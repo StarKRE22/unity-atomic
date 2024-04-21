@@ -1,68 +1,229 @@
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Profiling;
+#if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
 
 namespace Atomic.Objects
 {
-    public abstract class AtomicObject : AtomicObjectBase
+    public class AtomicObject : AtomicEntity, IMutableAtomicObject,
+        IAtomicEnable,
+        IAtomicDisable,
+        IAtomicUpdate,
+        IAtomicFixedUpdate,
+        IAtomicLateUpdate
     {
-        /// <summary>
-        ///     <para>Constructor for atomic object</para>
-        /// </summary>
-        public virtual void Compose()
-        {
-#if UNITY_EDITOR
-            Profiler.BeginSample("AtomicObjectCompose", this);
-#endif
-            AtomicObjectInfo objectInfo = AtomicCompiler.CompileObject(this.GetType());
-            
-            this.AddTypes(objectInfo.types);
-            this.AddReferences(this, objectInfo.references);
-            this.AddSections(this, objectInfo.sections);
-            
-#if UNITY_EDITOR
-            Profiler.EndSample();
-#endif
-        }
+        public bool IsEnable => _enabled;
 
-        private void AddReferences(object source, IEnumerable<ReferenceInfo> definitions)
+#if ODIN_INSPECTOR
+        [Title("Logic"), PropertySpace, PropertyOrder(150)]
+        [ShowInInspector, HideInEditorMode]
+#endif
+        private readonly List<IAtomicLogic> allLogics = new();
+
+        private readonly List<IAtomicEnable> enables = new();
+        private readonly List<IAtomicDisable> disables = new();
+        private readonly List<IAtomicUpdate> updates = new();
+        private readonly List<IAtomicFixedUpdate> fixedUpdates = new();
+        private readonly List<IAtomicLateUpdate> lateUpdates = new();
+
+        private readonly List<IAtomicEnable> _enableCache = new();
+        private readonly List<IAtomicDisable> _disableCache = new();
+        private readonly List<IAtomicUpdate> _updateCache = new();
+        private readonly List<IAtomicFixedUpdate> _fixedUpdateCache = new();
+        private readonly List<IAtomicLateUpdate> _lateUpdateCache = new();
+
+        private bool _enabled;
+        
+        public void AddLogic(IAtomicLogic target)
         {
-            foreach (ReferenceInfo definition in definitions)
+            if (target == null)
             {
-                string id = definition.id;
-                object value = definition.value(source);
-                
-                if (definition.@override)
+                return;
+            }
+
+            this.allLogics.Add(target);
+
+            if (target is IAtomicEnable enable)
+            {
+                this.enables.Add(enable);
+
+                if (_enabled)
                 {
-                    this.references[id] = value;
-                    continue;
+                    enable.Enable();
                 }
+            }
 
-                this.references.TryAdd(id, value);
-            }
-        }
-        
-        private void AddSections(object parent, IEnumerable<SectionInfo> definitions)
-        {
-            foreach (var definition in definitions)
+            if (target is IAtomicDisable disable)
             {
-                object section = definition.GetValue(parent);
-                
-                this.AddTypes(definition.types);
-                this.AddReferences(section, definition.references);
-                this.AddSections(section, definition.children);
+                this.disables.Add(disable);
+            }
+
+            if (target is IAtomicUpdate update)
+            {
+                this.updates.Add(update);
+            }
+
+            if (target is IAtomicFixedUpdate fixedUpdate)
+            {
+                this.fixedUpdates.Add(fixedUpdate);
+            }
+
+            if (target is IAtomicLateUpdate lateUpdate)
+            {
+                this.lateUpdates.Add(lateUpdate);
             }
         }
-        
-#if UNITY_EDITOR
-        [ContextMenu(nameof(Compose))]
-        public void ComposeEditor()
+
+        public void RemoveLogic(IAtomicLogic target)
         {
-            this.types.Clear();
-            this.references.Clear();
-            
-            this.Compose();
+            if (target == null)
+            {
+                return;
+            }
+
+            if (!this.allLogics.Remove(target))
+            {
+                return;
+            }
+
+            if (target is IAtomicEnable enable)
+            {
+                this.enables.Remove(enable);
+            }
+
+            if (target is IAtomicUpdate tickable)
+            {
+                this.updates.Remove(tickable);
+            }
+
+            if (target is IAtomicFixedUpdate fixedTickable)
+            {
+                this.fixedUpdates.Remove(fixedTickable);
+            }
+
+            if (target is IAtomicLateUpdate lateTickable)
+            {
+                this.lateUpdates.Remove(lateTickable);
+            }
+
+            if (target is IAtomicDisable disable)
+            {
+                if (_enabled)
+                {
+                    disable.Disable();
+                }
+            }
         }
-#endif
+
+        public IAtomicLogic[] AllLogic()
+        {
+            return this.allLogics.ToArray();
+        }
+
+        public int AllLogicNonAlloc(IAtomicLogic[] results)
+        {
+            int i = 0;
+
+            foreach (var element in this.allLogics)
+            {
+                results[i++] = element;
+            }
+
+            return i;
+        }
+
+        public IList<IAtomicLogic> AllLogicUnsafe()
+        {
+            return this.allLogics;
+        }
+
+        public void Enable()
+        {
+            _enabled = true;
+
+            if (this.enables.Count == 0)
+            {
+                return;
+            }
+
+            _enableCache.Clear();
+            _enableCache.AddRange(this.enables);
+
+            for (int i = 0, count = _enableCache.Count; i < count; i++)
+            {
+                IAtomicEnable enable = _enableCache[i];
+                enable.Enable();
+            }
+        }
+
+        public void Disable()
+        {
+            if (this.disables.Count == 0)
+            {
+                return;
+            }
+
+            _disableCache.Clear();
+            _disableCache.AddRange(this.disables);
+
+            for (int i = 0, count = _disableCache.Count; i < count; i++)
+            {
+                IAtomicDisable disable = _disableCache[i];
+                disable.Disable();
+            }
+
+            _enabled = false;
+        }
+
+        public void OnUpdate(float deltaTime)
+        {
+            if (this.updates.Count == 0)
+            {
+                return;
+            }
+
+            _updateCache.Clear();
+            _updateCache.AddRange(this.updates);
+
+            for (int i = 0, count = _updateCache.Count; i < count; i++)
+            {
+                IAtomicUpdate update = _updateCache[i];
+                update.OnUpdate(deltaTime);
+            }
+        }
+
+        public void OnFixedUpdate(float deltaTime)
+        {
+            if (this.fixedUpdates.Count == 0)
+            {
+                return;
+            }
+
+            _fixedUpdateCache.Clear();
+            _fixedUpdateCache.AddRange(this.fixedUpdates);
+
+            for (int i = 0, count = _fixedUpdateCache.Count; i < count; i++)
+            {
+                IAtomicFixedUpdate fixedUpdate = _fixedUpdateCache[i];
+                fixedUpdate.OnFixedUpdate(deltaTime);
+            }
+        }
+
+        public void OnLateUpdate(float deltaTime)
+        {
+            if (this.lateUpdates.Count == 0)
+            {
+                return;
+            }
+
+            _lateUpdateCache.Clear();
+            _lateUpdateCache.AddRange(this.lateUpdates);
+
+            for (int i = 0, count = _lateUpdateCache.Count; i < count; i++)
+            {
+                IAtomicLateUpdate lateUpdate = _lateUpdateCache[i];
+                lateUpdate.OnLateUpdate(deltaTime);
+            }
+        }
     }
 }

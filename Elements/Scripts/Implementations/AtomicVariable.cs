@@ -1,19 +1,30 @@
 using System;
+using System.Collections.Generic;
+#if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
+#endif
 using UnityEngine;
 
 namespace Atomic.Elements
 {
     [Serializable]
-    public class AtomicVariable<T> : IAtomicVariable<T>, IAtomicObservable<T>, IDisposable
+#if ODIN_INSPECTOR
+    [InlineProperty]
+#endif
+    public class AtomicVariable<T> : IAtomicVariableObservable<T>, IDisposable
     {
+        private static readonly IEqualityComparer<T> equalityComparer = EqualityComparer.GetDefault<T>();
+
         public T Value
         {
             get { return this.value; }
             set
             {
-                this.value = value;
-                this.onChanged?.Invoke(value);
+                if (!equalityComparer.Equals(this.value, value))
+                {
+                    this.value = value;
+                    this.onChanged?.Invoke(value);
+                }
             }
         }
 
@@ -29,8 +40,10 @@ namespace Atomic.Elements
 
         private Action<T> onChanged;
 
-        [OnValueChanged("OnValueChanged")]
         [SerializeField]
+#if ODIN_INSPECTOR
+        [HideLabel, OnValueChanged(nameof(OnValueChanged))]
+#endif
         private T value;
 
         public AtomicVariable()
@@ -43,15 +56,14 @@ namespace Atomic.Elements
             this.value = value;
         }
 
-#if UNITY_EDITOR
         private void OnValueChanged(T value)
         {
             this.onChanged?.Invoke(value);
         }
-#endif
+
         public void Dispose()
         {
-            AtomicUtils.Dispose(ref this.onChanged);
+            DelegateUtils.Dispose(ref this.onChanged);
         }
     }
 }

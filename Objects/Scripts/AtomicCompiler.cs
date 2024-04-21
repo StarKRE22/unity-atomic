@@ -5,48 +5,45 @@ namespace Atomic.Objects
 {
     public static class AtomicCompiler
     {
-        private static readonly Dictionary<Type, AtomicObjectInfo> compiledObjects = new();
+        private static readonly Dictionary<Type, AtomicEntityInfo> compiledEntities = new();
 
-        ///Call it in background thread!
-        public static void PrecompileObject(Type objectType)
+        //Call it in background thread!
+        public static void PrecompileEntity(Type objectType)
         {
-            CompileObject(objectType);
+            CompileEntity(objectType);
         }
 
-        internal static AtomicObjectInfo CompileObject(Type objectType)
+        internal static AtomicEntityInfo CompileEntity(Type objectType)
         {
-            if (compiledObjects.TryGetValue(objectType, out AtomicObjectInfo objectInfo))
+            if (compiledEntities.TryGetValue(objectType, out AtomicEntityInfo objectInfo))
             {
                 return objectInfo;
             }
 
-            objectInfo = CompileObjectInternal(objectType);
-            compiledObjects.Add(objectType, objectInfo);
+            objectInfo = CompileEntityInternal(objectType);
+            compiledEntities.Add(objectType, objectInfo);
             return objectInfo;
         }
 
-        private static AtomicObjectInfo CompileObjectInternal(Type objectType)
+        private static AtomicEntityInfo CompileEntityInternal(Type objectType)
         {
             var types = new HashSet<string>();
-            var references = new List<ReferenceInfo>();
-            var sections = new List<SectionInfo>();
+            var references = new List<ValueInfo>();
 
             foreach (Type @interface in objectType.GetInterfaces())
             {
                 types.UnionWith(AtomicScanner.ScanTypes(@interface));
-                references.AddRange(AtomicScanner.ScanReferences(@interface));
+                references.AddRange(AtomicScanner.ScanValues(@interface));
             }
 
-            while (objectType != typeof(AtomicObject))
+            while (objectType != typeof(AtomicObject) && objectType != typeof(AtomicEntity) && objectType != null)
             {
                 types.UnionWith(AtomicScanner.ScanTypes(objectType));
-                references.AddRange(AtomicScanner.ScanReferences(objectType));
-                sections.AddRange(AtomicScanner.ScanSections(objectType));
-                
+                references.AddRange(AtomicScanner.ScanValues(objectType));
                 objectType = objectType!.BaseType;
             }
 
-            return new AtomicObjectInfo(types, references, sections);
+            return new AtomicEntityInfo(types, references);
         }
     }
 }

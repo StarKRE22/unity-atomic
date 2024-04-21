@@ -1,10 +1,14 @@
 using System;
-using System.Collections.Generic;
+#if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
+#endif
 
 namespace Atomic.Elements
 {
     [Serializable]
+#if ODIN_INSPECTOR
+    [InlineProperty]
+#endif
     public class AtomicAction : IAtomicAction
     {
         private Action action;
@@ -23,7 +27,9 @@ namespace Atomic.Elements
             this.action = action;
         }
 
+#if ODIN_INSPECTOR
         [Button]
+#endif
         public void Invoke()
         {
             this.action?.Invoke();
@@ -31,6 +37,9 @@ namespace Atomic.Elements
     }
 
     [Serializable]
+#if ODIN_INSPECTOR
+    [InlineProperty]
+#endif
     public class AtomicAction<T> : IAtomicAction<T>
     {
         private Action<T> action;
@@ -49,14 +58,19 @@ namespace Atomic.Elements
             this.action = action;
         }
 
+#if ODIN_INSPECTOR
         [Button]
-        public void Invoke(T direction)
+#endif
+        public void Invoke(T arg)
         {
-            this.action?.Invoke(direction);
+            this.action?.Invoke(arg);
         }
     }
     
     [Serializable]
+#if ODIN_INSPECTOR
+    [InlineProperty]
+#endif
     public class AtomicAction<T1, T2> : IAtomicAction<T1, T2>
     {
         private Action<T1, T2> action;
@@ -75,7 +89,9 @@ namespace Atomic.Elements
             this.action = action;
         }
 
+#if ODIN_INSPECTOR
         [Button]
+#endif
         public void Invoke(T1 args1, T2 args2)
         {
             this.action?.Invoke(args1, args2);
@@ -83,6 +99,9 @@ namespace Atomic.Elements
     }
     
     [Serializable]
+#if ODIN_INSPECTOR
+    [InlineProperty]
+#endif
     public class AtomicAction<T1, T2, T3> : IAtomicAction<T1, T2, T3>
     {
         private Action<T1, T2, T3> action;
@@ -101,7 +120,9 @@ namespace Atomic.Elements
             this.action = action;
         }
 
+#if ODIN_INSPECTOR
         [Button]
+#endif
         public void Invoke(T1 args1, T2 args2, T3 args3)
         {
             this.action?.Invoke(args1, args2, args3);

@@ -7,11 +7,11 @@ namespace Atomic.Objects
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface)]
     public sealed class IsAttribute : Attribute
     {
-        internal readonly string[] types;
+        internal readonly string[] Types;
 
         public IsAttribute(params string[] types)
         {
-            this.types = types;
+            this.Types = types;
         }
     }
 }

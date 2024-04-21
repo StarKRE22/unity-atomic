@@ -7,7 +7,7 @@ namespace Atomic.Objects
     public static class ReflectionUtils
     {
         private static readonly Dictionary<Type, FieldInfo[]> fieldsMap = new();
-        private static readonly Dictionary<Type, PropertyInfo[]> propertiesMap = new();
+        private static readonly Dictionary<Type, System.Reflection.PropertyInfo[]> propertiesMap = new();
         private static readonly Dictionary<Type, MethodInfo[]> methodsMap = new();
 
         internal static FieldInfo[] GetFields(Type targetType)
@@ -28,7 +28,7 @@ namespace Atomic.Objects
             return fields;
         }
 
-        internal static PropertyInfo[] GetProperties(Type targetType)
+        internal static System.Reflection.PropertyInfo[] GetProperties(Type targetType)
         {
             if (propertiesMap.TryGetValue(targetType, out var properties))
             {

@@ -2,16 +2,14 @@ using System;
 
 namespace Atomic.Objects
 {
-    internal sealed class ReferenceInfo
+    internal sealed class ValueInfo
     {
         internal readonly string id;
-        internal readonly bool @override;
         internal readonly Func<object, object> value;
 
-        internal ReferenceInfo(string id, bool @override, Func<object, object> value)
+        internal ValueInfo(string id, Func<object, object> value)
         {
             this.id = id;
-            this.@override = @override;
             this.value = value;
         }
     }

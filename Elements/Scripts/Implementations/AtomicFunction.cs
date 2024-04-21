@@ -1,14 +1,18 @@
 using System;
+#if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
+#endif
 
 namespace Atomic.Elements
 {
     [Serializable]
-    public sealed class AtomicFunction<T> : IAtomicFunction<T>
+    public class AtomicFunction<T> : IAtomicFunction<T>
     {
         private Func<T> func;
 
+#if ODIN_INSPECTOR
         [ShowInInspector, ReadOnly]
+#endif
         public T Value
         {
             get { return this.func != null ? this.func.Invoke() : default; }
@@ -53,7 +57,9 @@ namespace Atomic.Elements
             this.func = func;
         }
 
+#if ODIN_INSPECTOR
         [Button]
+#endif
         public R Invoke(T args)
         {
             return this.func.Invoke(args);

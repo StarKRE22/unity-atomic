@@ -3,7 +3,7 @@ using System;
 namespace Atomic.Elements
 {
     [Serializable]
-    public sealed class AtomicObservable : IAtomicObservable
+    public class AtomicObservable : IAtomicObservable
     {
         private Action<Action> subscribe;
         private Action<Action> unsubscribe;
@@ -26,12 +26,12 @@ namespace Atomic.Elements
 
         public void Subscribe(Action action)
         {
-            this.subscribe.Invoke(action);
+            this.subscribe?.Invoke(action);
         }
 
         public void Unsubscribe(Action action)
         {
-            this.unsubscribe.Invoke(action);
+            this.unsubscribe?.Invoke(action);
         }
     }
 

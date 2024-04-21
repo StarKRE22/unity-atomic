@@ -1,9 +1,15 @@
 using System;
+#if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
+#endif
 
 namespace Atomic.Elements
 {
+    
     [Serializable]
+#if ODIN_INSPECTOR
+    [InlineProperty]
+#endif
     public class AtomicEvent : IAtomicEvent, IDisposable
     {
         private Action onEvent;
@@ -18,19 +24,24 @@ namespace Atomic.Elements
             this.onEvent -= action;
         }
 
+#if ODIN_INSPECTOR
         [Button]
+#endif
         public virtual void Invoke()
         {
             this.onEvent?.Invoke();
         }
-
+        
         public void Dispose()
         {
-            AtomicUtils.Dispose(ref this.onEvent);
+            DelegateUtils.Dispose(ref this.onEvent);
         }
     }
 
     [Serializable]
+#if ODIN_INSPECTOR
+    [InlineProperty]
+#endif
     public class AtomicEvent<T> : IAtomicEvent<T>, IDisposable
     {
         private Action<T> onEvent;
@@ -45,19 +56,24 @@ namespace Atomic.Elements
             this.onEvent -= action;
         }
 
+#if ODIN_INSPECTOR
         [Button]
-        public virtual void Invoke(T direction)
+#endif
+        public virtual void Invoke(T arg)
         {
-            this.onEvent?.Invoke(direction);
+            this.onEvent?.Invoke(arg);
         }
 
         public void Dispose()
         {
-            AtomicUtils.Dispose(ref this.onEvent);
+            DelegateUtils.Dispose(ref this.onEvent);
         }
     }
     
     [Serializable]
+#if ODIN_INSPECTOR
+    [InlineProperty]
+#endif
     public class AtomicEvent<T1, T2> : IAtomicEvent<T1, T2>, IDisposable
     {
         private Action<T1, T2> onEvent;
@@ -72,7 +88,9 @@ namespace Atomic.Elements
             this.onEvent -= action;
         }
 
+#if ODIN_INSPECTOR
         [Button]
+#endif
         public virtual void Invoke(T1 args1, T2 args2)
         {
             this.onEvent?.Invoke(args1, args2);
@@ -80,11 +98,14 @@ namespace Atomic.Elements
 
         public void Dispose()
         {
-            AtomicUtils.Dispose(ref this.onEvent);
+            DelegateUtils.Dispose(ref this.onEvent);
         }
     }
     
     [Serializable]
+#if ODIN_INSPECTOR
+    [InlineProperty]
+#endif
     public class AtomicEvent<T1, T2, T3> : IAtomicEvent<T1, T2, T3>, IDisposable
     {
         private Action<T1, T2, T3> onEvent;
@@ -99,7 +120,9 @@ namespace Atomic.Elements
             this.onEvent -= action;
         }
 
+#if ODIN_INSPECTOR
         [Button]
+#endif
         public virtual void Invoke(T1 args1, T2 args2, T3 args3)
         {
             this.onEvent?.Invoke(args1, args2, args3);
@@ -107,7 +130,7 @@ namespace Atomic.Elements
 
         public void Dispose()
         {
-            AtomicUtils.Dispose(ref this.onEvent);
+            DelegateUtils.Dispose(ref this.onEvent);
         }
     }
 }
