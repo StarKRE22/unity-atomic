@@ -14,7 +14,7 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
 Getting started
 ---
 
-Create Character with health mechanics
+For example, let's create Character class with health mechanics
 
 ```csharp
 
