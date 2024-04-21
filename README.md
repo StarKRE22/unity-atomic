@@ -17,11 +17,11 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
 
 ## Table of Contents
 - [Getting started](#getting-started)
-- [Declaring Entity](#declaring-entity)
-- [Interacting with Entity](#interacting-with-Entity)
-- [Add properties at runtime](#add-properties-at-runtime)
-- [Add mechanics at runtime](#add-mechanics-at-runtime)
-- [Contracts](#contracts)
+    - [Declaring Entity](#declaring-entity)
+    - [Interacting with Entity](#interacting-with-Entity)
+    - [Add properties at runtime](#add-properties-at-runtime)
+    - [Add mechanics at runtime](#add-mechanics-at-runtime)
+    - [Contracts](#contracts)
 - [Good Practices](#good-practices)
     - [Reusing of object structure](#reusing-of-object-structure)
     - [Division into sections](#division-into-sections)
