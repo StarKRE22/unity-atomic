@@ -92,6 +92,7 @@ character.RemoveData("JumpAction");
 Add / Remove mechanics at runtime
 ---
 For example you wanna add movement mechanics towards direction for your character.
+
 First of all, extend Character from AtomicObject. 
 
 ```csharp
@@ -108,7 +109,7 @@ public sealed class Character : AtomicObject //derived from MonoBehaviour
 }
 ```
 
-**Then create MovementMechanics class and implement IAtomicFixedUpdate interface which support FixedUpdate of AtomicObject**
+Create MovementMechanics class and implement IAtomicFixedUpdate interface which support FixedUpdate of AtomicObject
 
 ```csharp
 public sealed class MovementMechanics : IAtomicFixedUpdate
@@ -135,7 +136,7 @@ public sealed class MovementMechanics : IAtomicFixedUpdate
 }
 ```
 
-**Add MovementMechanics to your Character at Runtime**
+Add movement mechanics to your Character
 
 ```csharp
 IMutableAtomicObject character = gameObject.GetComponent<IMutableAtomicObject>();
