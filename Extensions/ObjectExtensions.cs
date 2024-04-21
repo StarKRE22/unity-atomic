@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Atomic.Elements;
@@ -114,14 +115,14 @@ namespace Atomic.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void InvokeAction(this IAtomicEntity it, string name)
+        public static void CallAction(this IAtomicEntity it, string name)
         {
             it.GetAction(name)?.Invoke();
         }
         
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void InvokeAction<T>(this IAtomicEntity it, string name, T args)
+        public static void CallAction<T>(this IAtomicEntity it, string name, T args)
         {
             it.GetAction<T>(name)?.Invoke(args);
         }
@@ -183,6 +184,102 @@ namespace Atomic.Extensions
         public static bool TryGetObservable<T>(this IAtomicEntity it, string name, out IAtomicObservable<T> result)
         {
             return it.TryGet(name, out result) && result != null;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool ListenEvent(this IAtomicEntity it, string name, Action listener)
+        {
+            if (it.TryGetObservable(name, out IAtomicObservable observable))
+            {
+                observable.Subscribe(listener);
+                return true;
+            }
+
+            return false;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool ListenEvent(this IAtomicEntity it, string name, IAtomicAction listener)
+        {
+            if (it.TryGetObservable(name, out IAtomicObservable observable))
+            {
+                observable.Subscribe(listener);
+                return true;
+            }
+
+            return false;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool UnlistenEvent(this IAtomicEntity it, string name, Action listener)
+        {
+            if (it.TryGetObservable(name, out IAtomicObservable observable))
+            {
+                observable.Unsubscribe(listener);
+                return true;
+            }
+
+            return false;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool UnlistenEvent(this IAtomicEntity it, string name, IAtomicAction listener)
+        {
+            if (it.TryGetObservable(name, out IAtomicObservable observable))
+            {
+                observable.Unsubscribe(listener);
+                return true;
+            }
+
+            return false;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool ListenEvent<T>(this IAtomicEntity it, string name, Action<T> listener)
+        {
+            if (it.TryGetObservable(name, out IAtomicObservable<T> observable))
+            {
+                observable.Subscribe(listener);
+                return true;
+            }
+
+            return false;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool ListenEvent<T>(this IAtomicEntity it, string name, IAtomicAction<T> listener)
+        {
+            if (it.TryGetObservable(name, out IAtomicObservable<T> observable))
+            {
+                observable.Subscribe(listener);
+                return true;
+            }
+
+            return false;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool UnlistenEvent<T>(this IAtomicEntity it, string name, Action<T> listener)
+        {
+            if (it.TryGetObservable(name, out IAtomicObservable<T> observable))
+            {
+                observable.Unsubscribe(listener);
+                return true;
+            }
+
+            return false;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool UnlistenEvent<T>(this IAtomicEntity it, string name, IAtomicAction<T> listener)
+        {
+            if (it.TryGetObservable(name, out IAtomicObservable<T> observable))
+            {
+                observable.Unsubscribe(listener);
+                return true;
+            }
+
+            return false;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
