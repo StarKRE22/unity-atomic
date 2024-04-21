@@ -15,7 +15,7 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
 - [Getting started](#getting-started)
 - [Declaring Entity](#declaring-entity)
 - [Interacting with Entity](#interacting-with-Entity)
-- [Add properties at runtime](#add-remove-properties-at-runtime)
+- [Add properties at runtime](#add-properties-at-runtime)
 - [Add mechanics at runtime](#add-mechanics-at-runtime)
 - [Good Practices](#good-practices)
 
