@@ -13,8 +13,10 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
 
 ## Table of Contents
 - [Getting started](#getting-started)
-- [Interacting with Character](#interacting-with-Character)
-- [Add / Remove properties at runtime](#add-/-remove-properties-at-runtime)
+    - [Interacting with Character](#interacting-with-Character)
+    - [Add properties at runtime](#add-remove-properties-at-runtime)
+    - [Add mechanics at runtime](#add-mechanics-at-runtime)
+- [Good Practices](#good-practices)
 
 Getting started
 ---
@@ -78,7 +80,7 @@ character.CallAction("TakeDamage", 2);
 character.ListenEvent("DeathEvent", () => Debug.Log("I'm dead!"));
 ```
 
-Add / Remove properties at runtime
+Add properties at runtime
 ---
 
 ```csharp
@@ -94,7 +96,7 @@ character.AddData("ResourceBag", new AtomicVariable<int>());
 character.RemoveData("JumpAction");
 ```
 
-Add / Remove mechanics at runtime
+Add mechanics at runtime
 ---
 For example you wanna add movement mechanics towards direction for your character.
 
