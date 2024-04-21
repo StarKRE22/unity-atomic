@@ -11,6 +11,10 @@ The atomic approach is an object-oriented approach for game object development, 
 
 Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-atomic/releases)
 
+## Table of Contents
+- [Getting started](#getting-started)
+- [Interacting with Character](#interacting-with-Character)
+
 Getting started
 ---
 
