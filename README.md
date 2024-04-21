@@ -21,6 +21,7 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
 - [Interacting with Entity](#interacting-with-Entity)
 - [Add properties at runtime](#add-properties-at-runtime)
 - [Add mechanics at runtime](#add-mechanics-at-runtime)
+- [Contracts](#contracts)
 - [Good Practices](#good-practices)
 
 Getting started
@@ -175,31 +176,12 @@ character.AddLogic(new MovementMechanics(character));
 character.RemoveLogic<MovementMechanics>();
 ```
 
-
-
-
-
-
-
-
-Good Practices
-===
-
-
 Contracts
 ---
-For better work with ids and undestanding types, I recommend using the Contracts
+To make easier development for the team with identifiers and types, it is better to put them into separate constants and add the [Contract] attribute, which will explicitly indicate which type is expected for a specific key.
 
 ```csharp
-//File for keeping object types
-public static class ObjectType
-{
-    public const string Damagable = nameof(Damagable);
-    public const string Moveable = nameof(Moveable);
-    public const string Jumpable = nameof(Jumpable);
-}
-
-//File for keeping object properties
+//File for keeping object ids
 public static class ObjectAPI
 {
     //Specify expecting type
@@ -211,6 +193,14 @@ public static class ObjectAPI
 
     [Contract(typeof(IAtomicObservable))]
     public const string DeathEvent = nameof(DeathEvent);
+}
+
+//File for keeping object types
+public static class ObjectType
+{
+    public const string Damagable = nameof(Damagable);
+    public const string Moveable = nameof(Moveable);
+    public const string Jumpable = nameof(Jumpable);
 }
 ```
 
@@ -226,9 +216,10 @@ character.CallAction(ObjectAPI.TakeDamageAction, 2);
 character.ListenEvent(ObjectAPI.DeathEvent,()=> Debug.Log("I'm dead!"));
 ```
 
-
-
-
+Good Practices
+===
+In this section, I would like to share good practices on how to develop game objects using the atomic approach as sustainably as possible.
+One of the key thoughts is that you can always put any block of code that you repeat into a separate class and assign responsibility to it.
 
 Reusing of object structure
 ---
@@ -332,8 +323,9 @@ public sealed class Character : AtomicEntity
 
     #endregion
 }
-
-
 ```
+
+
+
 
 
