@@ -13,18 +13,21 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
 
 ## Table of Contents
 - [Getting started](#getting-started)
-    - [Interacting with Character](#interacting-with-Character)
-    - [Add properties at runtime](#add-remove-properties-at-runtime)
-    - [Add mechanics at runtime](#add-mechanics-at-runtime)
+- [Declaring Entity](#declaring-entity)
+- [Interacting with Entity](#interacting-with-Entity)
+- [Add properties at runtime](#add-remove-properties-at-runtime)
+- [Add mechanics at runtime](#add-mechanics-at-runtime)
 - [Good Practices](#good-practices)
 
 Getting started
 ---
 
+
+Declaring Entity
+---
 For example, let's create Character class with health mechanics
 
 ```csharp
-
 [Is("Damagable")]
 public sealed class Character : AtomicEntity //derived from MonoBehaviour
 {
@@ -57,7 +60,7 @@ public sealed class Character : AtomicEntity //derived from MonoBehaviour
 }
 ```
 
-Interacting with Character
+Interacting with Entity
 ---
 
 ```csharp
