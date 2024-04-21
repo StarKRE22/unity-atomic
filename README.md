@@ -7,7 +7,7 @@ Created by Igor Gulkin (@StarKRE22)
 
 What is Unity Atomic?
 ---
-The atomic approach is an object-oriented approach for game object development, representing a game object as a composition of atomic data and functions. The atomic object provides a common interface for interacting with it's properties and functions of various entities, and also has the ability to change the structure of an object at runtime.
+The atomic approach is an object-oriented approach for game object development in Unity Engine, representing a game object as a composition of atomic data and functions. The atomic object provides a common interface for interacting with it's properties and functions of various entities, and also has the ability to change the structure of an object at runtime.
 
 Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-atomic/releases)
 
@@ -22,6 +22,17 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
 Getting started
 ---
 
+**There are 3 ways of installation:**
+
+_1. Download code from repository_
+
+_2. Download .zip archive from [release notes](https://github.com/StarKRE22/unity-atomic/releases)_
+
+_3. Install via Unity Package Manager_
+
+```
+"com.starkre.unity-atomic": "https://github.com/StarKRE22/unity-atomic.git", 
+```
 
 Declaring Entity
 ---
