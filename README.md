@@ -23,6 +23,9 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
 - [Add mechanics at runtime](#add-mechanics-at-runtime)
 - [Contracts](#contracts)
 - [Good Practices](#good-practices)
+    - [Reusing of object structure](#reusing-of-object-structure)
+    - [Division into sections](#division-into-sections)
+    - [Reflection Baking](#reflection-baking)
 
 Getting started
 ---
@@ -324,8 +327,13 @@ public sealed class Character : AtomicEntity
     #endregion
 }
 ```
+Division into sections
+---
+//TODO
 
-
+Reflection Baking
+---
+//TODO
 
 
 
