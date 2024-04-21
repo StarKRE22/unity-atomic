@@ -74,3 +74,43 @@ character.CallAction("TakeDamage", 2);
 //Subscribe on death
 character.ListenEvent("DeathEvent", () => Debug.Log("I'm dead!"));
 ```
+
+Contracts
+---
+For better work with ids and undestanding types, I recommend using the Contracts
+
+```csharp
+//File for keeping object types
+public static class ObjectType
+{
+    public const string Damagable = nameof(Damagable);
+    public const string Moveable = nameof(Moveable);
+    public const string Jumpable = nameof(Jumpable);
+}
+
+//File for keeping object properties
+public static class ObjectAPI
+{
+    //Specify expecting type
+    [Contract(typeof(IAtomicVariableObservable<int>))]
+    public const string Health = nameof(Health);
+        
+    [Contract(typeof(IAtomicAction<int>))]
+    public const string TakeDamageAction = nameof(TakeDamageAction);
+
+    [Contract(typeof(IAtomicObservable))]
+    public const string DeathEvent = nameof(DeathEvent);
+}
+```
+
+```csharp
+
+//Interact with object properties by contract ids
+bool isDamagable = character.Is(ObjectType.Damagable);
+
+int health = character.GetValue<int>(ObjectAPI.Health).Value;
+
+character.CallAction(ObjectAPI.TakeDamageAction, 2);
+
+character.ListenEvent(ObjectAPI.DeathEvent,()=> Debug.Log("I'm dead!"));
+```
