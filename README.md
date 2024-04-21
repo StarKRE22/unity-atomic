@@ -114,3 +114,107 @@ character.CallAction(ObjectAPI.TakeDamageAction, 2);
 
 character.ListenEvent(ObjectAPI.DeathEvent,()=> Debug.Log("I'm dead!"));
 ```
+
+Reusing of object structure
+---
+If you need reuse game mechanics between different objects then you can create component for target structure
+
+```csharp
+//Create common health component
+[Serializable]
+public sealed class HealthComponent
+{
+    public IAtomicVariableObservable<int> Health => this.health;
+    public IAtomicAction<int> TakeDamageAction => this.takeDamageAction;
+    public IAtomicObservable DeathEvent => this.deathEvent;
+
+    [SerializeField]
+    private AtomicVariable<int> health;
+
+    [SerializeField]
+    private AtomicAction<int> takeDamageAction;
+
+    [SerializeField]
+    private AtomicEvent deathEvent;
+
+    public void Compose()
+    {
+        //Declare damage action
+        this.takeDamageAction.Compose(damage => { this.health.Value -= damage; });
+
+        //Declare death mechanics
+        this.health.Subscribe(value =>
+        {
+            if (value <= 0) this.deathEvent.Invoke();
+        });
+    }
+}
+```
+
+Reuse health logic between Character and Tower
+
+```csharp
+
+[Is(ObjectType.Damagable)]
+public sealed class Character : AtomicEntity
+{
+    #region INTERFACE
+
+    ///Health
+    [Get(ObjectAPI.Health)]
+    public IAtomicVariableObservable<int> Health => this.healthComponent.Health;
+
+    [Get(ObjectAPI.TakeDamageAction)]
+    public IAtomicAction<int> TakeDamageAction => this.healthComponent.TakeDamageAction;
+
+    [Get(ObjectAPI.DeathEvent)]
+    public IAtomicObservable DeathEvent => this.healthComponent.DeathEvent;
+
+    ///Movement
+    [Get(ObjectAPI.MoveAction)]
+    public IAtomicAction<Vector3> MoveAction => this.moveAction;
+
+    #endregion
+
+    #region CORE
+
+    [SerializeField]
+    private HealthComponent healthComponent;
+
+    [SerializeField]
+    private AtomicAction<Vector3> moveAction;
+
+    private void Awake()
+    {
+        this.healthComponent.Compose();
+        this.moveAction.Compose(offset => this.transform.Translate(offset));
+    }
+
+    #endregion
+}
+
+[Is(ObjectType.Damagable)]
+public sealed class Tower : AtomicEntity
+{
+    #region INTERFACE
+
+    [Get(ObjectAPI.TakeDamageAction)]
+    public IAtomicAction<int> TakeDamageAction => this.healthComponent.TakeDamageAction;
+
+    #endregion
+
+    #region CORE
+
+    [SerializeField]
+    private HealthComponent healthComponent;
+
+    private void Awake()
+    {
+        this.healthComponent.Compose();
+    }
+
+    #endregion
+}
+
+```
+
