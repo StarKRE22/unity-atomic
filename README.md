@@ -35,7 +35,7 @@ _2. Download .zip archive from [release notes](https://github.com/StarKRE22/unit
 _3. Install via Unity Package Manager_
 
 ```
-"com.starkre.unity-atomic": "https://github.com/StarKRE22/unity-atomic.git", 
+"com.starkre.unity-atomic": "https://github.com/StarKRE22/unity-atomic.git" 
 ```
 
 Declaring Entity
