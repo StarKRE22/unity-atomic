@@ -1,5 +1,5 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/starkre22/unity-atomic?color=green)](https://github.com/starkre22/unity-atomic/releases)
-[![GitHub](https://img.shields.io/github/license/starkre22/unity-atomic)](https://github.com/starkre22/unity-atomic/LICENSE)
+[![GitHub](https://img.shields.io/github/license/starkre22/unity-atomic)](https://github.com/StarKRE22/unity-atomic/blob/master/LICENSE)
 
 > [!IMPORTANT]
 > For a more better Unity development experience, I recommend using the [Odin Inspector](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) asset.
