@@ -117,7 +117,10 @@ character.ListenEvent(ObjectAPI.DeathEvent,()=> Debug.Log("I'm dead!"));
 
 Reusing of object structure
 ---
-If you need reuse game mechanics between different objects then you can create component for target structure
+**If you need reuse game mechanics between different objects then you can create common component**
+
+For example you need to reuse heath mechanics between Character and Tower.
+To do this, you can make HealthComponent that will contain health data, damage action, and death event:
 
 ```csharp
 //Create common health component
@@ -151,9 +154,31 @@ public sealed class HealthComponent
 }
 ```
 
-Reuse health logic between Character and Tower
+**Reuse health component between Tower and Character**
 
 ```csharp
+[Is(ObjectType.Damagable)]
+public sealed class Tower : AtomicEntity
+{
+    #region INTERFACE
+
+    [Get(ObjectAPI.TakeDamageAction)]
+    public IAtomicAction<int> TakeDamageAction => this.healthComponent.TakeDamageAction;
+
+    #endregion
+
+    #region CORE
+
+    [SerializeField]
+    private HealthComponent healthComponent;
+
+    private void Awake()
+    {
+        this.healthComponent.Compose();
+    }
+
+    #endregion
+}
 
 [Is(ObjectType.Damagable)]
 public sealed class Character : AtomicEntity
@@ -193,28 +218,7 @@ public sealed class Character : AtomicEntity
     #endregion
 }
 
-[Is(ObjectType.Damagable)]
-public sealed class Tower : AtomicEntity
-{
-    #region INTERFACE
-
-    [Get(ObjectAPI.TakeDamageAction)]
-    public IAtomicAction<int> TakeDamageAction => this.healthComponent.TakeDamageAction;
-
-    #endregion
-
-    #region CORE
-
-    [SerializeField]
-    private HealthComponent healthComponent;
-
-    private void Awake()
-    {
-        this.healthComponent.Compose();
-    }
-
-    #endregion
-}
 
 ```
+
 
