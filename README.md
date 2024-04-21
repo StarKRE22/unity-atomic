@@ -50,7 +50,7 @@ public sealed class Character : AtomicEntity //derived from MonoBehaviour
 }
 ```
 
-Interacting with Entity
+Interacting with Character
 ---
 
 ```csharp
