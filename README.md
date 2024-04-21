@@ -1,7 +1,6 @@
 > [!IMPORTANT]
 > For a more better Unity development experience, I recommend using the [Odin Inspector](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) asset.
 
-
 Unity Atomic - Atomic Extensions for Unity
 ===
 Created by Igor Gulkin (@StarKRE22)
@@ -15,7 +14,7 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
 Getting started
 ---
 
-Create Character using Atomic Approach
+Create Character using Atomic approach
 
 ```csharp
 
@@ -51,13 +50,12 @@ public sealed class Character : AtomicEntity //derived from MonoBehaviour
 }
 ```
 
-Interacting with Character
+Interacting with Entity
 ---
 
 ```csharp
 
 IAtomicEntity character = gameObject.GetComponent<IAtomicEntity>();
-
 
 //Check if damagable object 
 bool isDamagable = character.Is("Damagable");
@@ -74,6 +72,93 @@ character.CallAction("TakeDamage", 2);
 //Subscribe on death
 character.ListenEvent("DeathEvent", () => Debug.Log("I'm dead!"));
 ```
+
+Add / Remove properties at runtime
+---
+
+```csharp
+IMutableAtomicEntity character = gameObject.GetComponent<IMutableAtomicEntity>();
+
+//Make character invisible
+character.AddType("Invisible");
+
+//Add resource bag to the character
+character.AddData("ResourceBag", new AtomicVariable<int>());
+
+//Remove jump ability
+character.RemoveData("JumpAction");
+```
+
+Add / Remove mechanics at runtime
+---
+For example you wanna add movement mechanics towards direction for your character.
+First of all, extend Character from AtomicObject. 
+
+```csharp
+public sealed class Character : AtomicObject //derived from MonoBehaviour
+{
+    [Get("Transform")]
+    public Transform mainTrainsform;
+
+   //Define when Fixed Update required for AtomicObject
+   private void FixedUpdate()
+   {
+       base.OnFixedUpdate(Time.fixedDeltaTime);
+   }
+}
+```
+
+**Then create MovementMechanics class and implement IAtomicFixedUpdate interface which support FixedUpdate of AtomicObject**
+
+```csharp
+public sealed class MovementMechanics : IAtomicFixedUpdate
+{
+    private readonly IAtomicEntity entity;
+
+    public MovementMechanics(IAtomicEntity entity)
+    {
+        this.entity = entity;
+    }
+    
+    public void OnFixedUpdate(float deltaTime)
+    {
+        if (!entity.TryGet("Transform", out Transform transform) ||
+            !entity.TryGet("MoveSpeed", out IAtomicValue<float> moveSpeed) ||
+            !entity.TryGet("MoveDirection", out IAtomicValue<Vector3> moveDirection))
+        {
+            return;
+        }
+
+        Vector3 offset = moveDirection.Value * (moveSpeed.Value * deltaTime);
+        transform.Translate(offset);
+    }
+}
+```
+
+**Add MovementMechanics to your Character at Runtime**
+
+```csharp
+IMutableAtomicObject character = gameObject.GetComponent<IMutableAtomicObject>();
+
+//Add movement mechanics at runtime
+character.AddData("MoveSpeed", new AtomicVariable<float>(3));
+character.AddData("MoveDirection", new AtomicVariable<Vector3>(Vector3.forward));
+character.AddLogic(new MovementMechanics(character));
+
+//Remove movement mechanics at runtime
+character.RemoveLogic<MovementMechanics>();
+```
+
+
+
+
+
+
+
+
+Good Practices
+===
+
 
 Contracts
 ---
@@ -114,6 +199,10 @@ character.CallAction(ObjectAPI.TakeDamageAction, 2);
 
 character.ListenEvent(ObjectAPI.DeathEvent,()=> Debug.Log("I'm dead!"));
 ```
+
+
+
+
 
 Reusing of object structure
 ---
