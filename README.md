@@ -24,6 +24,7 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
         - [AtomicVariable](#atomic-variable)
         - [AtomicAction](#atomic-action)
         - [AtomicEvent](#atomic-event)
+        - [AtomicFunction](#atomic-function)
     - [Objects](#work-with-objects)
         - [Atomic Entity](#atomic-entity)
         - [Atomic Object](#atomic-object)
@@ -222,6 +223,32 @@ public sealed class Character : MonoBehaviour
             this.health.Value -= damage;
             this.damageTakenEvent.Invoke(damage);
         });
+    }
+}
+```
+
+### Atomic Function
+Represents a function object (See class: [AtomicFunction](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicFunction.cs))
+
+```csharp
+var positionFunc = new AtomicFunction<Vector3>(() => gameObject.transform.position);
+Vector3 position = positionFunc.Invoke();
+```
+
+Example of using function
+
+```csharp
+public sealed class Character : MonoBehaviour
+{
+    public IAtomicValue<Vector3> Position => this.positionFunc;
+    
+    [SerializeField]
+    private AtomicFunction positionFunc;
+    
+    private void Awake()
+    {
+        //Init function
+        this.positionFunc.Compose(() => this.transform.position);
     }
 }
 ```
