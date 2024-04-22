@@ -19,7 +19,7 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
 - [Installation](#installation)
 - [Quick Start](#quick-start)
 - [Documentation](#documentation)
-    - [Data Structures](#data-structures)
+    - [Structures](#structures)
         - [AtomicValue](#atomic-value)
         - [AtomicVariable](#atomic-variable)
         - [AtomicAction](#atomic-action)
@@ -112,7 +112,7 @@ Documentation
 ===
 In this section you will see full capabilities of the atomic approach with theory.
 
-## Data Structures
+## Structures
 
 There are several different atomic structures in the library that may be required to develop game objects
 
