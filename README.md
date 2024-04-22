@@ -29,6 +29,7 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
         - [AtomicObservable](#atomic-observable)
         - [AtomicPropertyObservable](#atomic-property-observable)
         - [AtomicSetter](#atomic-setter)
+        - [AtomicExpressions](#atomic-expressions)
     - [Objects](#work-with-objects)
         - [Atomic Entity](#atomic-entity)
         - [Atomic Object](#atomic-object)
@@ -332,6 +333,78 @@ class: [AtomicPropertyObservable](https://github.com/StarKRE22/unity-atomic/blob
 ### Atomic Setter
 Provides setter interface to a specified source.
 (See class: [AtomicSetter](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicSetter.cs))
+
+### Atomic Expressions
+
+Atomic expressions are one of the most powerful extensions of the atomic approach. Provide the ability to make composites of data in the form of sum, product, logical and/or.
+
+For example, let's assume that we want to make the character move forward at a speed that can be changed by different multipliers. Let there be a trigger effector as an object that will change the character's speed
+
+To do this, create an atomic expression of speed in the character class
+
+```csharp
+public sealed class Character : MonoBehaviour
+{
+    public IAtomicExpression<float> MoveSpeed => this.moveSpeedExpression;
+
+    [SerializeField]
+    private AtomicFloatProduct moveSpeedExpression;
+
+    [SerializeField]
+    private AtomicValue<float> moveSpeedBase = new(3);
+    
+    private void Awake()
+    {
+        //Add base speed to move expression:
+        this.moveSpeedExpression.Append(this.moveSpeedBase);
+    }
+
+    private void FixedUpdate()
+    {
+        //Move character forward:
+        Vector3 moveStep = this.moveSpeedExpression.Invoke() * Vector3.forward * Time.fixedDeltaTime;
+        this.transform.position += moveStep;
+    }
+}
+```
+
+```csharp
+//Increases character speed for 2 times: 
+public sealed class SpeedAreaEffector : MonoBehaviour
+{
+    [SerializeField]
+    private AtomicValue<float> speedMultiplier = new(2);
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out Character character))
+        {
+            character.MoveSpeed.Append(this.speedMultiplier);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out Character character))
+        {
+            character.MoveSpeed.Remove(this.speedMultiplier);
+        }
+    }
+}
+```
+
+Thus, every time the character enters the trigger, his speed will double.
+
+There are other expressions that you can check out in the library:
+- [AtomicAnd](https://github.com/StarKRE22/unity-atomic/blob/master/Extensions/Expressions/AtomicAnd.cs)
+- [AtomicOr](https://github.com/StarKRE22/unity-atomic/blob/master/Extensions/Expressions/AtomicOr.cs)
+- [AtomicIntSum](https://github.com/StarKRE22/unity-atomic/blob/master/Extensions/Expressions/AtomicIntSum.cs)
+- [AtomicIntProduct](https://github.com/StarKRE22/unity-atomic/blob/master/Extensions/Expressions/AtomicIntProduct.cs)
+- [AtomicFloatSum](https://github.com/StarKRE22/unity-atomic/blob/master/Extensions/Expressions/AtomicFloatSum.cs)
+- [AtomicFloatProduct](https://github.com/StarKRE22/unity-atomic/blob/master/Extensions/Expressions/AtomicFloatProduct.cs)
+
+
+
 
 Contracts
 ---
