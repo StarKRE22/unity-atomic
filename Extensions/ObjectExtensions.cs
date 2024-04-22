@@ -6,7 +6,7 @@ using Atomic.Objects;
 
 namespace Atomic.Extensions
 {
-    public static class EntityExtensions
+    public static class ObjectExtensions
     {
         private static readonly List<IAtomicLogic> cache = new();
 
@@ -115,14 +115,13 @@ namespace Atomic.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void CallAction(this IAtomicEntity it, string name)
+        public static void InvokeAction(this IAtomicEntity it, string name)
         {
             it.GetAction(name)?.Invoke();
         }
-        
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void CallAction<T>(this IAtomicEntity it, string name, T args)
+        public static void InvokeAction<T>(this IAtomicEntity it, string name, T args)
         {
             it.GetAction<T>(name)?.Invoke(args);
         }
@@ -144,7 +143,7 @@ namespace Atomic.Extensions
             return it.Get<IAtomicSetter<T>>(name);
         }
 
-        public static void SetValue<T>(this IAtomicEntity it, string name, T value)
+        public static void SetVariable<T>(this IAtomicEntity it, string name, T value)
         {
             if (it.TryGet(name, out IAtomicSetter<T> setter))
             {
@@ -187,7 +186,7 @@ namespace Atomic.Extensions
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool ListenEvent(this IAtomicEntity it, string name, Action listener)
+        public static bool SubscribeOnEvent(this IAtomicEntity it, string name, Action listener)
         {
             if (it.TryGetObservable(name, out IAtomicObservable observable))
             {
@@ -199,7 +198,7 @@ namespace Atomic.Extensions
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool ListenEvent(this IAtomicEntity it, string name, IAtomicAction listener)
+        public static bool SubscribeOnEvent(this IAtomicEntity it, string name, IAtomicAction listener)
         {
             if (it.TryGetObservable(name, out IAtomicObservable observable))
             {
@@ -211,19 +210,7 @@ namespace Atomic.Extensions
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool UnlistenEvent(this IAtomicEntity it, string name, Action listener)
-        {
-            if (it.TryGetObservable(name, out IAtomicObservable observable))
-            {
-                observable.Unsubscribe(listener);
-                return true;
-            }
-
-            return false;
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool UnlistenEvent(this IAtomicEntity it, string name, IAtomicAction listener)
+        public static bool UnsubscribeFromEvent(this IAtomicEntity it, string name, Action listener)
         {
             if (it.TryGetObservable(name, out IAtomicObservable observable))
             {
@@ -235,7 +222,19 @@ namespace Atomic.Extensions
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool ListenEvent<T>(this IAtomicEntity it, string name, Action<T> listener)
+        public static bool UnsubscribeFromEvent(this IAtomicEntity it, string name, IAtomicAction listener)
+        {
+            if (it.TryGetObservable(name, out IAtomicObservable observable))
+            {
+                observable.Unsubscribe(listener);
+                return true;
+            }
+
+            return false;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool SubscribeOnEvent<T>(this IAtomicEntity it, string name, Action<T> listener)
         {
             if (it.TryGetObservable(name, out IAtomicObservable<T> observable))
             {
@@ -247,7 +246,7 @@ namespace Atomic.Extensions
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool ListenEvent<T>(this IAtomicEntity it, string name, IAtomicAction<T> listener)
+        public static bool SubscribeOnEvent<T>(this IAtomicEntity it, string name, IAtomicAction<T> listener)
         {
             if (it.TryGetObservable(name, out IAtomicObservable<T> observable))
             {
@@ -259,7 +258,7 @@ namespace Atomic.Extensions
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool UnlistenEvent<T>(this IAtomicEntity it, string name, Action<T> listener)
+        public static bool UnsubscribeFromEvent<T>(this IAtomicEntity it, string name, Action<T> listener)
         {
             if (it.TryGetObservable(name, out IAtomicObservable<T> observable))
             {
@@ -271,7 +270,7 @@ namespace Atomic.Extensions
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool UnlistenEvent<T>(this IAtomicEntity it, string name, IAtomicAction<T> listener)
+        public static bool UnsubscribeFromEvent<T>(this IAtomicEntity it, string name, IAtomicAction<T> listener)
         {
             if (it.TryGetObservable(name, out IAtomicObservable<T> observable))
             {
