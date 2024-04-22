@@ -28,6 +28,7 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
         - [AtomicProperty](#atomic-property)
         - [AtomicObservable](#atomic-observable)
         - [AtomicPropertyObservable](#atomic-property-observable)
+        - [AtomicSetter](#atomic-setter)
     - [Objects](#work-with-objects)
         - [Atomic Entity](#atomic-entity)
         - [Atomic Object](#atomic-object)
@@ -328,6 +329,9 @@ public interface IWeaponManager
 Combines Atomic Property & Atomic Observable (See
 class: [AtomicPropertyObservable](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicPropertyObservable.cs))
 
+### Atomic Setter
+Provides setter interface to a specified source.
+(See class: [AtomicSetter](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicSetter.cs))
 
 Contracts
 ---
