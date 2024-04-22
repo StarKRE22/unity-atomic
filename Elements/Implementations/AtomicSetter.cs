@@ -5,6 +5,8 @@ using Sirenix.OdinInspector;
 
 namespace Atomic.Elements
 {
+    ///Provides setter interface to a specified source.
+
     [Serializable]
     public class AtomicSetter<T> : IAtomicSetter<T>
     {
