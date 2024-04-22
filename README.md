@@ -124,6 +124,16 @@ In this section you will see full capabilities of the atomic approach with theor
 ## Structures
 
 There are several different atomic structures in the library that may be required to develop game objects
+- [AtomicValue](#atomic-value)
+- [AtomicVariable](#atomic-variable)
+- [AtomicAction](#atomic-action)
+- [AtomicEvent](#atomic-event)
+- [AtomicFunction](#atomic-function)
+- [AtomicProperty](#atomic-property)
+- [AtomicObservable](#atomic-observable)
+- [AtomicPropertyObservable](#atomic-property-observable)
+- [AtomicSetter](#atomic-setter)
+- [AtomicExpressions](#atomic-expressions)
 
 ### Atomic Value
 Represents a read-only property (See class: [AtomicValue](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicValue.cs))
