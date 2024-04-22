@@ -120,7 +120,7 @@ There are several different atomic structures in the library that may be require
 Represents a read-only property (See class: [AtomicValue](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicValue.cs))
 
 ```csharp
-IAtomicValue<float> damage = new AtomicValue<float>(5.0f);
+var damage = new AtomicValue<float>(5.0f);
 float damageValue = damage.Value; //5.0f
 ```
 
@@ -140,7 +140,7 @@ public sealed class Character : MonoBehaviour
 Represents a read-write reactive property (See class: [AtomicVariable](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicVariable.cs))
 
 ```csharp
-IAtomicVariableObservable<int> health = new AtomicVariable<int>(5);
+var health = new AtomicVariable<int>(5);
 int healthValue = health.Value;
 
 health.Value = 3;
@@ -164,7 +164,7 @@ public sealed class Character : MonoBehaviour
 Represents a method object (See class: [AtomicAction](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicAction.cs))
 
 ```csharp
-IAtomicAction<int> takeDamageAction = new AtomicAction<int>(damage => Debug.Log("Take Damage {damage}"))
+var takeDamageAction = new AtomicAction<int>(damage => Debug.Log($"Take Damage {damage}"))
 takeDamageAction.Invoke(5);
 ```
 
@@ -193,7 +193,7 @@ public sealed class Character : MonoBehaviour
 Represents an event object (See class: [AtomicEvent](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicEvent.cs))
 
 ```csharp
-IAtomicEvent deathEvent = new AtomicEvent();
+var deathEvent = new AtomicEvent();
 deathEvent.Subscribe(() => Debug.Log("I'm dead!"))
 deathEvent.Invoke();
 deathEvent.Dispose(); //Unsubscribe all listeners
