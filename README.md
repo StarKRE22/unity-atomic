@@ -407,6 +407,16 @@ There are other expressions that you can check out in the library:
 - [AtomicFloatProduct](https://github.com/StarKRE22/unity-atomic/blob/master/Extensions/Expressions/AtomicFloatProduct.cs)
 
 
+Objects
+----
+Let's now see how we can work with our game objects using the atomic approach. 
+There are two objects in the library that represent the game object: [AtomicEntity](atomic-entity) & [AtomicObject](atomic-object)
+
+### Atomic Entity
+//TODO
+
+### Atomic Object
+//TODO
 
 
 Contracts
