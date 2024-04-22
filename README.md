@@ -121,7 +121,7 @@ In this section you will see full capabilities of the atomic approach with theor
 There are several different atomic structures in the library that may be required to develop game objects
 
 ### Atomic Value
-Represents read-only property (See class: [AtomicValue](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicValue.cs))
+Represents a read-only property (See class: [AtomicValue](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicValue.cs))
 
 ```csharp
 IAtomicValue<float> damage = new AtomicValue<float>(5.0f);
@@ -139,7 +139,7 @@ public sealed class Character : MonoBehaviour
 ```
 
 ### Atomic Variable
-Represents read-write reactive property (See class: [AtomicVariable](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicVariable.cs))
+Represents a read-write reactive property (See class: [AtomicVariable](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicVariable.cs))
 
 ```csharp
 IAtomicVariableObservable<int> health = new AtomicVariable<int>(5);
@@ -159,7 +159,32 @@ public sealed class Character : MonoBehaviour
 }
 ```
 
+### Atomic Action
+Represents a method object (See class: [AtomicAction](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicAction.cs))
 
+```csharp
+IAtomicAction<int> takeDamageAction = new AtomicAction<int>(damage => Debug.Log("Take Damage {damage}"))
+takeDamageAction.Invoke(5);
+```
+
+Example of using action
+
+```csharp
+public sealed class Character : MonoBehaviour
+{
+    [SerializeField]    
+    private AtomicAction<int> takeDamageAction;
+    
+    [SerializeField]    
+    private AtomicVariable<int> health = new(100);
+    
+    private void Awake()
+    {
+        //Init take damage action
+        this.takeDamageAction.Compose(damage => this.health.Value -= damage);
+    }
+}
+```
 
 
 
