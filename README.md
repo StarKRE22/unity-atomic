@@ -129,6 +129,8 @@ Example of using as speed property
 ```csharp
 public sealed class Character : MonoBehaviour
 {
+    public IAtomicValue<float> Speed => this.speed;
+
     [SerializeField]    
     private AtomicValue<float> speed = new(3.0f);
 }
@@ -151,6 +153,8 @@ Example of using as health property
 ```csharp
 public sealed class Character : MonoBehaviour
 {
+    public IAtomicVariableObservable<int> Health => this.health;
+
     [SerializeField]    
     private AtomicVariable<int> health = new(5);
 }
@@ -169,6 +173,8 @@ Example of using action
 ```csharp
 public sealed class Character : MonoBehaviour
 {
+    public IAtomicAction<int> TakeDamageAction => this.takeDamageAction;
+    
     [SerializeField]    
     private AtomicAction<int> takeDamageAction;
     
@@ -182,7 +188,6 @@ public sealed class Character : MonoBehaviour
     }
 }
 ```
-
 
 ### Atomic Event
 Represents an event object (See class: [AtomicEvent](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicEvent.cs))
@@ -199,14 +204,16 @@ Example of using event
 ```csharp
 public sealed class Character : MonoBehaviour
 {
-    [SerializeField]
-    private AtomicEvent<int> damageTakenEvent;
+    public IAtomicObservable<int> DamageTakenEvent => this.damageTakenEvent;
 
     [SerializeField]    
     private AtomicAction<int> takeDamageAction;
     
     [SerializeField]    
     private AtomicVariable<int> health = new(100);
+
+    [SerializeField]
+    private AtomicEvent<int> damageTakenEvent;
     
     private void Awake()
     {
