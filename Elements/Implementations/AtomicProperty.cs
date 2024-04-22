@@ -1,13 +1,17 @@
 using System;
+
 #if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
 #endif
 
 namespace Atomic.Elements
 {
+    ///Provides read-write interface to a specified source
+    
     [Serializable]
     public sealed class AtomicProperty<T> : IAtomicVariable<T>
     {
+        
 #if ODIN_INSPECTOR
         [ShowInInspector, ReadOnly]
 #endif
