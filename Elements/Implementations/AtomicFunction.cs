@@ -1,10 +1,13 @@
 using System;
+
 #if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
 #endif
 
 namespace Atomic.Elements
 {
+    /// Represents a function object.
+    
     [Serializable]
     public class AtomicFunction<T> : IAtomicFunction<T>
     {
@@ -63,6 +66,34 @@ namespace Atomic.Elements
         public R Invoke(T args)
         {
             return this.func.Invoke(args);
+        }
+    }
+    
+    [Serializable]
+    public sealed class AtomicFunction<T1, T2, R> : IAtomicFunction<T1, T2, R>
+    {
+        private Func<T1, T2, R> func;
+
+        public AtomicFunction()
+        {
+        }
+
+        public AtomicFunction(Func<T1, T2, R> func)
+        {
+            this.func = func;
+        }
+
+        public void Compose(Func<T1, T2, R> func)
+        {
+            this.func = func;
+        }
+
+#if ODIN_INSPECTOR
+        [Button]
+#endif
+        public R Invoke(T1 arg1, T2 arg2)
+        {
+            return this.func.Invoke(arg1, arg2);
         }
     }
 }
