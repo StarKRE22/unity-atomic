@@ -1,19 +1,28 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
+
 #if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
 #endif
-using UnityEngine;
 
 namespace Atomic.Elements
 {
-    [Serializable]
+    /// Represents a serialized read-write reactive property.
+
 #if ODIN_INSPECTOR
     [InlineProperty]
 #endif
+
+    [Serializable]
     public class AtomicVariable<T> : IAtomicVariableObservable<T>, IDisposable
     {
         private static readonly IEqualityComparer<T> equalityComparer = EqualityComparer.GetDefault<T>();
+
+        private Action<T> onChanged;
+        
+        [SerializeField]
+        private T value;
 
         public T Value
         {
@@ -28,24 +37,6 @@ namespace Atomic.Elements
             }
         }
 
-        public void Subscribe(Action<T> listener)
-        {
-            this.onChanged += listener;
-        }
-
-        public void Unsubscribe(Action<T> listener)
-        {
-            this.onChanged -= listener;
-        }
-
-        private Action<T> onChanged;
-
-        [SerializeField]
-#if ODIN_INSPECTOR
-        [HideLabel, OnValueChanged(nameof(OnValueChanged))]
-#endif
-        private T value;
-
         public AtomicVariable()
         {
             this.value = default;
@@ -56,6 +47,19 @@ namespace Atomic.Elements
             this.value = value;
         }
 
+        public void Subscribe(Action<T> listener)
+        {
+            this.onChanged += listener;
+        }
+
+        public void Unsubscribe(Action<T> listener)
+        {
+            this.onChanged -= listener;
+        }
+
+#if ODIN_INSPECTOR
+        [HideLabel, OnValueChanged(nameof(OnValueChanged))]
+#endif
         private void OnValueChanged(T value)
         {
             this.onChanged?.Invoke(value);
