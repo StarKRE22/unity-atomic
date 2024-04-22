@@ -34,7 +34,7 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
         - [Atomic Entity](#atomic-entity)
         - [Atomic Object](#atomic-object)
     - [Contracts](#contracts)
-    - [Extensions(#extensions)]
+    - [Extensions](#extensions)
         - [Structures](extensions-for-structures)
         - [Objects](extensions-for-objects)
 - [Good Practices](#good-practices)
