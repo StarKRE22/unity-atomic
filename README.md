@@ -18,11 +18,10 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
 ## Table of Contents
 - [Installation](#installation)
 - [Quick Start](#quick-start)
-    - [Create a Character](#create-a-character)
-    - [Interact with Character](#interact-with-character)
-- [Data Structures](#work-with-elements)
-    - [AtomicValue]
-    - [AtomicVariable] 
+- [Documentation](#documentation)
+    - [Data Structures](#data-structures)
+    - 
+    
 - [Work with Objects](#work-with-objects)
     - [Atomic Entity](#atomic-entity)
        - [Add properties at runtime](#add-properties-at-runtime)
@@ -38,8 +37,7 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
     - [Division into sections](#division-into-sections)
     - [Reflection Baking](#reflection-baking)
 
-Installation
----
+## Installation
 
 **There are 3 ways of installation:**
 
@@ -53,16 +51,13 @@ _3. Install via Unity Package Manager_
 "com.starkre.unity-atomic": "https://github.com/StarKRE22/unity-atomic.git" 
 ```
 
-Quick Start
----
+## Quick Start
+In this section you will see the basic functionality of how you can create a character class and interact with it.
 
-**Create a Character**
-
-For example, let's create Character class with health mechanics
-
+_Let's create a Character class with health mechanics:_
 ```csharp
 [Is("Damagable")]
-public sealed class Character : AtomicEntity //derived from MonoBehaviour
+public sealed class Character : AtomicEntity
 {
     [Get("Health")]
     [SerializeField]
@@ -93,9 +88,7 @@ public sealed class Character : AtomicEntity //derived from MonoBehaviour
 }
 ```
 
-Interact with Character
----
-
+_Then you can see examples below of how you can interact with character properties:_
 ```csharp
 
 IAtomicEntity character = gameObject.GetComponent<IAtomicEntity>();
@@ -116,12 +109,55 @@ character.CallAction("TakeDamage", 2);
 character.ListenEvent("DeathEvent", () => Debug.Log("I'm dead!"));
 ```
 
+These were simple examples demonstrating the basic capabilities of the atomic approach. 
+For more detail information look in the documentation section.
 
-Data Structures
----
+Documentation
+===
+In this section you will see full capabilities of the atomic approach with theory.
+
+## Data Structures
+
 There are several different atomic structures in the library that may be required to develop game objects
 
+### Atomic Value
+Represents read-only property (See class: [AtomicValue](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicValue.cs))
 
+```csharp
+IAtomicValue<float> damage = new AtomicValue<float>(5.0f);
+float damageValue = damage.Value; //5.0f
+```
+
+Example of using as speed property
+
+```csharp
+public sealed class Character : MonoBehaviour
+{
+    [SerializeField]    
+    private AtomicValue<float> speed = new(3.0f);
+}
+```
+
+### Atomic Variable
+Represents read-write reactive property (See class: [AtomicVariable](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicVariable.cs))
+
+```csharp
+IAtomicVariableObservable<int> health = new AtomicVariable<int>(5);
+int healthValue = health.Value;
+
+health.Value = 3;
+health.Subscribe(value => Debug.Log($"On health changed {value}"));
+```
+
+Example of using as health property
+
+```csharp
+public sealed class Character : MonoBehaviour
+{
+    [SerializeField]    
+    private AtomicVariable<int> health = new(5);
+}
+```
 
 
 
