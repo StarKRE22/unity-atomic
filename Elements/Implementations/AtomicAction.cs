@@ -1,14 +1,18 @@
 using System;
+
 #if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
 #endif
 
 namespace Atomic.Elements
 {
-    [Serializable]
+    /// Represents a method object 
+    
 #if ODIN_INSPECTOR
     [InlineProperty]
 #endif
+
+    [Serializable]
     public class AtomicAction : IAtomicAction
     {
         private Action action;
@@ -22,6 +26,7 @@ namespace Atomic.Elements
             this.action = action;
         }
 
+        //Setups action delegate;
         public void Compose(Action action)
         {
             this.action = action;
@@ -36,10 +41,12 @@ namespace Atomic.Elements
         }
     }
 
-    [Serializable]
+   
 #if ODIN_INSPECTOR
     [InlineProperty]
 #endif
+
+    [Serializable]
     public class AtomicAction<T> : IAtomicAction<T>
     {
         private Action<T> action;
@@ -67,10 +74,12 @@ namespace Atomic.Elements
         }
     }
     
-    [Serializable]
+   
 #if ODIN_INSPECTOR
     [InlineProperty]
 #endif
+    
+    [Serializable]
     public class AtomicAction<T1, T2> : IAtomicAction<T1, T2>
     {
         private Action<T1, T2> action;
@@ -98,10 +107,12 @@ namespace Atomic.Elements
         }
     }
     
-    [Serializable]
+    
 #if ODIN_INSPECTOR
     [InlineProperty]
 #endif
+
+    [Serializable]
     public class AtomicAction<T1, T2, T3> : IAtomicAction<T1, T2, T3>
     {
         private Action<T1, T2, T3> action;
