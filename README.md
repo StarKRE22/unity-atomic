@@ -45,7 +45,7 @@ Installation
 
 _1. Download code from repository_
 
-_2. Download .unitypackage from [release notes](https://github.com/StarKRE22/unity-atomic/releases/download/ver-2.0/Atomic.unitypackage)_ 
+_2. Download last [Atomic.unitypackage](https://github.com/StarKRE22/unity-atomic/releases/download/ver-2.0/Atomic.unitypackage) from [release notes](https://github.com/StarKRE22/unity-atomic/releases)_ 
 
 _3. Install via Unity Package Manager_
 
