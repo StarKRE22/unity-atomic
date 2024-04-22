@@ -444,9 +444,9 @@ bool isDamagable = character.Is(ObjectType.Damagable);
 
 int health = character.GetValue<int>(ObjectAPI.Health).Value;
 
-character.CallAction(ObjectAPI.TakeDamageAction, 2);
+character.InvokeAction(ObjectAPI.TakeDamageAction, 2);
 
-character.ListenEvent(ObjectAPI.DeathEvent,()=> Debug.Log("I'm dead!"));
+character.SubscribeOnEvent(ObjectAPI.DeathEvent,()=> Debug.Log("I'm dead!"));
 ```
 
 Extensions
