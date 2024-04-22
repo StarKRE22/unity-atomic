@@ -30,10 +30,13 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
         - [AtomicPropertyObservable](#atomic-property-observable)
         - [AtomicSetter](#atomic-setter)
         - [AtomicExpressions](#atomic-expressions)
-    - [Objects](#work-with-objects)
+    - [Objects](#objects)
         - [Atomic Entity](#atomic-entity)
         - [Atomic Object](#atomic-object)
     - [Contracts](#contracts)
+    - [Extensions(#extensions)]
+        - [Structures](extensions-for-structures)
+        - [Objects](extensions-for-objects)
 - [Good Practices](#good-practices)
     - [Reusing of object structure](#reusing-of-object-structure)
     - [Division into sections](#division-into-sections)
@@ -445,6 +448,13 @@ character.CallAction(ObjectAPI.TakeDamageAction, 2);
 
 character.ListenEvent(ObjectAPI.DeathEvent,()=> Debug.Log("I'm dead!"));
 ```
+
+Extensions
+---
+### Extensions for structures
+### Extensions for objects
+
+//TODO:
 
 Good Practices
 ===
