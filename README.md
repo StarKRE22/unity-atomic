@@ -16,25 +16,36 @@ The atomic approach is an object-oriented approach for game object development i
 Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-atomic/releases)
 
 ## Table of Contents
-- [Getting started](#getting-started)
-    - [Declaring Entity](#declaring-entity)
-    - [Interacting with Entity](#interacting-with-Entity)
-    - [Add properties at runtime](#add-properties-at-runtime)
-    - [Add mechanics at runtime](#add-mechanics-at-runtime)
-    - [Contracts](#contracts)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+    - [Create a Character](#create-a-character)
+    - [Interact with Character](#interact-with-character)
+- [Data Structures](#work-with-elements)
+    - [AtomicValue]
+    - [AtomicVariable] 
+- [Work with Objects](#work-with-objects)
+    - [Atomic Entity](#atomic-entity)
+       - [Add properties at runtime](#add-properties-at-runtime)
+
+    - [Atomic Object]()
+      - [Add mechanics at runtime](#add-mechanics-at-runtime)
+
+- [Contracts](#contracts)
+
+
 - [Good Practices](#good-practices)
     - [Reusing of object structure](#reusing-of-object-structure)
     - [Division into sections](#division-into-sections)
     - [Reflection Baking](#reflection-baking)
 
-Getting started
+Installation
 ---
 
 **There are 3 ways of installation:**
 
 _1. Download code from repository_
 
-_2. Download .zip archive from [release notes](https://github.com/StarKRE22/unity-atomic/releases)_
+_2. Download .unitypackage from [release notes](https://github.com/StarKRE22/unity-atomic/releases/download/ver-2.0/Atomic.unitypackage)_ 
 
 _3. Install via Unity Package Manager_
 
@@ -42,8 +53,11 @@ _3. Install via Unity Package Manager_
 "com.starkre.unity-atomic": "https://github.com/StarKRE22/unity-atomic.git" 
 ```
 
-Declaring Entity
+Quick Start
 ---
+
+**Create a Character**
+
 For example, let's create Character class with health mechanics
 
 ```csharp
@@ -79,7 +93,7 @@ public sealed class Character : AtomicEntity //derived from MonoBehaviour
 }
 ```
 
-Interacting with Entity
+Interact with Character
 ---
 
 ```csharp
@@ -102,82 +116,16 @@ character.CallAction("TakeDamage", 2);
 character.ListenEvent("DeathEvent", () => Debug.Log("I'm dead!"));
 ```
 
-Add properties at runtime
+
+Data Structures
 ---
+There are several different atomic structures in the library that may be required to develop game objects
 
-```csharp
-IMutableAtomicEntity character = gameObject.GetComponent<IMutableAtomicEntity>();
 
-//Make character invisible
-character.AddType("Invisible");
 
-//Add resource bag to the character
-character.AddData("ResourceBag", new AtomicVariable<int>());
 
-//Remove jump ability
-character.RemoveData("JumpAction");
-```
 
-Add mechanics at runtime
----
-For example you wanna add movement mechanics towards direction for your character.
 
-First of all, extend Character from AtomicObject. 
-
-```csharp
-public sealed class Character : AtomicObject //derived from MonoBehaviour
-{
-    [Get("Transform")]
-    public Transform mainTrainsform;
-
-   //Define when Fixed Update required for AtomicObject
-   private void FixedUpdate()
-   {
-       base.OnFixedUpdate(Time.fixedDeltaTime);
-   }
-}
-```
-
-Create MovementMechanics class and implement IAtomicFixedUpdate interface which support FixedUpdate of AtomicObject
-
-```csharp
-public sealed class MovementMechanics : IAtomicFixedUpdate
-{
-    private readonly IAtomicEntity entity;
-
-    public MovementMechanics(IAtomicEntity entity)
-    {
-        this.entity = entity;
-    }
-    
-    public void OnFixedUpdate(float deltaTime)
-    {
-        if (!entity.TryGet("Transform", out Transform transform) ||
-            !entity.TryGet("MoveSpeed", out IAtomicValue<float> moveSpeed) ||
-            !entity.TryGet("MoveDirection", out IAtomicValue<Vector3> moveDirection))
-        {
-            return;
-        }
-
-        Vector3 offset = moveDirection.Value * (moveSpeed.Value * deltaTime);
-        transform.Translate(offset);
-    }
-}
-```
-
-Add movement mechanics to your Character
-
-```csharp
-IMutableAtomicObject character = gameObject.GetComponent<IMutableAtomicObject>();
-
-//Add movement mechanics at runtime
-character.AddData("MoveSpeed", new AtomicVariable<float>(3));
-character.AddData("MoveDirection", new AtomicVariable<Vector3>(Vector3.forward));
-character.AddLogic(new MovementMechanics(character));
-
-//Remove movement mechanics at runtime
-character.RemoveLogic<MovementMechanics>();
-```
 
 Contracts
 ---
@@ -336,4 +284,87 @@ Reflection Baking
 //TODO
 
 
+
+
+
+
+
+
+
+Add properties at runtime
+---
+
+```csharp
+IMutableAtomicEntity character = gameObject.GetComponent<IMutableAtomicEntity>();
+
+//Make character invisible
+character.AddType("Invisible");
+
+//Add resource bag to the character
+character.AddData("ResourceBag", new AtomicVariable<int>());
+
+//Remove jump ability
+character.RemoveData("JumpAction");
+```
+
+Add mechanics at runtime
+---
+For example you wanna add movement mechanics towards direction for your character.
+
+First of all, extend Character from AtomicObject. 
+
+```csharp
+public sealed class Character : AtomicObject //derived from MonoBehaviour
+{
+    [Get("Transform")]
+    public Transform mainTrainsform;
+
+   //Define when Fixed Update required for AtomicObject
+   private void FixedUpdate()
+   {
+       base.OnFixedUpdate(Time.fixedDeltaTime);
+   }
+}
+```
+
+Create MovementMechanics class and implement IAtomicFixedUpdate interface which support FixedUpdate of AtomicObject
+
+```csharp
+public sealed class MovementMechanics : IAtomicFixedUpdate
+{
+    private readonly IAtomicEntity entity;
+
+    public MovementMechanics(IAtomicEntity entity)
+    {
+        this.entity = entity;
+    }
+    
+    public void OnFixedUpdate(float deltaTime)
+    {
+        if (!entity.TryGet("Transform", out Transform transform) ||
+            !entity.TryGet("MoveSpeed", out IAtomicValue<float> moveSpeed) ||
+            !entity.TryGet("MoveDirection", out IAtomicValue<Vector3> moveDirection))
+        {
+            return;
+        }
+
+        Vector3 offset = moveDirection.Value * (moveSpeed.Value * deltaTime);
+        transform.Translate(offset);
+    }
+}
+```
+
+Add movement mechanics to your Character
+
+```csharp
+IMutableAtomicObject character = gameObject.GetComponent<IMutableAtomicObject>();
+
+//Add movement mechanics at runtime
+character.AddData("MoveSpeed", new AtomicVariable<float>(3));
+character.AddData("MoveDirection", new AtomicVariable<Vector3>(Vector3.forward));
+character.AddLogic(new MovementMechanics(character));
+
+//Remove movement mechanics at runtime
+character.RemoveLogic<MovementMechanics>();
+```
 
