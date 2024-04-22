@@ -1,3 +1,5 @@
+/// Provides observable interface to a specified source.
+
 using System;
 
 namespace Atomic.Elements
