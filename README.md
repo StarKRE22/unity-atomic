@@ -23,15 +23,11 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
         - [AtomicValue](#atomic-value)
         - [AtomicVariable](#atomic-variable)
         - [AtomicAction](#atomic-action)
+        - [AtomicEvent](#atomic-event)
     - [Objects](#work-with-objects)
         - [Atomic Entity](#atomic-entity)
         - [Atomic Object](#atomic-object)
-    
-
-      
-- [Contracts](#contracts)
-
-
+    - [Contracts](#contracts)
 - [Good Practices](#good-practices)
     - [Reusing of object structure](#reusing-of-object-structure)
     - [Division into sections](#division-into-sections)
@@ -147,6 +143,7 @@ int healthValue = health.Value;
 
 health.Value = 3;
 health.Subscribe(value => Debug.Log($"On health changed {value}"));
+health.Dispose(); //Unsubscribe all listeners
 ```
 
 Example of using as health property
@@ -187,6 +184,40 @@ public sealed class Character : MonoBehaviour
 ```
 
 
+### Atomic Event
+Represents an event object (See class: [AtomicEvent](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicEvent.cs))
+
+```csharp
+IAtomicEvent deathEvent = new AtomicEvent();
+deathEvent.Subscribe(() => Debug.Log("I'm dead!"))
+deathEvent.Invoke();
+deathEvent.Dispose(); //Unsubscribe all listeners
+```
+
+Example of using event
+
+```csharp
+public sealed class Character : MonoBehaviour
+{
+    [SerializeField]
+    private AtomicEvent<int> damageTakenEvent;
+
+    [SerializeField]    
+    private AtomicAction<int> takeDamageAction;
+    
+    [SerializeField]    
+    private AtomicVariable<int> health = new(100);
+    
+    private void Awake()
+    {
+        //Init take damage action
+        this.takeDamageAction.Compose(damage => {
+            this.health.Value -= damage;
+            this.damageTakenEvent.Invoke(damage);
+        });
+    }
+}
+```
 
 Contracts
 ---
