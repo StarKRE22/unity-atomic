@@ -26,6 +26,8 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
         - [AtomicEvent](#atomic-event)
         - [AtomicFunction](#atomic-function)
         - [AtomicProperty](#atomic-property)
+        - [AtomicObservable](#atomic-observable)
+        - [AtomicPropertyObservable](#atomic-property-observable)
     - [Objects](#work-with-objects)
         - [Atomic Entity](#atomic-entity)
         - [Atomic Object](#atomic-object)
@@ -288,6 +290,44 @@ public sealed class Character : MonoBehaviour
     }
 }
 ```
+
+### Atomic Observable
+
+Provides observable interface to a specified source (See
+class: [AtomicObservable](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicObservable.cs))
+
+Example of using observable
+```csharp
+public sealed class Character : MonoBehaviour
+{
+    public IAtomicObservable<IWeapon> WeaponChangedEvent => this.weaponChangedEvent;
+
+    [SerializeField]
+    private AtomicObservable<IWeapon> weaponChangedEvent;
+
+    [Inject]
+    private IWeaponManager weaponManager;
+
+    private void Awake()
+    {
+        this.weaponChangedEvent.Compose(
+            weapon => this.weaponManager.OnChanged += weapon,
+            weapon => this.weaponManager.OnChanged -= weapon
+        );
+    }
+}
+
+public interface IWeaponManager
+{
+    event Action<IWeapon> OnChanged;
+}
+```
+
+### Atomic Property Observable
+
+Combines Atomic Property & Atomic Observable (See
+class: [AtomicPropertyObservable](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicPropertyObservable.cs))
+
 
 Contracts
 ---
