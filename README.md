@@ -20,15 +20,15 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
 - [Quick Start](#quick-start)
 - [Documentation](#documentation)
     - [Data Structures](#data-structures)
-    - 
+        - [AtomicValue](#atomic-value)
+        - [AtomicVariable](#atomic-variable)
+        - [AtomicAction](#atomic-action)
+    - [Objects](#work-with-objects)
+        - [Atomic Entity](#atomic-entity)
+        - [Atomic Object](#atomic-object)
     
-- [Work with Objects](#work-with-objects)
-    - [Atomic Entity](#atomic-entity)
-       - [Add properties at runtime](#add-properties-at-runtime)
 
-    - [Atomic Object]()
-      - [Add mechanics at runtime](#add-mechanics-at-runtime)
-
+      
 - [Contracts](#contracts)
 
 
@@ -100,13 +100,13 @@ bool isDamagable = character.Is("Damagable");
 int health = character.GetValue<int>("Health").Value;
 
 //Set health
-character.SetValue("Health", 5);
+character.SetVariable("Health", 5);
 
 //Deal damage
-character.CallAction("TakeDamage", 2);
+character.InvokeAction("TakeDamage", 2);
 
 //Subscribe on death
-character.ListenEvent("DeathEvent", () => Debug.Log("I'm dead!"));
+character.SubscribeOnEvent("DeathEvent", () => Debug.Log("I'm dead!"));
 ```
 
 These were simple examples demonstrating the basic capabilities of the atomic approach. 
