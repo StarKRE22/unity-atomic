@@ -25,6 +25,7 @@ Release Notes, see [unity-atomic/releases](https://github.com/StarKRE22/unity-at
         - [AtomicAction](#atomic-action)
         - [AtomicEvent](#atomic-event)
         - [AtomicFunction](#atomic-function)
+        - [AtomicProperty](#atomic-property)
     - [Objects](#work-with-objects)
         - [Atomic Entity](#atomic-entity)
         - [Atomic Object](#atomic-object)
@@ -249,6 +250,41 @@ public sealed class Character : MonoBehaviour
     {
         //Init function
         this.positionFunc.Compose(() => this.transform.position);
+    }
+}
+```
+
+### Atomic Property
+
+Provides read-write interface to a specified source (See class: [AtomicProperty](https://github.com/StarKRE22/unity-atomic/blob/master/Elements/Implementations/AtomicProperty.cs))
+
+```csharp
+var positionProperty = new AtomicProperty<Vector3>(
+    () => transform.position,
+    value => transform.position = value
+);
+
+Vector3 position = positionProperty.Value;
+positionProperty.Value = new Vector3(10, 10, 10);
+```
+
+Example of using property
+
+```csharp
+public sealed class Character : MonoBehaviour
+{
+    public IAtomicVariable<Vector3> Position => this.positionProperty;
+    
+    [SerializeField]
+    private AtomicFunction positionProperty;
+    
+    private void Awake()
+    {
+        //Init property
+        this.positionFunc.Compose(
+            () => this.transform.position,
+            value => this.transform.position = value
+        );
     }
 }
 ```
