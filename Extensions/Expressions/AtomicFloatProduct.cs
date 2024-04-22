@@ -4,14 +4,16 @@ using GameEngine;
 
 namespace Atomic.Elements
 {
+    ///Represents a product of float members 
+    
     [Serializable]
-    public sealed class AtomicFloatMul : AtomicExpression<float>
+    public sealed class AtomicFloatProduct : AtomicExpression<float>
     {
-        public AtomicFloatMul()
+        public AtomicFloatProduct()
         {
         }
 
-        public AtomicFloatMul(IEnumerable<IAtomicValue<float>> members) : base(members)
+        public AtomicFloatProduct(IEnumerable<IAtomicValue<float>> members) : base(members)
         {
         }
         
