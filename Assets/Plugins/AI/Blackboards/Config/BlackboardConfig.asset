@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f10f62366b8b4b15b1bf35e2b066b073, type: 3}
+  m_Name: BlackboardConfig
+  m_EditorClassIdentifier: 
+  keys:
+  - id: 0
+    name: UNDEFINED
+    type: 
+  - id: 1
+    name: Character
+    type: IAtomicObject
+  - id: 2
+    name: PatrolEnabled
+    type: bool
+  - id: 3
+    name: PatrolPoints
+    type: Transform[]
+  - id: 4
+    name: PatrolIndex
+    type: int
+  - id: 5
+    name: StoppingDistance
+    type: float
+  - id: 6
+    name: AttackEnabled
+    type: bool
+  - id: 7
+    name: AttackDistance
+    type: float
+  - id: 8
+    name: Target
+    type: IAtomicObject
+  - id: 9
+    name: SensorCenter
+    type: Transform
+  - id: 10
+    name: SensorSize
+    type: Vector2
+  - id: 11
+    name: ExclamationPoint
+    type: GameObject
+  - id: 12
+    name: MeleeDistance
+    type: float
+  - id: 13
+    name: RangeDistance
+    type: float
+  - id: 14
+    name: MovePosition
+    type: Vector2

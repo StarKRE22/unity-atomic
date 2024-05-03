@@ -1,0 +1,16 @@
+{
+    "name": "unity-atomic",
+    "rootNamespace": "",
+    "references": [
+        "GUID:efcfb9645db140f0a3a57513111db946"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
