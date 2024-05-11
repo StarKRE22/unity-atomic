@@ -57,7 +57,6 @@ namespace Sample
 
         private void Jump()
         {
-            Debug.Log("JUMP!");
             if (this.enabled.Invoke())
             {
                 this.rigidbody.AddForce(new Vector2(0, this.FullForce.Value), ForceMode2D.Impulse);

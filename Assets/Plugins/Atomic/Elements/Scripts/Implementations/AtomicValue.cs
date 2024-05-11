@@ -27,6 +27,10 @@ namespace Atomic.Elements
         [SerializeField]
         private T value;
 
+        public AtomicValue()
+        {
+        }
+
         public AtomicValue(T value)
         {
             this.value = value;

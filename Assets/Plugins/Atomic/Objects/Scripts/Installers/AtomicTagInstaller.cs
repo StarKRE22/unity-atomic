@@ -1,12 +1,11 @@
 using System;
-using Atomic.Objects;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Atomic
+namespace Atomic.Objects
 {
     [Serializable, InlineProperty]
-    public sealed class TagInstaller : IAtomicObject.IComposable
+    public sealed class AtomicTagInstaller : IAtomicObject.IComposable
     {
         [TagId]
         [SerializeField]

@@ -1,10 +1,9 @@
 using System;
-using Atomic.Objects;
 
-namespace Atomic
+namespace Atomic.Objects
 {
     [Serializable]
-    public class ElementInstaller<T> : ReferenceInstaller<T> where T : IAtomicObject.IBehaviour
+    public class AtomicElementInstaller<T> : AtomicReferenceInstaller<T> where T : IAtomicObject.IBehaviour
     {
         public override void Compose(IAtomicObject obj)
         {

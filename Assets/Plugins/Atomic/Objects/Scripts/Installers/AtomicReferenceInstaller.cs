@@ -3,10 +3,10 @@ using Atomic.Objects;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Atomic
+namespace Atomic.Objects
 {
     [Serializable, InlineProperty]
-    public class ReferenceInstaller<T> : IAtomicObject.IComposable
+    public class AtomicReferenceInstaller<T> : IAtomicObject.IComposable
     {
         [ReferenceId]
         [HorizontalGroup]
@@ -20,11 +20,11 @@ namespace Atomic
 
         public T Value => this.value;
         
-        public ReferenceInstaller()
+        public AtomicReferenceInstaller()
         {
         }
 
-        public ReferenceInstaller(T value)
+        public AtomicReferenceInstaller(T value)
         {
             this.value = value;
         }

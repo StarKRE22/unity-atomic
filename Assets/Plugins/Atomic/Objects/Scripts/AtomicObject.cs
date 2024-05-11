@@ -111,7 +111,6 @@ namespace Atomic.Objects
 #if UNITY_EDITOR
         private List<IAtomicObject.IDrawGizmos> drawGizmoses;
 #endif
-
         private bool _enabled;
 
         public bool Enabled
@@ -208,7 +207,6 @@ namespace Atomic.Objects
                 this.drawGizmoses.Remove(gizmos);
             }
 #endif
-
             if (_enabled)
             {
                 if (behaviour is IAtomicObject.IDisable disable)
@@ -906,11 +904,16 @@ namespace Atomic.Objects
         [FoldoutGroup("Debug")]
         [LabelText("Tags")]
         [ShowInInspector, PropertyOrder(100)]
-        private List<string> TagsDebug
+        [ListDrawerSettings(
+            CustomRemoveElementFunction = nameof(OnRemoveTagDebugById),
+            CustomRemoveIndexFunction = nameof(OnRemoveTagDebugByIndex),
+            HideAddButton = true
+        )]
+        private List<TagDebug> TagsDebug
         {
             get
             {
-                var result = new List<string>();
+                var result = new List<TagDebug>();
                 if (this.tags == null)
                 {
                     return result;
@@ -924,12 +927,43 @@ namespace Atomic.Objects
 
                 foreach (var tag in this.tags)
                 {
-                    result.Add(catalog.FindTypeById(tag) + $" ({tag})");
+                    result.Add(new TagDebug(catalog.FindTypeById(tag) + $" ({tag})", tag));
                 }
 
                 return result;
             }
             set { /** noting... **/ }
+        }
+        
+        private struct TagDebug
+        {
+            [ShowInInspector, ReadOnly]
+            public string name;
+            
+            internal readonly int id;
+
+            public TagDebug(string name, int id)
+            {
+                this.name = name;
+                this.id = id;
+            }
+        }
+        
+        private void OnRemoveTagDebugById(TagDebug tagDebug)
+        {
+            this.DelTag(tagDebug.id);
+        }
+        
+        private void OnRemoveTagDebugByIndex(int index)
+        {
+            var tags = this.tags.ToArray();
+            for (int i = 0, count = tags.Length; i < count; i++)
+            {
+                if (i == index)
+                {
+                    this.DelTag(tags[i]);
+                }
+            }
         }
 #endif
 
@@ -937,12 +971,16 @@ namespace Atomic.Objects
         [FoldoutGroup("Debug")]
         [LabelText("References")]
         [ShowInInspector, PropertyOrder(100)]
-
-        private Dictionary<string, object> ReferencesDebug
+        [ListDrawerSettings(
+            CustomRemoveElementFunction = nameof(OnRemoveReferenceByValue),
+            CustomRemoveIndexFunction = nameof(OnRemoveReferenceByIndex),
+            HideAddButton = true
+        )]
+        private List<ReferenceDebug> ReferencesDebug
         {
             get
             {
-                var result = new Dictionary<string, object>();
+                var result = new List<ReferenceDebug>();
                 if (this.references == null)
                 {
                     return result;
@@ -957,7 +995,7 @@ namespace Atomic.Objects
                 foreach (var (id, value) in this.references)
                 {
                     string fullName = catalog.GetFullItemNameById(id);
-                    result.Add(fullName, value);
+                    result.Add(new ReferenceDebug(fullName, value, id));
                 }
 
                 return result;
@@ -965,26 +1003,145 @@ namespace Atomic.Objects
 
             set { /** noting... **/ }
         }
+        
+       
+        private struct ReferenceDebug
+        {
+            [HorizontalGroup(200)]
+            [ShowInInspector, ReadOnly]
+            [HideLabel]
+            public string name;
+
+            [HorizontalGroup]
+            [ShowInInspector]
+            [HideLabel]
+            public object value;
+            
+            internal readonly int id;
+
+            public ReferenceDebug(string name, object value, int id)
+            {
+                this.name = name;
+                this.value = value;
+                this.id = id;
+            }
+        }
+        
+        private void OnRemoveReferenceByValue(ReferenceDebug referenceDebug)
+        {
+            this.DelReference(referenceDebug.id);
+        }
+        
+        private void OnRemoveReferenceByIndex(int index)
+        {
+            KeyValuePair<int,object>[] keyValuePairs = this.references.ToArray();
+            for (int i = 0, count = keyValuePairs.Length; i < count; i++)
+            {
+                if (i == index)
+                {
+                    this.DelReference(keyValuePairs[i].Key);
+                }
+            }
+        }
 #endif
 
 #if ODIN_INSPECTOR
         [FoldoutGroup("Debug")]
         [LabelText("Behaviours")]
         [ShowInInspector, PropertyOrder(100)]
-
-        private List<string> BehavioursDebug
+        [ListDrawerSettings(
+            CustomRemoveElementFunction = nameof(OnRemoveBehaviourByValue),
+            CustomRemoveIndexFunction = nameof(OnRemoveBehaviourByIndex),
+            HideAddButton = true
+        )]
+        private List<BehaviourDebug> BehavioursDebug
         {
             get
             {
                 if (this.behaviours == null)
                 {
-                    return new List<string>();
+                    return new List<BehaviourDebug>();
                 }
 
-                return this.behaviours.Select(it => it.GetType().Name).ToList();
+                return this.behaviours.Select(it => new BehaviourDebug(it.GetType().Name)).ToList();
             }
             set { /** noting... **/ }
         }
+        
+        [InlineProperty]
+        private struct BehaviourDebug
+        {
+            [ShowInInspector, ReadOnly]
+            public string value;
+
+            public BehaviourDebug(string value)
+            {
+                this.value = value;
+            }
+        }
+
+        
+        private void OnRemoveBehaviourByValue(BehaviourDebug behaviourDebug)
+        {
+            for (int i = 0, count = this.behaviours.Count; i < count; i++)
+            {
+                IAtomicObject.IBehaviour behaviour = this.behaviours[i];
+                if (behaviour.GetType().Name == behaviourDebug.value)
+                {
+                    this.DelBehaviour(behaviour);
+                    return;
+                }
+            }
+        }
+
+    
+
+        private void OnRemoveBehaviourByIndex(int index)
+        {
+            this.DelBehaviour(this.behaviours[index]);
+        }
+        
+        [PropertySpace]
+        [FoldoutGroup("Debug")]
+        [Button("Add Element")]
+        [ShowInInspector, PropertyOrder(100), HideInEditorMode]
+        private void OnAddElement(IAtomicObject.IComposable composable)
+        {
+            composable.Compose(this);
+        }
+        
+        // [Button("Add Tag")]
+        // [FoldoutGroup("Debug")]
+        // [ShowInInspector, PropertyOrder(100), HideInEditorMode]
+        // private void OnAddTag([TagId] int tag)
+        // {
+        //     this.AddTag(tag);
+        // }
+        //
+        // [Button("Add Reference")]
+        // [FoldoutGroup("Debug")]
+        // [ShowInInspector, PropertyOrder(100), HideInEditorMode]
+        // private void OnAddReference([ReferenceId] int id, object value)
+        // {
+        //     this.AddReference(id, value);
+        // }
+        //
+        // [Button("Add Behaviour")]
+        // [FoldoutGroup("Debug")]
+        // [ShowInInspector, PropertyOrder(100), HideInEditorMode]
+        // private void OnAddBehaviour(IAtomicObject.IBehaviour behaviour)
+        // {
+        //     this.AddBehaviour(behaviour);
+        // }
+        //
+        // [Button("Add Element")]
+        // [FoldoutGroup("Debug")]
+        // [ShowInInspector, PropertyOrder(100), HideInEditorMode]
+        // private void OnAddElement([ReferenceId] int id, IAtomicObject.IBehaviour value)
+        // {
+        //     this.AddReference(id, value);
+        //     this.AddBehaviour(value);
+        // }
 #endif
 #endif
 

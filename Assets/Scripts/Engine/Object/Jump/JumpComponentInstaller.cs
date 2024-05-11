@@ -12,9 +12,14 @@ namespace Sample
         [SerializeField]
         private JumpComponent jumpComponent;
 
+        public JumpComponentInstaller()
+        {
+            jumpComponent = new JumpComponent(null, 0);
+        }
+
         public void Compose(IAtomicObject obj)
         {
-            obj.AddReference(CommonAPI.JumpComponent, jumpComponent);
+            obj.AddReference(CommonAPI.JumpComponent, this.jumpComponent);
         }
     }
 }
