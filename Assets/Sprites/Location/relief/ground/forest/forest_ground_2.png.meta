@@ -1,0 +1,5003 @@
+fileFormatVersion: 2
+guid: 5607f5b9cacdf5f44b2ba19ee752b16d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: forest_ground_2_0
+  - first:
+      213: 21300002
+    second: forest_ground_2_1
+  - first:
+      213: 21300004
+    second: forest_ground_2_2
+  - first:
+      213: 21300006
+    second: forest_ground_2_3
+  - first:
+      213: 21300008
+    second: forest_ground_2_4
+  - first:
+      213: 21300010
+    second: forest_ground_2_5
+  - first:
+      213: 21300012
+    second: forest_ground_2_6
+  - first:
+      213: 21300014
+    second: forest_ground_2_7
+  - first:
+      213: 21300016
+    second: forest_ground_2_8
+  - first:
+      213: 21300018
+    second: forest_ground_2_9
+  - first:
+      213: 21300020
+    second: forest_ground_2_10
+  - first:
+      213: 21300022
+    second: forest_ground_2_11
+  - first:
+      213: 21300024
+    second: forest_ground_2_12
+  - first:
+      213: 21300026
+    second: forest_ground_2_13
+  - first:
+      213: 21300028
+    second: forest_ground_2_14
+  - first:
+      213: 21300030
+    second: forest_ground_2_15
+  - first:
+      213: 21300032
+    second: forest_ground_2_16
+  - first:
+      213: 21300034
+    second: forest_ground_2_17
+  - first:
+      213: 21300036
+    second: forest_ground_2_18
+  - first:
+      213: 21300038
+    second: forest_ground_2_19
+  - first:
+      213: 21300040
+    second: forest_ground_2_20
+  - first:
+      213: 21300042
+    second: forest_ground_2_21
+  - first:
+      213: 21300044
+    second: forest_ground_2_22
+  - first:
+      213: 21300046
+    second: forest_ground_2_23
+  - first:
+      213: 21300048
+    second: forest_ground_2_24
+  - first:
+      213: 21300050
+    second: forest_ground_2_25
+  - first:
+      213: 21300052
+    second: forest_ground_2_26
+  - first:
+      213: 21300054
+    second: forest_ground_2_27
+  - first:
+      213: 21300056
+    second: forest_ground_2_28
+  - first:
+      213: 21300058
+    second: forest_ground_2_29
+  - first:
+      213: 21300060
+    second: forest_ground_2_30
+  - first:
+      213: 21300062
+    second: forest_ground_2_31
+  - first:
+      213: 21300064
+    second: forest_ground_2_32
+  - first:
+      213: 21300066
+    second: forest_ground_2_33
+  - first:
+      213: 21300068
+    second: forest_ground_2_34
+  - first:
+      213: 21300070
+    second: forest_ground_2_35
+  - first:
+      213: 21300072
+    second: forest_ground_2_36
+  - first:
+      213: 21300074
+    second: forest_ground_2_37
+  - first:
+      213: 21300076
+    second: forest_ground_2_38
+  - first:
+      213: 21300078
+    second: forest_ground_2_39
+  - first:
+      213: 21300080
+    second: forest_ground_2_40
+  - first:
+      213: 21300082
+    second: forest_ground_2_41
+  - first:
+      213: 21300084
+    second: forest_ground_2_42
+  - first:
+      213: 21300086
+    second: forest_ground_2_43
+  - first:
+      213: 21300088
+    second: forest_ground_2_44
+  - first:
+      213: 21300090
+    second: forest_ground_2_45
+  - first:
+      213: 21300092
+    second: forest_ground_2_46
+  - first:
+      213: 21300094
+    second: forest_ground_2_47
+  - first:
+      213: 21300096
+    second: forest_ground_2_48
+  - first:
+      213: 21300098
+    second: forest_ground_2_49
+  - first:
+      213: 21300100
+    second: forest_ground_2_50
+  - first:
+      213: 21300102
+    second: forest_ground_2_51
+  - first:
+      213: 21300104
+    second: forest_ground_2_52
+  - first:
+      213: 21300106
+    second: forest_ground_2_53
+  - first:
+      213: 21300108
+    second: forest_ground_2_54
+  - first:
+      213: 21300110
+    second: forest_ground_2_55
+  - first:
+      213: 21300112
+    second: forest_ground_2_56
+  - first:
+      213: 21300114
+    second: forest_ground_2_57
+  - first:
+      213: 21300116
+    second: forest_ground_2_58
+  - first:
+      213: 21300118
+    second: forest_ground_2_59
+  - first:
+      213: 21300120
+    second: forest_ground_2_60
+  - first:
+      213: 21300122
+    second: forest_ground_2_61
+  - first:
+      213: 21300124
+    second: forest_ground_2_62
+  - first:
+      213: 21300126
+    second: forest_ground_2_63
+  - first:
+      213: 21300128
+    second: forest_ground_2_64
+  - first:
+      213: 21300130
+    second: forest_ground_2_65
+  - first:
+      213: 21300132
+    second: forest_ground_2_66
+  - first:
+      213: 21300134
+    second: forest_ground_2_67
+  - first:
+      213: 21300136
+    second: forest_ground_2_68
+  - first:
+      213: 21300138
+    second: forest_ground_2_69
+  - first:
+      213: 21300140
+    second: forest_ground_2_70
+  - first:
+      213: 21300142
+    second: forest_ground_2_71
+  - first:
+      213: 21300144
+    second: forest_ground_2_72
+  - first:
+      213: 21300146
+    second: forest_ground_2_73
+  - first:
+      213: 21300148
+    second: forest_ground_2_74
+  - first:
+      213: 21300150
+    second: forest_ground_2_75
+  - first:
+      213: 21300152
+    second: forest_ground_2_76
+  - first:
+      213: 21300154
+    second: forest_ground_2_77
+  - first:
+      213: 21300156
+    second: forest_ground_2_78
+  - first:
+      213: 21300158
+    second: forest_ground_2_79
+  - first:
+      213: 21300160
+    second: forest_ground_2_80
+  - first:
+      213: 21300162
+    second: forest_ground_2_81
+  - first:
+      213: 21300164
+    second: forest_ground_2_82
+  - first:
+      213: 21300166
+    second: forest_ground_2_83
+  - first:
+      213: 21300168
+    second: forest_ground_2_84
+  - first:
+      213: 21300170
+    second: forest_ground_2_85
+  - first:
+      213: 21300172
+    second: forest_ground_2_86
+  - first:
+      213: 21300174
+    second: forest_ground_2_87
+  - first:
+      213: 21300176
+    second: forest_ground_2_88
+  - first:
+      213: 21300178
+    second: forest_ground_2_89
+  - first:
+      213: 21300180
+    second: forest_ground_2_90
+  - first:
+      213: 21300182
+    second: forest_ground_2_91
+  - first:
+      213: 21300184
+    second: forest_ground_2_92
+  - first:
+      213: 21300186
+    second: forest_ground_2_93
+  - first:
+      213: 21300188
+    second: forest_ground_2_94
+  - first:
+      213: 21300190
+    second: forest_ground_2_95
+  - first:
+      213: 21300192
+    second: forest_ground_2_96
+  - first:
+      213: 21300194
+    second: forest_ground_2_97
+  - first:
+      213: 21300196
+    second: forest_ground_2_98
+  - first:
+      213: 21300198
+    second: forest_ground_2_99
+  - first:
+      213: 21300200
+    second: forest_ground_2_100
+  - first:
+      213: 21300202
+    second: forest_ground_2_101
+  - first:
+      213: 21300204
+    second: forest_ground_2_102
+  - first:
+      213: 21300206
+    second: forest_ground_2_103
+  - first:
+      213: 21300208
+    second: forest_ground_2_104
+  - first:
+      213: 21300210
+    second: forest_ground_2_105
+  - first:
+      213: 21300212
+    second: forest_ground_2_106
+  - first:
+      213: 21300214
+    second: forest_ground_2_107
+  - first:
+      213: 21300216
+    second: forest_ground_2_108
+  - first:
+      213: 21300218
+    second: forest_ground_2_109
+  - first:
+      213: 21300220
+    second: forest_ground_2_110
+  - first:
+      213: 21300222
+    second: forest_ground_2_111
+  - first:
+      213: 21300224
+    second: forest_ground_2_112
+  - first:
+      213: 21300226
+    second: forest_ground_2_113
+  - first:
+      213: 21300228
+    second: forest_ground_2_114
+  - first:
+      213: 21300230
+    second: forest_ground_2_115
+  - first:
+      213: 21300232
+    second: forest_ground_2_116
+  - first:
+      213: 21300234
+    second: forest_ground_2_117
+  - first:
+      213: 21300236
+    second: forest_ground_2_118
+  - first:
+      213: 21300238
+    second: forest_ground_2_119
+  - first:
+      213: 21300240
+    second: forest_ground_2_120
+  - first:
+      213: 21300242
+    second: forest_ground_2_121
+  - first:
+      213: 21300244
+    second: forest_ground_2_122
+  - first:
+      213: 21300246
+    second: forest_ground_2_123
+  - first:
+      213: 21300248
+    second: forest_ground_2_124
+  - first:
+      213: 21300250
+    second: forest_ground_2_125
+  - first:
+      213: 21300252
+    second: forest_ground_2_126
+  - first:
+      213: 21300254
+    second: forest_ground_2_127
+  - first:
+      213: 21300256
+    second: forest_ground_2_128
+  - first:
+      213: 21300258
+    second: forest_ground_2_129
+  - first:
+      213: 21300260
+    second: forest_ground_2_130
+  - first:
+      213: 21300262
+    second: forest_ground_2_131
+  - first:
+      213: 21300264
+    second: forest_ground_2_132
+  - first:
+      213: 21300266
+    second: forest_ground_2_133
+  - first:
+      213: 21300268
+    second: forest_ground_2_134
+  - first:
+      213: 21300270
+    second: forest_ground_2_135
+  - first:
+      213: 21300272
+    second: forest_ground_2_136
+  - first:
+      213: 21300274
+    second: forest_ground_2_137
+  - first:
+      213: 21300276
+    second: forest_ground_2_138
+  - first:
+      213: 21300278
+    second: forest_ground_2_139
+  - first:
+      213: 21300280
+    second: forest_ground_2_140
+  - first:
+      213: 21300282
+    second: forest_ground_2_141
+  - first:
+      213: 21300284
+    second: forest_ground_2_142
+  - first:
+      213: 21300286
+    second: forest_ground_2_143
+  - first:
+      213: 21300288
+    second: forest_ground_2_144
+  - first:
+      213: 21300290
+    second: forest_ground_2_145
+  - first:
+      213: 21300292
+    second: forest_ground_2_146
+  - first:
+      213: 21300294
+    second: forest_ground_2_147
+  - first:
+      213: 21300296
+    second: forest_ground_2_148
+  - first:
+      213: 21300298
+    second: forest_ground_2_149
+  - first:
+      213: 21300300
+    second: forest_ground_2_150
+  - first:
+      213: 21300302
+    second: forest_ground_2_151
+  - first:
+      213: 21300304
+    second: forest_ground_2_152
+  - first:
+      213: 21300306
+    second: forest_ground_2_153
+  - first:
+      213: 21300308
+    second: forest_ground_2_154
+  - first:
+      213: 21300310
+    second: forest_ground_2_155
+  - first:
+      213: 21300312
+    second: forest_ground_2_156
+  - first:
+      213: 21300314
+    second: forest_ground_2_157
+  - first:
+      213: 21300316
+    second: forest_ground_2_158
+  - first:
+      213: 21300318
+    second: forest_ground_2_159
+  - first:
+      213: 21300320
+    second: forest_ground_2_160
+  - first:
+      213: 21300322
+    second: forest_ground_2_161
+  - first:
+      213: 21300324
+    second: forest_ground_2_162
+  - first:
+      213: 21300326
+    second: forest_ground_2_163
+  - first:
+      213: 21300328
+    second: forest_ground_2_164
+  - first:
+      213: 21300330
+    second: forest_ground_2_165
+  - first:
+      213: 21300332
+    second: forest_ground_2_166
+  - first:
+      213: 21300334
+    second: forest_ground_2_167
+  - first:
+      213: 21300336
+    second: forest_ground_2_168
+  - first:
+      213: 21300338
+    second: forest_ground_2_169
+  - first:
+      213: 21300340
+    second: forest_ground_2_170
+  - first:
+      213: 21300342
+    second: forest_ground_2_171
+  - first:
+      213: 21300344
+    second: forest_ground_2_172
+  - first:
+      213: 21300346
+    second: forest_ground_2_173
+  - first:
+      213: 21300348
+    second: forest_ground_2_174
+  - first:
+      213: 21300350
+    second: forest_ground_2_175
+  - first:
+      213: 21300352
+    second: forest_ground_2_176
+  - first:
+      213: 21300354
+    second: forest_ground_2_177
+  - first:
+      213: 21300356
+    second: forest_ground_2_178
+  - first:
+      213: 21300358
+    second: forest_ground_2_179
+  - first:
+      213: 21300360
+    second: forest_ground_2_180
+  - first:
+      213: 21300362
+    second: forest_ground_2_181
+  - first:
+      213: 21300364
+    second: forest_ground_2_182
+  - first:
+      213: 21300366
+    second: forest_ground_2_183
+  - first:
+      213: 21300368
+    second: forest_ground_2_184
+  - first:
+      213: 21300370
+    second: forest_ground_2_185
+  - first:
+      213: 21300372
+    second: forest_ground_2_186
+  - first:
+      213: 21300374
+    second: forest_ground_2_187
+  - first:
+      213: 21300376
+    second: forest_ground_2_188
+  - first:
+      213: 21300378
+    second: forest_ground_2_189
+  - first:
+      213: 21300380
+    second: forest_ground_2_190
+  - first:
+      213: 21300382
+    second: forest_ground_2_191
+  - first:
+      213: 21300384
+    second: forest_ground_2_192
+  - first:
+      213: 21300386
+    second: forest_ground_2_193
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: forest_ground_2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2910
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1111e362c5b7aca4692b632595ea4bc4
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 2910
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46406eb3bbac81243b774aec43daadcc
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 2910
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e3b8d62c92a0af4db75ac9327906188
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 2910
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 719613b352810b54c959d462c9354e3c
+      internalID: 21300006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 2910
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e961fe2da38274a48a630e675820d2af
+      internalID: 21300008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 2910
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 977032e78c3e5184ca2401161675e4e4
+      internalID: 21300010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 2910
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a823d5303304ac244865d474afd2ae5e
+      internalID: 21300012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_7
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 2910
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a3ef2e7d4f09ed4caf888b0f2a591c1
+      internalID: 21300014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_8
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2910
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97ddfa405de781b4ebed3e693c9bbe2b
+      internalID: 21300016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_9
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 2910
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a02582e2b49ecd43bd771078ed4676f
+      internalID: 21300018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_10
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 2910
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40a71db32b1025c4b806d961c0e4fcb6
+      internalID: 21300020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_11
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 2910
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c02d6b3123071b1438ed3ca652ba26bc
+      internalID: 21300022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_12
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2910
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52eda11839471d04da6d2dd627a43569
+      internalID: 21300024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2782
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b6a5a3a9fcd4d648b0f4f37656e40d8
+      internalID: 21300026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_14
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2782
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0101ab2156a1fa4d8abbcead75b9515
+      internalID: 21300028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_15
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 2782
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb50ddda15156324a96972deab016314
+      internalID: 21300030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_16
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 2782
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc562ad557f37fc46a7abe390b8c4d1a
+      internalID: 21300032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_17
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 2782
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b73f619cc4672c4ab4657f7b124ee04
+      internalID: 21300034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_18
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2782
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11e996c5a8558d747a3d357dff681aff
+      internalID: 21300036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2654
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a893095c3e22de2439c0467196fa8692
+      internalID: 21300038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_20
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2654
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dcb96870227469459100d32c76919e3
+      internalID: 21300040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_21
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 2654
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e10736f91629fe74d8c388b354ddc875
+      internalID: 21300042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_22
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 2654
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b524b2d09ae6102418f3cf028de31a78
+      internalID: 21300044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_23
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 2654
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07e05546628fea9498f1810647919f0b
+      internalID: 21300046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_24
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2654
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf0e1d7f42e95874690e20a6388e29ea
+      internalID: 21300048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2526
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41ce3cb11b6cd544abb8f3b0c84d7d46
+      internalID: 21300050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_26
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2526
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d08c94b9308bc36409df4ca3b0108d53
+      internalID: 21300052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_27
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 2526
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f7b3e77de54c7a41b912848cc9a860d
+      internalID: 21300054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_28
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 2526
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72a251b8a67d54a4083754e1ecfce8c4
+      internalID: 21300056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_29
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 2526
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c77361f1dcdba434298a462e1d5ff9af
+      internalID: 21300058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_30
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2526
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6c9f89230cbb654581ac1b2a54ec1db
+      internalID: 21300060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_31
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2398
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 728a91ec6c4424c4bab785f68a11e092
+      internalID: 21300062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_32
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2398
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1e13219bbc4af74f942adbee5f61ad5
+      internalID: 21300064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_33
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 2398
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 158af976af07ef549a5d880da1c3c4bd
+      internalID: 21300066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_34
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 2398
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16ea2764847637c44a15a7ac30850297
+      internalID: 21300068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_35
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 2398
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d26ea109ead39204cb11dbc016df9559
+      internalID: 21300070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_36
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2398
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a33b007a51995c643a64374b7d73fc2f
+      internalID: 21300072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_37
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2270
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b0c216c2e6ce8743a8150602383f198
+      internalID: 21300074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_38
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2270
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5af8a1233bf2fd741b5c40f0ccbcde8b
+      internalID: 21300076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_39
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 2270
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d19bf38af95d6a94188adc2349542d4a
+      internalID: 21300078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_40
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 2270
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0699b56c10a47c04fa3ecee96a5a8d56
+      internalID: 21300080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_41
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 2270
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1a93d95774fe6b48ac4aa9910dd4c2b
+      internalID: 21300082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_42
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2270
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4a250b7a50981c4599513d2fd45916d
+      internalID: 21300084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_43
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2142
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bceec6a04b55724881729f96286fbfa
+      internalID: 21300086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_44
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2142
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33a0ad6f0b2494f4391763d3896fd40c
+      internalID: 21300088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_45
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 2142
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3346bdffd35c49418c536c0a28e47ff
+      internalID: 21300090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_46
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 2142
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15818d90c8830054fb9117b6de83a0e7
+      internalID: 21300092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_47
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 2142
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4ca2a4b5df38c84fbea305dc9321668
+      internalID: 21300094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_48
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2142
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f9cf8c73b649e247a04dff006b55f28
+      internalID: 21300096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_49
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2014
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3a13e91a8dc6c647be7dfa3d29b978a
+      internalID: 21300098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_50
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2014
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebb4a204eadf2934a8b73ffecee66708
+      internalID: 21300100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_51
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 2014
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e16bf4e4619470d429be8610497b7596
+      internalID: 21300102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_52
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 2014
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dbaa55442d529f48a68f69f1946418d
+      internalID: 21300104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_53
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 2014
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e77d748235797946b8dfef2562963e9
+      internalID: 21300106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_54
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2014
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 369cb5043b9d6754983e76c1a94242f8
+      internalID: 21300108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_55
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1886
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f6848e95ba425a4e9dd83b09ffcf028
+      internalID: 21300110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_56
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1886
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adea2f51fcf6419408224467147740eb
+      internalID: 21300112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_57
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1886
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70bd6420813c94f47a23d4bab9f79c47
+      internalID: 21300114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_58
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1886
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb0f75512a014eb489416a153630db95
+      internalID: 21300116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_59
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1886
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6da238ac08b0d9143a97140899eac18a
+      internalID: 21300118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_60
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1886
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64838bfe1dea84347aef5f8ea6039913
+      internalID: 21300120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_61
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1758
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d7b2451b0713504d999ffa23aa3d19b
+      internalID: 21300122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_62
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1758
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b043334cf687254fa4c87a6e0bc5730
+      internalID: 21300124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_63
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1758
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56586a4e97de9bc489677add2b78dce6
+      internalID: 21300126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_64
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1758
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d9f2e5f6aa89154293740a79a8c1be0
+      internalID: 21300128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_65
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1758
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddc45c485a1db4a42bf0eabce24e327b
+      internalID: 21300130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_66
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1758
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bf48dcc0434d1247b3bad58a66e72cb
+      internalID: 21300132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_67
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1630
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd3ff21e19c394247ac54f4418b5e780
+      internalID: 21300134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_68
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1630
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dbdd738429306e468f36b9a971d3847
+      internalID: 21300136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_69
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1630
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74d0ec0cdaf274f408d4404dd651bc31
+      internalID: 21300138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_70
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1630
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39794606757e9784e8b0c0594d801150
+      internalID: 21300140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_71
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1630
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94f8f74d5d679e941b4970a6a655c0f3
+      internalID: 21300142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_72
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1630
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 663d15e1d6ee2f44e88df9bf20aa8ab9
+      internalID: 21300144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_73
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1502
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9e4b6b204d458c4e9c23ed335c415d1
+      internalID: 21300146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_74
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1502
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cb213aedb2e07a4c8a925566ef9bc36
+      internalID: 21300148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_75
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1502
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d469f3717bf30a440b24ef175b1215c1
+      internalID: 21300150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_76
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1502
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 736aaa3207dc04f48ae8f939ff381754
+      internalID: 21300152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_77
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1502
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 653f60e7ace19f54da2b8664cdd89145
+      internalID: 21300154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_78
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1502
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 348d563e35b9f8a45b40290a892afa72
+      internalID: 21300156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_79
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1374
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcc895e4b73721643b3f9a9057134329
+      internalID: 21300158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_80
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1374
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b927ad716c63e5948853a35ce06cf154
+      internalID: 21300160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_81
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1374
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5931959a5481f4f46911968662bb972e
+      internalID: 21300162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_82
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1374
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42dd789eb91890442abb213ae89c3ecd
+      internalID: 21300164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_83
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1374
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3aa38e45b49bfc9479e8681ce2a760c0
+      internalID: 21300166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_84
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1374
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a894a3a68b4904478c520ee4f6db087
+      internalID: 21300168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_85
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1246
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab52302cbc3757843a7434bda81e60ea
+      internalID: 21300170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_86
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1246
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55fb2f95c423f9e4bb957f7aed0bd738
+      internalID: 21300172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_87
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1246
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87bde1184c56bc746a027fd913e00991
+      internalID: 21300174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_88
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1246
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc173b0ffbad2244f8a6996ea0af75c5
+      internalID: 21300176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_89
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1246
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da6a6847173bacf41847dbe6e3e794a2
+      internalID: 21300178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_90
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1246
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffdeb2b9aec11294e8e06ac394dee611
+      internalID: 21300180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_91
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1118
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 487301f3cdc43a24f8562deb15034323
+      internalID: 21300182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_92
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1118
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a53d19c730542074e8e6aa5236a967b1
+      internalID: 21300184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_93
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1118
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23c1e91248efc7f4da2b8cd4e8699c14
+      internalID: 21300186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_94
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1118
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f0483d524976a748b8cdd3ea526f9c7
+      internalID: 21300188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_95
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1118
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fe69562daf54944f8512e6d51d7bcae
+      internalID: 21300190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_96
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1118
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9b4a838ecd8c9b45a97b5dc8faa0fc7
+      internalID: 21300192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_97
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 990
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c711a1fe9b7393942a863e542530526e
+      internalID: 21300194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_98
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 990
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 823fec4fe4abb1b4dbee6b609a422033
+      internalID: 21300196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_99
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 990
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e335bbb25a2d1434da50d159beafd6a4
+      internalID: 21300198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_100
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 990
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97121b59a61990e41b00d27c6219a3a8
+      internalID: 21300200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_101
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 990
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48273a93143621346a8d8471ca0d0298
+      internalID: 21300202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_102
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 990
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95446297567d1864d996bef291852626
+      internalID: 21300204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_103
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 862
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 981a60030467ce6418f22704f3dd5a36
+      internalID: 21300206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_104
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 862
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a308e0a95424308499f0e3af937a5d34
+      internalID: 21300208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_105
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 862
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5581f5fbb0896324f8a958cac051a43c
+      internalID: 21300210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_106
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 862
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f40c38e54449ff43b6113d478039946
+      internalID: 21300212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_107
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 862
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c98a8d37ff2bf0a4da4a3fa9041459d9
+      internalID: 21300214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_108
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 862
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2e72dbe6457e8d49acd542a84d7b157
+      internalID: 21300216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_109
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 862
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fe954ee7be2bdb4d87146f665d6fd6a
+      internalID: 21300218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_110
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 862
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0157a6eae65d2004db6737bd5b0283b9
+      internalID: 21300220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_111
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 862
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f6919785764f2d44abdc04b6c3e6e90
+      internalID: 21300222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_112
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 862
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17afd9180a4091b46894353c60d0fdb0
+      internalID: 21300224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_113
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 862
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fd30034d3fe33141b7e44c310062174
+      internalID: 21300226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_114
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 862
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6ffef68288711d4d9dd318702acd564
+      internalID: 21300228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_115
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 862
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81782e2ea3d89f8468d2eac7d628c200
+      internalID: 21300230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_116
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 734
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7668c31e998ebe5439c961145a7d5baa
+      internalID: 21300232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_117
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 734
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 126b892727bcdf04e8a0ec7247834467
+      internalID: 21300234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_118
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 734
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f654beac8d69614187fab97a16b21b5
+      internalID: 21300236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_119
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 734
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9efc021e13277840b297478020df500
+      internalID: 21300238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_120
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 734
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e3b4a758b31ca143ad3095ef7dd9e74
+      internalID: 21300240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_121
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 734
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 482ab4eecc00f7d47bbf31ed30a520a6
+      internalID: 21300242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_122
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 734
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4093e18a547484943870b41deeae0baf
+      internalID: 21300244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_123
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 734
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbf772b479a7d0242808d1a32003a291
+      internalID: 21300246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_124
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 734
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9aec368053d495246b293de4ae9f4a84
+      internalID: 21300248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_125
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 734
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e40ff55a7fa8ae04db30a63868d533c5
+      internalID: 21300250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_126
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 734
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7713f3e7a0648d4aa6fc6716fc09b5c
+      internalID: 21300252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_127
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 734
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0fbff9a27268c240a22f647e67df20c
+      internalID: 21300254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_128
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 734
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aea70057863b5db46a1fe54ef7f2bbc2
+      internalID: 21300256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_129
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 606
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1e61c48bb8b51d4caad842429dccf11
+      internalID: 21300258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_130
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 606
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adecacf7e884ae846aad935dadca928f
+      internalID: 21300260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_131
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 606
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f28901226a9a68419a37f0fa9f0b7a5
+      internalID: 21300262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_132
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 606
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6d9ed69fa7e8d34595e728aef0de887
+      internalID: 21300264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_133
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 606
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da3c0b698b043bd4f9e37ca40ec10087
+      internalID: 21300266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_134
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 606
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22228d148bcdd5a419a3bf319200f0fb
+      internalID: 21300268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_135
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 606
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0702931df25f3554ea1900e9918e91c6
+      internalID: 21300270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_136
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 606
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04bddf72323df574c88026fef9253886
+      internalID: 21300272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_137
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 606
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7373ecbec264a3343a5182faba598a41
+      internalID: 21300274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_138
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 606
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7db30017fae0ac74ba600fd38a524b1f
+      internalID: 21300276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_139
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 606
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c14844074054c3499306b7026732803
+      internalID: 21300278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_140
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 606
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 639ba8b23668ad24fba04b4602d44580
+      internalID: 21300280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_141
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 606
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba2570e5ccf9a8a48aae2f3fd389445e
+      internalID: 21300282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_142
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 478
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27bfc9710b2feae4eb500f4539be1baf
+      internalID: 21300284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_143
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 478
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 884766c12b54c4244aa19f9f7d1713ed
+      internalID: 21300286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_144
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 478
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b18e75b016a2cd848b5f9c9d0b4dbc56
+      internalID: 21300288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_145
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 478
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b169bfcb4aaf8042b9dfb1c04b79605
+      internalID: 21300290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_146
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 478
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 323c93adc4a8c6046a2810c742285bfb
+      internalID: 21300292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_147
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 478
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fb4e61df2b59bb448a6f157d8220d52
+      internalID: 21300294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_148
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 478
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd5564b186b54d84dbdea6e5f65e891a
+      internalID: 21300296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_149
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 478
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a71a24d26b52cd40a6e8162856d8f2a
+      internalID: 21300298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_150
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 478
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ed9e97e94355154fab8ad589d5be04a
+      internalID: 21300300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_151
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 478
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90f0fdae88e96994180c35061e0e6495
+      internalID: 21300302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_152
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 478
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dbb3f7e52f104249acd23e8cbc1c8c3
+      internalID: 21300304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_153
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 478
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7b172e99e9f969429f3703ed15394ab
+      internalID: 21300306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_154
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 478
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d788ce6a2537df440a1fdd727fb6abc7
+      internalID: 21300308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_155
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 350
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c243ed987eab2d1408be583c64f61c02
+      internalID: 21300310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_156
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 350
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7841c8dd2b0f9ab4f8c12a906898dcc8
+      internalID: 21300312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_157
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 350
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b55d27a408ac3f4e83a5e6bc2a418ab
+      internalID: 21300314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_158
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 350
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d6c415fbca40b243b4bd1521cd3fc41
+      internalID: 21300316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_159
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 350
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a4ccc69a2aedbf4cb20353eaf8a25ed
+      internalID: 21300318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_160
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 350
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3af69aa4fa481f649938d4b0a09c794c
+      internalID: 21300320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_161
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 350
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc9f6c45112d4984880c4c4b87b08f45
+      internalID: 21300322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_162
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 350
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b05ae02bdc915941bffb95ca5d3d2fd
+      internalID: 21300324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_163
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 350
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 368d6ce78d86d9a49a652788df1d4c0e
+      internalID: 21300326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_164
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 350
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1de93e71508e2942a00030eb0007a77
+      internalID: 21300328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_165
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 350
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed5f84918731b8c4c963ed519be746e9
+      internalID: 21300330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_166
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 350
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4603ab1e0ec171c4aad58f3d59b9301f
+      internalID: 21300332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_167
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 350
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bea7d999b4d5084448f25e2b9678a862
+      internalID: 21300334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_168
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 222
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 410cc7d405ded09448900f07cfde1c2b
+      internalID: 21300336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_169
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 222
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fad96a7bd11dd8a4d861bc950bc22801
+      internalID: 21300338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_170
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 222
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 547539adbb8f73642bacc80a55981c5c
+      internalID: 21300340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_171
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 222
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fb69c7c3a5c03343a1c284b6c58e37b
+      internalID: 21300342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_172
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 222
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd77b34596a227444b508bb68335493d
+      internalID: 21300344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_173
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 222
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f176bd47b452fd40918f229bc2dea60
+      internalID: 21300346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_174
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 222
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b213a6883656b34ab78b3ae36abc86a
+      internalID: 21300348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_175
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 222
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b13a681de238f8f4184c187f1800e91a
+      internalID: 21300350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_176
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 222
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7018e451c51b73047888e481bd796329
+      internalID: 21300352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_177
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 222
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8541029ed1aba2f46b81e1868e3be85b
+      internalID: 21300354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_178
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 222
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb6058a61c595484d9228b331369879f
+      internalID: 21300356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_179
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 222
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2c943926f6e61f41953a07c4ffb0e9e
+      internalID: 21300358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_180
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 222
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78fcd57bc60a8cd468adc66b90feff6c
+      internalID: 21300360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_181
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 94
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd47edd9a546db0428ab6c488144116c
+      internalID: 21300362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_182
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 94
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec5c68756ec080e4bbddeaed6b608fe3
+      internalID: 21300364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_183
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 94
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1021590cf670ca8448970790ea3af258
+      internalID: 21300366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_184
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 94
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca178ca753e180047bcef99a9c43a20f
+      internalID: 21300368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_185
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 94
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aecbf7c192740d41be823d1376bfbcf
+      internalID: 21300370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_186
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 94
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92bf91c21d5146444b9c963d8207b9c9
+      internalID: 21300372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_187
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 94
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7109a06d84bf0345ba08f27b03ad96f
+      internalID: 21300374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_188
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 94
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0c8da3b23301464daa3883ff0f2ae58
+      internalID: 21300376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_189
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 94
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15f9cff10f405c94ba2966ef653470a8
+      internalID: 21300378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_190
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 94
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa1939a3b4478a44aa016fdfc25f6ef3
+      internalID: 21300380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_191
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 94
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad866dc96d294c741beb973704069512
+      internalID: 21300382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_192
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 94
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8764c8d4f2a2ea74f8f258c995aab7be
+      internalID: 21300384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_ground_2_193
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 94
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff2eb8849ed0b50448662e28f3e57ab0
+      internalID: 21300386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: dd800e47b7d680c499d3d008d5f2564d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      forest_ground_2_0: 21300000
+      forest_ground_2_1: 21300002
+      forest_ground_2_10: 21300020
+      forest_ground_2_100: 21300200
+      forest_ground_2_101: 21300202
+      forest_ground_2_102: 21300204
+      forest_ground_2_103: 21300206
+      forest_ground_2_104: 21300208
+      forest_ground_2_105: 21300210
+      forest_ground_2_106: 21300212
+      forest_ground_2_107: 21300214
+      forest_ground_2_108: 21300216
+      forest_ground_2_109: 21300218
+      forest_ground_2_11: 21300022
+      forest_ground_2_110: 21300220
+      forest_ground_2_111: 21300222
+      forest_ground_2_112: 21300224
+      forest_ground_2_113: 21300226
+      forest_ground_2_114: 21300228
+      forest_ground_2_115: 21300230
+      forest_ground_2_116: 21300232
+      forest_ground_2_117: 21300234
+      forest_ground_2_118: 21300236
+      forest_ground_2_119: 21300238
+      forest_ground_2_12: 21300024
+      forest_ground_2_120: 21300240
+      forest_ground_2_121: 21300242
+      forest_ground_2_122: 21300244
+      forest_ground_2_123: 21300246
+      forest_ground_2_124: 21300248
+      forest_ground_2_125: 21300250
+      forest_ground_2_126: 21300252
+      forest_ground_2_127: 21300254
+      forest_ground_2_128: 21300256
+      forest_ground_2_129: 21300258
+      forest_ground_2_13: 21300026
+      forest_ground_2_130: 21300260
+      forest_ground_2_131: 21300262
+      forest_ground_2_132: 21300264
+      forest_ground_2_133: 21300266
+      forest_ground_2_134: 21300268
+      forest_ground_2_135: 21300270
+      forest_ground_2_136: 21300272
+      forest_ground_2_137: 21300274
+      forest_ground_2_138: 21300276
+      forest_ground_2_139: 21300278
+      forest_ground_2_14: 21300028
+      forest_ground_2_140: 21300280
+      forest_ground_2_141: 21300282
+      forest_ground_2_142: 21300284
+      forest_ground_2_143: 21300286
+      forest_ground_2_144: 21300288
+      forest_ground_2_145: 21300290
+      forest_ground_2_146: 21300292
+      forest_ground_2_147: 21300294
+      forest_ground_2_148: 21300296
+      forest_ground_2_149: 21300298
+      forest_ground_2_15: 21300030
+      forest_ground_2_150: 21300300
+      forest_ground_2_151: 21300302
+      forest_ground_2_152: 21300304
+      forest_ground_2_153: 21300306
+      forest_ground_2_154: 21300308
+      forest_ground_2_155: 21300310
+      forest_ground_2_156: 21300312
+      forest_ground_2_157: 21300314
+      forest_ground_2_158: 21300316
+      forest_ground_2_159: 21300318
+      forest_ground_2_16: 21300032
+      forest_ground_2_160: 21300320
+      forest_ground_2_161: 21300322
+      forest_ground_2_162: 21300324
+      forest_ground_2_163: 21300326
+      forest_ground_2_164: 21300328
+      forest_ground_2_165: 21300330
+      forest_ground_2_166: 21300332
+      forest_ground_2_167: 21300334
+      forest_ground_2_168: 21300336
+      forest_ground_2_169: 21300338
+      forest_ground_2_17: 21300034
+      forest_ground_2_170: 21300340
+      forest_ground_2_171: 21300342
+      forest_ground_2_172: 21300344
+      forest_ground_2_173: 21300346
+      forest_ground_2_174: 21300348
+      forest_ground_2_175: 21300350
+      forest_ground_2_176: 21300352
+      forest_ground_2_177: 21300354
+      forest_ground_2_178: 21300356
+      forest_ground_2_179: 21300358
+      forest_ground_2_18: 21300036
+      forest_ground_2_180: 21300360
+      forest_ground_2_181: 21300362
+      forest_ground_2_182: 21300364
+      forest_ground_2_183: 21300366
+      forest_ground_2_184: 21300368
+      forest_ground_2_185: 21300370
+      forest_ground_2_186: 21300372
+      forest_ground_2_187: 21300374
+      forest_ground_2_188: 21300376
+      forest_ground_2_189: 21300378
+      forest_ground_2_19: 21300038
+      forest_ground_2_190: 21300380
+      forest_ground_2_191: 21300382
+      forest_ground_2_192: 21300384
+      forest_ground_2_193: 21300386
+      forest_ground_2_2: 21300004
+      forest_ground_2_20: 21300040
+      forest_ground_2_21: 21300042
+      forest_ground_2_22: 21300044
+      forest_ground_2_23: 21300046
+      forest_ground_2_24: 21300048
+      forest_ground_2_25: 21300050
+      forest_ground_2_26: 21300052
+      forest_ground_2_27: 21300054
+      forest_ground_2_28: 21300056
+      forest_ground_2_29: 21300058
+      forest_ground_2_3: 21300006
+      forest_ground_2_30: 21300060
+      forest_ground_2_31: 21300062
+      forest_ground_2_32: 21300064
+      forest_ground_2_33: 21300066
+      forest_ground_2_34: 21300068
+      forest_ground_2_35: 21300070
+      forest_ground_2_36: 21300072
+      forest_ground_2_37: 21300074
+      forest_ground_2_38: 21300076
+      forest_ground_2_39: 21300078
+      forest_ground_2_4: 21300008
+      forest_ground_2_40: 21300080
+      forest_ground_2_41: 21300082
+      forest_ground_2_42: 21300084
+      forest_ground_2_43: 21300086
+      forest_ground_2_44: 21300088
+      forest_ground_2_45: 21300090
+      forest_ground_2_46: 21300092
+      forest_ground_2_47: 21300094
+      forest_ground_2_48: 21300096
+      forest_ground_2_49: 21300098
+      forest_ground_2_5: 21300010
+      forest_ground_2_50: 21300100
+      forest_ground_2_51: 21300102
+      forest_ground_2_52: 21300104
+      forest_ground_2_53: 21300106
+      forest_ground_2_54: 21300108
+      forest_ground_2_55: 21300110
+      forest_ground_2_56: 21300112
+      forest_ground_2_57: 21300114
+      forest_ground_2_58: 21300116
+      forest_ground_2_59: 21300118
+      forest_ground_2_6: 21300012
+      forest_ground_2_60: 21300120
+      forest_ground_2_61: 21300122
+      forest_ground_2_62: 21300124
+      forest_ground_2_63: 21300126
+      forest_ground_2_64: 21300128
+      forest_ground_2_65: 21300130
+      forest_ground_2_66: 21300132
+      forest_ground_2_67: 21300134
+      forest_ground_2_68: 21300136
+      forest_ground_2_69: 21300138
+      forest_ground_2_7: 21300014
+      forest_ground_2_70: 21300140
+      forest_ground_2_71: 21300142
+      forest_ground_2_72: 21300144
+      forest_ground_2_73: 21300146
+      forest_ground_2_74: 21300148
+      forest_ground_2_75: 21300150
+      forest_ground_2_76: 21300152
+      forest_ground_2_77: 21300154
+      forest_ground_2_78: 21300156
+      forest_ground_2_79: 21300158
+      forest_ground_2_8: 21300016
+      forest_ground_2_80: 21300160
+      forest_ground_2_81: 21300162
+      forest_ground_2_82: 21300164
+      forest_ground_2_83: 21300166
+      forest_ground_2_84: 21300168
+      forest_ground_2_85: 21300170
+      forest_ground_2_86: 21300172
+      forest_ground_2_87: 21300174
+      forest_ground_2_88: 21300176
+      forest_ground_2_89: 21300178
+      forest_ground_2_9: 21300018
+      forest_ground_2_90: 21300180
+      forest_ground_2_91: 21300182
+      forest_ground_2_92: 21300184
+      forest_ground_2_93: 21300186
+      forest_ground_2_94: 21300188
+      forest_ground_2_95: 21300190
+      forest_ground_2_96: 21300192
+      forest_ground_2_97: 21300194
+      forest_ground_2_98: 21300196
+      forest_ground_2_99: 21300198
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,17 @@
+using Atomic.Objects;
+using GameEngine;
+using UnityEngine;
+
+namespace Sample
+{
+    public sealed class DiscardCharacterEffectsMechanics
+    {
+        public void OnCollisionEnter2D(Collision2D collision2D)
+        {
+            if (collision2D.TryGetAtomicObject(out var obj) && obj.HasCharacterTag())
+            {
+                obj.GetEffectHolder()?.DiscardAllEffects();
+            }
+        }
+    }
+}

@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44bae1cf0fb645f197e54e0bd53a7b2f, type: 3}
+  m_Name: ReferenceCatalog
+  m_EditorClassIdentifier: 
+  namespace: GameEngine
+  directoryPath: Assets/Scripts/Engine/Contracts
+  suffix: API
+  imports:
+  - Sample
+  - Atomic.Elements
+  categories:
+  - name: Common
+    indexes:
+    - id: 1
+      name: Transform
+      type: Transform
+    - id: 2
+      name: Rigidbody2D
+      type: Rigidbody2D
+    - id: 7
+      name: EffectHolder
+      type: EffectHolder
+    - id: 5
+      name: CollectCoinEvent
+      type: IAtomicObservable
+    - id: 14
+      name: LookDirection
+      type: IAtomicVariable<float>
+    - id: 13
+      name: JumpComponent
+      type: JumpComponent
+    - id: 23
+      name: DeathAction
+      type: IAtomicAction
+    - id: 12
+      name: MoveComponent
+      type: MoveComponent
+    - id: 4
+      name: GameObject
+      type: 
+  - name: Visual
+    indexes:
+    - id: 3
+      name: Animator
+      type: Animator
+    - id: 8
+      name: SpriteRenderer
+      type: SpriteRenderer
