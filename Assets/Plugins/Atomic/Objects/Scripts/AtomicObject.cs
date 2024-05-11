@@ -10,8 +10,6 @@ using Sirenix.OdinInspector;
 
 namespace Atomic.Objects
 {
-    //TODO: ADD BUTTONS FOR ADD / DELETE TAGS, REFERENCES, BEHAVIOURS
-
     [AddComponentMenu("Atomic/Atomic Object")]
     [DisallowMultipleComponent]
     public sealed class AtomicObject : MonoBehaviour, IAtomicObject, IDisposable
@@ -1003,8 +1001,7 @@ namespace Atomic.Objects
 
             set { /** noting... **/ }
         }
-        
-       
+
         private struct ReferenceDebug
         {
             [HorizontalGroup(200)]
@@ -1109,39 +1106,6 @@ namespace Atomic.Objects
         {
             composable.Compose(this);
         }
-        
-        // [Button("Add Tag")]
-        // [FoldoutGroup("Debug")]
-        // [ShowInInspector, PropertyOrder(100), HideInEditorMode]
-        // private void OnAddTag([TagId] int tag)
-        // {
-        //     this.AddTag(tag);
-        // }
-        //
-        // [Button("Add Reference")]
-        // [FoldoutGroup("Debug")]
-        // [ShowInInspector, PropertyOrder(100), HideInEditorMode]
-        // private void OnAddReference([ReferenceId] int id, object value)
-        // {
-        //     this.AddReference(id, value);
-        // }
-        //
-        // [Button("Add Behaviour")]
-        // [FoldoutGroup("Debug")]
-        // [ShowInInspector, PropertyOrder(100), HideInEditorMode]
-        // private void OnAddBehaviour(IAtomicObject.IBehaviour behaviour)
-        // {
-        //     this.AddBehaviour(behaviour);
-        // }
-        //
-        // [Button("Add Element")]
-        // [FoldoutGroup("Debug")]
-        // [ShowInInspector, PropertyOrder(100), HideInEditorMode]
-        // private void OnAddElement([ReferenceId] int id, IAtomicObject.IBehaviour value)
-        // {
-        //     this.AddReference(id, value);
-        //     this.AddBehaviour(value);
-        // }
 #endif
 #endif
 
@@ -1194,3 +1158,37 @@ namespace Atomic.Objects
         #endregion
     }
 }
+
+
+// [Button("Add Tag")]
+// [FoldoutGroup("Debug")]
+// [ShowInInspector, PropertyOrder(100), HideInEditorMode]
+// private void OnAddTag([TagId] int tag)
+// {
+//     this.AddTag(tag);
+// }
+//
+// [Button("Add Reference")]
+// [FoldoutGroup("Debug")]
+// [ShowInInspector, PropertyOrder(100), HideInEditorMode]
+// private void OnAddReference([ReferenceId] int id, object value)
+// {
+//     this.AddReference(id, value);
+// }
+//
+// [Button("Add Behaviour")]
+// [FoldoutGroup("Debug")]
+// [ShowInInspector, PropertyOrder(100), HideInEditorMode]
+// private void OnAddBehaviour(IAtomicObject.IBehaviour behaviour)
+// {
+//     this.AddBehaviour(behaviour);
+// }
+//
+// [Button("Add Element")]
+// [FoldoutGroup("Debug")]
+// [ShowInInspector, PropertyOrder(100), HideInEditorMode]
+// private void OnAddElement([ReferenceId] int id, IAtomicObject.IBehaviour value)
+// {
+//     this.AddReference(id, value);
+//     this.AddBehaviour(value);
+// }
