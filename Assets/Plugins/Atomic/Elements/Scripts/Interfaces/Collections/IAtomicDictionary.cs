@@ -1,8 +1,11 @@
+using System.Collections.Generic;
+
 namespace Atomic.Elements
 {
-    //TODO: REACTIVE
-    public interface IAtomicDictionary
+    public interface IAtomicDictionary<K, V> : IDictionary<K, V>
     {
-        
+        event ChangeItemHandler<K, V> OnItemChanged;
+        event AddItemHandler<K, V> OnItemAdded;
+        event RemoveItemHandler<K, V> OnItemRemoved;
     }
 }

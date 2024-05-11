@@ -1,8 +1,12 @@
+using System.Collections.Generic;
+
 namespace Atomic.Elements
 {
-    //TODO: REACTIVE
-    public interface IAtomicList
+    public interface IAtomicList<T> : IList<T>
     {
-        
+        event ChangeItemHandler<T> OnItemChanged;
+        event AddItemHandler<T> OnItemInserted;
+        event RemoveItemHandler<T> OnItemDeleted;
+        event ClearHandler OnCleared;
     }
 }
