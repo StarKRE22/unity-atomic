@@ -106,13 +106,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unityControl: 1
   composeOnAwake: 1
   disposeOnDestroy: 1
-  unityControl: 1
   monoInstallers:
   - {fileID: 1677397730050075148}
   - {fileID: 2515028205399612470}
   scriptableInstallers: []
+  hasBehaviours: 1
+  tagStorageType: 2
+  tagCapacity: 1
+  tagArraySize: 2
+  tagSegmentStart: 1
+  tagSegmentEnd: 1
+  referenceStorageType: 2
+  referenceCapacity: 10
+  referenceArraySize: 24
+  referenceSegmentStart: 1
+  referenceSegmentEnd: 23
 --- !u!1 &4405886900182241067
 GameObject:
   m_ObjectHideFlags: 0

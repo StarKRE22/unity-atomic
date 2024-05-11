@@ -445,8 +445,15 @@ namespace Atomic.Objects
         #endregion
 
         #region Setup
-
-        [Title("Main")]
+        
+        [Tooltip("Will the Unity callbacks control the behavior of the object?")]
+        [PropertyOrder(80)]
+        [HideInPlayMode]
+        [ShowIf(nameof(hasBehaviours))]
+        [SerializeField]
+        private bool unityControl = true;
+        
+        [Space]
         [PropertyOrder(80)]
         [Tooltip("Do need to compose the object on Awake?")]
         [HideInPlayMode]
@@ -459,12 +466,6 @@ namespace Atomic.Objects
         [SerializeField]
         private bool disposeOnDestroy = true;
 
-        [Tooltip("Will the Unity callbacks control the behavior of the object?")]
-        [PropertyOrder(80)]
-        [HideInPlayMode]
-        [ShowIf(nameof(hasBehaviours))]
-        [SerializeField]
-        private bool unityControl = true;
 
         [Title("Installing")]
         [PropertyOrder(90)]

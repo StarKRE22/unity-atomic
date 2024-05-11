@@ -2451,57 +2451,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
-    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
-      propertyPath: tagCapacity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
-      propertyPath: tagArraySize
+    - target: {fileID: 1677397730050075148, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
+      propertyPath: jumpComponent.baseForce.value
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
-      propertyPath: unityControl
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
-      propertyPath: tagSegmentEnd
-      value: 1
+    - target: {fileID: 1677397730050075148, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
+      propertyPath: moveComponent.baseSpeed.value
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
       propertyPath: tagStorageType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
-      propertyPath: tagSegmentStart
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
-      propertyPath: referenceCapacity
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
-      propertyPath: referenceArraySize
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
-      propertyPath: referenceSegmentEnd
-      value: 23
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
       propertyPath: referenceStorageType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
-      propertyPath: referenceSegmentStart
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
-      propertyPath: monoInstallers.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
       propertyPath: monoInstallers.Array.data[2]
