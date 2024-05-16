@@ -9,7 +9,7 @@ namespace Atomic.Objects
         bool HasTag(int tag);
         bool AddTag(int tag);
         bool DelTag(int tag);
-        
+
         [CanBeNull]
         T GetReference<T>(int id) where T : class;
 
@@ -34,6 +34,11 @@ namespace Atomic.Objects
             void Compose(IAtomicObject obj);
         }
 
+        public interface IDisposable
+        {
+            void Dispose(IAtomicObject obj);
+        }
+
         public interface IBehaviour
         {
         }
@@ -41,11 +46,6 @@ namespace Atomic.Objects
         public interface IAwake : IBehaviour
         {
             void OnAwake(IAtomicObject obj);
-        }
-
-        public interface IDestroy : IBehaviour
-        {
-            void Destroy(IAtomicObject obj);
         }
 
         public interface IEnable : IBehaviour
@@ -121,12 +121,5 @@ namespace Atomic.Objects
         {
             void CollisionExit2D(IAtomicObject obj, Collision2D collider);
         }
-        
-        public interface IAspect
-        {
-            void Apply(IAtomicObject target);
-            void Discard(IAtomicObject target);
-        }
-
     }
 }

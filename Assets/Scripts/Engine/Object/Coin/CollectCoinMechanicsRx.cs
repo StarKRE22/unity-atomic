@@ -8,7 +8,7 @@ namespace Sample
     {
         public void Compose(IAtomicObject obj)
         {
-            obj.OnTriggerEnter2D(collider =>
+            obj.SubscribeOnTriggerEnter2D(collider =>
             {
                 if (collider.TryGetComponent(out Coin coin))
                 {

@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Sample
 {
     [Serializable]
-    public sealed class JumpAspect : ScriptableObject, IAtomicObject.IAspect
+    public sealed class JumpAspect : ScriptableObject, IAtomicObject.IComposable, IAtomicObject.IDisposable
     {
         [SerializeField]
         public float baseForce;
@@ -21,7 +21,7 @@ namespace Sample
             this.conditions = conditions;
         }
 
-        public void Apply(IAtomicObject target)
+        public void Compose(IAtomicObject target)
         {
             if (target.TryGetRigidbody2D(out Rigidbody2D rigidbody2D))
             {
@@ -31,7 +31,7 @@ namespace Sample
             }
         }
 
-        public void Discard(IAtomicObject target)
+        public void Dispose(IAtomicObject target)
         {
             target.DelReference(CommonAPI.JumpComponent);
         }

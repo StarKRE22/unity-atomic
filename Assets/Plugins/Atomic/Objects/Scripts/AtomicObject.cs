@@ -212,9 +212,9 @@ namespace Atomic.Objects
                     disable.Disable(this);
                 }
 
-                if (behaviour is IAtomicObject.IDestroy destroy)
+                if (behaviour is IAtomicObject.IDisposable destroy)
                 {
-                    destroy.Destroy(this);
+                    destroy.Dispose(this);
                 }
             }
 
@@ -283,9 +283,9 @@ namespace Atomic.Objects
             for (int i = 0, count = this.behaviours.Count; i < count; i++)
             {
                 var element = this.behaviours[i];
-                if (element is IAtomicObject.IDestroy destroy)
+                if (element is IAtomicObject.IDisposable destroy)
                 {
-                    destroy.Destroy(this);
+                    destroy.Dispose(this);
                 }
             }
         }

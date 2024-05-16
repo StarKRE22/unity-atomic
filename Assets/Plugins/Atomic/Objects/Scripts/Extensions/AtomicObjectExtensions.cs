@@ -6,16 +6,29 @@ namespace Atomic.Objects
 {
     public static class AtomicObjectExtensions
     {
-        //TODO: Добавить реактивщину
-        public static void OnFixedUpdate(this IAtomicObject obj, Action<float> action)
+        public static IAtomicObject.IBehaviour SubscribeOnUpdate(this IAtomicObject obj, Action<float> action)
+        {
+            
+        }
+        
+        public static IAtomicObject.IBehaviour SubcribeOnFixedUpdate(this IAtomicObject obj, Action<float> action)
+        {
+            IAtomicObject.IBehaviour behaviour = new AtomicFixedUpdate(action);
+            obj.AddBehaviour(behaviour);
+            return behaviour;
+        }
+        
+        public static IAtomicObject.IBehaviour SubscribeOnLateUpdate(this IAtomicObject obj, Action<float> action)
         {
             
         }
 
         //TODO: Добавить реактивщину
-        public static void OnTriggerEnter2D(this IAtomicObject obj, Action<Collider> action)
+        public static void SubscribeOnTriggerEnter2D(this IAtomicObject obj, Action<Collider2D> action)
         {
-            
+            IAtomicObject.IBehaviour behaviour = new AtomicFixedUpdate(action);
+            obj.AddBehaviour(behaviour);
+            return behaviour;
         }
 
         
@@ -45,15 +58,15 @@ namespace Atomic.Objects
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ApplyAspect(this IAtomicObject obj, IAtomicObject.IAspect aspect)
+        public static void Compose(this IAtomicObject obj, IAtomicObject.IComposable aspect)
         {
-            aspect.Apply(obj);
+            aspect.Compose(obj);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void DiscardAspect(this IAtomicObject obj, IAtomicObject.IAspect aspect)
+        public static void Dispose(this IAtomicObject obj, IAtomicObject.IDisposable aspect)
         {
-            aspect.Discard(obj);
+            aspect.Dispose(obj);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
