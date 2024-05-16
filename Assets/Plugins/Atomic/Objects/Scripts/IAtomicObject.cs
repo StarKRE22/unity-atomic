@@ -1,3 +1,4 @@
+using System;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -126,5 +127,6 @@ namespace Atomic.Objects
             void Apply(IAtomicObject target);
             void Discard(IAtomicObject target);
         }
+
     }
 }

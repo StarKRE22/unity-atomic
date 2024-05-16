@@ -6,7 +6,9 @@ using UnityEngine;
 namespace Sample
 {
     [Serializable]
-    public sealed class MoveComponent : ISerializationCallbackReceiver, IAtomicObject.IFixedUpdate, IDisposable
+    public sealed class MoveComponent : ISerializationCallbackReceiver, 
+        IAtomicObject.IFixedUpdate, 
+        IDisposable
     {
         public IAtomicValue<bool> IsMoving => this.isMoving;
         public IAtomicVariable<float> CurrentDirection => this.currentDirection;

@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -5,6 +6,19 @@ namespace Atomic.Objects
 {
     public static class AtomicObjectExtensions
     {
+        //TODO: Добавить реактивщину
+        public static void OnFixedUpdate(this IAtomicObject obj, Action<float> action)
+        {
+            
+        }
+
+        //TODO: Добавить реактивщину
+        public static void OnTriggerEnter2D(this IAtomicObject obj, Action<Collider> action)
+        {
+            
+        }
+
+        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void AddElement(this IAtomicObject obj, int id, IAtomicObject.IBehaviour element)
         {

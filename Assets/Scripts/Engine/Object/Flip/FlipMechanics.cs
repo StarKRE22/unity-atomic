@@ -17,7 +17,7 @@ namespace Sample
             this.transform = transform;
         }
 
-        public void OnFixedUpdate(IAtomicObject obj, float deltaTime)
+        public void OnFixedUpdate(IAtomicObject _, float deltaTime)
         {
             float moveDirection = this.moveDirection.Value;
             
