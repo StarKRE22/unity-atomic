@@ -277,19 +277,6 @@ namespace Atomic.Objects
             _enabled = false;
         }
 
-        [ContextMenu("OnDestroy")]
-        public void Destroy()
-        {
-            for (int i = 0, count = this.behaviours.Count; i < count; i++)
-            {
-                var element = this.behaviours[i];
-                if (element is IAtomicObject.IDisposable destroy)
-                {
-                    destroy.Dispose(this);
-                }
-            }
-        }
-
         public void OnUpdate(float deltaTime)
         {
             if (this.updates.Count == 0)
@@ -667,10 +654,11 @@ namespace Atomic.Objects
                         continue;
                     }
 
-                    if (source is IDisposable composable)
+                    if (source is IAtomicObject.IDisposable composable)
                     {
-                        composable.Dispose();
+                        composable.Dispose(this);
                     }
+                    
                 }
             }
 
@@ -764,11 +752,6 @@ namespace Atomic.Objects
 
         private void OnDestroy()
         {
-            if (this.unityControl)
-            {
-                this.Destroy();
-            }
-
             if (this.disposeOnDestroy)
             {
                 this.Dispose();

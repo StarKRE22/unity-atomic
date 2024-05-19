@@ -33,7 +33,7 @@ namespace Sample
 
         private void AddBehaviour(IAtomicObject obj)
         {
-            obj.SubcribeOnFixedUpdate(deltaTime => Debug.Log($"TICK {deltaTime}"));
+            obj.SubcribeOnFixedUpdate((_, deltaTime) => Debug.Log($"TICK {deltaTime}"));
             obj.AddBehaviour(new FlipMechanicsRx(obj));
             obj.AddBehaviour(this.moveComponent);
         }

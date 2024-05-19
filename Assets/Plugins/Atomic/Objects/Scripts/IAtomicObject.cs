@@ -1,4 +1,3 @@
-using System;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -80,8 +79,7 @@ namespace Atomic.Objects
             void OnGizmosDraw(IAtomicObject obj);
         }
 #endif
-
-
+        
         public interface ITriggerEnter : IBehaviour
         {
             void TriggerEnter(IAtomicObject obj, Collider collider);
@@ -92,16 +90,6 @@ namespace Atomic.Objects
             void TriggerExit(IAtomicObject obj, Collider collider);
         }
 
-        public interface ITriggerEnter2D : IBehaviour
-        {
-            void TriggerEnter2D(IAtomicObject obj, Collider2D collider);
-        }
-
-        public interface ITriggerExit2D : IBehaviour
-        {
-            void TriggerExit2D(IAtomicObject obj, Collider2D collider);
-        }
-
         public interface ICollisionEnter : IBehaviour
         {
             void CollisionEnter(IAtomicObject obj, Collision collider);
@@ -110,6 +98,16 @@ namespace Atomic.Objects
         public interface ICollisionExit : IBehaviour
         {
             void CollisionExit(IAtomicObject obj, Collision collider);
+        }
+        
+        public interface ITriggerEnter2D : IBehaviour
+        {
+            void TriggerEnter2D(IAtomicObject obj, Collider2D collider);
+        }
+
+        public interface ITriggerExit2D : IBehaviour
+        {
+            void TriggerExit2D(IAtomicObject obj, Collider2D collider);
         }
 
         public interface ICollisionEnter2D : IBehaviour

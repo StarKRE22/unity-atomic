@@ -106,16 +106,20 @@ namespace Atomic.Objects
                 writer.WriteLine($"        public static bool TryGet{item.name}(this IAtomicObject obj, out {item.type} result) => obj.TryGetReference({item.name}, out result);");
                 writer.WriteLine();
 
+                //TODO: ТУТ ПРОВЕРИТЬ, ЕСЛИ ТИП is IBehaviour, то сделать и добавление Behaviour
                 writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
                 writer.WriteLine($"        public static bool Add{item.name}(this IAtomicObject obj, {item.type} reference) => obj.AddReference({item.name}, reference);");
                 writer.WriteLine();
 
+                //TODO: ТУТ ПРОВЕРИТЬ, ЕСЛИ ТИП is IBehaviour, то сделать и удаление Behaviour
                 writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
                 writer.WriteLine($"        public static bool Del{item.name}(this IAtomicObject obj) => obj.DelReference({item.name});");
                 writer.WriteLine();
                 
                 writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
                 writer.WriteLine($"        public static void Set{item.name}(this IAtomicObject obj, {item.type} reference) => obj.SetReference({item.name}, reference);");
+
+                //TODO: ТУТ ПРОВЕРИТЬ, ЕСЛИ ТИП is IObservable, то Написать Subscribe & Unsubscribe
 
                 if (i < count - 1)
                 {

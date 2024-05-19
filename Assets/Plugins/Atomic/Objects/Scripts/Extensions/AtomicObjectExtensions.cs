@@ -6,32 +6,150 @@ namespace Atomic.Objects
 {
     public static class AtomicObjectExtensions
     {
-        public static IAtomicObject.IBehaviour SubscribeOnUpdate(this IAtomicObject obj, Action<float> action)
+        public static IAtomicObject.IBehaviour SubscribeOnEnable(
+            this IAtomicObject obj,
+            Action<IAtomicObject> action
+        )
         {
-            
-        }
-        
-        public static IAtomicObject.IBehaviour SubcribeOnFixedUpdate(this IAtomicObject obj, Action<float> action)
-        {
-            IAtomicObject.IBehaviour behaviour = new AtomicFixedUpdate(action);
+            var behaviour = new AtomicEnable(action);
             obj.AddBehaviour(behaviour);
             return behaviour;
         }
         
-        public static IAtomicObject.IBehaviour SubscribeOnLateUpdate(this IAtomicObject obj, Action<float> action)
+        public static IAtomicObject.IBehaviour SubscribeOnDisable(
+            this IAtomicObject obj,
+            Action<IAtomicObject> action
+        )
         {
-            
+            var behaviour = new AtomicDisable(action);
+            obj.AddBehaviour(behaviour);
+            return behaviour;
         }
-
-        //TODO: Добавить реактивщину
-        public static void SubscribeOnTriggerEnter2D(this IAtomicObject obj, Action<Collider2D> action)
+        
+        public static IAtomicObject.IBehaviour SubscribeOnUpdate(
+            this IAtomicObject obj,
+            Action<IAtomicObject, float> action
+        )
         {
-            IAtomicObject.IBehaviour behaviour = new AtomicFixedUpdate(action);
+            var behaviour = new AtomicUpdate(action);
             obj.AddBehaviour(behaviour);
             return behaviour;
         }
 
+        public static IAtomicObject.IBehaviour SubcribeOnFixedUpdate(
+            this IAtomicObject obj,
+            Action<IAtomicObject, float> action
+        )
+        {
+            var behaviour = new AtomicFixedUpdate(action);
+            obj.AddBehaviour(behaviour);
+            return behaviour;
+        }
+
+        public static IAtomicObject.IBehaviour SubscribeOnLateUpdate(
+            this IAtomicObject obj,
+            Action<IAtomicObject, float> action
+        )
+        {
+            var behaviour = new AtomicLateUpdate(action);
+            obj.AddBehaviour(behaviour);
+            return behaviour;
+        }
+
+#if UNITY_EDITOR
+        //Don't wrap UNITY_EDITOR
+        public static IAtomicObject.IBehaviour SubscribeOnDrawGizmos(
+            this IAtomicObject obj,
+            Action<IAtomicObject, float> action
+        )
+        {
+            var behaviour = new AtomicLateUpdate(action);
+            obj.AddBehaviour(behaviour);
+            return behaviour;
+        }
+#endif
         
+        public static IAtomicObject.IBehaviour SubscribeOnTriggerEnter(
+            this IAtomicObject obj,
+            Action<IAtomicObject, Collider> action
+        )
+        {
+            IAtomicObject.IBehaviour behaviour = new AtomicTriggerEnter(action);
+            obj.AddBehaviour(behaviour);
+            return behaviour;
+        }
+        
+        public static IAtomicObject.IBehaviour SubscribeOnTriggerExit(
+            this IAtomicObject obj,
+            Action<IAtomicObject, Collider> action
+        )
+        {
+            IAtomicObject.IBehaviour behaviour = new AtomicTriggerExit(action);
+            obj.AddBehaviour(behaviour);
+            return behaviour;
+        }
+        
+        public static IAtomicObject.IBehaviour SubscribeOnCollisionEnter(
+            this IAtomicObject obj,
+            Action<IAtomicObject, Collision> action
+        )
+        {
+            IAtomicObject.IBehaviour behaviour = new AtomicCollisionEnter(action);
+            obj.AddBehaviour(behaviour);
+            return behaviour;
+        }
+        
+        public static IAtomicObject.IBehaviour SubscribeOnCollisionExit(
+            this IAtomicObject obj,
+            Action<IAtomicObject, Collision> action
+        )
+        {
+            IAtomicObject.IBehaviour behaviour = new AtomicCollisionExit(action);
+            obj.AddBehaviour(behaviour);
+            return behaviour;
+        }
+        
+        
+        public static IAtomicObject.IBehaviour SubscribeOnTriggerEnter2D(
+            this IAtomicObject obj,
+            Action<IAtomicObject, Collider2D> action
+        )
+        {
+            IAtomicObject.IBehaviour behaviour = new AtomicTriggerEnter2D(action);
+            obj.AddBehaviour(behaviour);
+            return behaviour;
+        }
+        
+        public static IAtomicObject.IBehaviour SubscribeOnTriggerExit2D(
+            this IAtomicObject obj,
+            Action<IAtomicObject, Collider2D> action
+        )
+        {
+            IAtomicObject.IBehaviour behaviour = new AtomicTriggerExit2D(action);
+            obj.AddBehaviour(behaviour);
+            return behaviour;
+        }
+        
+        public static IAtomicObject.IBehaviour SubscribeOnCollisionEnter2D(
+            this IAtomicObject obj,
+            Action<IAtomicObject, Collision2D> action
+        )
+        {
+            IAtomicObject.IBehaviour behaviour = new AtomicCollisionEnter2D(action);
+            obj.AddBehaviour(behaviour);
+            return behaviour;
+        }
+        
+        public static IAtomicObject.IBehaviour SubscribeOnCollisionExit2D(
+            this IAtomicObject obj,
+            Action<IAtomicObject, Collision2D> action
+        )
+        {
+            IAtomicObject.IBehaviour behaviour = new AtomicCollisionExit2D(action);
+            obj.AddBehaviour(behaviour);
+            return behaviour;
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void AddElement(this IAtomicObject obj, int id, IAtomicObject.IBehaviour element)
         {
@@ -74,7 +192,7 @@ namespace Atomic.Objects
         {
             return gameObject.TryGetComponent(out obj);
         }
-        
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TryGetAtomicObject(this Component component, out IAtomicObject obj)
         {
@@ -86,7 +204,7 @@ namespace Atomic.Objects
         {
             return collision2D.gameObject.TryGetComponent(out obj);
         }
-        
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TryGetAtomicObject(this Collision collision, out IAtomicObject obj)
         {
