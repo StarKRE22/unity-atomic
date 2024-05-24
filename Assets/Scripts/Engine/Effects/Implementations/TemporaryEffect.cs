@@ -6,21 +6,21 @@ using UnityEngine;
 namespace Sample
 {
     [Serializable]
-    public class TemporaryEffect : ICompletableEffect, IObject.IUpdate
+    public class TemporaryEffect : ICompletableEffect, IAtomicObject.IUpdate
     {
         [SerializeField]
         private AtomicCountdown countdown;
 
         private Action<IEffect> callback;
         
-        public virtual void Apply(IObject obj)
+        public virtual void Apply(IAtomicObject obj)
         {
             this.countdown.Reset();
             this.countdown.Start();
             obj.AddLogic(this);
         }
 
-        public virtual void Discard(IObject obj)
+        public virtual void Discard(IAtomicObject obj)
         {
             this.countdown.Stop();
             obj.DelLogic(this);
@@ -31,7 +31,7 @@ namespace Sample
             this.callback = callback;
         }
         
-        public void OnUpdate(IObject obj, float deltaTime)
+        public void OnUpdate(IAtomicObject obj, float deltaTime)
         {
             if (!this.countdown.IsPlaying)
             {

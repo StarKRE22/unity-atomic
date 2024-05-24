@@ -27,7 +27,7 @@ namespace Atomic.Objects
 
             foreach (Type @interface in objectType.GetInterfaces())
             {
-                if (@interface == typeof(IObject))
+                if (@interface == typeof(IAtomicObject))
                 {
                     continue;
                 }
@@ -36,7 +36,7 @@ namespace Atomic.Objects
                 references.AddRange(ObjectScanner.ScanReferences(@interface));
             }
 
-            while (objectType != typeof(MonoObject) && objectType != null)
+            while (objectType != typeof(AtomicObject) && objectType != null)
             {
                 types.AddRange(ObjectScanner.ScanTypes(objectType));
                 references.AddRange(ObjectScanner.ScanReferences(objectType));

@@ -11,7 +11,7 @@ namespace Sample
         {
             if (collision2D.TryGetAtomicObject(out var obj) && obj.HasCharacterTag())
             {
-                obj.InvokeAction(CommonAPI.DeathAction);
+                obj.InvokeAtomicAction(CommonAPI.DeathAction);
             }
         }
     }

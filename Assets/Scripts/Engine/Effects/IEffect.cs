@@ -5,8 +5,8 @@ namespace Sample
 {
     public interface IEffect
     {
-        void Apply(IObject obj);
-        void Discard(IObject obj);
+        void Apply(IAtomicObject obj);
+        void Discard(IAtomicObject obj);
     }
 
     public interface ICompletableEffect : IEffect

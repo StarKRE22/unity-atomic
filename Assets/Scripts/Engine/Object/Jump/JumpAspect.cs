@@ -14,14 +14,14 @@ namespace Sample
         [SerializeField]
         public float baseForce;
 
-        private readonly IEnumerable<IAtomicFunction<IObject, bool>> conditions;
+        private readonly IEnumerable<IAtomicFunction<IAtomicObject, bool>> conditions;
 
-        public JumpAspect(params IAtomicFunction<IObject, bool>[] conditions)
+        public JumpAspect(params IAtomicFunction<IAtomicObject, bool>[] conditions)
         {
             this.conditions = conditions;
         }
 
-        public void Compose(IObject target)
+        public void Compose(IAtomicObject target)
         {
             if (target.TryGetRigidbody2D(out Rigidbody2D rigidbody2D))
             {
@@ -31,7 +31,7 @@ namespace Sample
             }
         }
 
-        public void Dispose(IObject target)
+        public void Dispose(IAtomicObject target)
         {
             target.DelValue(CommonAPI.JumpComponent);
         }

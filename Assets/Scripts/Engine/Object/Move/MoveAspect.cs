@@ -9,7 +9,7 @@ namespace Sample
         [SerializeField]
         public float baseSpeed;
         
-        public void Compose(IObject target)
+        public void Compose(IAtomicObject target)
         {
             Rigidbody2D rigidbody2D = target.GetRigidbody2D();
             if (rigidbody2D != null)
@@ -18,7 +18,7 @@ namespace Sample
             }
         }
 
-        public void Dispose(IObject target)
+        public void Dispose(IAtomicObject target)
         {
             target.DelElement(CommonAPI.MoveComponent);
         }

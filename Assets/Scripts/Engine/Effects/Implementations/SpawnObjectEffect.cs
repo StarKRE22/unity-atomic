@@ -14,7 +14,7 @@ namespace Sample
 
         private GameObject _gameObject;
         
-        public void Apply(IObject obj)
+        public void Apply(IAtomicObject obj)
         {
             Transform transform = obj.GetTransform();
             if (transform != null)
@@ -23,7 +23,7 @@ namespace Sample
             }
         }
 
-        public void Discard(IObject obj)
+        public void Discard(IAtomicObject obj)
         {
             if (_gameObject != null)
             {

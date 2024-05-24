@@ -7,7 +7,7 @@ namespace Sample
     public sealed class ObjectTest : MonoBehaviour
     {
         [SerializeField]
-        private MonoObject character;
+        private AtomicObject character;
 
         [SerializeField]
         private MoveComponent moveComponent;

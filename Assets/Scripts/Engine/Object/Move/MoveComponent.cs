@@ -65,7 +65,7 @@ namespace Sample
             this.currentDirection?.Dispose();
         }
 
-        public void OnFixedUpdate(IObject _, float deltaTime)
+        public void OnFixedUpdate(IAtomicObject _, float deltaTime)
         {
             float speedX = 0.0f;
             float speedY = this.rigidbody.velocity.y;

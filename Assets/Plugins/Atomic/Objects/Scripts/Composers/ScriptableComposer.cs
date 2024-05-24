@@ -11,7 +11,7 @@ namespace Atomic.Objects
         [SerializeReference]
         private IAspect[] aspects;
         
-        public void Compose(IObject obj)
+        public void Compose(IAtomicObject obj)
         {
             if (this.aspects is {Length: > 0})
             {
@@ -26,7 +26,7 @@ namespace Atomic.Objects
             }
         }
 
-        public void Dispose(IObject obj)
+        public void Dispose(IAtomicObject obj)
         {
             if (this.aspects is {Length: > 0})
             {

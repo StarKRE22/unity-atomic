@@ -9,7 +9,7 @@ namespace Sample
     public sealed class CharacterSystem : MonoBehaviour
     {
         [SerializeField]
-        private MonoObject[] characters;
+        private AtomicObject[] characters;
 
         private MoveController moveController;
         private JumpController jumpController;
@@ -18,7 +18,7 @@ namespace Sample
         {
             this.moveController = new MoveController(new AtomicSetter<float>(value =>
             {
-                foreach (MonoObject character in this.characters)
+                foreach (AtomicObject character in this.characters)
                 {
                     IAtomicVariable<float> currentDirection = character.GetMoveComponent()?.CurrentDirection;
                     
@@ -31,7 +31,7 @@ namespace Sample
 
             this.jumpController = new JumpController(new AtomicAction(() =>
             {
-                foreach (MonoObject character in this.characters)
+                foreach (AtomicObject character in this.characters)
                 {
                     character.GetJumpComponent()?.JumpAction?.Invoke();
                 }

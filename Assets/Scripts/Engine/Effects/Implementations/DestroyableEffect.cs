@@ -11,12 +11,12 @@ namespace Sample
         [SerializeField]
         private GameObject gameObject;
         
-        public void Apply(IObject obj)
+        public void Apply(IAtomicObject obj)
         {
             //Nothing...
         }
 
-        public void Discard(IObject obj)
+        public void Discard(IAtomicObject obj)
         {
             GameObject.Destroy(this.gameObject);
         }

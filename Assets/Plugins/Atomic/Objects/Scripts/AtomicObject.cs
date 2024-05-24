@@ -12,7 +12,7 @@ namespace Atomic.Objects
 {
     [AddComponentMenu("Atomic/Atomic Object")]
     [DisallowMultipleComponent]
-    public sealed class MonoObject : MonoBehaviour, IObject
+    public sealed class AtomicObject : MonoBehaviour, IAtomicObject
     {
         #region Tags
 
@@ -499,28 +499,28 @@ namespace Atomic.Objects
         [PropertyOrder(95)]
         [HideInPlayMode]
         [SerializeField]
-        private int referenceCapacity;
+        private int valueCapacity;
 
         [FoldoutGroup("Optimization")]
         [EnableIf(nameof(valueStorageType), ValueStorageType.ARRAY)]
         [PropertyOrder(95)]
         [HideInPlayMode]
         [SerializeField]
-        private int referenceArraySize;
+        private int valueArraySize;
 
         [FoldoutGroup("Optimization")]
         [EnableIf(nameof(valueStorageType), ValueStorageType.SEGMENT)]
         [PropertyOrder(95)]
         [HideInPlayMode]
         [SerializeField]
-        private int referenceSegmentStart;
+        private int valueSegmentStart;
 
         [FoldoutGroup("Optimization")]
         [EnableIf(nameof(valueStorageType), ValueStorageType.SEGMENT)]
         [PropertyOrder(95)]
         [HideInPlayMode]
         [SerializeField]
-        private int referenceSegmentEnd;
+        private int valueSegmentEnd;
 
         [Serializable]
         public enum TagsStorageType
@@ -551,9 +551,9 @@ namespace Atomic.Objects
 
             this.values = this.valueStorageType switch
             {
-                ValueStorageType.DICTIONARY => new ValueDictionary(this.referenceCapacity),
-                ValueStorageType.ARRAY => new ValueArray(this.referenceArraySize),
-                ValueStorageType.SEGMENT => new ValueSegment(this.referenceSegmentStart, this.referenceSegmentEnd),
+                ValueStorageType.DICTIONARY => new ValueDictionary(this.valueCapacity),
+                ValueStorageType.ARRAY => new ValueArray(this.valueArraySize),
+                ValueStorageType.SEGMENT => new ValueSegment(this.valueSegmentStart, this.valueSegmentEnd),
                 _ => throw new ArgumentOutOfRangeException()
             };
 
@@ -840,11 +840,11 @@ namespace Atomic.Objects
             this.tagSegmentEnd = tags.Max(it => it);
             this.tagArraySize = this.tagSegmentEnd + 1;
 
-            Dictionary<int, object> reference = (Dictionary<int, object>) this.values;
-            this.referenceCapacity = reference.Count;
-            this.referenceSegmentStart = reference.Min(it => it.Key);
-            this.referenceSegmentEnd = reference.Max(it => it.Key);
-            this.referenceArraySize = this.referenceSegmentEnd + 1;
+            Dictionary<int, object> value = (Dictionary<int, object>) this.values;
+            this.valueCapacity = value.Count;
+            this.valueSegmentStart = value.Min(it => it.Key);
+            this.valueSegmentEnd = value.Max(it => it.Key);
+            this.valueArraySize = this.valueSegmentEnd + 1;
 
             this.tagStorageType = prevTagType;
             this.valueStorageType = prevRefType;
@@ -982,9 +982,9 @@ namespace Atomic.Objects
             }
         }
         
-        private void OnRemoveReferenceByValue(ReferenceDebug referenceDebug)
+        private void OnRemoveReferenceByValue(ReferenceDebug valueDebug)
         {
-            this.DelValue(referenceDebug.id);
+            this.DelValue(valueDebug.id);
         }
         
         private void OnRemoveReferenceByIndex(int index)
@@ -1072,7 +1072,7 @@ namespace Atomic.Objects
         #region Tools
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Bake<T>() where T : IObject
+        public static void Bake<T>() where T : IAtomicObject
         {
             ObjectBaker.Bake(typeof(T));
         }
@@ -1102,13 +1102,13 @@ namespace Atomic.Objects
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Inflate(IObject entity)
+        public static void Inflate(IAtomicObject entity)
         {
             ObjectInflater.Inflate(entity);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void InflateFrom(IObject entity, object from)
+        public static void InflateFrom(IAtomicObject entity, object from)
         {
             ObjectInflater.InflateFrom(entity, from);
         }

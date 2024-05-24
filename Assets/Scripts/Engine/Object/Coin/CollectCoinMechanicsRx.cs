@@ -4,16 +4,16 @@ using GameEngine;
 
 namespace Sample
 {
-    public class CollectCoinMechanicsRx : IObject.IComposable
+    public class CollectCoinMechanicsRx : IComposable
     {
-        public void Compose(IObject obj)
+        public void Compose(IAtomicObject obj)
         {
             obj.SubscribeOnTriggerEnter2D((_, collider) =>
             {
                 if (collider.TryGetComponent(out Coin coin))
                 {
                     coin.PickUp();
-                    obj.InvokeAction(CommonAPI.CollectCoinEvent);
+                    obj.InvokeAtomicAction(CommonAPI.CollectCoinEvent);
                 }
             });
         }

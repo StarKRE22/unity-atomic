@@ -32,7 +32,7 @@ namespace Sample
         [Logic]
         private DiscardCharacterEffectsMechanics discardEffectsMechanics;
 
-        public void Compose(IObject obj)
+        public void Compose(IAtomicObject obj)
         {
             this.effectHolder.Compose(obj);
             this.killMechanics = new KillCharacterMechanics();

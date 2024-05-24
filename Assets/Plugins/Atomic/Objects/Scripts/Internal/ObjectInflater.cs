@@ -6,12 +6,12 @@ namespace Atomic.Objects
 {
     internal static class ObjectInflater
     {
-        internal static void Inflate(IObject entity)
+        internal static void Inflate(IAtomicObject entity)
         {
             InflateFrom(entity, entity);
         }
         
-        internal static void InflateFrom(IObject entity, object source)
+        internal static void InflateFrom(IAtomicObject entity, object source)
         {
             Type sourceType = source.GetType();
 

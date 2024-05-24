@@ -2,7 +2,7 @@ using JetBrains.Annotations;
 
 namespace Atomic.Objects
 {
-    public interface IObject
+    public interface IAtomicObject
     {
         bool HasTag(int tag);
         bool AddTag(int tag);

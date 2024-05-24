@@ -28,7 +28,7 @@ namespace Sample
         [SerializeField]
         private bool aiEnabled = true;
         
-        public void OnFixedUpdate(IObject obj, float deltaTime)
+        public void OnFixedUpdate(IAtomicObject obj, float deltaTime)
         {
             if (this.aiEnabled)
             {

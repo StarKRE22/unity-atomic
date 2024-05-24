@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Sample
 {
     [Tags(TagAPI.Character)]
-    [RequireComponent(typeof(MonoObject))]
+    [RequireComponent(typeof(AtomicObject))]
     public sealed class Character : MonoBehaviour, IComposable, IDisposable
     {
         #region Interface
@@ -75,7 +75,7 @@ namespace Sample
         [Logic]
         private FlipMechanics flipMechanics;
 
-        public void Compose(IObject obj)
+        public void Compose(IAtomicObject obj)
         {
             this.moveComponent.Enabled.Append(this.isAlive);
             this.jumpComponent.Enabled.AppendAll(this.isAlive, this.groundedComponent.isGrounded);
@@ -106,7 +106,7 @@ namespace Sample
 
         #endregion
 
-        public void Dispose(IObject obj)
+        public void Dispose(IAtomicObject obj)
         {
             isAlive?.Dispose();
             collectCoinEvent?.Dispose();

@@ -18,16 +18,16 @@ namespace GameEngine
 
 
         ///Extensions
-        public static bool HasCharacterTag(this IObject obj) => obj.HasTag(Character);
-        public static bool AddCharacterTag(this IObject obj) => obj.AddTag(Character);
-        public static bool DelCharacterTag(this IObject obj) => obj.DelTag(Character);
+        public static bool HasCharacterTag(this IAtomicObject obj) => obj.HasTag(Character);
+        public static bool AddCharacterTag(this IAtomicObject obj) => obj.AddTag(Character);
+        public static bool DelCharacterTag(this IAtomicObject obj) => obj.DelTag(Character);
 
-        public static bool HasEnemyTag(this IObject obj) => obj.HasTag(Enemy);
-        public static bool AddEnemyTag(this IObject obj) => obj.AddTag(Enemy);
-        public static bool DelEnemyTag(this IObject obj) => obj.DelTag(Enemy);
+        public static bool HasEnemyTag(this IAtomicObject obj) => obj.HasTag(Enemy);
+        public static bool AddEnemyTag(this IAtomicObject obj) => obj.AddTag(Enemy);
+        public static bool DelEnemyTag(this IAtomicObject obj) => obj.DelTag(Enemy);
 
-        public static bool HasBarnTag(this IObject obj) => obj.HasTag(Barn);
-        public static bool AddBarnTag(this IObject obj) => obj.AddTag(Barn);
-        public static bool DelBarnTag(this IObject obj) => obj.DelTag(Barn);
+        public static bool HasBarnTag(this IAtomicObject obj) => obj.HasTag(Barn);
+        public static bool AddBarnTag(this IAtomicObject obj) => obj.AddTag(Barn);
+        public static bool DelBarnTag(this IAtomicObject obj) => obj.DelTag(Barn);
     }
 }

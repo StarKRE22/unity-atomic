@@ -4,10 +4,10 @@ namespace Atomic.Objects
 {
     [AddComponentMenu("Atomic/Atomic Object Proxy")]
     [DisallowMultipleComponent]
-    public sealed class MonoObjectProxy : MonoBehaviour, IObject
+    public sealed class AtomicObjectProxy : MonoBehaviour, IAtomicObject
     {
         [SerializeField]
-        private MonoObject source;
+        private AtomicObject source;
 
         public bool HasTag(int tag)
         {

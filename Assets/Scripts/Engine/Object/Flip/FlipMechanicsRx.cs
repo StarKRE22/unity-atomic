@@ -10,13 +10,13 @@ namespace Sample
         private readonly IAtomicValue<float> currentDirection;
         private readonly Transform transform;
         
-        public FlipMechanicsRx(IObject obj)
+        public FlipMechanicsRx(IAtomicObject obj)
         {
             this.currentDirection = obj.GetMoveComponent()!.CurrentDirection;
             this.transform = obj.GetTransform();
         }
 
-        public void OnFixedUpdate(IObject obj, float deltaTime)
+        public void OnFixedUpdate(IAtomicObject obj, float deltaTime)
         {
             float moveDirection = this.currentDirection.Value;
             if (moveDirection != 0)

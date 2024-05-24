@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Sample
 {
     [Serializable, InlineProperty]
-    public sealed class JumpComponentInstaller : IObject.IComposable
+    public sealed class JumpComponentInstaller : IComposable
     {
         [SerializeField]
         private JumpComponent jumpComponent;
@@ -17,7 +17,7 @@ namespace Sample
             jumpComponent = new JumpComponent(null, 0);
         }
 
-        public void Compose(IObject obj)
+        public void Compose(IAtomicObject obj)
         {
             obj.AddValue(CommonAPI.JumpComponent, this.jumpComponent);
         }

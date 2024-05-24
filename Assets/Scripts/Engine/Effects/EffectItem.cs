@@ -17,7 +17,7 @@ namespace Sample
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            var obj = col.GetComponentInParent<IObject>();
+            var obj = col.GetComponentInParent<IAtomicObject>();
 
             
             

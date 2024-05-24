@@ -43,7 +43,7 @@ namespace Sample
         [Logic]
         private FlyAnimMechanics flyMechanics;
 
-        public void Compose(IObject obj)
+        public void Compose(IAtomicObject obj)
         {
             this.moveMechanics.Compose(this.animator, this.character.isGroundMoving, IsMoving);
             this.jumpMechanics.Compose(this.animator, this.character.jumpComponent.JumpEvent, Jump);

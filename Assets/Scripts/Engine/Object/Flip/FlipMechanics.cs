@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Sample
 {
     [Serializable]
-    public sealed class FlipMechanics : IObject.IFixedUpdate
+    public sealed class FlipMechanics : IAtomicObject.IFixedUpdate
     {
         private readonly IAtomicValue<float> moveDirection;
         private readonly Transform transform;
@@ -17,7 +17,7 @@ namespace Sample
             this.transform = transform;
         }
 
-        public void OnFixedUpdate(IObject _, float deltaTime)
+        public void OnFixedUpdate(IAtomicObject _, float deltaTime)
         {
             float moveDirection = this.moveDirection.Value;
             

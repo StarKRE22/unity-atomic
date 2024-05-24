@@ -17,12 +17,12 @@ namespace Atomic.Objects
 
         public int Tag => this.tag;
 
-        public void Compose(IObject obj)
+        public void Compose(IAtomicObject obj)
         {
             obj.AddTag(this.tag);
         }
 
-        public void Dispose(IObject obj)
+        public void Dispose(IAtomicObject obj)
         {
             obj.DelTag(this.tag);
         }
@@ -52,12 +52,12 @@ namespace Atomic.Objects
             this.value = value;
         }
 
-        public virtual void Compose(IObject obj)
+        public virtual void Compose(IAtomicObject obj)
         {
             obj.AddValue(this.id, this.value);
         }
 
-        public virtual void Dispose(IObject obj)
+        public virtual void Dispose(IAtomicObject obj)
         {
             obj.DelValue(this.id);
         }
@@ -81,12 +81,12 @@ namespace Atomic.Objects
             this.value = value;
         }
 
-        public virtual void Compose(IObject obj)
+        public virtual void Compose(IAtomicObject obj)
         {
             obj.AddLogic(this.value);
         }
 
-        public void Dispose(IObject obj)
+        public void Dispose(IAtomicObject obj)
         {
             obj.DelLogic(this.value);
         }
@@ -95,13 +95,13 @@ namespace Atomic.Objects
     [Serializable]
     public class ElementAspect<T> : ValueAspect<T> where T : ILogic
     {
-        public override void Compose(IObject obj)
+        public override void Compose(IAtomicObject obj)
         {
             base.Compose(obj);
             obj.AddLogic(this.value);
         }
 
-        public override void Dispose(IObject obj)
+        public override void Dispose(IAtomicObject obj)
         {
             base.Dispose(obj);
             obj.DelLogic(this.value);

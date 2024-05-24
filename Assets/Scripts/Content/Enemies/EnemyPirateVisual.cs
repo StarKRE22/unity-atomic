@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Sample
 {
     [Serializable]
-    public sealed class EnemyPirateVisual : MonoBehaviour, IObject.IComposable
+    public sealed class EnemyPirateVisual : MonoBehaviour, IAtomicObject.IComposable
     {
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
 
@@ -23,7 +23,7 @@ namespace Sample
         [SerializeField]
         private MoveAnimMechanics moveMechanics;
 
-        public void Compose(IObject obj)
+        public void Compose(IAtomicObject obj)
         {
             this.moveMechanics.Compose(this.animator, pirate.moveComponent.IsMoving, IsMoving);
         }

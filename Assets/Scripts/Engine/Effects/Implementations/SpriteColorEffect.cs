@@ -13,7 +13,7 @@ namespace Sample
         [SerializeField]
         private Color color;
 
-        public override void Apply(IObject obj)
+        public override void Apply(IAtomicObject obj)
         {
             SpriteRenderer spriteRenderer = obj.GetSpriteRenderer();
             if (spriteRenderer != null)
@@ -22,7 +22,7 @@ namespace Sample
             }
         }
 
-        public override void Discard(IObject obj)
+        public override void Discard(IAtomicObject obj)
         {
             SpriteRenderer spriteRenderer = obj.GetSpriteRenderer();
             if (spriteRenderer != null)

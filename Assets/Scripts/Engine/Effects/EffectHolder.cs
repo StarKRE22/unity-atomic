@@ -16,18 +16,18 @@ namespace Sample
         [ShowInInspector, ReadOnly]
         private readonly List<IEffect> effects = new();
         
-        private IObject owner;
+        private IAtomicObject owner;
 
         public EffectHolder()
         {
         }
 
-        public EffectHolder(IObject owner)
+        public EffectHolder(IAtomicObject owner)
         {
             this.owner = owner;
         }
 
-        public void Compose(IObject owner)
+        public void Compose(IAtomicObject owner)
         {
             this.owner = owner;
         }
