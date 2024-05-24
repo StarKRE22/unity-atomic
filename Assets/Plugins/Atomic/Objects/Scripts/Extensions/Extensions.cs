@@ -66,9 +66,7 @@ namespace Atomic.Objects
         {
             return collision.gameObject.TryGetComponent(out obj);
         }
-        
-        
-        
+
         public static ILogic SubscribeOnEnable(
             this IObject obj,
             Action<IObject> action

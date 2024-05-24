@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Sample
 {
-    public sealed class CharacterVisual : MonoBehaviour, IObject.IComposable
+    public sealed class CharacterVisual : MonoBehaviour, IComposable
     {
         #region Interface
 

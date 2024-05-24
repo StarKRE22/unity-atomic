@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Sample
 {
-    public sealed class MoveAspect : ScriptableObject, IObject.IAspect
+    public sealed class MoveAspect : ScriptableObject, IAspect
     {
         [SerializeField]
         public float baseSpeed;

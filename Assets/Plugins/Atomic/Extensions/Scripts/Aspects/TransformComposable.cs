@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Atomic
 {
     [Serializable]
-    public sealed class TransformComposable : ValueComposable<Transform>
+    public sealed class TransformAspect : ValueAspect<Transform>
     {
     }
 }

@@ -4,8 +4,12 @@ using UnityEngine;
 
 namespace Atomic.Objects
 {
+    public interface IAspect : IComposable, IDisposable
+    {
+    }
+    
     [Serializable, InlineProperty]
-    public sealed class TagComposable : IComposable
+    public sealed class TagAspect : IAspect
     {
         [TagId]
         [SerializeField]
@@ -17,10 +21,15 @@ namespace Atomic.Objects
         {
             obj.AddTag(this.tag);
         }
+
+        public void Dispose(IObject obj)
+        {
+            obj.DelTag(this.tag);
+        }
     }
 
     [Serializable, InlineProperty]
-    public class ValueComposable<T> : IComposable
+    public class ValueAspect<T> : IAspect
     {
         [ValueId]
         [HorizontalGroup]
@@ -34,11 +43,11 @@ namespace Atomic.Objects
 
         public T Value => this.value;
 
-        public ValueComposable()
+        public ValueAspect()
         {
         }
 
-        public ValueComposable(T value)
+        public ValueAspect(T value)
         {
             this.value = value;
         }
@@ -47,22 +56,27 @@ namespace Atomic.Objects
         {
             obj.AddValue(this.id, this.value);
         }
+
+        public virtual void Dispose(IObject obj)
+        {
+            obj.DelValue(this.id);
+        }
     }
 
 
     [Serializable, InlineProperty]
-    public class LogicComposable<T> : IComposable where T : ILogic
+    public class LogicAspect<T> : IAspect where T : ILogic
     {
         [SerializeField]
         protected T value;
 
         public T Value => this.value;
 
-        public LogicComposable()
+        public LogicAspect()
         {
         }
 
-        public LogicComposable(T value)
+        public LogicAspect(T value)
         {
             this.value = value;
         }
@@ -71,41 +85,47 @@ namespace Atomic.Objects
         {
             obj.AddLogic(this.value);
         }
+
+        public void Dispose(IObject obj)
+        {
+            obj.DelLogic(this.value);
+        }
     }
 
     [Serializable]
-    public class ElementComposable<T> : ValueComposable<T> where T : ILogic
+    public class ElementAspect<T> : ValueAspect<T> where T : ILogic
     {
         public override void Compose(IObject obj)
         {
             base.Compose(obj);
             obj.AddLogic(this.value);
         }
+
+        public override void Dispose(IObject obj)
+        {
+            base.Dispose(obj);
+            obj.DelLogic(this.value);
+        }
     }
 
 
     [Serializable]
-    public sealed class GameObjectComposable : ValueComposable<GameObject>
+    public sealed class GameObjectAspect : ValueAspect<GameObject>
     {
     }
 
     [Serializable]
-    public sealed class TransformComposable : ValueComposable<Transform>
+    public sealed class TransformAspect : ValueAspect<Transform>
     {
     }
 
     [Serializable]
-    public sealed class TransformArrayComposable : ValueComposable<Transform[]>
+    public sealed class TransformArrayAspect : ValueAspect<Transform[]>
     {
     }
 
     [Serializable]
-    public sealed class ComponentComposable : ValueComposable<Component>
-    {
-    }
-
-    [Serializable]
-    public sealed class ScriptableObjectComposable : ValueComposable<ScriptableObject>
+    public sealed class ComponentAspect : ValueAspect<Component>
     {
     }
 }

@@ -625,6 +625,30 @@ namespace Atomic.Objects
         [ContextMenu("Dispose")]
         public void Dispose()
         {
+            if (this.monoComposers is {Count: > 0})
+            {
+                for (int i = 0, count = this.monoComposers.Count; i < count; i++)
+                {
+                    MonoComposer source = this.monoComposers[i];
+                    if (source != null)
+                    {
+                        source.Dispose(this);
+                    }
+                }
+            }
+
+            if (this.scriptableComposers is {Count: > 0})
+            {
+                for (int i = 0, count = this.scriptableComposers.Count; i < count; i++)
+                {
+                    ScriptableComposer source = this.scriptableComposers[i];
+                    if (source != null)
+                    {
+                        source.Dispose(this);
+                    }
+                }
+            }
+            
             if (this.monoSections is {Count: > 0})
             {
                 for (int i = 0, count = this.monoSections.Count; i < count; i++)

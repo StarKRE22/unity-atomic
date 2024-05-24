@@ -1,9 +1,7 @@
-using System;
 using Atomic.Elements;
 using Atomic.Objects;
 using GameEngine;
 using UnityEngine;
-using IDisposable = System.IDisposable;
 
 namespace Sample
 {
@@ -14,7 +12,7 @@ namespace Sample
         #region Interface
 
         [Value(CommonAPI.GameObject)]
-        public UnityEngine.GameObject GameObject => this.gameObject;
+        public GameObject GameObject => this.gameObject;
 
         [Value(CommonAPI.Transform)]
         public Transform Transform => this.transform;
@@ -94,14 +92,6 @@ namespace Sample
             this.effectHolder.Compose(obj);
         }
 
-        public void Dispose()
-        {
-            isAlive?.Dispose();
-            collectCoinEvent?.Dispose();
-            jumpComponent?.Dispose();
-            moveComponent?.Dispose();
-        }
-
         private void Death()
         {
             this.isAlive.Value = false;
@@ -115,5 +105,13 @@ namespace Sample
         }
 
         #endregion
+
+        public void Dispose(IObject obj)
+        {
+            isAlive?.Dispose();
+            collectCoinEvent?.Dispose();
+            jumpComponent?.Dispose();
+            moveComponent?.Dispose();
+        }
     }
 }

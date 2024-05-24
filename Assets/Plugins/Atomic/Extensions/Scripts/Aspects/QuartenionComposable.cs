@@ -5,7 +5,7 @@ using Atomic.Objects;
 namespace Atomic
 {
     [Serializable]
-    public sealed class QuartenionComposable : ValueComposable<AtomicQuaternion>
+    public sealed class QuartenionAspect : ValueAspect<AtomicQuaternion>
     {
     }
 }

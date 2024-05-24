@@ -5,7 +5,7 @@ using GameObject = UnityEngine.GameObject;
 
 namespace Sample
 {
-    public sealed class EnemyPirate : MonoBehaviour, IObject.IComposable
+    public sealed class EnemyPirate : MonoBehaviour, IComposable
     {
         [Value(CommonAPI.Rigidbody2D)]
         public Rigidbody2D Rigidbody2D => this.GetComponent<Rigidbody2D>();

@@ -5,7 +5,7 @@ using Atomic.Objects;
 namespace Atomic
 {
     [Serializable]
-    public sealed class IntComposable : ValueComposable<AtomicInt>
+    public sealed class IntAspect : ValueAspect<AtomicInt>
     {
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Sample
 {
-    public sealed class FlipMechanicsRx : IObject.IFixedUpdate
+    public sealed class FlipMechanicsRx : IFixedUpdate
     {
         private readonly IAtomicValue<float> currentDirection;
         private readonly Transform transform;

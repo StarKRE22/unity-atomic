@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Sample
 {
     [Serializable]
-    public sealed class CollectCoinMechanics : IObject.ITriggerEnter2D
+    public sealed class CollectCoinMechanics : ITriggerEnter2D
     {
         private IAtomicEvent coinCollectEvent;
 
