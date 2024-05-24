@@ -22,12 +22,12 @@ namespace Atomic.Objects
         private static ObjectInfo BakeInternal(Type objectType)
         {
             List<int> types = new List<int>();
-            List<ReferenceInfo> references = new List<ReferenceInfo>();
-            List<BehaviourInfo> behaviours = new List<BehaviourInfo>();
+            List<ValueInfo> references = new List<ValueInfo>();
+            List<LogicInfo> behaviours = new List<LogicInfo>();
 
             foreach (Type @interface in objectType.GetInterfaces())
             {
-                if (@interface == typeof(IAtomicObject))
+                if (@interface == typeof(IObject))
                 {
                     continue;
                 }
@@ -36,7 +36,7 @@ namespace Atomic.Objects
                 references.AddRange(ObjectScanner.ScanReferences(@interface));
             }
 
-            while (objectType != typeof(AtomicObject) && objectType != null)
+            while (objectType != typeof(MonoObject) && objectType != null)
             {
                 types.AddRange(ObjectScanner.ScanTypes(objectType));
                 references.AddRange(ObjectScanner.ScanReferences(objectType));

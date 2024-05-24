@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Sample
 {
-    public sealed class CharacterVisual : MonoBehaviour, IAtomicObject.IComposable
+    public sealed class CharacterVisual : MonoBehaviour, IObject.IComposable
     {
         #region Interface
 
-        [Reference(VisualAPI.Animator)]
+        [Value(VisualAPI.Animator)]
         public Animator Animator => this.animator;
 
-        [Reference(VisualAPI.SpriteRenderer)]
+        [Value(VisualAPI.SpriteRenderer)]
         public SpriteRenderer SpriteRenderer => this.spriteRenderer;
 
         #endregion
@@ -32,18 +32,18 @@ namespace Sample
         private SpriteRenderer spriteRenderer;
 
         [SerializeField]
-        [Behaviour]
+        [Logic]
         private MoveAnimMechanics moveMechanics;
         
         [SerializeField]
-        [Behaviour]
+        [Logic]
         private JumpAnimMechanics jumpMechanics;
 
         [SerializeField]
-        [Behaviour]
+        [Logic]
         private FlyAnimMechanics flyMechanics;
 
-        public void Compose(IAtomicObject obj)
+        public void Compose(IObject obj)
         {
             this.moveMechanics.Compose(this.animator, this.character.isGroundMoving, IsMoving);
             this.jumpMechanics.Compose(this.animator, this.character.jumpComponent.JumpEvent, Jump);

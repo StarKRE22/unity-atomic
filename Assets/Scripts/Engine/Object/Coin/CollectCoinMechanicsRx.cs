@@ -4,9 +4,9 @@ using GameEngine;
 
 namespace Sample
 {
-    public class CollectCoinMechanicsRx : IAtomicObject.IComposable
+    public class CollectCoinMechanicsRx : IObject.IComposable
     {
-        public void Compose(IAtomicObject obj)
+        public void Compose(IObject obj)
         {
             obj.SubscribeOnTriggerEnter2D((_, collider) =>
             {

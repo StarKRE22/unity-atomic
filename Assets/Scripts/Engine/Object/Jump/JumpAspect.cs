@@ -9,31 +9,31 @@ using UnityEngine;
 namespace Sample
 {
     [Serializable]
-    public sealed class JumpAspect : ScriptableObject, IAtomicObject.IComposable, IAtomicObject.IDisposable
+    public sealed class JumpAspect : ScriptableObject, IAspect
     {
         [SerializeField]
         public float baseForce;
 
-        private readonly IEnumerable<IAtomicFunction<IAtomicObject, bool>> conditions;
+        private readonly IEnumerable<IAtomicFunction<IObject, bool>> conditions;
 
-        public JumpAspect(params IAtomicFunction<IAtomicObject, bool>[] conditions)
+        public JumpAspect(params IAtomicFunction<IObject, bool>[] conditions)
         {
             this.conditions = conditions;
         }
 
-        public void Compose(IAtomicObject target)
+        public void Compose(IObject target)
         {
             if (target.TryGetRigidbody2D(out Rigidbody2D rigidbody2D))
             {
                 var jumpComponent = new JumpComponent(rigidbody2D, baseForce);
                 // jumpComponent.Enabled.Append(new AtomicFunction<bool>()); //Conditions
-                target.AddReference(CommonAPI.JumpComponent, jumpComponent);
+                target.AddValue(CommonAPI.JumpComponent, jumpComponent);
             }
         }
 
-        public void Dispose(IAtomicObject target)
+        public void Dispose(IObject target)
         {
-            target.DelReference(CommonAPI.JumpComponent);
+            target.DelValue(CommonAPI.JumpComponent);
         }
     }
 }

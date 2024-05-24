@@ -14,12 +14,12 @@ namespace Sample
         [SerializeField]
         private AtomicValue<float> range;
 
-        public override void Apply(IAtomicObject obj)
+        public override void Apply(IObject obj)
         {
             obj.GetJumpComponent()?.FullForce?.Append(this.range);
         }
 
-        public override void Discard(IAtomicObject obj)
+        public override void Discard(IObject obj)
         {
             obj.GetJumpComponent()?.FullForce?.Remove(this.range);
         }

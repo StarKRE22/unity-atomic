@@ -1,6 +1,7 @@
 using System;
 using Atomic.Objects;
 using UnityEngine;
+using GameObject = UnityEngine.GameObject;
 
 namespace Sample
 {
@@ -10,12 +11,12 @@ namespace Sample
         [SerializeField]
         private GameObject gameObject;
         
-        public void Apply(IAtomicObject obj)
+        public void Apply(IObject obj)
         {
             //Nothing...
         }
 
-        public void Discard(IAtomicObject obj)
+        public void Discard(IObject obj)
         {
             GameObject.Destroy(this.gameObject);
         }

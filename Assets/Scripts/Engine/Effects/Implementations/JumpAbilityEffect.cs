@@ -14,7 +14,7 @@ namespace Sample
         [SerializeField]
         private float baseForce = 10;
         
-        public override void Apply(IAtomicObject obj)
+        public override void Apply(IObject obj)
         {
             if (obj.TryGetRigidbody2D(out var rigidbody))
             {
@@ -22,7 +22,7 @@ namespace Sample
             }
         }
 
-        public override void Discard(IAtomicObject obj)
+        public override void Discard(IObject obj)
         {
             obj.DelJumpComponent();
         }

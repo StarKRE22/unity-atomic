@@ -17,11 +17,11 @@ namespace Sample
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            var obj = col.GetComponentInParent<IAtomicObject>();
+            var obj = col.GetComponentInParent<IObject>();
 
             
             
-            if (obj.TryGetReference(CommonAPI.EffectHolder, out EffectHolder effectHolder))
+            if (obj.TryGetValue(CommonAPI.EffectHolder, out EffectHolder effectHolder))
             {
                 // Transform objTransform = obj.transform;
                 // IEffect effect = Instantiate(this.effectPrefab, objTransform.position, objTransform.rotation, objTransform);

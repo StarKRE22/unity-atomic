@@ -8,10 +8,10 @@ namespace Sample
     {
         private const int MONEY_RANGE = 1;
         
-        private readonly IAtomicObject target;
+        private readonly IObject target;
         private readonly PlayerWallet playerWallet;
 
-        public CollectCoinObserver(IAtomicObject target, PlayerWallet playerWallet)
+        public CollectCoinObserver(IObject target, PlayerWallet playerWallet)
         {
             this.target = target;
             this.playerWallet = playerWallet;

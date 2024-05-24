@@ -1,37 +1,38 @@
 using Atomic.Objects;
 using GameEngine;
 using UnityEngine;
+using GameObject = UnityEngine.GameObject;
 
 namespace Sample
 {
-    public sealed class EnemyPirate : MonoBehaviour, IAtomicObject.IComposable
+    public sealed class EnemyPirate : MonoBehaviour, IObject.IComposable
     {
-        [Reference(CommonAPI.Rigidbody2D)]
+        [Value(CommonAPI.Rigidbody2D)]
         public Rigidbody2D Rigidbody2D => this.GetComponent<Rigidbody2D>();
 
-        [Reference(CommonAPI.GameObject)]
+        [Value(CommonAPI.GameObject)]
         public GameObject GameObject => this.gameObject;
 
-        [Reference(CommonAPI.Transform)]
+        [Value(CommonAPI.Transform)]
         public Transform Transform => this.transform;
 
-        [Reference(CommonAPI.MoveComponent)]
-        [Behaviour]
+        [Value(CommonAPI.MoveComponent)]
+        [Logic]
         public MoveComponent moveComponent;
         
-        [Behaviour]
+        [Logic]
         public GroundedComponent groundedComponent;
 
-        [Reference(CommonAPI.EffectHolder)]
+        [Value(CommonAPI.EffectHolder)]
         public EffectHolder effectHolder;
 
-        [Behaviour]
+        [Logic]
         private KillCharacterMechanics killMechanics;
 
-        [Behaviour]
+        [Logic]
         private DiscardCharacterEffectsMechanics discardEffectsMechanics;
 
-        public void Compose(IAtomicObject obj)
+        public void Compose(IObject obj)
         {
             this.effectHolder.Compose(obj);
             this.killMechanics = new KillCharacterMechanics();

@@ -3,37 +3,38 @@ using Atomic.Elements;
 using Atomic.Objects;
 using GameEngine;
 using UnityEngine;
+using IDisposable = System.IDisposable;
 
 namespace Sample
 {
     [Tags(TagAPI.Character)]
-    [RequireComponent(typeof(AtomicObject))]
-    public sealed class Character : MonoBehaviour, IAtomicObject.IComposable, IDisposable
+    [RequireComponent(typeof(MonoObject))]
+    public sealed class Character : MonoBehaviour, IComposable, IDisposable
     {
         #region Interface
 
-        [Reference(CommonAPI.GameObject)]
-        public GameObject GameObject => this.gameObject;
+        [Value(CommonAPI.GameObject)]
+        public UnityEngine.GameObject GameObject => this.gameObject;
 
-        [Reference(CommonAPI.Transform)]
+        [Value(CommonAPI.Transform)]
         public Transform Transform => this.transform;
 
-        [Reference(CommonAPI.Rigidbody2D)]
+        [Value(CommonAPI.Rigidbody2D)]
         public Rigidbody2D Rigidbody => this.GetComponent<Rigidbody2D>();
 
-        [Reference(CommonAPI.EffectHolder)]
+        [Value(CommonAPI.EffectHolder)]
         public EffectHolder EffectHolder => this.effectHolder;
 
-        [Reference(CommonAPI.CollectCoinEvent)]
+        [Value(CommonAPI.CollectCoinEvent)]
         public IAtomicObservable CollectCoinEvent => this.collectCoinEvent;
 
-        [Reference(CommonAPI.DeathAction)]
+        [Value(CommonAPI.DeathAction)]
         public IAtomicAction DeathAction => this.deathAction;
 
-        [Reference(CommonAPI.MoveComponent)]
+        [Value(CommonAPI.MoveComponent)]
         public MoveComponent MoveComponent => this.moveComponent;
 
-        [Reference(CommonAPI.JumpComponent)]
+        [Value(CommonAPI.JumpComponent)]
         public JumpComponent JumpComponent => this.jumpComponent;
 
         #endregion
@@ -55,28 +56,28 @@ namespace Sample
         [SerializeField]
         private AtomicEvent collectCoinEvent;
 
-        [Behaviour]
+        [Logic]
         [SerializeField]
         private MoveComponent moveComponent;
 
         [SerializeField]
         public JumpComponent jumpComponent;
 
-        [Behaviour]
+        [Logic]
         [SerializeField]
         private GroundedComponent groundedComponent;
 
         [SerializeField]
         private EffectHolder effectHolder;
 
-        [Behaviour]
+        [Logic]
         [SerializeField]
         private CollectCoinMechanics collectCoinMechanics;
 
-        [Behaviour]
+        [Logic]
         private FlipMechanics flipMechanics;
 
-        public void Compose(IAtomicObject obj)
+        public void Compose(IObject obj)
         {
             this.moveComponent.Enabled.Append(this.isAlive);
             this.jumpComponent.Enabled.AppendAll(this.isAlive, this.groundedComponent.isGrounded);

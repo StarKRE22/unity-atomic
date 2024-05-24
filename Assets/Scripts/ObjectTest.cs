@@ -7,7 +7,7 @@ namespace Sample
     public sealed class ObjectTest : MonoBehaviour
     {
         [SerializeField]
-        private AtomicObject character;
+        private MonoObject character;
 
         [SerializeField]
         private MoveComponent moveComponent;
@@ -19,11 +19,11 @@ namespace Sample
         {
             //Накатываем компоненты
             this.character.AddElement(CommonAPI.MoveComponent, moveComponent);
-            this.character.AddReference(CommonAPI.JumpComponent, jumpComponent);
+            this.character.AddValue(CommonAPI.JumpComponent, jumpComponent);
             
             //Откатываем компоненты
             this.character.DelElement(CommonAPI.MoveComponent);
-            this.character.DelReference(CommonAPI.JumpComponent);
+            this.character.DelValue(CommonAPI.JumpComponent);
         }
 
         //

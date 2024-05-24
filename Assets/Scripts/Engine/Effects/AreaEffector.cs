@@ -10,7 +10,7 @@ namespace Sample
         
         private void OnTriggerEnter2D(Collider2D col)
         {
-            var obj = col.GetComponentInParent<IAtomicObject>();
+            var obj = col.GetComponentInParent<IObject>();
             
             if (obj != null)
             {
@@ -20,7 +20,7 @@ namespace Sample
 
         private void OnTriggerExit2D(Collider2D col)
         {
-            var obj = col.GetComponentInParent<IAtomicObject>();
+            var obj = col.GetComponentInParent<IObject>();
 
             if (obj != null)
             {

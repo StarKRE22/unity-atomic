@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Sample
 {
     [Serializable]
-    public sealed class CollectCoinMechanics : IAtomicObject.ITriggerEnter2D
+    public sealed class CollectCoinMechanics : IObject.ITriggerEnter2D
     {
         private IAtomicEvent coinCollectEvent;
 
@@ -24,7 +24,7 @@ namespace Sample
             this.coinCollectEvent = coinCollectEvent;
         }
 
-        public void TriggerEnter2D(IAtomicObject obj, Collider2D collider)
+        public void TriggerEnter2D(IObject obj, Collider2D collider)
         {
             if (collider.TryGetComponent(out Coin coin))
             {

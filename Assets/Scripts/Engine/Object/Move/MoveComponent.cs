@@ -2,12 +2,13 @@ using System;
 using Atomic.Elements;
 using Atomic.Objects;
 using UnityEngine;
+using IDisposable = System.IDisposable;
 
 namespace Sample
 {
     [Serializable]
     public sealed class MoveComponent : ISerializationCallbackReceiver, 
-        IAtomicObject.IFixedUpdate, 
+        IObject.IFixedUpdate, 
         IDisposable
     {
         public IAtomicValue<bool> IsMoving => this.isMoving;
@@ -64,7 +65,7 @@ namespace Sample
             this.currentDirection?.Dispose();
         }
 
-        public void OnFixedUpdate(IAtomicObject _, float deltaTime)
+        public void OnFixedUpdate(IObject _, float deltaTime)
         {
             float speedX = 0.0f;
             float speedY = this.rigidbody.velocity.y;

@@ -2,6 +2,7 @@ using System;
 using Atomic.Objects;
 using GameEngine;
 using UnityEngine;
+using GameObject = UnityEngine.GameObject;
 
 namespace Sample
 {
@@ -13,7 +14,7 @@ namespace Sample
 
         private GameObject _gameObject;
         
-        public void Apply(IAtomicObject obj)
+        public void Apply(IObject obj)
         {
             Transform transform = obj.GetTransform();
             if (transform != null)
@@ -22,7 +23,7 @@ namespace Sample
             }
         }
 
-        public void Discard(IAtomicObject obj)
+        public void Discard(IObject obj)
         {
             if (_gameObject != null)
             {

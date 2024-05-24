@@ -8,127 +8,129 @@ namespace Atomic
 {
     public static class ObjectExtensions
     {
+        
+        
         [CanBeNull]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IAtomicValue<T> GetValue<T>(this IAtomicObject it, int id)
+        public static IAtomicValue<T> GetValue<T>(this IObject it, int id)
         {
-            return it.GetReference<IAtomicValue<T>>(id);
+            return it.GetValue<IAtomicValue<T>>(id);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetValue<T>(this IAtomicObject it, int id, out IAtomicValue<T> result)
+        public static bool TryGetValue<T>(this IObject it, int id, out IAtomicValue<T> result)
         {
-            return it.TryGetReference(id, out result) && result != null;
-        }
-
-        [CanBeNull]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IAtomicVariable<T> GetVariable<T>(this IAtomicObject it, int id)
-        {
-            return it.GetReference<IAtomicVariable<T>>(id);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetVariable<T>(this IAtomicObject it, int id, out IAtomicVariable<T> result)
-        {
-            return it.TryGetReference(id, out result) && result != null;
+            return it.TryGet(id, out result) && result != null;
         }
 
         [CanBeNull]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IAtomicFunction<T> GetFunction<T>(this IAtomicObject it, int id)
+        public static IAtomicVariable<T> GetVariable<T>(this IObject it, int id)
         {
-            return it.GetReference<IAtomicFunction<T>>(id);
+            return it.GetValue<IAtomicVariable<T>>(id);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetFunction<T>(this IAtomicObject it, int id, out IAtomicFunction<T> result)
+        public static bool TryGetVariable<T>(this IObject it, int id, out IAtomicVariable<T> result)
         {
-            return it.TryGetReference(id, out result) && result != null;
+            return it.TryGet(id, out result) && result != null;
         }
 
         [CanBeNull]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IAtomicFunction<T1, T2> GetFunction<T1, T2>(this IAtomicObject it, int id)
+        public static IAtomicFunction<T> GetFunction<T>(this IObject it, int id)
         {
-            return it.GetReference<IAtomicFunction<T1, T2>>(id);
+            return it.GetValue<IAtomicFunction<T>>(id);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetFunction<T>(this IObject it, int id, out IAtomicFunction<T> result)
+        {
+            return it.TryGet(id, out result) && result != null;
+        }
+
+        [CanBeNull]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IAtomicFunction<T1, T2> GetFunction<T1, T2>(this IObject it, int id)
+        {
+            return it.GetValue<IAtomicFunction<T1, T2>>(id);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TryGetFunction<T1, T2>(
-            this IAtomicObject it,
+            this IObject it,
             int id,
             out IAtomicFunction<T1, T2> result
-        ) => it.TryGetReference(id, out result) && result != null;
+        ) => it.TryGet(id, out result) && result != null;
 
         [CanBeNull]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IAtomicFunction<T1, T2, T3> GetFunction<T1, T2, T3>(this IAtomicObject it, int id)
+        public static IAtomicFunction<T1, T2, T3> GetFunction<T1, T2, T3>(this IObject it, int id)
         {
-            return it.GetReference<IAtomicFunction<T1, T2, T3>>(id);
+            return it.GetValue<IAtomicFunction<T1, T2, T3>>(id);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TryGetFunction<T1, T2, T3>(
-            this IAtomicObject it,
+            this IObject it,
             int id,
             out IAtomicFunction<T1, T2, T3> result
-        ) => it.TryGetReference(id, out result) && result != null;
+        ) => it.TryGet(id, out result) && result != null;
 
         [CanBeNull]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IAtomicAction GetAction(this IAtomicObject it, int id)
+        public static IAtomicAction GetAction(this IObject it, int id)
         {
-            return it.GetReference<IAtomicAction>(id);
+            return it.GetValue<IAtomicAction>(id);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetAction(this IAtomicObject it, int id, out IAtomicAction result)
+        public static bool TryGetAction(this IObject it, int id, out IAtomicAction result)
         {
-            return it.TryGetReference(id, out result) && result != null;
-        }
-
-        [CanBeNull]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IAtomicAction<T> GetAction<T>(this IAtomicObject it, int id)
-        {
-            return it.GetReference<IAtomicAction<T>>(id);
-        }
-
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetAction<T>(this IAtomicObject it, int id, out IAtomicAction<T> result)
-        {
-            return it.TryGetReference(id, out result) && result != null;
+            return it.TryGet(id, out result) && result != null;
         }
 
         [CanBeNull]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IAtomicAction<T1, T2> GetAction<T1, T2>(this IAtomicObject it, int id)
+        public static IAtomicAction<T> GetAction<T>(this IObject it, int id)
         {
-            return it.GetReference<IAtomicAction<T1, T2>>(id);
+            return it.GetValue<IAtomicAction<T>>(id);
+        }
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetAction<T>(this IObject it, int id, out IAtomicAction<T> result)
+        {
+            return it.TryGet(id, out result) && result != null;
+        }
+
+        [CanBeNull]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IAtomicAction<T1, T2> GetAction<T1, T2>(this IObject it, int id)
+        {
+            return it.GetValue<IAtomicAction<T1, T2>>(id);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetAction<T1, T2>(this IAtomicObject it, int id, out IAtomicAction<T1, T2> result)
+        public static bool TryGetAction<T1, T2>(this IObject it, int id, out IAtomicAction<T1, T2> result)
         {
-            return it.TryGetReference(id, out result) && result != null;
+            return it.TryGet(id, out result) && result != null;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void InvokeAction(this IAtomicObject it, int id)
+        public static void InvokeAction(this IObject it, int id)
         {
             it.GetAction(id)?.Invoke();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void InvokeAction<T>(this IAtomicObject it, int id, T args)
+        public static void InvokeAction<T>(this IObject it, int id, T args)
         {
             it.GetAction<T>(id)?.Invoke(args);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T InvokeFunction<T>(this IAtomicObject it, int id)
+        public static T InvokeFunction<T>(this IObject it, int id)
         {
             IAtomicFunction<T> function = it.GetFunction<T>(id);
             if (function != null) return function.Invoke();
@@ -137,58 +139,58 @@ namespace Atomic
 
         [CanBeNull]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IAtomicSetter<T> GetSetter<T>(this IAtomicObject it, int id)
+        public static IAtomicSetter<T> GetSetter<T>(this IObject it, int id)
         {
-            return it.GetReference<IAtomicSetter<T>>(id);
+            return it.GetValue<IAtomicSetter<T>>(id);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetVariable<T>(this IAtomicObject it, int id, T value)
+        public static void SetVariable<T>(this IObject it, int id, T value)
         {
-            if (it.TryGetReference(id, out IAtomicSetter<T> setter)) setter.Value = value;
-        }
-
-        [CanBeNull]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IAtomicExpression<T> GetExpression<T>(this IAtomicObject it, int id)
-        {
-            return it.GetReference<IAtomicExpression<T>>(id);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetExpression<T>(this IAtomicObject it, int id, out IAtomicExpression<T> result)
-        {
-            return it.TryGetReference(id, out result) && result != null;
+            if (it.TryGet(id, out IAtomicSetter<T> setter)) setter.Value = value;
         }
 
         [CanBeNull]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IAtomicObservable GetObservable(this IAtomicObject it, int id)
+        public static IAtomicExpression<T> GetExpression<T>(this IObject it, int id)
         {
-            return it.GetReference<IAtomicObservable>(id);
+            return it.GetValue<IAtomicExpression<T>>(id);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetObservable(this IAtomicObject it, int id, out IAtomicObservable result)
+        public static bool TryGetExpression<T>(this IObject it, int id, out IAtomicExpression<T> result)
         {
-            return it.TryGetReference(id, out result) && result != null;
+            return it.TryGet(id, out result) && result != null;
         }
 
         [CanBeNull]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IAtomicObservable<T> GetObservable<T>(this IAtomicObject it, int id)
+        public static IAtomicObservable GetObservable(this IObject it, int id)
         {
-            return it.GetReference<IAtomicObservable<T>>(id);
+            return it.GetValue<IAtomicObservable>(id);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetObservable<T>(this IAtomicObject it, int id, out IAtomicObservable<T> result)
+        public static bool TryGetObservable(this IObject it, int id, out IAtomicObservable result)
         {
-            return it.TryGetReference(id, out result) && result != null;
+            return it.TryGet(id, out result) && result != null;
+        }
+
+        [CanBeNull]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IAtomicObservable<T> GetObservable<T>(this IObject it, int id)
+        {
+            return it.GetValue<IAtomicObservable<T>>(id);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool SubscribeOnEvent(this IAtomicObject it, int id, Action listener)
+        public static bool TryGetObservable<T>(this IObject it, int id, out IAtomicObservable<T> result)
+        {
+            return it.TryGet(id, out result) && result != null;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool SubscribeOnEvent(this IObject it, int id, Action listener)
         {
             if (it.TryGetObservable(id, out IAtomicObservable observable))
             {
@@ -200,7 +202,7 @@ namespace Atomic
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool SubscribeOnEvent(this IAtomicObject it, int id, IAtomicAction listener)
+        public static bool SubscribeOnEvent(this IObject it, int id, IAtomicAction listener)
         {
             if (it.TryGetObservable(id, out IAtomicObservable observable))
             {
@@ -212,7 +214,7 @@ namespace Atomic
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool UnsubscribeFromEvent(this IAtomicObject it, int id, Action listener)
+        public static bool UnsubscribeFromEvent(this IObject it, int id, Action listener)
         {
             if (it.TryGetObservable(id, out IAtomicObservable observable))
             {
@@ -224,7 +226,7 @@ namespace Atomic
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool UnsubscribeFromEvent(this IAtomicObject it, int id, IAtomicAction listener)
+        public static bool UnsubscribeFromEvent(this IObject it, int id, IAtomicAction listener)
         {
             if (it.TryGetObservable(id, out IAtomicObservable observable))
             {
@@ -236,7 +238,7 @@ namespace Atomic
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool SubscribeOnEvent<T>(this IAtomicObject it, int id, Action<T> listener)
+        public static bool SubscribeOnEvent<T>(this IObject it, int id, Action<T> listener)
         {
             if (it.TryGetObservable(id, out IAtomicObservable<T> observable))
             {
@@ -248,7 +250,7 @@ namespace Atomic
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool SubscribeOnEvent<T>(this IAtomicObject it, int id, IAtomicAction<T> listener)
+        public static bool SubscribeOnEvent<T>(this IObject it, int id, IAtomicAction<T> listener)
         {
             if (it.TryGetObservable(id, out IAtomicObservable<T> observable))
             {
@@ -260,7 +262,7 @@ namespace Atomic
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool UnsubscribeFromEvent<T>(this IAtomicObject it, int id, Action<T> listener)
+        public static bool UnsubscribeFromEvent<T>(this IObject it, int id, Action<T> listener)
         {
             if (it.TryGetObservable(id, out IAtomicObservable<T> observable))
             {
@@ -272,7 +274,7 @@ namespace Atomic
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool UnsubscribeFromEvent<T>(this IAtomicObject it, int id, IAtomicAction<T> listener)
+        public static bool UnsubscribeFromEvent<T>(this IObject it, int id, IAtomicAction<T> listener)
         {
             if (it.TryGetObservable(id, out IAtomicObservable<T> observable))
             {

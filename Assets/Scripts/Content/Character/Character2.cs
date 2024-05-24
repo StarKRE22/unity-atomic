@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Sample
 {
-    public sealed class Character2 : MonoBehaviour, IAtomicObject.IComposable
+    public sealed class Character2 : MonoBehaviour, IObject.IComposable
     {
         [SerializeField]
         private AtomicAction deathAction;
@@ -16,26 +16,26 @@ namespace Sample
         [SerializeField]
         private MoveComponent moveComponent;
 
-        public void Compose(IAtomicObject obj)
+        public void Compose(IObject obj)
         {
             this.AddInterface(obj);
             this.AddBehaviour(obj);
         }
 
-        private void AddInterface(IAtomicObject obj)
+        private void AddInterface(IObject obj)
         {
-            obj.AddReference(CommonAPI.GameObject, this.gameObject);
+            obj.AddValue(CommonAPI.GameObject, this.gameObject);
             obj.AddTransform(this.transform);
             obj.AddRigidbody2D(this.GetComponent<Rigidbody2D>());
             obj.AddMoveComponent(this.moveComponent);
             obj.AddJumpComponent(this.jumpComponent);
         }
 
-        private void AddBehaviour(IAtomicObject obj)
+        private void AddBehaviour(IObject obj)
         {
             obj.SubcribeOnFixedUpdate((_, deltaTime) => Debug.Log($"TICK {deltaTime}"));
-            obj.AddBehaviour(new FlipMechanicsRx(obj));
-            obj.AddBehaviour(this.moveComponent);
+            obj.AddLogic(new FlipMechanicsRx(obj));
+            obj.AddLogic(this.moveComponent);
         }
     }
 }

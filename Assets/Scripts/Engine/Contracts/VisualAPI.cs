@@ -20,33 +20,33 @@ namespace GameEngine
 
         ///Extensions
         [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Animator GetAnimator(this IAtomicObject obj) => obj.GetReference<Animator>(Animator);
+        public static Animator GetAnimator(this IObject obj) => obj.GetValue<Animator>(Animator);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetAnimator(this IAtomicObject obj, out Animator result) => obj.TryGetReference(Animator, out result);
+        public static bool TryGetAnimator(this IObject obj, out Animator result) => obj.TryGet(Animator, out result);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddAnimator(this IAtomicObject obj, Animator reference) => obj.AddReference(Animator, reference);
+        public static bool AddAnimator(this IObject obj, Animator reference) => obj.Put(Animator, reference);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool DelAnimator(this IAtomicObject obj) => obj.DelReference(Animator);
+        public static bool DelAnimator(this IObject obj) => obj.Del(Animator);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetAnimator(this IAtomicObject obj, Animator reference) => obj.SetReference(Animator, reference);
+        public static void SetAnimator(this IObject obj, Animator reference) => obj.Set(Animator, reference);
 
         [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static SpriteRenderer GetSpriteRenderer(this IAtomicObject obj) => obj.GetReference<SpriteRenderer>(SpriteRenderer);
+        public static SpriteRenderer GetSpriteRenderer(this IObject obj) => obj.GetValue<SpriteRenderer>(SpriteRenderer);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetSpriteRenderer(this IAtomicObject obj, out SpriteRenderer result) => obj.TryGetReference(SpriteRenderer, out result);
+        public static bool TryGetSpriteRenderer(this IObject obj, out SpriteRenderer result) => obj.TryGet(SpriteRenderer, out result);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddSpriteRenderer(this IAtomicObject obj, SpriteRenderer reference) => obj.AddReference(SpriteRenderer, reference);
+        public static bool AddSpriteRenderer(this IObject obj, SpriteRenderer reference) => obj.Put(SpriteRenderer, reference);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool DelSpriteRenderer(this IAtomicObject obj) => obj.DelReference(SpriteRenderer);
+        public static bool DelSpriteRenderer(this IObject obj) => obj.Del(SpriteRenderer);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetSpriteRenderer(this IAtomicObject obj, SpriteRenderer reference) => obj.SetReference(SpriteRenderer, reference);
+        public static void SetSpriteRenderer(this IObject obj, SpriteRenderer reference) => obj.Set(SpriteRenderer, reference);
     }
 }

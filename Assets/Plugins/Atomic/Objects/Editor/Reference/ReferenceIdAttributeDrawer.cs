@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Atomic.Objects
 {
     [UsedImplicitly]
-    public sealed class ReferenceIdAttributeDrawer : OdinAttributeDrawer<ReferenceIdAttribute, int>
+    public sealed class ReferenceIdAttributeDrawer : OdinAttributeDrawer<ValueIdAttribute, int>
     {
         protected override void DrawPropertyLayout(GUIContent label)
         {

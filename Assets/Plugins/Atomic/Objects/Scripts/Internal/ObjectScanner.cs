@@ -7,8 +7,8 @@ namespace Atomic.Objects
     internal static class ObjectScanner
     {
         private static readonly Dictionary<Type, IEnumerable<int>> scannedTypes = new();
-        private static readonly Dictionary<Type, IEnumerable<ReferenceInfo>> scannedReferences = new();
-        private static readonly Dictionary<Type, IEnumerable<BehaviourInfo>> scannedBehaviours = new();
+        private static readonly Dictionary<Type, IEnumerable<ValueInfo>> scannedReferences = new();
+        private static readonly Dictionary<Type, IEnumerable<LogicInfo>> scannedBehaviours = new();
 
         internal static IEnumerable<int> ScanTypes(Type target)
         {
@@ -22,7 +22,7 @@ namespace Atomic.Objects
             return types;
         }
 
-        internal static IEnumerable<ReferenceInfo> ScanReferences(Type target)
+        internal static IEnumerable<ValueInfo> ScanReferences(Type target)
         {
             if (scannedReferences.TryGetValue(target, out var values))
             {
@@ -40,15 +40,15 @@ namespace Atomic.Objects
             return attribute != null ? attribute.typeIds : Array.Empty<int>();
         }
 
-        private static IEnumerable<ReferenceInfo> ScanReferencesInternal(Type target)
+        private static IEnumerable<ValueInfo> ScanReferencesInternal(Type target)
         {
-            List<ReferenceInfo> references = new List<ReferenceInfo>();
+            List<ValueInfo> references = new List<ValueInfo>();
             FieldInfo[] fields = ReflectionUtils.GetFields(target);
 
             for (int i = 0, count = fields.Length; i < count; i++)
             {
                 FieldInfo field = fields[i];
-                ReferenceAttribute attribute = field.GetCustomAttribute<ReferenceAttribute>();
+                ValueAttribute attribute = field.GetCustomAttribute<ValueAttribute>();
 
                 if (attribute == null)
                 {
@@ -58,7 +58,7 @@ namespace Atomic.Objects
                 int index = attribute.id;
                 if (index >= 0)
                 {
-                    references.Add(new ReferenceInfo(index, field.GetValue));
+                    references.Add(new ValueInfo(index, field.GetValue));
                 }
             }
 
@@ -67,13 +67,13 @@ namespace Atomic.Objects
             {
                 PropertyInfo property = properties[i];
 
-                ReferenceAttribute referenceAttribute = property.GetCustomAttribute<ReferenceAttribute>();
+                ValueAttribute referenceAttribute = property.GetCustomAttribute<ValueAttribute>();
                 if (referenceAttribute != null)
                 {
                     int index = referenceAttribute.id;
                     if (index >= 0)
                     {
-                        references.Add(new ReferenceInfo(index, property.GetValue));
+                        references.Add(new ValueInfo(index, property.GetValue));
                     }
                 }
             }
@@ -81,7 +81,7 @@ namespace Atomic.Objects
             return references;
         }
 
-        public static IEnumerable<BehaviourInfo> ScanBehaviours(Type target)
+        public static IEnumerable<LogicInfo> ScanBehaviours(Type target)
         {
             if (scannedBehaviours.TryGetValue(target, out var behaviours))
             {
@@ -93,18 +93,18 @@ namespace Atomic.Objects
             return behaviours;
         }
 
-        private static IEnumerable<BehaviourInfo> ScanBehavioursInternal(Type target)
+        private static IEnumerable<LogicInfo> ScanBehavioursInternal(Type target)
         {
-            List<BehaviourInfo> behaviours = new List<BehaviourInfo>();
+            List<LogicInfo> behaviours = new List<LogicInfo>();
             FieldInfo[] fields = ReflectionUtils.GetFields(target);
 
             for (int i = 0, count = fields.Length; i < count; i++)
             {
                 FieldInfo field = fields[i];
-                if (field.IsDefined(typeof(BehaviourAttribute)) && 
-                    typeof(IAtomicObject.IBehaviour).IsAssignableFrom(field.FieldType))
+                if (field.IsDefined(typeof(LogicAttribute)) && 
+                    typeof(ILogic).IsAssignableFrom(field.FieldType))
                 {
-                    behaviours.Add(new BehaviourInfo(field.GetValue));
+                    behaviours.Add(new LogicInfo(field.GetValue));
                     
                 }
             }

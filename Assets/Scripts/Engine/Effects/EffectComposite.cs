@@ -20,7 +20,7 @@ namespace Sample
             this.callback.Invoke(this);
         }
 
-        public void Apply(IAtomicObject obj)
+        public void Apply(IObject obj)
         {
             foreach (var effect in this.scriptableEffects)
             {
@@ -33,7 +33,7 @@ namespace Sample
             }
         }
 
-        public void Discard(IAtomicObject obj)
+        public void Discard(IObject obj)
         {
             foreach (var effect in this.scriptableEffects)
             {

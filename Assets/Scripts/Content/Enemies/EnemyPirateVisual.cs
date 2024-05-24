@@ -6,24 +6,24 @@ using UnityEngine;
 namespace Sample
 {
     [Serializable]
-    public sealed class EnemyPirateVisual : MonoBehaviour, IAtomicObject.IComposable
+    public sealed class EnemyPirateVisual : MonoBehaviour, IObject.IComposable
     {
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
 
-        [Reference(VisualAPI.Animator)]
+        [Value(VisualAPI.Animator)]
         public Animator animator;
 
-        [Reference(VisualAPI.SpriteRenderer)]
+        [Value(VisualAPI.SpriteRenderer)]
         public SpriteRenderer spriteRenderer;
 
         [SerializeField]
         private EnemyPirate pirate;
 
-        [Behaviour]
+        [Logic]
         [SerializeField]
         private MoveAnimMechanics moveMechanics;
 
-        public void Compose(IAtomicObject obj)
+        public void Compose(IObject obj)
         {
             this.moveMechanics.Compose(this.animator, pirate.moveComponent.IsMoving, IsMoving);
         }

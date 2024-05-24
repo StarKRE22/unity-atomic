@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Sample
 {
-    public sealed class MoveAspect : ScriptableObject, IAtomicObject.IComposable, IAtomicObject.IDisposable
+    public sealed class MoveAspect : ScriptableObject, IObject.IAspect
     {
         [SerializeField]
         public float baseSpeed;
         
-        public void Compose(IAtomicObject target)
+        public void Compose(IObject target)
         {
             Rigidbody2D rigidbody2D = target.GetRigidbody2D();
             if (rigidbody2D != null)
@@ -18,7 +18,7 @@ namespace Sample
             }
         }
 
-        public void Dispose(IAtomicObject target)
+        public void Dispose(IObject target)
         {
             target.DelElement(CommonAPI.MoveComponent);
         }
