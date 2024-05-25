@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Unity.Properties;
 using UnityEditor;
 
 namespace Atomic.Objects
@@ -150,6 +149,28 @@ namespace Atomic.Objects
             writer.WriteLine("}");
         }
 
+        private static void GenerateObjectExtensions(StreamWriter writer, string itemName)
+        {
+            writer.WriteLine("        [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            writer.WriteLine($"        public static object Get{itemName}(this IAtomicObject obj) => obj.GetValue({itemName});");
+            writer.WriteLine();
+            
+            writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            writer.WriteLine($"        public static bool TryGet{itemName}(this IAtomicObject obj, out object value) => obj.TryGetValue({itemName}, out value);");
+            writer.WriteLine();
+
+            writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            writer.WriteLine($"        public static bool Add{itemName}(this IAtomicObject obj, object value) => obj.AddValue({itemName}, value);");
+            writer.WriteLine();
+
+            writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            writer.WriteLine($"        public static bool Del{itemName}(this IAtomicObject obj) => obj.DelValue({itemName});");   
+            writer.WriteLine();
+
+            writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            writer.WriteLine($"        public static void Set{itemName}(this IAtomicObject obj, object value) => obj.SetValue({itemName}, value);");
+        }
+
         private static void GenerateTypedExtensions(StreamWriter writer, string itemType, string itemName)
         {
             writer.WriteLine("        [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]");
@@ -196,28 +217,6 @@ namespace Atomic.Objects
                 writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
                 writer.WriteLine($"        public static void Set{itemName}(this IAtomicObject obj, {itemType} value) => obj.SetValue({itemName}, value);");
             }
-        }
-
-        private static void GenerateObjectExtensions(StreamWriter writer, string itemName)
-        {
-            writer.WriteLine("        [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]");
-            writer.WriteLine($"        public static object Get{itemName}(this IAtomicObject obj) => obj.GetValue({itemName});");
-            writer.WriteLine();
-            
-            writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-            writer.WriteLine($"        public static bool TryGet{itemName}(this IAtomicObject obj, out object value) => obj.TryGetValue({itemName}, out value);");
-            writer.WriteLine();
-
-            writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-            writer.WriteLine($"        public static bool Add{itemName}(this IAtomicObject obj, object value) => obj.AddValue({itemName}, value);");
-            writer.WriteLine();
-
-            writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-            writer.WriteLine($"        public static bool Del{itemName}(this IAtomicObject obj) => obj.DelValue({itemName});");   
-            writer.WriteLine();
-
-            writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-            writer.WriteLine($"        public static void Set{itemName}(this IAtomicObject obj, object value) => obj.SetValue({itemName}, value);");
         }
 
         private static bool IsLogicType(string itemType)
