@@ -7,19 +7,19 @@ namespace Atomic.Objects
     //TODO: REFRESH SETTINGS
     internal static class ReferenceAPIGenerator
     {
-        internal static void Generate(ReferenceCatalog referenceCatalog)
+        internal static void Generate(ValueCatalog valueCatalog)
         {
-            string suffix = referenceCatalog.suffix;
-            string @namespace = referenceCatalog.@namespace;
-            string directoryPath = referenceCatalog.directoryPath;
-            string[] imports = referenceCatalog.imports;
+            string suffix = valueCatalog.suffix;
+            string @namespace = valueCatalog.@namespace;
+            string directoryPath = valueCatalog.directoryPath;
+            string[] imports = valueCatalog.imports;
 
             if (!Directory.Exists(directoryPath))
             {
                 Directory.CreateDirectory(directoryPath);
             }
             
-            foreach (ReferenceCatalog.Category category in referenceCatalog.categories)
+            foreach (ValueCatalog.Category category in valueCatalog.categories)
             {
                 GenerateCategory(category, @namespace, suffix, directoryPath, imports);
             }
@@ -29,7 +29,7 @@ namespace Atomic.Objects
         }
 
         private static void GenerateCategory(
-            ReferenceCatalog.Category category,
+            ValueCatalog.Category category,
             string @namespace,
             string suffix,
             string directoryPath,
@@ -68,7 +68,7 @@ namespace Atomic.Objects
             var items = category.indexes;
             for (int i = 0, count = items.Count; i < count; i++)
             {
-                ReferenceCatalog.Item item = items[i];
+                ValueCatalog.Item item = items[i];
 
                 string itemType = string.IsNullOrEmpty(item.type) ? "" : $"// {item.type}";
                 writer.WriteLine($"        public const int {item.name} = {item.id}; {itemType}");
@@ -92,7 +92,7 @@ namespace Atomic.Objects
             writer.WriteLine("        ///Extensions");
             for (int i = 0, count = items.Count; i < count; i++)
             {
-                ReferenceCatalog.Item item = items[i];
+                ValueCatalog.Item item = items[i];
                 if (string.IsNullOrEmpty(item.type))
                 {
                     continue;

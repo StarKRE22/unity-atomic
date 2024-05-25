@@ -8,7 +8,7 @@ namespace Sample
 {
     [Serializable]
     public sealed class MoveComponent : ISerializationCallbackReceiver, 
-        IAtomicFixedUpdate, 
+        IFixedUpdate, 
         IDisposable
     {
         public IAtomicValue<bool> IsMoving => this.isMoving;

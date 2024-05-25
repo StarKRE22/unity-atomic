@@ -5,7 +5,7 @@ using GameObject = UnityEngine.GameObject;
 
 namespace Sample
 {
-    public sealed class EnemyJumper : MonoBehaviour, IAtomicFixedUpdate
+    public sealed class EnemyJumper : MonoBehaviour, IFixedUpdate
     {
         [Value(CommonAPI.Rigidbody2D)]
         public Rigidbody2D Rigidbody => this.GetComponent<Rigidbody2D>();

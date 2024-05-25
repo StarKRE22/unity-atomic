@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -96,14 +97,14 @@ namespace Atomic.Objects
 
         #region Logic
 
-        private List<IAtomicLogic> logics;
+        private List<ILogic> logics;
 
         private List<IUpdate> updates;
-        private List<IAtomicFixedUpdate> fixedUpdates;
+        private List<IFixedUpdate> fixedUpdates;
         private List<ILateUpdate> lateUpdates;
 
         private List<IUpdate> _updateCache;
-        private List<IAtomicFixedUpdate> _fixedUpdateCache;
+        private List<IFixedUpdate> _fixedUpdateCache;
         private List<ILateUpdate> _lateUpdateCache;
 
 #if UNITY_EDITOR
@@ -116,7 +117,7 @@ namespace Atomic.Objects
             get { return _enabled; }
         }
 
-        public bool AddLogic(IAtomicLogic logic)
+        public bool AddLogic(ILogic logic)
         {
             if (logic == null)
             {
@@ -132,7 +133,12 @@ namespace Atomic.Objects
 
             if (_enabled)
             {
-                if (logic is IAtomicEnable enable)
+                if (logic is IAwake awake)
+                {
+                    awake.OnAwake(this);
+                }
+                
+                if (logic is IEnable enable)
                 {
                     enable.Enable(this);
                 }
@@ -143,7 +149,7 @@ namespace Atomic.Objects
                 this.updates.Add(update);
             }
 
-            if (logic is IAtomicFixedUpdate fixedUpdate)
+            if (logic is IFixedUpdate fixedUpdate)
             {
                 this.fixedUpdates.Add(fixedUpdate);
             }
@@ -162,12 +168,12 @@ namespace Atomic.Objects
             return true;
         }
 
-        public bool AddLogic<T>() where T : IAtomicLogic, new()
+        public bool AddLogic<T>() where T : ILogic, new()
         {
             return this.AddLogic(new T());
         }
 
-        public bool DelLogic(IAtomicLogic logic)
+        public bool DelLogic(ILogic logic)
         {
             if (logic == null)
             {
@@ -184,7 +190,7 @@ namespace Atomic.Objects
                 this.updates.Remove(tickable);
             }
 
-            if (logic is IAtomicFixedUpdate fixedTickable)
+            if (logic is IFixedUpdate fixedTickable)
             {
                 this.fixedUpdates.Remove(fixedTickable);
             }
@@ -202,16 +208,21 @@ namespace Atomic.Objects
 #endif
             if (_enabled)
             {
-                if (logic is IAtomicDisable disable)
+                if (logic is IDisable disable)
                 {
                     disable.Disable(this);
+                }
+
+                if (logic is IDisposable disposable)
+                {
+                    disposable.Dispose();
                 }
             }
 
             return true;
         }
 
-        public bool DelLogic<T>() where T : IAtomicLogic
+        public bool DelLogic<T>() where T : ILogic
         {
             for (int i = 0, count = this.logics.Count; i < count; i++)
             {
@@ -224,6 +235,19 @@ namespace Atomic.Objects
             return false;
         }
 
+        [ContextMenu("Awake")]
+        public void OnAwake()
+        {
+            for (int i = 0, count = this.logics.Count; i < count; i++)
+            {
+                var behaviour = this.logics[i];
+                if (behaviour is IAwake awake)
+                {
+                    awake.OnAwake(this);
+                }
+            }
+        }
+
         [ContextMenu("OnEnable")]
         public void Enable()
         {
@@ -232,7 +256,7 @@ namespace Atomic.Objects
             for (int i = 0, count = this.logics.Count; i < count; i++)
             {
                 var behaviour = this.logics[i];
-                if (behaviour is IAtomicEnable enable)
+                if (behaviour is IEnable enable)
                 {
                     enable.Enable(this);
                 }
@@ -245,7 +269,7 @@ namespace Atomic.Objects
             for (int i = 0, count = this.logics.Count; i < count; i++)
             {
                 var behaviour = this.logics[i];
-                if (behaviour is IAtomicDisable disable)
+                if (behaviour is IDisable disable)
                 {
                     disable.Disable(this);
                 }
@@ -283,7 +307,7 @@ namespace Atomic.Objects
 
             for (int i = 0, count = _fixedUpdateCache.Count; i < count; i++)
             {
-                IAtomicFixedUpdate atomicFixedUpdate = _fixedUpdateCache[i];
+                IFixedUpdate atomicFixedUpdate = _fixedUpdateCache[i];
                 atomicFixedUpdate.OnFixedUpdate(this, deltaTime);
             }
         }
@@ -394,9 +418,8 @@ namespace Atomic.Objects
                 }
             }
         }
-
-
-#if UNITY_EDITOR
+        
+        [Conditional("UNITY_EDITOR")]
         public void OnGizmosDraw()
         {
             foreach (IDrawGizmos gizmos in this.drawGizmoses)
@@ -404,8 +427,7 @@ namespace Atomic.Objects
                 gizmos.OnGizmosDraw(this);
             }
         }
-#endif
-
+        
         #endregion
 
         #region Setup
@@ -434,17 +456,17 @@ namespace Atomic.Objects
         [PropertyOrder(90)]
         [HideInPlayMode]
         [SerializeField]
-        private List<MonoSection> monoSections;
+        private List<MonoComposer> monoComposers;
 
         [PropertyOrder(90)]
         [HideInPlayMode]
         [SerializeField]
-        private List<ScriptableSection> scriptableSections;
+        private List<ScriptableComposer> scriptableComposers;
 
         [PropertyOrder(90)]
         [HideInPlayMode]
         [SerializeField]
-        private List<MonoBehaviour> customSections; 
+        private List<MonoBehaviour> customComponents; 
 
         [FoldoutGroup("Optimization")]
         [PropertyOrder(95)]
@@ -456,7 +478,7 @@ namespace Atomic.Objects
         [PropertyOrder(95)]
         [HideInPlayMode]
         [SerializeField]
-        private bool inflateSections = true;
+        private bool inflateComponents = true;
 
         [Space]
         [FoldoutGroup("Optimization")]
@@ -565,13 +587,13 @@ namespace Atomic.Objects
 
             if (this.hasLogic)
             {
-                this.logics = new List<IAtomicLogic>();
+                this.logics = new List<ILogic>();
                 this.updates = new List<IUpdate>();
-                this.fixedUpdates = new List<IAtomicFixedUpdate>();
+                this.fixedUpdates = new List<IFixedUpdate>();
                 this.lateUpdates = new List<ILateUpdate>();
 
                 _updateCache = new List<IUpdate>();
-                _fixedUpdateCache = new List<IAtomicFixedUpdate>();
+                _fixedUpdateCache = new List<IFixedUpdate>();
                 _lateUpdateCache = new List<ILateUpdate>();
 
 #if UNITY_EDITOR
@@ -579,11 +601,11 @@ namespace Atomic.Objects
 #endif
             }
 
-            if (this.monoSections is {Count: > 0})
+            if (this.monoComposers is {Count: > 0})
             {
-                for (int i = 0, count = this.monoSections.Count; i < count; i++)
+                for (int i = 0, count = this.monoComposers.Count; i < count; i++)
                 {
-                    MonoSection source = this.monoSections[i];
+                    MonoComposer source = this.monoComposers[i];
                     if (source != null)
                     {
                         source.Compose(this);
@@ -591,11 +613,11 @@ namespace Atomic.Objects
                 }
             }
 
-            if (this.scriptableSections is {Count: > 0})
+            if (this.scriptableComposers is {Count: > 0})
             {
-                for (int i = 0, count = this.scriptableSections.Count; i < count; i++)
+                for (int i = 0, count = this.scriptableComposers.Count; i < count; i++)
                 {
-                    ScriptableSection source = this.scriptableSections[i];
+                    ScriptableComposer source = this.scriptableComposers[i];
                     if (source != null)
                     {
                         source.Compose(this);
@@ -603,27 +625,28 @@ namespace Atomic.Objects
                 }
             }
             
-            if (this.customSections is {Count: > 0})
+            if (this.customComponents is {Count: > 0})
             {
-                for (int i = 0, count = this.customSections.Count; i < count; i++)
+                for (int i = 0, count = this.customComponents.Count; i < count; i++)
                 {
-                    MonoBehaviour source = this.customSections[i];
+                    MonoBehaviour source = this.customComponents[i];
                     if (source == null)
                     {
                         continue;
                     }
 
-                    if (source is IAtomicAspect composable)
-                    {
-                        composable.Compose(this);
-                    }
+                    //TODO: ???
+                    // if (source is IAspect composable)
+                    // {
+                    //     composable.Compose(this);
+                    // }
 
-                    if (this.inflateSections)
+                    if (this.inflateComponents)
                     {
                         ObjectInflater.InflateFrom(this, source);
                     }
 
-                    if (source is IAtomicLogic behaviour)
+                    if (source is ILogic behaviour)
                     {
                         this.AddLogic(behaviour);
                     }
@@ -634,46 +657,39 @@ namespace Atomic.Objects
         [ContextMenu("Dispose")]
         public void Dispose()
         {
-            if (this.monoSections is {Count: > 0})
+            for (int i = 0, count = this.logics.Count; i < count; i++)
             {
-                for (int i = 0, count = this.monoSections.Count; i < count; i++)
+                var behaviour = this.logics[i];
+                if (behaviour is IDisposable disposable)
                 {
-                    MonoSection source = this.monoSections[i];
-                    if (source != null)
-                    {
-                        source.Dispose(this);
-                    }
+                    disposable.Dispose();
                 }
             }
             
-            if (this.scriptableSections is {Count: > 0})
-            {
-                for (int i = 0, count = this.scriptableSections.Count; i < count; i++)
-                {
-                    ScriptableSection source = this.scriptableSections[i];
-                    if (source != null)
-                    {
-                        source.Dispose(this);
-                    }
-                }
-            }
-            
-            if (this.customSections is {Count: > 0})
-            {
-                for (int i = 0, count = this.customSections.Count; i < count; i++)
-                {
-                    MonoBehaviour source = this.customSections[i];
-                    if (source is IAtomicLogic behaviour)
-                    {
-                        this.DelLogic(behaviour);
-                    }
-
-                    if (source is IAtomicAspect disposable)
-                    {
-                        disposable.Dispose(this);
-                    }
-                }
-            }
+            //TODO ???
+            // if (this.monoSections is {Count: > 0})
+            // {
+            //     for (int i = 0, count = this.monoSections.Count; i < count; i++)
+            //     {
+            //         MonoSection source = this.monoSections[i];
+            //         if (source != null)
+            //         {
+            //             source.Discard(this);
+            //         }
+            //     }
+            // }
+            //
+            // if (this.scriptableSections is {Count: > 0})
+            // {
+            //     for (int i = 0, count = this.scriptableSections.Count; i < count; i++)
+            //     {
+            //         ScriptableSection source = this.scriptableSections[i];
+            //         if (source != null)
+            //         {
+            //             source.Discard(this);
+            //         }
+            //     }
+            // }
         }
 
         #endregion
@@ -815,8 +831,8 @@ namespace Atomic.Objects
             this.composeOnAwake = true;
             this.disposeOnDestroy = true;
 
-            this.monoSections = new List<MonoSection>(this.GetComponentsInChildren<MonoSection>());
-            this.scriptableSections = new List<ScriptableSection>();
+            this.monoComposers = new List<MonoComposer>(this.GetComponentsInChildren<MonoComposer>());
+            this.scriptableComposers = new List<ScriptableComposer>();
         }
 
         #endregion
@@ -1044,12 +1060,11 @@ namespace Atomic.Objects
             }
         }
 
-        
         private void OnRemoveBehaviourByValue(BehaviourDebug behaviourDebug)
         {
             for (int i = 0, count = this.logics.Count; i < count; i++)
             {
-                IAtomicLogic logic = this.logics[i];
+                ILogic logic = this.logics[i];
                 if (logic.GetType().Name == behaviourDebug.value)
                 {
                     this.DelLogic(logic);
@@ -1057,8 +1072,6 @@ namespace Atomic.Objects
                 }
             }
         }
-
-    
 
         private void OnRemoveBehaviourByIndex(int index)
         {
@@ -1069,7 +1082,7 @@ namespace Atomic.Objects
         [FoldoutGroup("Debug")]
         [Button("Add Element")]
         [ShowInInspector, PropertyOrder(100), HideInEditorMode]
-        private void OnAddElement(IAtomicAspect aspect)
+        private void OnAddElement(IAspect aspect)
         {
             aspect.Compose(this);
         }
@@ -1125,6 +1138,9 @@ namespace Atomic.Objects
         #endregion
     }
 }
+
+
+
 
 
 // [Button("Add Tag")]

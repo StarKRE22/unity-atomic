@@ -26,17 +26,17 @@ namespace Atomic.Objects
         public static void CreateReferenceCatalog()
         {
             const string path = "Assets/Plugins/Atomic/Objects/Editor/ReferenceCatalog.asset";
-            var scriptableObject = ScriptableObject.CreateInstance<ReferenceCatalog>();
+            var scriptableObject = ScriptableObject.CreateInstance<ValueCatalog>();
             
             AssetDatabase.CreateAsset(scriptableObject, path);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
         
-        public static ReferenceCatalog GetReferenceCatalog()
+        public static ValueCatalog GetReferenceCatalog()
         {
             const string path = "Assets/Plugins/Atomic/Objects/Editor/ReferenceCatalog.asset";
-            ReferenceCatalog scriptableObject = AssetDatabase.LoadAssetAtPath<ReferenceCatalog>(path);
+            ValueCatalog scriptableObject = AssetDatabase.LoadAssetAtPath<ValueCatalog>(path);
             return scriptableObject;
         }
     }

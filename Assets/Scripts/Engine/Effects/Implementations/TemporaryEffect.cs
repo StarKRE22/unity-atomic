@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Sample
 {
     [Serializable]
-    public class TemporaryEffect : ICompletableEffect, IAtomicObject.IUpdate
+    public class TemporaryEffect : ICompletableEffect, IUpdate
     {
         [SerializeField]
         private AtomicCountdown countdown;

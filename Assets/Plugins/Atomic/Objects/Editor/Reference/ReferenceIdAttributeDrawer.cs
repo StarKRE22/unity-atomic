@@ -10,7 +10,7 @@ namespace Atomic.Objects
     {
         protected override void DrawPropertyLayout(GUIContent label)
         {
-            ReferenceCatalog catalog = CatalogTools.GetReferenceCatalog();
+            ValueCatalog catalog = CatalogTools.GetReferenceCatalog();
 
             if (catalog == null)
             {

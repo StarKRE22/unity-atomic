@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Atomic.Objects
 {
     [Serializable]
-    public sealed class AtomicEnable : IAtomicEnable
+    public sealed class AtomicEnable : IEnable
     {
         private Action<IAtomicObject> action;
 
@@ -29,7 +29,7 @@ namespace Atomic.Objects
     }
 
     [Serializable]
-    public sealed class AtomicDisable : IAtomicDisable
+    public sealed class AtomicDisable : IDisable
     {
         private Action<IAtomicObject> action;
 
@@ -79,15 +79,15 @@ namespace Atomic.Objects
     }
 
     [Serializable]
-    public sealed class AtomicFixedUpdateLogic : IAtomicFixedUpdate
+    public sealed class AtomicFixedUpdate : IFixedUpdate
     {
         private Action<IAtomicObject, float> action;
 
-        public AtomicFixedUpdateLogic()
+        public AtomicFixedUpdate()
         {
         }
 
-        public AtomicFixedUpdateLogic(Action<IAtomicObject, float> action)
+        public AtomicFixedUpdate(Action<IAtomicObject, float> action)
         {
             this.action = action;
         }
@@ -104,15 +104,15 @@ namespace Atomic.Objects
     }
 
     [Serializable]
-    public sealed class LateUpdateLogic : ILateUpdate
+    public sealed class AtomicLateUpdate : ILateUpdate
     {
         private Action<IAtomicObject, float> action;
 
-        public LateUpdateLogic()
+        public AtomicLateUpdate()
         {
         }
 
-        public LateUpdateLogic(Action<IAtomicObject, float> action)
+        public AtomicLateUpdate(Action<IAtomicObject, float> action)
         {
             this.action = action;
         }
@@ -128,17 +128,16 @@ namespace Atomic.Objects
         }
     }
 
-#if UNITY_EDITOR
     [Serializable]
-    public sealed class DrawGizmosLogic : IDrawGizmos
+    public sealed class AtomicDrawGizmos : IDrawGizmos
     {
         private Action<IAtomicObject> action;
 
-        public DrawGizmosLogic()
+        public AtomicDrawGizmos()
         {
         }
 
-        public DrawGizmosLogic(Action<IAtomicObject> action)
+        public AtomicDrawGizmos(Action<IAtomicObject> action)
         {
             this.action = action;
         }
@@ -153,18 +152,17 @@ namespace Atomic.Objects
             this.action?.Invoke(obj);
         }
     }
-#endif
     
     [Serializable]
-    public sealed class TriggerEnterLogic : ITriggerEnter
+    public sealed class AtomicTriggerEnter : ITriggerEnter
     {
         private Action<IAtomicObject, Collider> action;
 
-        public TriggerEnterLogic()
+        public AtomicTriggerEnter()
         {
         }
 
-        public TriggerEnterLogic(Action<IAtomicObject, Collider> action)
+        public AtomicTriggerEnter(Action<IAtomicObject, Collider> action)
         {
             this.action = action;
         }
@@ -174,22 +172,22 @@ namespace Atomic.Objects
             this.action = action;
         }
 
-        public void TriggerEnter(IAtomicObject obj, Collider collider)
+        public void TriggerEnter(IAtomicObject obj, Collider trigger)
         {
-            this.action?.Invoke(obj, collider);
+            this.action?.Invoke(obj, trigger);
         }
     }
     
     [Serializable]
-    public sealed class TriggerExitLogic : ITriggerExit
+    public sealed class AtomicTriggerExit : ITriggerExit
     {
         private Action<IAtomicObject, Collider> action;
 
-        public TriggerExitLogic()
+        public AtomicTriggerExit()
         {
         }
 
-        public TriggerExitLogic(Action<IAtomicObject, Collider> action)
+        public AtomicTriggerExit(Action<IAtomicObject, Collider> action)
         {
             this.action = action;
         }
@@ -199,22 +197,22 @@ namespace Atomic.Objects
             this.action = action;
         }
 
-        public void TriggerExit(IAtomicObject obj, Collider collider)
+        public void TriggerExit(IAtomicObject obj, Collider trigger)
         {
-            this.action?.Invoke(obj, collider);
+            this.action?.Invoke(obj, trigger);
         }
     }
     
     [Serializable]
-    public sealed class CollisionLogic : ICollisionEnter
+    public sealed class AtomicCollisionEnter : ICollisionEnter
     {
         private Action<IAtomicObject, Collision> action;
 
-        public CollisionLogic()
+        public AtomicCollisionEnter()
         {
         }
 
-        public CollisionLogic(Action<IAtomicObject, Collision> action)
+        public AtomicCollisionEnter(Action<IAtomicObject, Collision> action)
         {
             this.action = action;
         }
@@ -224,22 +222,22 @@ namespace Atomic.Objects
             this.action = action;
         }
 
-        public void CollisionEnter(IAtomicObject obj, Collision collider)
+        public void CollisionEnter(IAtomicObject obj, Collision collision)
         {
-            this.action?.Invoke(obj, collider);
+            this.action?.Invoke(obj, collision);
         }
     }
     
     [Serializable]
-    public sealed class CollisionExitLogic : ICollisionExit
+    public sealed class AtomicCollisionExit : ICollisionExit
     {
         private Action<IAtomicObject, Collision> action;
 
-        public CollisionExitLogic()
+        public AtomicCollisionExit()
         {
         }
 
-        public CollisionExitLogic(Action<IAtomicObject, Collision> action)
+        public AtomicCollisionExit(Action<IAtomicObject, Collision> action)
         {
             this.action = action;
         }
@@ -249,22 +247,22 @@ namespace Atomic.Objects
             this.action = action;
         }
         
-        public void CollisionExit(IAtomicObject obj, Collision collider)
+        public void CollisionExit(IAtomicObject obj, Collision collision)
         {
-            this.action?.Invoke(obj, collider);
+            this.action?.Invoke(obj, collision);
         }
     }
     
     [Serializable]
-    public sealed class TriggerEnter2DLogic : ITriggerEnter2D
+    public sealed class AtomicTriggerEnter2D : ITriggerEnter2D
     {
         private Action<IAtomicObject, Collider2D> action;
 
-        public TriggerEnter2DLogic()
+        public AtomicTriggerEnter2D()
         {
         }
 
-        public TriggerEnter2DLogic(Action<IAtomicObject, Collider2D> action)
+        public AtomicTriggerEnter2D(Action<IAtomicObject, Collider2D> action)
         {
             this.action = action;
         }
@@ -274,22 +272,22 @@ namespace Atomic.Objects
             this.action = action;
         }
 
-        public void TriggerEnter2D(IAtomicObject obj, Collider2D collider)
+        public void TriggerEnter2D(IAtomicObject obj, Collider2D trigger)
         {
-            this.action?.Invoke(obj, collider);
+            this.action?.Invoke(obj, trigger);
         }
     }
     
     [Serializable]
-    public sealed class TriggerExit2DLogic : ITriggerExit2D
+    public sealed class AtomicTriggerExit2D : ITriggerExit2D
     {
         private Action<IAtomicObject, Collider2D> action;
 
-        public TriggerExit2DLogic()
+        public AtomicTriggerExit2D()
         {
         }
 
-        public TriggerExit2DLogic(Action<IAtomicObject, Collider2D> action)
+        public AtomicTriggerExit2D(Action<IAtomicObject, Collider2D> action)
         {
             this.action = action;
         }
@@ -299,22 +297,22 @@ namespace Atomic.Objects
             this.action = action;
         }
 
-        public void TriggerExit2D(IAtomicObject obj, Collider2D collider)
+        public void TriggerExit2D(IAtomicObject obj, Collider2D trigger)
         {
-            this.action?.Invoke(obj, collider);
+            this.action?.Invoke(obj, trigger);
         }
     }
     
     [Serializable]
-    public sealed class CollisionEnter2DLogic : ICollisionEnter2D
+    public sealed class AtomicCollisionEnter2D : ICollisionEnter2D
     {
         private Action<IAtomicObject, Collision2D> action;
 
-        public CollisionEnter2DLogic()
+        public AtomicCollisionEnter2D()
         {
         }
 
-        public CollisionEnter2DLogic(Action<IAtomicObject, Collision2D> action)
+        public AtomicCollisionEnter2D(Action<IAtomicObject, Collision2D> action)
         {
             this.action = action;
         }
@@ -324,22 +322,22 @@ namespace Atomic.Objects
             this.action = action;
         }
 
-        public void CollisionEnter2D(IAtomicObject obj, Collision2D collider)
+        public void CollisionEnter2D(IAtomicObject obj, Collision2D collision)
         {
-            this.action?.Invoke(obj, collider);
+            this.action?.Invoke(obj, collision);
         }
     }
     
     [Serializable]
-    public sealed class CollisionExit2DLogic : ICollisionExit2D
+    public sealed class AtomicCollisionExit2D : ICollisionExit2D
     {
         private Action<IAtomicObject, Collision2D> action;
 
-        public CollisionExit2DLogic()
+        public AtomicCollisionExit2D()
         {
         }
 
-        public CollisionExit2DLogic(Action<IAtomicObject, Collision2D> action)
+        public AtomicCollisionExit2D(Action<IAtomicObject, Collision2D> action)
         {
             this.action = action;
         }
@@ -349,13 +347,9 @@ namespace Atomic.Objects
             this.action = action;
         }
         
-        public void CollisionExit2D(IAtomicObject obj, Collision2D collider)
+        public void CollisionExit2D(IAtomicObject obj, Collision2D collision)
         {
-            this.action?.Invoke(obj, collider);
+            this.action?.Invoke(obj, collision);
         }
-    }
-    
-    public abstract class ScriptableLogic : ScriptableObject, IAtomicLogic
-    {
     }
 }

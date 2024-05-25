@@ -24,9 +24,9 @@ namespace Sample
             this.coinCollectEvent = coinCollectEvent;
         }
 
-        public void TriggerEnter2D(IAtomicObject obj, Collider2D collider)
+        public void TriggerEnter2D(IAtomicObject obj, Collider2D trigger)
         {
-            if (collider.TryGetComponent(out Coin coin))
+            if (trigger.TryGetComponent(out Coin coin))
             {
                 coin.PickUp();
                 this.coinCollectEvent.Invoke();

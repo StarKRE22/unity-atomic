@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Atomic.Objects
 {
     [Serializable, InlineProperty]
-    public sealed class TagAspect : IAtomicAspect
+    public sealed class TagAspect : IAspect
     {
         [TagId]
         [SerializeField]
@@ -25,7 +25,7 @@ namespace Atomic.Objects
     }
 
     [Serializable, InlineProperty]
-    public class ValueAspect<T> : IAtomicAspect
+    public class ValueAspect<T> : IAspect
     {
         [ValueId]
         [HorizontalGroup]
@@ -61,7 +61,7 @@ namespace Atomic.Objects
 
 
     [Serializable, InlineProperty]
-    public class LogicAspect<T> : IAtomicAspect where T : IAtomicLogic
+    public class LogicAspect<T> : IAspect where T : ILogic
     {
         [SerializeField]
         protected T value;
@@ -89,7 +89,7 @@ namespace Atomic.Objects
     }
 
     [Serializable]
-    public class ElementAspect<T> : ValueAspect<T> where T : IAtomicLogic
+    public class ElementAspect<T> : ValueAspect<T> where T : ILogic
     {
         public override void Compose(IAtomicObject obj)
         {

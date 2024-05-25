@@ -29,7 +29,7 @@ namespace Atomic.Objects
             }
 
             //Register references:
-            ValueInfo[] references = objectInfo.references;
+            ValueInfo[] references = objectInfo.values;
             for (int i = 0, count = references.Length; i < count; i++)
             {
                 ValueInfo valueInfo = references[i];
@@ -42,7 +42,7 @@ namespace Atomic.Objects
             for (int i = 0, count = behaviours.Length; i < count; i++)
             {
                 LogicInfo logicInfo = behaviours[i];
-                var behaviour = (IAtomicLogic) logicInfo.valueFunc(source);
+                var behaviour = (ILogic) logicInfo.valueFunc(source);
                 entity.AddLogic(behaviour);
             }
 

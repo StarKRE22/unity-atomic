@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Sample
 {
     [Serializable]
-    public sealed class FlipMechanicsDynamic : IAtomicObject.IFixedUpdate
+    public sealed class FlipMechanicsDynamic : IFixedUpdate
     {
         public void OnFixedUpdate(IAtomicObject obj, float deltaTime)
         {

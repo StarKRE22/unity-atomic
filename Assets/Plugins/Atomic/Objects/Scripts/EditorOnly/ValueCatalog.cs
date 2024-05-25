@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Atomic.Objects
 {
-    public sealed class ReferenceCatalog : ScriptableObject
+    public sealed class ValueCatalog : ScriptableObject
     {
         [SerializeField]
         public string @namespace = "Atomic.Objects";

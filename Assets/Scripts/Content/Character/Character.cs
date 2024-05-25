@@ -1,3 +1,4 @@
+using System;
 using Atomic.Elements;
 using Atomic.Objects;
 using GameEngine;
@@ -6,7 +7,7 @@ using UnityEngine;
 namespace Sample
 {
     [Tags(TagAPI.Character)]
-    public sealed class Character : MonoBehaviour, IAtomicAspect
+    public sealed class Character : MonoBehaviour, IAwake, IDisposable
     {
         #region Interface
 
@@ -58,7 +59,7 @@ namespace Sample
         private MoveComponent moveComponent;
 
         [SerializeField]
-        public JumpComponent jumpComponent;
+        internal JumpComponent jumpComponent;
 
         [Logic]
         [SerializeField]
@@ -72,9 +73,10 @@ namespace Sample
         private CollectCoinMechanics collectCoinMechanics;
 
         [Logic]
+        [SerializeField]
         private FlipMechanics flipMechanics;
-
-        public void Compose(IAtomicObject obj)
+        
+        public void OnAwake(IAtomicObject obj)
         {
             this.moveComponent.Enabled.Append(this.isAlive);
             this.jumpComponent.Enabled.AppendAll(this.isAlive, this.groundedComponent.isGrounded);
@@ -83,7 +85,7 @@ namespace Sample
             this.isGroundMoving.Compose(this.IsGroundMoving);
 
             this.collectCoinMechanics.Compose(this.collectCoinEvent);
-            this.flipMechanics = new FlipMechanics(this.moveComponent.CurrentDirection, this.transform);
+            this.flipMechanics.Compose(this.moveComponent.CurrentDirection, this.transform);
 
             Rigidbody2D rigidbody = this.GetComponent<Rigidbody2D>();
             this.verticalSpeed.Compose(() => rigidbody.velocity.y);
@@ -91,14 +93,15 @@ namespace Sample
             this.effectHolder.Compose(obj);
         }
         
-        public void Dispose(IAtomicObject obj)
+        public void Dispose()
         {
-            isAlive?.Dispose();
-            collectCoinEvent?.Dispose();
-            jumpComponent?.Dispose();
-            moveComponent?.Dispose();
+            this.isAlive?.Dispose();
+            this.collectCoinEvent?.Dispose();
+            this.moveComponent?.Dispose();
+            this.jumpComponent?.Dispose();
+            this.groundedComponent?.Dispose();
         }
-
+        
         private void Death()
         {
             this.isAlive.Value = false;

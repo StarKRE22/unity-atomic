@@ -5,7 +5,7 @@ using GameObject = UnityEngine.GameObject;
 
 namespace Sample
 {
-    public sealed class EnemyPirate : MonoBehaviour, IAtomicAspect
+    public sealed class EnemyPirate : MonoBehaviour, IAwake, ICollisionEnter2D
     {
         [Value(CommonAPI.Rigidbody2D)]
         public Rigidbody2D Rigidbody2D => this.GetComponent<Rigidbody2D>();
@@ -32,11 +32,17 @@ namespace Sample
         [Logic]
         private DiscardCharacterEffectsMechanics discardEffectsMechanics;
 
-        public void Compose(IAtomicObject obj)
+        public void OnAwake(IAtomicObject obj)
         {
             this.effectHolder.Compose(obj);
             this.killMechanics = new KillCharacterMechanics();
             this.discardEffectsMechanics = new DiscardCharacterEffectsMechanics();
+        }
+
+        public void CollisionEnter2D(IAtomicObject obj, Collision2D collision)
+        {
+            this.killMechanics.OnCollisionEnter2D(collision);
+            this.discardEffectsMechanics.OnCollisionEnter2D(collision);
         }
     }
 }

@@ -19,12 +19,12 @@ namespace Sample
 
         public void OnEnable()
         {
-            this.target.SubscribeOnEvent(CommonAPI.CollectCoinEvent, this.OnCoinCollected);
+            this.target.SubscribeOnAtomicEvent(CommonAPI.CollectCoinEvent, this.OnCoinCollected);
         }
 
         public void OnDisable()
         {
-            this.target.UnsubscribeFromEvent(CommonAPI.CollectCoinEvent, this.OnCoinCollected);
+            this.target.UnsubscribeFromAtomicEvent(CommonAPI.CollectCoinEvent, this.OnCoinCollected);
         }
 
         private void OnCoinCollected()

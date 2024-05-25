@@ -6,12 +6,18 @@ using UnityEngine;
 namespace Sample
 {
     [Serializable]
-    public sealed class FlipMechanics : IAtomicObject.IFixedUpdate
+    public sealed class FlipMechanics : IFixedUpdate
     {
-        private readonly IAtomicValue<float> moveDirection;
-        private readonly Transform transform;
+        private IAtomicValue<float> moveDirection;
+        private Transform transform;
         
         public FlipMechanics(IAtomicValue<float> moveDirection, Transform transform)
+        {
+            this.moveDirection = moveDirection;
+            this.transform = transform;
+        }
+        
+        public void Compose(IAtomicValue<float> moveDirection, Transform transform)
         {
             this.moveDirection = moveDirection;
             this.transform = transform;

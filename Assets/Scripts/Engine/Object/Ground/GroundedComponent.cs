@@ -7,7 +7,7 @@ using IDisposable = System.IDisposable;
 namespace Sample
 {
     [Serializable]
-    public sealed class GroundedComponent : IAtomicObject.IFixedUpdate, IDisposable, IAtomicObject.IDrawGizmos
+    public sealed class GroundedComponent : IFixedUpdate, IDisposable, IDrawGizmos
     {
         public Transform groundPoint;
         public AtomicVariable<bool> isGrounded;
@@ -26,7 +26,6 @@ namespace Sample
         }
 
 #if UNITY_EDITOR
-
         public void OnGizmosDraw(IAtomicObject obj)
         {
             Gizmos.DrawLine(this.groundPoint.position,

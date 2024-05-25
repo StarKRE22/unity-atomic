@@ -10,7 +10,7 @@ namespace Atomic.Objects
         private const string DEFAULT_ITEM_TYPE = "Enter Type";
         private const string DEFAULT_CATEGORY_NAME = "Enter Category";
 
-        private ReferenceCatalog catalog;
+        private ValueCatalog catalog;
 
         private SerializedObject catalogSerialized;
         private SerializedProperty itemsSerialized;
@@ -285,9 +285,9 @@ namespace Atomic.Objects
         private void DrawCustomElement(int itemIndex)
         {
             SerializedProperty item = this.itemsSerialized.GetArrayElementAtIndex(itemIndex);
-            SerializedProperty id = item.FindPropertyRelative(nameof(ReferenceCatalog.Item.id));
-            SerializedProperty name = item.FindPropertyRelative(nameof(ReferenceCatalog.Item.name));
-            SerializedProperty type = item.FindPropertyRelative(nameof(ReferenceCatalog.Item.type));
+            SerializedProperty id = item.FindPropertyRelative(nameof(ValueCatalog.Item.id));
+            SerializedProperty name = item.FindPropertyRelative(nameof(ValueCatalog.Item.name));
+            SerializedProperty type = item.FindPropertyRelative(nameof(ValueCatalog.Item.type));
 
             EditorGUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
             Color prevColor = GUI.color;
@@ -471,7 +471,7 @@ namespace Atomic.Objects
                     return;
                 }
                 
-                ReferenceCatalog.Category category = this.catalog.categories[_categoryIndex];
+                ValueCatalog.Category category = this.catalog.categories[_categoryIndex];
                 string buttonName = $"Compile >>> {category.name}{this.catalog.suffix}.cs";
                 if (GUILayout.Button(buttonName, buttonStyle, GUILayout.Height(30), GUILayout.MaxWidth(250)))
                 {
