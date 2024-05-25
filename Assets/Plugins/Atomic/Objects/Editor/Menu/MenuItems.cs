@@ -5,8 +5,8 @@ namespace Atomic.Objects
 {
     internal static class MenuItems
     {
-        [MenuItem("Window/Atomic Objects/Reference Window", priority = 7)]
-        internal static void ShowReferenceCatalogWindow()
+        [MenuItem("Window/Atomic Objects/Value Window", priority = 7)]
+        internal static void ShowValueCatalogWindow()
         {
             EditorWindow.GetWindow(typeof(ValueWindow));
         }
@@ -17,7 +17,7 @@ namespace Atomic.Objects
             EditorWindow.GetWindow(typeof(TagWindow));
         }
 
-        [MenuItem("Assets/Atomic Objects/Select Reference Catalog", priority = 7)]
+        [MenuItem("Assets/Atomic Objects/Select Value Catalog", priority = 7)]
         internal static void SelectReferenceCatalog()
         {
             Selection.activeObject = CatalogTools.GetReferenceCatalog();

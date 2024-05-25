@@ -475,7 +475,7 @@ namespace Atomic.Objects
                 string buttonName = $"Compile >>> {category.name}{this.catalog.suffix}.cs";
                 if (GUILayout.Button(buttonName, buttonStyle, GUILayout.Height(30), GUILayout.MaxWidth(250)))
                 {
-                    ValueAPIGenerator.Generate(this.catalog);
+                    ValueAPIGenerator.Generate(this.catalog, _categoryIndex);
                 }
             }
 

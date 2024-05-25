@@ -24,6 +24,24 @@ namespace Atomic.Objects
             }
         }
         
+        internal static void Generate(ValueCatalog valueCatalog, int index)
+        {
+            string suffix = valueCatalog.suffix;
+            string @namespace = valueCatalog.@namespace;
+            string directoryPath = valueCatalog.directoryPath;
+            string[] imports = valueCatalog.imports;
+
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+            
+            GenerateCategory(valueCatalog.categories[index], @namespace, suffix, directoryPath, imports);
+
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+        
         internal static void Generate(ValueCatalog valueCatalog)
         {
             string suffix = valueCatalog.suffix;
@@ -115,52 +133,11 @@ namespace Atomic.Objects
                 
                 if (string.IsNullOrEmpty(itemType))
                 {
-                    continue;
-                }
-                
-                writer.WriteLine("        [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                writer.WriteLine($"        public static {itemType} Get{itemName}(this IAtomicObject obj) => obj.GetValue<{itemType}>({itemName});");
-                writer.WriteLine();
-                
-                writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                writer.WriteLine($"        public static bool TryGet{itemName}(this IAtomicObject obj, out {itemType} value) => obj.TryGetValue({itemName}, out value);");
-                writer.WriteLine();
-
-                if (IsLogicType(itemType))
-                {
-                    writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                    writer.WriteLine($"        public static void Add{itemName}(this IAtomicObject obj, {itemType} value) => obj.AddElement({itemName}, value);");
+                    GenerateObjectExtensions(writer, itemName);
                 }
                 else
                 {
-                    writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                    writer.WriteLine($"        public static bool Add{itemName}(this IAtomicObject obj, {itemType} value) => obj.AddValue({itemName}, value);");
-                }
-                
-                writer.WriteLine();
-
-                if (IsLogicType(itemType))
-                {
-                    writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                    writer.WriteLine($"        public static void Del{itemName}(this IAtomicObject obj) => obj.DelElement({itemName});");
-                }
-                else
-                {
-                    writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                    writer.WriteLine($"        public static bool Del{itemName}(this IAtomicObject obj) => obj.DelValue({itemName});");   
-                }
-                
-                writer.WriteLine();
-
-                if (IsLogicType(itemType))
-                {
-                    writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                    writer.WriteLine($"        public static void Set{itemName}(this IAtomicObject obj, {itemType} value) => obj.SetElement({itemName}, value);");
-                }
-                else
-                {
-                    writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                    writer.WriteLine($"        public static void Set{itemName}(this IAtomicObject obj, {itemType} value) => obj.SetValue({itemName}, value);");
+                    GenerateTypedExtensions(writer, itemType, itemName);
                 }
 
                 if (i < count - 1)
@@ -171,6 +148,76 @@ namespace Atomic.Objects
 
             writer.WriteLine("    }");
             writer.WriteLine("}");
+        }
+
+        private static void GenerateTypedExtensions(StreamWriter writer, string itemType, string itemName)
+        {
+            writer.WriteLine("        [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            writer.WriteLine($"        public static {itemType} Get{itemName}(this IAtomicObject obj) => obj.GetValue<{itemType}>({itemName});");
+            writer.WriteLine();
+            
+            writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            writer.WriteLine($"        public static bool TryGet{itemName}(this IAtomicObject obj, out {itemType} value) => obj.TryGetValue({itemName}, out value);");
+            writer.WriteLine();
+
+            if (IsLogicType(itemType))
+            {
+                writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                writer.WriteLine($"        public static void Add{itemName}(this IAtomicObject obj, {itemType} value) => obj.AddElement({itemName}, value);");
+            }
+            else
+            {
+                writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                writer.WriteLine($"        public static bool Add{itemName}(this IAtomicObject obj, {itemType} value) => obj.AddValue({itemName}, value);");
+            }
+            
+            writer.WriteLine();
+
+            if (IsLogicType(itemType))
+            {
+                writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                writer.WriteLine($"        public static void Del{itemName}(this IAtomicObject obj) => obj.DelElement({itemName});");
+            }
+            else
+            {
+                writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                writer.WriteLine($"        public static bool Del{itemName}(this IAtomicObject obj) => obj.DelValue({itemName});");   
+            }
+            
+            writer.WriteLine();
+
+            if (IsLogicType(itemType))
+            {
+                writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                writer.WriteLine($"        public static void Set{itemName}(this IAtomicObject obj, {itemType} value) => obj.SetElement({itemName}, value);");
+            }
+            else
+            {
+                writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                writer.WriteLine($"        public static void Set{itemName}(this IAtomicObject obj, {itemType} value) => obj.SetValue({itemName}, value);");
+            }
+        }
+
+        private static void GenerateObjectExtensions(StreamWriter writer, string itemName)
+        {
+            writer.WriteLine("        [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            writer.WriteLine($"        public static object Get{itemName}(this IAtomicObject obj) => obj.GetValue({itemName});");
+            writer.WriteLine();
+            
+            writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            writer.WriteLine($"        public static bool TryGet{itemName}(this IAtomicObject obj, out object value) => obj.TryGetValue({itemName}, out value);");
+            writer.WriteLine();
+
+            writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            writer.WriteLine($"        public static bool Add{itemName}(this IAtomicObject obj, object value) => obj.AddValue({itemName}, value);");
+            writer.WriteLine();
+
+            writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            writer.WriteLine($"        public static bool Del{itemName}(this IAtomicObject obj) => obj.DelValue({itemName});");   
+            writer.WriteLine();
+
+            writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+            writer.WriteLine($"        public static void Set{itemName}(this IAtomicObject obj, object value) => obj.SetValue({itemName}, value);");
         }
 
         private static bool IsLogicType(string itemType)
