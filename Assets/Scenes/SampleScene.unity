@@ -1421,6 +1421,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5041756459921393077, guid: a358f183e04cd4930a3f6b6d55b73e66, type: 3}
   m_PrefabInstance: {fileID: 676303053}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &692633286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 692633287}
+  - component: {fileID: 692633288}
+  m_Layer: 0
+  m_Name: <AI>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &692633287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692633286}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2033056546}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &692633288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692633286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af087c4f65842f390129d280d7916fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  composers:
+  - rid: 713235083656167429
+  - rid: 713235083656167425
+  - rid: 713235083656167426
+  - rid: 713235083656167427
+  references:
+    version: 2
+    RefIds:
+    - rid: 713235083656167425
+      type: {class: TransformAspect, ns: Atomic.Objects, asm: Atomic.Objects}
+      data:
+        id: 9
+        value: {fileID: 1388310808}
+    - rid: 713235083656167426
+      type: {class: AtomicIntAspect, ns: Atomic, asm: Atomic.Extensions}
+      data:
+        id: 10
+        value:
+          value: 50
+    - rid: 713235083656167427
+      type: {class: CharacterComposer, ns: Sample, asm: Assembly-CSharp}
+      data:
+        health:
+          value: 0
+        speed:
+          value: 0
+    - rid: 713235083656167429
+      type: {class: ComponentAspect, ns: Atomic.Objects, asm: Atomic.Objects}
+      data:
+        id: 1
+        value: {fileID: 0}
 --- !u!1001 &738742844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1820,8 +1895,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553cedf8e552467e992a3a38c9815ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characters:
-  - {fileID: 5584460699502264610}
+  character: {fileID: 0}
+  attackActionKey: 9
 --- !u!1001 &1031529482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3428,6 +3503,14 @@ PrefabInstance:
       propertyPath: managedReferences[713234723908616192].currentDirection.value
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4405886900182241067, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
+      propertyPath: hasLogic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
       propertyPath: tagCapacity
       value: 1
@@ -3437,12 +3520,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
+      propertyPath: unityControl
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
       propertyPath: tagSegmentEnd
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
       propertyPath: valueCapacity
-      value: 10
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
+      propertyPath: composeOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
       propertyPath: tagStorageType
@@ -3461,13 +3552,25 @@ PrefabInstance:
       value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
+      propertyPath: valueStorageType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
       propertyPath: valueSegmentStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
+      propertyPath: monoComposers.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
       propertyPath: customComponents.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
+      propertyPath: monoComposers.Array.data[0]
+      value: 
+      objectReference: {fileID: 692633288}
     - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
       propertyPath: customComponents.Array.data[0]
       value: 
@@ -3480,6 +3583,14 @@ PrefabInstance:
       propertyPath: customComponents.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
+      propertyPath: scriptableComposers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5005196844303762423, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
+      propertyPath: scriptableComposers.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 73b6d9d6b60e5443c95abb272ed69f97, type: 2}
     - target: {fileID: 9176129390428473732, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -3527,7 +3638,10 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 4069423951261584999, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 9176129390428473732, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 692633287}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8652474711988500030, guid: e492815c96ec94a66a2f6784781fe5c0, type: 3}
       insertIndex: -1

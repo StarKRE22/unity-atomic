@@ -8,7 +8,6 @@ namespace Atomic.Objects
 
         T GetValue<T>(int id) where T : class;
         object GetValue(int id);
-        
         bool TryGetValue<T>(int id, out T value) where T : class;
         bool TryGetValue(int id, out object value);
 

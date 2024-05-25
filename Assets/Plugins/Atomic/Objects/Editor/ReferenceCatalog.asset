@@ -49,8 +49,8 @@ MonoBehaviour:
       name: GameObject
       type: GameObject
     - id: 6
-      name: dddd
-      type: 
+      name: PatrolPoints
+      type: Transform[]
   - name: Visual
     indexes:
     - id: 3

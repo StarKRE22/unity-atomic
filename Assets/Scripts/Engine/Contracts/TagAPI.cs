@@ -14,7 +14,8 @@ namespace GameEngine
         ///Keys
         public const int Character = 1;
         public const int Enemy = 2;
-        public const int Barn = 3;
+        public const int Resource = 3;
+        public const int CapturePoint = 4;
 
 
         ///Extensions
@@ -26,8 +27,12 @@ namespace GameEngine
         public static bool AddEnemyTag(this IAtomicObject obj) => obj.AddTag(Enemy);
         public static bool DelEnemyTag(this IAtomicObject obj) => obj.DelTag(Enemy);
 
-        public static bool HasBarnTag(this IAtomicObject obj) => obj.HasTag(Barn);
-        public static bool AddBarnTag(this IAtomicObject obj) => obj.AddTag(Barn);
-        public static bool DelBarnTag(this IAtomicObject obj) => obj.DelTag(Barn);
+        public static bool HasResourceTag(this IAtomicObject obj) => obj.HasTag(Resource);
+        public static bool AddResourceTag(this IAtomicObject obj) => obj.AddTag(Resource);
+        public static bool DelResourceTag(this IAtomicObject obj) => obj.DelTag(Resource);
+
+        public static bool HasCapturePointTag(this IAtomicObject obj) => obj.HasTag(CapturePoint);
+        public static bool AddCapturePointTag(this IAtomicObject obj) => obj.AddTag(CapturePoint);
+        public static bool DelCapturePointTag(this IAtomicObject obj) => obj.DelTag(CapturePoint);
     }
 }

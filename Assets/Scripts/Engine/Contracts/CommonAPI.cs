@@ -23,6 +23,9 @@ namespace GameEngine
         public const int DeathAction = 23; // IAtomicAction
         public const int MoveComponent = 12; // MoveComponent
         public const int GameObject = 4; // GameObject
+        public const int PatrolPoints = 6; // Transform[]
+        public const int Health = 10; // IAtomicVariable<int>
+        public const int Speed = 11; // IAtomicVariable<int>
 
 
         ///Extensions
@@ -160,5 +163,50 @@ namespace GameEngine
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetGameObject(this IAtomicObject obj, GameObject value) => obj.SetValue(GameObject, value);
+
+        [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Transform[] GetPatrolPoints(this IAtomicObject obj) => obj.GetValue<Transform[]>(PatrolPoints);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetPatrolPoints(this IAtomicObject obj, out Transform[] value) => obj.TryGetValue(PatrolPoints, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddPatrolPoints(this IAtomicObject obj, Transform[] value) => obj.AddValue(PatrolPoints, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelPatrolPoints(this IAtomicObject obj) => obj.DelValue(PatrolPoints);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetPatrolPoints(this IAtomicObject obj, Transform[] value) => obj.SetValue(PatrolPoints, value);
+
+        [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IAtomicVariable<int> GetHealth(this IAtomicObject obj) => obj.GetValue<IAtomicVariable<int>>(Health);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetHealth(this IAtomicObject obj, out IAtomicVariable<int> value) => obj.TryGetValue(Health, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddHealth(this IAtomicObject obj, IAtomicVariable<int> value) => obj.AddValue(Health, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelHealth(this IAtomicObject obj) => obj.DelValue(Health);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetHealth(this IAtomicObject obj, IAtomicVariable<int> value) => obj.SetValue(Health, value);
+
+        [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IAtomicVariable<int> GetSpeed(this IAtomicObject obj) => obj.GetValue<IAtomicVariable<int>>(Speed);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetSpeed(this IAtomicObject obj, out IAtomicVariable<int> value) => obj.TryGetValue(Speed, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddSpeed(this IAtomicObject obj, IAtomicVariable<int> value) => obj.AddValue(Speed, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelSpeed(this IAtomicObject obj) => obj.DelValue(Speed);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetSpeed(this IAtomicObject obj, IAtomicVariable<int> value) => obj.SetValue(Speed, value);
     }
 }
