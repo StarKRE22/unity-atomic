@@ -713,7 +713,11 @@ namespace Atomic.Objects
                 this.Compose();
             }
 
-            if (!this.unityControl)
+            if (this.unityControl)
+            {
+                this.OnAwake();
+            }
+            else
             {
                 this.enabled = false;
             }
@@ -876,16 +880,22 @@ namespace Atomic.Objects
             this.Compose();
 
             HashSet<int> tags = (HashSet<int>) this.tags;
-            this.tagCapacity = tags.Count;
-            this.tagSegmentStart = tags.Min(it => it);
-            this.tagSegmentEnd = tags.Max(it => it);
-            this.tagArraySize = this.tagSegmentEnd + 1;
-
-            Dictionary<int, object> value = (Dictionary<int, object>) this.values;
-            this.valueCapacity = value.Count;
-            this.valueSegmentStart = value.Min(it => it.Key);
-            this.valueSegmentEnd = value.Max(it => it.Key);
-            this.valueArraySize = this.valueSegmentEnd + 1;
+            if (tags.Count > 0)
+            {
+                this.tagCapacity = tags.Count;
+                this.tagSegmentStart = tags.Min(it => it);
+                this.tagSegmentEnd = tags.Max(it => it);
+                this.tagArraySize = this.tagSegmentEnd + 1;
+            }
+            
+            Dictionary<int, object> values = (Dictionary<int, object>) this.values;
+            if (values.Count > 0)
+            {
+                this.valueCapacity = values.Count;
+                this.valueSegmentStart = values.Min(it => it.Key);
+                this.valueSegmentEnd = values.Max(it => it.Key);
+                this.valueArraySize = this.valueSegmentEnd + 1;
+            }
 
             this.tagStorageType = prevTagType;
             this.valueStorageType = prevRefType;

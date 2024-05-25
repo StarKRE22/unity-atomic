@@ -78,6 +78,8 @@ namespace Sample
         
         public void OnAwake(IAtomicObject obj)
         {
+            Debug.Log("ON AWAKE");
+
             this.moveComponent.Enabled.Append(this.isAlive);
             this.jumpComponent.Enabled.AppendAll(this.isAlive, this.groundedComponent.isGrounded);
 

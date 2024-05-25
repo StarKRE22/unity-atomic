@@ -23,7 +23,7 @@ namespace GameEngine
         public const int DeathAction = 23; // IAtomicAction
         public const int MoveComponent = 12; // MoveComponent
         public const int GameObject = 4; // GameObject
-        public const int dddd = 6;
+
 
         ///Extensions
         [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -160,20 +160,5 @@ namespace GameEngine
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetGameObject(this IAtomicObject obj, GameObject value) => obj.SetValue(GameObject, value);
-
-        [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static object Getdddd(this IAtomicObject obj) => obj.GetValue(dddd);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetdddd(this IAtomicObject obj, out object value) => obj.TryGetValue(dddd, out value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Adddddd(this IAtomicObject obj, object value) => obj.AddValue(dddd, value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Deldddd(this IAtomicObject obj) => obj.DelValue(dddd);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Setdddd(this IAtomicObject obj, object value) => obj.SetValue(dddd, value);
     }
 }

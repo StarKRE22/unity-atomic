@@ -19,6 +19,7 @@ namespace Sample
         
         public void Compose(IAtomicValue<float> moveDirection, Transform transform)
         {
+            Debug.Log("COMPOSE");
             this.moveDirection = moveDirection;
             this.transform = transform;
         }
