@@ -142,7 +142,7 @@ namespace Atomic.Objects
                 {
                     awake.OnAwake(this);
                 }
-                
+
                 if (logic is IEnable enable)
                 {
                     enable.Enable(this);
@@ -428,7 +428,7 @@ namespace Atomic.Objects
                 }
             }
         }
-        
+
         [Conditional("UNITY_EDITOR")]
         public void OnGizmosDraw()
         {
@@ -437,18 +437,18 @@ namespace Atomic.Objects
                 gizmos.OnGizmosDraw(this);
             }
         }
-        
+
         #endregion
 
         #region Setup
-        
+
         [Tooltip("Will the Unity callbacks control the behavior of the object?")]
         [PropertyOrder(80)]
         [HideInPlayMode]
         [ShowIf(nameof(hasLogic))]
         [SerializeField]
         private bool unityControl = true;
-        
+
         [Space]
         [PropertyOrder(80)]
         [Tooltip("Do need to compose the object on Awake?")]
@@ -476,7 +476,7 @@ namespace Atomic.Objects
         [PropertyOrder(90)]
         [HideInPlayMode]
         [SerializeField]
-        private List<MonoBehaviour> customComponents; 
+        private List<MonoBehaviour> customComponents;
 
         [FoldoutGroup("Optimization")]
         [PropertyOrder(95)]
@@ -634,7 +634,7 @@ namespace Atomic.Objects
                     }
                 }
             }
-            
+
             if (this.customComponents is {Count: > 0})
             {
                 for (int i = 0, count = this.customComponents.Count; i < count; i++)
@@ -675,7 +675,7 @@ namespace Atomic.Objects
                     disposable.Dispose();
                 }
             }
-            
+
             //TODO ???
             // if (this.monoSections is {Count: > 0})
             // {
@@ -841,8 +841,14 @@ namespace Atomic.Objects
             this.composeOnAwake = true;
             this.disposeOnDestroy = true;
 
-            this.monoComposers = new List<MonoComposer>(this.GetComponentsInChildren<MonoComposer>());
+            this.monoComposers = new List<MonoComposer>(
+                this.GetComponentsInChildren<MonoComposer>()
+            );
+
             this.scriptableComposers = new List<ScriptableComposer>();
+            this.customComponents = new List<MonoBehaviour>(
+                this.GetComponentsInChildren<MonoBehaviour>().Where(it => it is ILogic)
+            );
         }
 
         #endregion
@@ -857,7 +863,7 @@ namespace Atomic.Objects
         [GUIColor(0f, 0.83f, 1f)]
         [PropertySpace(SpaceAfter = 8, SpaceBefore = 8)]
 #endif
-        [ContextMenu("Compute Capacity", isValidateFunction:false, priority:1000002)]
+        [ContextMenu("Compute Capacity", isValidateFunction: false, priority: 1000002)]
         private void ComputeCapacity()
         {
             var prevTagType = this.tagStorageType;
@@ -865,7 +871,7 @@ namespace Atomic.Objects
 
             this.tagStorageType = TagsStorageType.HASHSET;
             this.valueStorageType = ValueStorageType.DICTIONARY;
-            
+
             //Make compose for compute capacity!
             this.Compose();
 
@@ -923,14 +929,17 @@ namespace Atomic.Objects
 
                 return result;
             }
-            set { /** noting... **/ }
+            set
+            {
+                /** noting... **/
+            }
         }
-        
+
         private struct TagDebug
         {
             [ShowInInspector, ReadOnly]
             public string name;
-            
+
             internal readonly int id;
 
             public TagDebug(string name, int id)
@@ -939,12 +948,12 @@ namespace Atomic.Objects
                 this.id = id;
             }
         }
-        
+
         private void OnRemoveTagDebugById(TagDebug tagDebug)
         {
             this.DelTag(tagDebug.id);
         }
-        
+
         private void OnRemoveTagDebugByIndex(int index)
         {
             var tags = this.tags.ToArray();
@@ -992,7 +1001,10 @@ namespace Atomic.Objects
                 return result;
             }
 
-            set { /** noting... **/ }
+            set
+            {
+                /** noting... **/
+            }
         }
 
         private struct ReferenceDebug
@@ -1006,7 +1018,7 @@ namespace Atomic.Objects
             [ShowInInspector]
             [HideLabel]
             public object value;
-            
+
             internal readonly int id;
 
             public ReferenceDebug(string name, object value, int id)
@@ -1016,15 +1028,15 @@ namespace Atomic.Objects
                 this.id = id;
             }
         }
-        
+
         private void OnRemoveReferenceByValue(ReferenceDebug valueDebug)
         {
             this.DelValue(valueDebug.id);
         }
-        
+
         private void OnRemoveReferenceByIndex(int index)
         {
-            KeyValuePair<int,object>[] keyValuePairs = this.values.ToArray();
+            KeyValuePair<int, object>[] keyValuePairs = this.values.ToArray();
             for (int i = 0, count = keyValuePairs.Length; i < count; i++)
             {
                 if (i == index)
@@ -1055,9 +1067,12 @@ namespace Atomic.Objects
 
                 return this.logics.Select(it => new BehaviourDebug(it.GetType().Name)).ToList();
             }
-            set { /** noting... **/ }
+            set
+            {
+                /** noting... **/
+            }
         }
-        
+
         [InlineProperty]
         private struct BehaviourDebug
         {
@@ -1087,7 +1102,7 @@ namespace Atomic.Objects
         {
             this.DelLogic(this.logics[index]);
         }
-        
+
         [PropertySpace]
         [FoldoutGroup("Debug")]
         [Button("Add Element")]
@@ -1148,9 +1163,6 @@ namespace Atomic.Objects
         #endregion
     }
 }
-
-
-
 
 
 // [Button("Add Tag")]

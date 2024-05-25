@@ -16,18 +16,18 @@ namespace Atomic.Objects
         {
             EditorWindow.GetWindow(typeof(TagWindow));
         }
-
-        [MenuItem("Assets/Atomic Objects/Select Value Catalog", priority = 7)]
-        internal static void SelectReferenceCatalog()
-        {
-            Selection.activeObject = CatalogTools.GetReferenceCatalog();
-        }
-        
-        [MenuItem("Assets/Atomic Objects/Select Tag Catalog", priority = 7)]
-        internal static void SelectTagCatalog()
-        {
-            Selection.activeObject = CatalogTools.GetTagCatalog();
-        }
+        //
+        // [MenuItem("Assets/Atomic Objects/Select Value Catalog", priority = 7)]
+        // internal static void SelectReferenceCatalog()
+        // {
+        //     Selection.activeObject = CatalogTools.GetReferenceCatalog();
+        // }
+        //
+        // [MenuItem("Assets/Atomic Objects/Select Tag Catalog", priority = 7)]
+        // internal static void SelectTagCatalog()
+        // {
+        //     Selection.activeObject = CatalogTools.GetTagCatalog();
+        // }
     }
 }
 #endif

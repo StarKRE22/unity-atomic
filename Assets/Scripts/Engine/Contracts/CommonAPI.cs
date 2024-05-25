@@ -23,8 +23,7 @@ namespace GameEngine
         public const int DeathAction = 23; // IAtomicAction
         public const int MoveComponent = 12; // MoveComponent
         public const int GameObject = 4; // GameObject
-        public const int dddd = 6; 
-
+        public const int dddd = 6;
 
         ///Extensions
         [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]
