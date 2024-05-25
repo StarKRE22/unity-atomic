@@ -102,7 +102,7 @@ namespace Atomic.Objects
             {
                 FieldInfo field = fields[i];
                 if (field.IsDefined(typeof(LogicAttribute)) && 
-                    typeof(ILogic).IsAssignableFrom(field.FieldType))
+                    typeof(IAtomicLogic).IsAssignableFrom(field.FieldType))
                 {
                     behaviours.Add(new LogicInfo(field.GetValue));
                     

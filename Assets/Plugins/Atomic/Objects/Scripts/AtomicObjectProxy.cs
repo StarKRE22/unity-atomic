@@ -64,22 +64,22 @@ namespace Atomic.Objects
             return source.DelValue(id, out removed);
         }
 
-        public bool AddLogic(ILogic logic)
+        public bool AddLogic(IAtomicLogic logic)
         {
             return source.AddLogic(logic);
         }
 
-        public bool AddLogic<T>() where T : ILogic, new()
+        public bool AddLogic<T>() where T : IAtomicLogic, new()
         {
             return source.AddLogic<T>();
         }
 
-        public bool DelLogic(ILogic logic)
+        public bool DelLogic(IAtomicLogic logic)
         {
             return source.DelLogic(logic);
         }
 
-        public bool DelLogic<T>() where T : ILogic
+        public bool DelLogic<T>() where T : IAtomicLogic
         {
             return source.DelLogic<T>();
         }

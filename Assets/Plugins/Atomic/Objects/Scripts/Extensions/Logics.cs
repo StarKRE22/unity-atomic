@@ -4,15 +4,15 @@ using UnityEngine;
 namespace Atomic.Objects
 {
     [Serializable]
-    public sealed class EnableLogic : IEnable
+    public sealed class AtomicEnable : IAtomicEnable
     {
         private Action<IAtomicObject> action;
 
-        public EnableLogic()
+        public AtomicEnable()
         {
         }
 
-        public EnableLogic(Action<IAtomicObject> action)
+        public AtomicEnable(Action<IAtomicObject> action)
         {
             this.action = action;
         }
@@ -29,15 +29,15 @@ namespace Atomic.Objects
     }
 
     [Serializable]
-    public sealed class DisableLogic : IDisable
+    public sealed class AtomicDisable : IAtomicDisable
     {
         private Action<IAtomicObject> action;
 
-        public DisableLogic()
+        public AtomicDisable()
         {
         }
 
-        public DisableLogic(Action<IAtomicObject> action)
+        public AtomicDisable(Action<IAtomicObject> action)
         {
             this.action = action;
         }
@@ -54,15 +54,15 @@ namespace Atomic.Objects
     }
 
     [Serializable]
-    public sealed class UpdateLogic : IUpdate
+    public sealed class AtomicUpdate : IUpdate
     {
         private Action<IAtomicObject, float> action;
 
-        public UpdateLogic()
+        public AtomicUpdate()
         {
         }
 
-        public UpdateLogic(Action<IAtomicObject, float> action)
+        public AtomicUpdate(Action<IAtomicObject, float> action)
         {
             this.action = action;
         }
@@ -79,15 +79,15 @@ namespace Atomic.Objects
     }
 
     [Serializable]
-    public sealed class FixedUpdateLogic : IFixedUpdate
+    public sealed class AtomicFixedUpdateLogic : IAtomicFixedUpdate
     {
         private Action<IAtomicObject, float> action;
 
-        public FixedUpdateLogic()
+        public AtomicFixedUpdateLogic()
         {
         }
 
-        public FixedUpdateLogic(Action<IAtomicObject, float> action)
+        public AtomicFixedUpdateLogic(Action<IAtomicObject, float> action)
         {
             this.action = action;
         }
@@ -355,7 +355,7 @@ namespace Atomic.Objects
         }
     }
     
-    public abstract class ScriptableLogic : ScriptableObject, ILogic
+    public abstract class ScriptableLogic : ScriptableObject, IAtomicLogic
     {
     }
 }

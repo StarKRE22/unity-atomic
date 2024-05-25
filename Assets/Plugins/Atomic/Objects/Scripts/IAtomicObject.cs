@@ -22,9 +22,9 @@ namespace Atomic.Objects
         bool DelValue(int id);
         bool DelValue(int id, out object removed);
 
-        bool AddLogic(ILogic logic);
-        bool AddLogic<T>() where T : ILogic, new();
-        bool DelLogic(ILogic logic);
-        bool DelLogic<T>() where T : ILogic;
+        bool AddLogic(IAtomicLogic logic);
+        bool AddLogic<T>() where T : IAtomicLogic, new();
+        bool DelLogic(IAtomicLogic logic);
+        bool DelLogic<T>() where T : IAtomicLogic;
     }
 }

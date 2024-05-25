@@ -42,7 +42,7 @@ namespace Atomic.Objects
             for (int i = 0, count = behaviours.Length; i < count; i++)
             {
                 LogicInfo logicInfo = behaviours[i];
-                var behaviour = (ILogic) logicInfo.valueFunc(source);
+                var behaviour = (IAtomicLogic) logicInfo.valueFunc(source);
                 entity.AddLogic(behaviour);
             }
 

@@ -7,7 +7,7 @@ namespace Atomic.Objects
     public static class Extensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void AddElement(this IAtomicObject obj, int id, ILogic element)
+        public static void AddElement(this IAtomicObject obj, int id, IAtomicLogic element)
         {
             if (obj.AddValue(id, element))
             {
@@ -20,27 +20,33 @@ namespace Atomic.Objects
         {
             if (obj.DelValue(id, out var removed))
             {
-                obj.DelLogic(removed as ILogic);
+                obj.DelLogic(removed as IAtomicLogic);
             }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetElement(this IAtomicObject obj, int id, ILogic element)
+        public static void SetElement(this IAtomicObject obj, int id, IAtomicLogic element)
         {
             obj.DelElement(id);
             obj.AddElement(id, element);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Compose(this IAtomicObject obj, IComposable aspect)
+        public static void Compose(this IAtomicObject obj, IAtomicAspect aspect)
         {
             aspect.Compose(obj);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Dispose(this IAtomicObject obj, IDisposable aspect)
+        public static void Dispose(this IAtomicObject obj, IAtomicAspect aspect)
         {
             aspect.Dispose(obj);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void InflateFrom(this IAtomicObject entity, object from)
+        {
+            ObjectInflater.InflateFrom(entity, from);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -67,47 +73,47 @@ namespace Atomic.Objects
             return collision.gameObject.TryGetComponent(out obj);
         }
 
-        public static ILogic SubscribeOnEnable(
+        public static IAtomicLogic SubscribeOnEnable(
             this IAtomicObject obj,
             Action<IAtomicObject> action
         )
         {
-            var behaviour = new EnableLogic(action);
+            var behaviour = new AtomicEnable(action);
             obj.AddLogic(behaviour);
             return behaviour;
         }
         
-        public static ILogic SubscribeOnDisable(
+        public static IAtomicLogic SubscribeOnDisable(
             this IAtomicObject obj,
             Action<IAtomicObject> action
         )
         {
-            var behaviour = new DisableLogic(action);
+            var behaviour = new AtomicDisable(action);
             obj.AddLogic(behaviour);
             return behaviour;
         }
         
-        public static ILogic SubscribeOnUpdate(
+        public static IAtomicLogic SubscribeOnUpdate(
             this IAtomicObject obj,
             Action<IAtomicObject, float> action
         )
         {
-            var behaviour = new UpdateLogic(action);
+            var behaviour = new AtomicUpdate(action);
             obj.AddLogic(behaviour);
             return behaviour;
         }
 
-        public static ILogic SubcribeOnFixedUpdate(
+        public static IAtomicLogic SubcribeOnFixedUpdate(
             this IAtomicObject obj,
             Action<IAtomicObject, float> action
         )
         {
-            var behaviour = new FixedUpdateLogic(action);
+            var behaviour = new AtomicFixedUpdateLogic(action);
             obj.AddLogic(behaviour);
             return behaviour;
         }
 
-        public static ILogic SubscribeOnLateUpdate(
+        public static IAtomicLogic SubscribeOnLateUpdate(
             this IAtomicObject obj,
             Action<IAtomicObject, float> action
         )
@@ -119,7 +125,7 @@ namespace Atomic.Objects
 
 #if UNITY_EDITOR
         //Don't wrap UNITY_EDITOR
-        public static ILogic SubscribeOnDrawGizmos(
+        public static IAtomicLogic SubscribeOnDrawGizmos(
             this IAtomicObject obj,
             Action<IAtomicObject, float> action
         )
@@ -130,83 +136,83 @@ namespace Atomic.Objects
         }
 #endif
         
-        public static ILogic SubscribeOnTriggerEnter(
+        public static IAtomicLogic SubscribeOnTriggerEnter(
             this IAtomicObject obj,
             Action<IAtomicObject, Collider> action
         )
         {
-            ILogic logic = new TriggerEnterLogic(action);
+            IAtomicLogic logic = new TriggerEnterLogic(action);
             obj.AddLogic(logic);
             return logic;
         }
         
-        public static ILogic SubscribeOnTriggerExit(
+        public static IAtomicLogic SubscribeOnTriggerExit(
             this IAtomicObject obj,
             Action<IAtomicObject, Collider> action
         )
         {
-            ILogic logic = new TriggerExitLogic(action);
+            IAtomicLogic logic = new TriggerExitLogic(action);
             obj.AddLogic(logic);
             return logic;
         }
         
-        public static ILogic SubscribeOnCollisionEnter(
+        public static IAtomicLogic SubscribeOnCollisionEnter(
             this IAtomicObject obj,
             Action<IAtomicObject, Collision> action
         )
         {
-            ILogic logic = new CollisionLogic(action);
+            IAtomicLogic logic = new CollisionLogic(action);
             obj.AddLogic(logic);
             return logic;
         }
         
-        public static ILogic SubscribeOnCollisionExit(
+        public static IAtomicLogic SubscribeOnCollisionExit(
             this IAtomicObject obj,
             Action<IAtomicObject, Collision> action
         )
         {
-            ILogic logic = new CollisionExitLogic(action);
+            IAtomicLogic logic = new CollisionExitLogic(action);
             obj.AddLogic(logic);
             return logic;
         }
         
         
-        public static ILogic SubscribeOnTriggerEnter2D(
+        public static IAtomicLogic SubscribeOnTriggerEnter2D(
             this IAtomicObject obj,
             Action<IAtomicObject, Collider2D> action
         )
         {
-            ILogic logic = new TriggerEnter2DLogic(action);
+            IAtomicLogic logic = new TriggerEnter2DLogic(action);
             obj.AddLogic(logic);
             return logic;
         }
         
-        public static ILogic SubscribeOnTriggerExit2D(
+        public static IAtomicLogic SubscribeOnTriggerExit2D(
             this IAtomicObject obj,
             Action<IAtomicObject, Collider2D> action
         )
         {
-            ILogic logic = new TriggerExit2DLogic(action);
+            IAtomicLogic logic = new TriggerExit2DLogic(action);
             obj.AddLogic(logic);
             return logic;
         }
         
-        public static ILogic SubscribeOnCollisionEnter2D(
+        public static IAtomicLogic SubscribeOnCollisionEnter2D(
             this IAtomicObject obj,
             Action<IAtomicObject, Collision2D> action
         )
         {
-            ILogic logic = new CollisionEnter2DLogic(action);
+            IAtomicLogic logic = new CollisionEnter2DLogic(action);
             obj.AddLogic(logic);
             return logic;
         }
         
-        public static ILogic SubscribeOnCollisionExit2D(
+        public static IAtomicLogic SubscribeOnCollisionExit2D(
             this IAtomicObject obj,
             Action<IAtomicObject, Collision2D> action
         )
         {
-            ILogic logic = new CollisionExit2DLogic(action);
+            IAtomicLogic logic = new CollisionExit2DLogic(action);
             obj.AddLogic(logic);
             return logic;
         }

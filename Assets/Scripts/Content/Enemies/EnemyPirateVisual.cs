@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Sample
 {
     [Serializable]
-    public sealed class EnemyPirateVisual : MonoBehaviour, IAtomicObject.IComposable
+    public sealed class EnemyPirateVisual : MonoBehaviour, IAtomicAspect
     {
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
 

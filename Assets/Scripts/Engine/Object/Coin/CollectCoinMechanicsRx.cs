@@ -4,7 +4,7 @@ using GameEngine;
 
 namespace Sample
 {
-    public class CollectCoinMechanicsRx : IComposable
+    public class CollectCoinMechanicsRx : IAtomicAspect
     {
         public void Compose(IAtomicObject obj)
         {

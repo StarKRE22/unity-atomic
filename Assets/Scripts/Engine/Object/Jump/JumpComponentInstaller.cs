@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Sample
 {
     [Serializable, InlineProperty]
-    public sealed class JumpComponentInstaller : IComposable
+    public sealed class JumpComponentInstaller : IAtomicAspect
     {
         [SerializeField]
         private JumpComponent jumpComponent;

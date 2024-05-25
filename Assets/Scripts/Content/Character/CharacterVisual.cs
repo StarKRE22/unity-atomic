@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Sample
 {
-    public sealed class CharacterVisual : MonoBehaviour, IComposable
+    public sealed class CharacterVisual : MonoBehaviour, IAtomicAspect
     {
         #region Interface
 
@@ -31,16 +31,16 @@ namespace Sample
         [SerializeField]
         private SpriteRenderer spriteRenderer;
 
-        [SerializeField]
         [Logic]
+        [SerializeField]
         private MoveAnimMechanics moveMechanics;
-        
-        [SerializeField]
+
         [Logic]
+        [SerializeField]
         private JumpAnimMechanics jumpMechanics;
 
-        [SerializeField]
         [Logic]
+        [SerializeField]
         private FlyAnimMechanics flyMechanics;
 
         public void Compose(IAtomicObject obj)
@@ -49,7 +49,11 @@ namespace Sample
             this.jumpMechanics.Compose(this.animator, this.character.jumpComponent.JumpEvent, Jump);
             this.flyMechanics.Compose(this.animator, this.character.verticalSpeed);
         }
-        
+
+        public void Dispose(IAtomicObject obj)
+        {
+        }
+
         #endregion
     }
 }

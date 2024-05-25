@@ -2,25 +2,23 @@ using UnityEngine;
 
 namespace Atomic.Objects
 {
-    [CreateAssetMenu(
-        fileName = "ScriptableComposer",
-        menuName = "Atomic/Objects/New ScriptableComposer"
-    )]
-    public sealed class ScriptableComposer : ScriptableObject, IAspect
+    [AddComponentMenu("Atomic/Mono Section")]
+    [DisallowMultipleComponent]
+    public sealed class MonoSection : MonoBehaviour, IAtomicAspect
     {
         [SerializeReference]
-        private IAspect[] aspects;
-        
+        private IAtomicAspect[] aspects;
+
         public void Compose(IAtomicObject obj)
         {
             if (this.aspects is {Length: > 0})
             {
                 for (int i = 0, count = this.aspects.Length; i < count; i++)
                 {
-                    var installer = this.aspects[i];
-                    if (installer != null)
+                    IAtomicAspect aspect = this.aspects[i];
+                    if (aspect != null)
                     {
-                        installer.Compose(obj);
+                        aspect.Compose(obj);
                     }
                 }
             }
@@ -32,10 +30,10 @@ namespace Atomic.Objects
             {
                 for (int i = 0, count = this.aspects.Length; i < count; i++)
                 {
-                    var installer = this.aspects[i];
-                    if (installer != null)
+                    IAtomicAspect aspect = this.aspects[i];
+                    if (aspect != null)
                     {
-                        installer.Dispose(obj);
+                        aspect.Dispose(obj);
                     }
                 }
             }

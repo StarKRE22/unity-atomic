@@ -6,8 +6,7 @@ using UnityEngine;
 namespace Sample
 {
     [Tags(TagAPI.Character)]
-    [RequireComponent(typeof(AtomicObject))]
-    public sealed class Character : MonoBehaviour, IComposable, IDisposable
+    public sealed class Character : MonoBehaviour, IAtomicAspect
     {
         #region Interface
 
@@ -91,6 +90,14 @@ namespace Sample
 
             this.effectHolder.Compose(obj);
         }
+        
+        public void Dispose(IAtomicObject obj)
+        {
+            isAlive?.Dispose();
+            collectCoinEvent?.Dispose();
+            jumpComponent?.Dispose();
+            moveComponent?.Dispose();
+        }
 
         private void Death()
         {
@@ -105,13 +112,5 @@ namespace Sample
         }
 
         #endregion
-
-        public void Dispose(IAtomicObject obj)
-        {
-            isAlive?.Dispose();
-            collectCoinEvent?.Dispose();
-            jumpComponent?.Dispose();
-            moveComponent?.Dispose();
-        }
     }
 }
