@@ -59,6 +59,11 @@ namespace Atomic.Objects
             return true;
         }
 
+        public bool ContainsKey(int index)
+        {
+            return this.values[index] != null;
+        }
+
         public IEnumerator<KeyValuePair<int, object>> GetEnumerator()
         {
             for (int i = 0, length = this.values.Length; i < length; i++)

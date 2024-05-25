@@ -93,6 +93,11 @@ namespace Atomic.Objects
             return this.values.Remove(id, out removed);
         }
 
+        public bool HasValue(int id)
+        {
+            return this.values.ContainsKey(id);
+        }
+
         #endregion
 
         #region Logic
@@ -233,6 +238,11 @@ namespace Atomic.Objects
             }
 
             return false;
+        }
+
+        public bool HasLogic(ILogic logic)
+        {
+            return this.logics.Contains(logic);
         }
 
         [ContextMenu("Awake")]

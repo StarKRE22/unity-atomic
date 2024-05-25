@@ -5,7 +5,6 @@ namespace Atomic.Objects
 {
     public static class LogicExtensions
     {
-        
         public static ILogic SubscribeOnEnable(
             this IAtomicObject obj,
             Action<IAtomicObject> action

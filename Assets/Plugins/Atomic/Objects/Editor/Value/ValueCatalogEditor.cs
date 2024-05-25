@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Atomic.Objects
 {
     [CustomEditor(typeof(ValueCatalog))]
-    internal sealed class ReferenceCatalogEditor : OdinEditor
+    internal sealed class ValueCatalogEditor : OdinEditor
     {
         public override void OnInspectorGUI()
         {
@@ -30,7 +30,7 @@ namespace Atomic.Objects
         private void CompileKeys()
         {
             ValueCatalog audioBank = this.target as ValueCatalog;
-            ReferenceAPIGenerator.Generate(audioBank);
+            ValueAPIGenerator.Generate(audioBank);
         }
     }
 }

@@ -64,6 +64,11 @@ namespace Atomic.Objects
             return source.DelValue(id, out removed);
         }
 
+        public bool HasValue(int id)
+        {
+            return source.HasValue(id);
+        }
+
         public bool AddLogic(ILogic logic)
         {
             return source.AddLogic(logic);
@@ -82,6 +87,11 @@ namespace Atomic.Objects
         public bool DelLogic<T>() where T : ILogic
         {
             return source.DelLogic<T>();
+        }
+
+        public bool HasLogic(ILogic logic)
+        {
+            return source.HasLogic(logic);
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Atomic.Objects
 {
-    internal sealed class ReferenceWindow : EditorWindow
+    internal sealed class ValueWindow : EditorWindow
     {
         private const string DEFAULT_ITEM_NAME = "Enter Name";
         private const string DEFAULT_ITEM_TYPE = "Enter Type";
@@ -30,7 +30,7 @@ namespace Atomic.Objects
 
         private void DrawTitle()
         {
-            this.titleContent = new GUIContent("Atomic References");
+            this.titleContent = new GUIContent("Atomic Values");
         }
 
         private void OnGUI()
@@ -82,7 +82,7 @@ namespace Atomic.Objects
             };
 
             rect.x += 5;
-            GUI.Label(rect, " Atomic References:", labelStyle);
+            GUI.Label(rect, " Atomic Values:", labelStyle);
 
             EditorGUILayout.Space(24);
             this.DrawCatalogButton();
@@ -475,7 +475,7 @@ namespace Atomic.Objects
                 string buttonName = $"Compile >>> {category.name}{this.catalog.suffix}.cs";
                 if (GUILayout.Button(buttonName, buttonStyle, GUILayout.Height(30), GUILayout.MaxWidth(250)))
                 {
-                    ReferenceAPIGenerator.Generate(this.catalog);
+                    ValueAPIGenerator.Generate(this.catalog);
                 }
             }
 

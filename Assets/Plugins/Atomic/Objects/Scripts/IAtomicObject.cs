@@ -16,10 +16,12 @@ namespace Atomic.Objects
         void SetValue(int id, object value);
         bool DelValue(int id);
         bool DelValue(int id, out object removed);
+        bool HasValue(int id);
 
         bool AddLogic(ILogic logic);
         bool AddLogic<T>() where T : ILogic, new();
         bool DelLogic(ILogic logic);
         bool DelLogic<T>() where T : ILogic;
+        bool HasLogic(ILogic logic);
     }
 }

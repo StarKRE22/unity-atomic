@@ -26,10 +26,7 @@ namespace Sample
         [Value(CommonAPI.EffectHolder)]
         public EffectHolder effectHolder;
 
-        [Logic]
         private KillCharacterMechanics killMechanics;
-
-        [Logic]
         private DiscardCharacterEffectsMechanics discardEffectsMechanics;
 
         public void OnAwake(IAtomicObject obj)

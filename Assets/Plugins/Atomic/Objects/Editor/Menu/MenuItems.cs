@@ -8,7 +8,7 @@ namespace Atomic.Objects
         [MenuItem("Window/Atomic Objects/Reference Window", priority = 7)]
         internal static void ShowReferenceCatalogWindow()
         {
-            EditorWindow.GetWindow(typeof(ReferenceWindow));
+            EditorWindow.GetWindow(typeof(ValueWindow));
         }
         
         [MenuItem("Window/Atomic Objects/Tag Window", priority = 7)]

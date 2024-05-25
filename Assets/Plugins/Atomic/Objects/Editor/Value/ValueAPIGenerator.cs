@@ -1,12 +1,29 @@
 #if UNITY_EDITOR
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Unity.Properties;
 using UnityEditor;
 
 namespace Atomic.Objects
 {
     //TODO: REFRESH SETTINGS
-    internal static class ReferenceAPIGenerator
+    [InitializeOnLoad]
+    internal static class ValueAPIGenerator
     {
+        private static readonly List<Type> allTypes;
+
+        static ValueAPIGenerator()
+        {
+            allTypes = new List<Type>();
+            
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                allTypes.AddRange(assembly.GetTypes().Where(it => typeof(ILogic).IsAssignableFrom(it)));
+            }
+        }
+        
         internal static void Generate(ValueCatalog valueCatalog)
         {
             string suffix = valueCatalog.suffix;
@@ -93,33 +110,58 @@ namespace Atomic.Objects
             for (int i = 0, count = items.Count; i < count; i++)
             {
                 ValueCatalog.Item item = items[i];
-                if (string.IsNullOrEmpty(item.type))
+                string itemName = item.name;
+                string itemType = item.type;
+                
+                if (string.IsNullOrEmpty(itemType))
                 {
                     continue;
                 }
                 
                 writer.WriteLine("        [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                writer.WriteLine($"        public static {item.type} Get{item.name}(this IAtomicObject obj) => obj.GetReference<{item.type}>({item.name});");
+                writer.WriteLine($"        public static {itemType} Get{itemName}(this IAtomicObject obj) => obj.GetValue<{itemType}>({itemName});");
                 writer.WriteLine();
                 
                 writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                writer.WriteLine($"        public static bool TryGet{item.name}(this IAtomicObject obj, out {item.type} result) => obj.TryGetReference({item.name}, out result);");
+                writer.WriteLine($"        public static bool TryGet{itemName}(this IAtomicObject obj, out {itemType} value) => obj.TryGetValue({itemName}, out value);");
                 writer.WriteLine();
 
-                //TODO: ТУТ ПРОВЕРИТЬ, ЕСЛИ ТИП is IBehaviour, то сделать и добавление Behaviour
-                writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                writer.WriteLine($"        public static bool Add{item.name}(this IAtomicObject obj, {item.type} reference) => obj.AddReference({item.name}, reference);");
-                writer.WriteLine();
-
-                //TODO: ТУТ ПРОВЕРИТЬ, ЕСЛИ ТИП is IBehaviour, то сделать и удаление Behaviour
-                writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                writer.WriteLine($"        public static bool Del{item.name}(this IAtomicObject obj) => obj.DelReference({item.name});");
-                writer.WriteLine();
+                if (IsLogicType(itemType))
+                {
+                    writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                    writer.WriteLine($"        public static void Add{itemName}(this IAtomicObject obj, {itemType} value) => obj.AddElement({itemName}, value);");
+                }
+                else
+                {
+                    writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                    writer.WriteLine($"        public static bool Add{itemName}(this IAtomicObject obj, {itemType} value) => obj.AddValue({itemName}, value);");
+                }
                 
-                writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                writer.WriteLine($"        public static void Set{item.name}(this IAtomicObject obj, {item.type} reference) => obj.SetReference({item.name}, reference);");
+                writer.WriteLine();
 
-                //TODO: ТУТ ПРОВЕРИТЬ, ЕСЛИ ТИП is IObservable, то Написать Subscribe & Unsubscribe
+                if (IsLogicType(itemType))
+                {
+                    writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                    writer.WriteLine($"        public static void Del{itemName}(this IAtomicObject obj) => obj.DelElement({itemName});");
+                }
+                else
+                {
+                    writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                    writer.WriteLine($"        public static bool Del{itemName}(this IAtomicObject obj) => obj.DelValue({itemName});");   
+                }
+                
+                writer.WriteLine();
+
+                if (IsLogicType(itemType))
+                {
+                    writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                    writer.WriteLine($"        public static void Set{itemName}(this IAtomicObject obj, {itemType} value) => obj.SetElement({itemName}, value);");
+                }
+                else
+                {
+                    writer.WriteLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                    writer.WriteLine($"        public static void Set{itemName}(this IAtomicObject obj, {itemType} value) => obj.SetValue({itemName}, value);");
+                }
 
                 if (i < count - 1)
                 {
@@ -129,6 +171,19 @@ namespace Atomic.Objects
 
             writer.WriteLine("    }");
             writer.WriteLine("}");
+        }
+
+        private static bool IsLogicType(string itemType)
+        {
+            foreach (var type in allTypes)
+            {
+                if (type.FullName == itemType || type.Name == itemType)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

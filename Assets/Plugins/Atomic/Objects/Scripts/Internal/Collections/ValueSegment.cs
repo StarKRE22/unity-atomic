@@ -112,6 +112,16 @@ namespace Atomic.Objects
             return removed != null;
         }
 
+        public bool ContainsKey(int index)
+        {
+            if (index < _startIndex || index > _endIndex)
+            {
+                return false;
+            }
+
+            return _array[index - _startIndex] != null;
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void AddLeft(int index, object value)
         {

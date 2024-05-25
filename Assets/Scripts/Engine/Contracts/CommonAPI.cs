@@ -22,7 +22,7 @@ namespace GameEngine
         public const int JumpComponent = 13; // JumpComponent
         public const int DeathAction = 23; // IAtomicAction
         public const int MoveComponent = 12; // MoveComponent
-        public const int GameObject = 4; 
+        public const int GameObject = 4; // GameObject
 
 
         ///Extensions
@@ -30,120 +30,135 @@ namespace GameEngine
         public static Transform GetTransform(this IAtomicObject obj) => obj.GetValue<Transform>(Transform);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetTransform(this IAtomicObject obj, out Transform result) => obj.TryGetValue(Transform, out result);
+        public static bool TryGetTransform(this IAtomicObject obj, out Transform value) => obj.TryGetValue(Transform, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddTransform(this IAtomicObject obj, Transform reference) => obj.AddValue(Transform, reference);
+        public static bool AddTransform(this IAtomicObject obj, Transform value) => obj.AddValue(Transform, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool DelTransform(this IAtomicObject obj) => obj.DelValue(Transform);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetTransform(this IAtomicObject obj, Transform reference) => obj.SetValue(Transform, reference);
+        public static void SetTransform(this IAtomicObject obj, Transform value) => obj.SetValue(Transform, value);
 
         [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Rigidbody2D GetRigidbody2D(this IAtomicObject obj) => obj.GetValue<Rigidbody2D>(Rigidbody2D);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetRigidbody2D(this IAtomicObject obj, out Rigidbody2D result) => obj.TryGetValue(Rigidbody2D, out result);
+        public static bool TryGetRigidbody2D(this IAtomicObject obj, out Rigidbody2D value) => obj.TryGetValue(Rigidbody2D, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddRigidbody2D(this IAtomicObject obj, Rigidbody2D reference) => obj.AddValue(Rigidbody2D, reference);
+        public static bool AddRigidbody2D(this IAtomicObject obj, Rigidbody2D value) => obj.AddValue(Rigidbody2D, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool DelRigidbody2D(this IAtomicObject obj) => obj.DelValue(Rigidbody2D);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetRigidbody2D(this IAtomicObject obj, Rigidbody2D reference) => obj.SetValue(Rigidbody2D, reference);
+        public static void SetRigidbody2D(this IAtomicObject obj, Rigidbody2D value) => obj.SetValue(Rigidbody2D, value);
 
         [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static EffectHolder GetEffectHolder(this IAtomicObject obj) => obj.GetValue<EffectHolder>(EffectHolder);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetEffectHolder(this IAtomicObject obj, out EffectHolder result) => obj.TryGetValue(EffectHolder, out result);
+        public static bool TryGetEffectHolder(this IAtomicObject obj, out EffectHolder value) => obj.TryGetValue(EffectHolder, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddEffectHolder(this IAtomicObject obj, EffectHolder reference) => obj.AddValue(EffectHolder, reference);
+        public static bool AddEffectHolder(this IAtomicObject obj, EffectHolder value) => obj.AddValue(EffectHolder, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool DelEffectHolder(this IAtomicObject obj) => obj.DelValue(EffectHolder);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetEffectHolder(this IAtomicObject obj, EffectHolder reference) => obj.SetValue(EffectHolder, reference);
+        public static void SetEffectHolder(this IAtomicObject obj, EffectHolder value) => obj.SetValue(EffectHolder, value);
 
         [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IAtomicObservable GetCollectCoinEvent(this IAtomicObject obj) => obj.GetValue<IAtomicObservable>(CollectCoinEvent);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetCollectCoinEvent(this IAtomicObject obj, out IAtomicObservable result) => obj.TryGetValue(CollectCoinEvent, out result);
+        public static bool TryGetCollectCoinEvent(this IAtomicObject obj, out IAtomicObservable value) => obj.TryGetValue(CollectCoinEvent, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddCollectCoinEvent(this IAtomicObject obj, IAtomicObservable reference) => obj.AddValue(CollectCoinEvent, reference);
+        public static bool AddCollectCoinEvent(this IAtomicObject obj, IAtomicObservable value) => obj.AddValue(CollectCoinEvent, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool DelCollectCoinEvent(this IAtomicObject obj) => obj.DelValue(CollectCoinEvent);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetCollectCoinEvent(this IAtomicObject obj, IAtomicObservable reference) => obj.SetValue(CollectCoinEvent, reference);
+        public static void SetCollectCoinEvent(this IAtomicObject obj, IAtomicObservable value) => obj.SetValue(CollectCoinEvent, value);
 
         [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IAtomicVariable<float> GetLookDirection(this IAtomicObject obj) => obj.GetValue<IAtomicVariable<float>>(LookDirection);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetLookDirection(this IAtomicObject obj, out IAtomicVariable<float> result) => obj.TryGetValue(LookDirection, out result);
+        public static bool TryGetLookDirection(this IAtomicObject obj, out IAtomicVariable<float> value) => obj.TryGetValue(LookDirection, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddLookDirection(this IAtomicObject obj, IAtomicVariable<float> reference) => obj.AddValue(LookDirection, reference);
+        public static bool AddLookDirection(this IAtomicObject obj, IAtomicVariable<float> value) => obj.AddValue(LookDirection, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool DelLookDirection(this IAtomicObject obj) => obj.DelValue(LookDirection);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetLookDirection(this IAtomicObject obj, IAtomicVariable<float> reference) => obj.SetValue(LookDirection, reference);
+        public static void SetLookDirection(this IAtomicObject obj, IAtomicVariable<float> value) => obj.SetValue(LookDirection, value);
 
         [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static JumpComponent GetJumpComponent(this IAtomicObject obj) => obj.GetValue<JumpComponent>(JumpComponent);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetJumpComponent(this IAtomicObject obj, out JumpComponent result) => obj.TryGetValue(JumpComponent, out result);
+        public static bool TryGetJumpComponent(this IAtomicObject obj, out JumpComponent value) => obj.TryGetValue(JumpComponent, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddJumpComponent(this IAtomicObject obj, JumpComponent reference) => obj.AddValue(JumpComponent, reference);
+        public static bool AddJumpComponent(this IAtomicObject obj, JumpComponent value) => obj.AddValue(JumpComponent, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool DelJumpComponent(this IAtomicObject obj) => obj.DelValue(JumpComponent);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetJumpComponent(this IAtomicObject obj, JumpComponent reference) => obj.SetValue(JumpComponent, reference);
+        public static void SetJumpComponent(this IAtomicObject obj, JumpComponent value) => obj.SetValue(JumpComponent, value);
 
         [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IAtomicAction GetDeathAction(this IAtomicObject obj) => obj.GetValue<IAtomicAction>(DeathAction);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetDeathAction(this IAtomicObject obj, out IAtomicAction result) => obj.TryGetValue(DeathAction, out result);
+        public static bool TryGetDeathAction(this IAtomicObject obj, out IAtomicAction value) => obj.TryGetValue(DeathAction, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddDeathAction(this IAtomicObject obj, IAtomicAction reference) => obj.AddValue(DeathAction, reference);
+        public static bool AddDeathAction(this IAtomicObject obj, IAtomicAction value) => obj.AddValue(DeathAction, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool DelDeathAction(this IAtomicObject obj) => obj.DelValue(DeathAction);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetDeathAction(this IAtomicObject obj, IAtomicAction reference) => obj.SetValue(DeathAction, reference);
+        public static void SetDeathAction(this IAtomicObject obj, IAtomicAction value) => obj.SetValue(DeathAction, value);
 
         [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static MoveComponent GetMoveComponent(this IAtomicObject obj) => obj.GetValue<MoveComponent>(MoveComponent);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetMoveComponent(this IAtomicObject obj, out MoveComponent result) => obj.TryGetValue(MoveComponent, out result);
+        public static bool TryGetMoveComponent(this IAtomicObject obj, out MoveComponent value) => obj.TryGetValue(MoveComponent, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddMoveComponent(this IAtomicObject obj, MoveComponent reference) => obj.AddValue(MoveComponent, reference);
+        public static void AddMoveComponent(this IAtomicObject obj, MoveComponent value) => obj.AddElement(MoveComponent, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool DelMoveComponent(this IAtomicObject obj) => obj.DelValue(MoveComponent);
+        public static void DelMoveComponent(this IAtomicObject obj) => obj.DelElement(MoveComponent);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetMoveComponent(this IAtomicObject obj, MoveComponent reference) => obj.SetValue(MoveComponent, reference);
+        public static void SetMoveComponent(this IAtomicObject obj, MoveComponent value) => obj.SetElement(MoveComponent, value);
+
+        [CanBeNull, MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static GameObject GetGameObject(this IAtomicObject obj) => obj.GetValue<GameObject>(GameObject);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetGameObject(this IAtomicObject obj, out GameObject value) => obj.TryGetValue(GameObject, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddGameObject(this IAtomicObject obj, GameObject value) => obj.AddValue(GameObject, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelGameObject(this IAtomicObject obj) => obj.DelValue(GameObject);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetGameObject(this IAtomicObject obj, GameObject value) => obj.SetValue(GameObject, value);
     }
 }

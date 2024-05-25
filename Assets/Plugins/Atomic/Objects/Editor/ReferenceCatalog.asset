@@ -47,7 +47,7 @@ MonoBehaviour:
       type: MoveComponent
     - id: 4
       name: GameObject
-      type: 
+      type: GameObject
   - name: Visual
     indexes:
     - id: 3
