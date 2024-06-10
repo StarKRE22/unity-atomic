@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/StarKRE22/unity-atomic/tree/experimental"
+    "url": "https://github.com/StarKRE22/unity-atomic.git#experimental"
   },
 
   "description": "Experimental concept of game object development"
