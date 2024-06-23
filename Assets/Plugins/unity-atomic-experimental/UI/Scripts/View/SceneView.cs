@@ -4,26 +4,57 @@ using UnityEngine;
 
 namespace Atomic.UI
 {
-    public sealed class SceneView : MonoBehaviour, IView, ISerializationCallbackReceiver
+    public class SceneView : MonoBehaviour, IView, ISerializationCallbackReceiver
     {
-        #region Setup
-        
-        [Serializable]
-        private struct Value
-        {
-            
-        }
-
-        [SerializeField]
-        private Value[] initialValues;
+        #region Install
 
         [SerializeReference]
-        private ILogic[] initialLogic;
+        protected IViewInstaller[] installers;
+
+        private bool installed;
+
+        void ISerializationCallbackReceiver.OnAfterDeserialize()
+        {
+            this.Install();
+        }
+
+        void ISerializationCallbackReceiver.OnBeforeSerialize()
+        {
+        }
+
+        private void Install()
+        {
+            if (this.installed)
+            {
+                return;
+            }
+            
+            if (this.installers != null)
+            {
+                for (int i = 0, count = this.installers.Length; i < count; i++)
+                {
+                    IViewInstaller installer = this.installers[i];
+                    installer?.Install(this);
+                }
+            }
+
+            this.installed = true;
+        }
 
         #endregion
 
         #region Main
 
+        private void OnEnable()
+        {
+            this.view.IsShown = true;
+        }
+
+        private void OnDisable()
+        {
+            this.view.IsShown = false;
+        }
+        
         private readonly View view = new();
 
         public event Action<IView, string> OnNameChanged
@@ -52,8 +83,16 @@ namespace Atomic.UI
 
         public bool IsShown
         {
-            get => view.IsShown;
-            set => view.IsShown = value;
+            get
+            {
+                return this.enabled &&
+                       this.gameObject.activeSelf &&
+                       this.gameObject.activeInHierarchy;
+            }
+            set
+            {
+                this.gameObject.SetActive(value);
+            }
         }
 
         #endregion
@@ -79,7 +118,6 @@ namespace Atomic.UI
         }
 
         public IReadOnlyDictionary<int, object> Values => view.Values;
-
 
         public T GetValue<T>(int id) where T : class
         {
@@ -173,13 +211,5 @@ namespace Atomic.UI
         }
 
         #endregion
-
-        void ISerializationCallbackReceiver.OnAfterDeserialize()
-        {
-        }
-
-        void ISerializationCallbackReceiver.OnBeforeSerialize()
-        {
-        }
     }
 }

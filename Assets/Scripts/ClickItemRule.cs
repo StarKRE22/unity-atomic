@@ -3,14 +3,10 @@ using Atomic.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DefaultNamespace
+namespace Test
 {
-    [Serializable]
     public sealed class ClickItemRule : IShow, IHide, IUpdate
     {
-        [SerializeField]
-        private Button button;
-
         public void OnShow(IView view)
         {
             view.GetButton().onClick.AddListener(this.OnClicked);

@@ -1,6 +1,6 @@
 {
     "name": "Atomic.UI",
-    "rootNamespace": "Atomic.UI",
+    "rootNamespace": "",
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
