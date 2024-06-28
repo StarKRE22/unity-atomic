@@ -1,6 +1,6 @@
 namespace Modules.GameCycles
 {
-    public enum GameState
+    public enum GameState : byte
     {
         OFF = 0,
         PLAY = 1,

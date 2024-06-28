@@ -3,20 +3,18 @@ using UnityEngine;
 
 namespace SampleGame
 {
-    public sealed class CameraFollower : IInitSystem, ILateUpdateSystem
+    public sealed class CameraFollower : ILateUpdateSystem
     {
+        [Inject(GameContextAPI.Character)]
         private ICharacter character;
-        private Camera camera;
-        private CameraConfig cameraConfig;
         
-        public void Init(IContext context)
-        {
-            this.character = context.GetCharacter();
-            this.camera = context.GetPlayerCamera();
-            this.cameraConfig = context.GetCameraConfig();
-        }
+        [Inject(GameContextAPI.PlayerCamera)]
+        private Camera camera;
+        
+        [Inject(GameContextAPI.CameraConfig)]
+        private CameraConfig cameraConfig;
 
-        public void LateUpdate(float deltaTime)
+        public void LateUpdate(IContext context, float deltaTime)
         {
             Vector3 cameraPosition = this.character.GetPosition() + this.cameraConfig.cameraOffset;
             this.camera.transform.position = cameraPosition;

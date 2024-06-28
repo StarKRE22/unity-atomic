@@ -2,6 +2,6 @@ namespace Atomic.Contexts
 {
     public interface IFixedUpdateSystem
     {
-        void FixedUpdate(float deltaTime);
+        void FixedUpdate(IContext context, float deltaTime);
     }
 }
