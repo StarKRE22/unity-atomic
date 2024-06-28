@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace Atomic.Contexts
 {
     [TestFixture]
-    public sealed class ContextTests
+    public sealed class ContextLifecycleTests
     {
         private Context context;
 
@@ -80,17 +80,21 @@ namespace Atomic.Contexts
             Assert.IsFalse(wasEvent.value);
             Assert.IsFalse(enableSystem.enabled);
         }
+        
+        [Test]
+        public void UpdateContext()
+        {
+            //Arrange
+            var wasEvent = new Reference<bool>();
+            var updateSystem = new UpdateSystemStub();
+
+            this.context.AddSystem(updateSystem);
 
 
-        //
-        // public void InitialzeTwiceFailed()
-        // {
-        //     //Arrange
-        //     Assert.IsTrue(this.context.IsOff());
-        //     
-        //     //Act
-        //     this.context.Initialize();
-        //     this.context.Initialize();
-        // }
+            //Act
+            this.context.Initialize();
+            this.context.Enable();
+        }
+        
     }
 }
