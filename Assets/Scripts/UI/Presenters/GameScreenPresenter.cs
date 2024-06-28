@@ -1,8 +1,10 @@
+using System;
 using Atomic.UI;
 using Modules.GameCycles;
 
 namespace SampleGame.UI
 {
+    [Serializable]
     public sealed class GameScreenPresenter : IAwakeHandler, IEnableHandler, IDisableHandler
     {
         private GameCycle gameCycle;

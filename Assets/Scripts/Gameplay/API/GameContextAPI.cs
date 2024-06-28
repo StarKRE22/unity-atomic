@@ -1,4 +1,3 @@
-using System;
 using Atomic.Contexts;
 using Modules.GameCycles;
 using Modules.Inputs;
