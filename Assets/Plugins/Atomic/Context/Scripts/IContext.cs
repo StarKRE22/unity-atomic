@@ -18,7 +18,7 @@ namespace Atomic.Contexts
         ContextState State { get; }
         
         IReadOnlyDictionary<int, object> AllData { get; }
-        IReadOnlyList<ISystem> AllSystems { get; }
+        IReadOnlyCollection<ISystem> AllSystems { get; }
         
         IContext Parent { get; set; }
         IReadOnlyList<IContext> Children { get; }
@@ -38,10 +38,12 @@ namespace Atomic.Contexts
         bool TryGetLogic<T>(out T logic) where T : ISystem;
         
         bool AddSystem(ISystem system);
-        bool AddSystem<T>() where T : ISystem;
+        bool AddSystem<T>() where T : ISystem, new();
         bool DelSystem(ISystem system);
         bool DelSystem<T>() where T : ISystem;
         bool HasSystem(ISystem system);
         bool HasSystem<T>() where T : ISystem;
+
+        void Inject(object target);
     }
 }

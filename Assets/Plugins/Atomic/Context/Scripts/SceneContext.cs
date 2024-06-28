@@ -54,7 +54,7 @@ namespace Atomic.Contexts
 
         public IReadOnlyDictionary<int, object> AllData => context.AllData;
 
-        public IReadOnlyList<ISystem> AllSystems => context.AllSystems;
+        public IReadOnlyCollection<ISystem> AllSystems => context.AllSystems;
 
         public IContext Parent
         {
@@ -124,7 +124,7 @@ namespace Atomic.Contexts
             return context.AddSystem(system);
         }
 
-        public bool AddSystem<T>() where T : ISystem
+        public bool AddSystem<T>() where T : ISystem, new()
         {
             return context.AddSystem<T>();
         }
@@ -147,6 +147,11 @@ namespace Atomic.Contexts
         public bool HasSystem<T>() where T : ISystem
         {
             return context.HasSystem<T>();
+        }
+
+        public void Inject(object target)
+        {
+            context.Inject(target);
         }
 
         public bool AddSystem(int key, ISystem logic)

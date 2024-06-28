@@ -29,47 +29,7 @@ namespace Atomic.Contexts
             this.name = name;
         }
 
-        public void Initialize()
-        {
-            if (this.state != ContextState.OFF)
-            {
-                Debug.LogWarning($"You can initialize context only from {ContextState.OFF} state! (Actual state: {this.state})");
-                return;
-            }
-
-            for (int i = 0, count = this.allSystems.Count; i < count; i++)
-            {
-                ISystem system = this.allSystems[i];
-                if (system is IInitSystem initSystem)
-                {
-                    initSystem.Init(this);
-                }
-            }
-
-            this.state = ContextState.INITIALIZED;
-            this.OnStateChanged?.Invoke(this.state);
-        }
-
-        public void Enable()
-        {
-            if (this.state != ContextState.INITIALIZED)
-            {
-                Debug.LogWarning($"You can enable context only from {ContextState.INITIALIZED} state! (Actual state: {this.state})");
-                return;
-            }
-            
-            for (int i = 0, count = this.allSystems.Count; i < count; i++)
-            {
-                ISystem system = this.allSystems[i];
-                if (system is IEnableSystem enableSystem)
-                {
-                    enableSystem.Enable(this);
-                }
-            }
-
-            this.state = ContextState.ENABLED;
-            this.OnStateChanged?.Invoke(this.state);
-        }
+       
 
         #endregion
 
@@ -88,12 +48,12 @@ namespace Atomic.Contexts
         public event Action<ISystem> OnSystemAdded;
         public event Action<ISystem> OnSystemRemoved;
 
-        public IReadOnlyList<ISystem> AllSystems
+        public IReadOnlyCollection<ISystem> AllSystems
         {
             get { return this.allSystems; }
         }
 
-        private List<ISystem> allSystems = new();
+        private readonly HashSet<ISystem> allSystems = new();
 
         #endregion
 
@@ -160,16 +120,45 @@ namespace Atomic.Contexts
             throw new NotImplementedException();
         }
 
+        public bool AddSystem<T>() where T : ISystem, new()
+        {
+            return this.AddSystem(new T());
+        }
+        
         public bool AddSystem(ISystem system)
         {
-            if (this.allSystems.Contains(system))
+            if (!this.allSystems.Add(system))
             {
                 return false;
             }
+
+            if (this.state == ContextState.INITIALIZED && system is IInitSystem initSystem)
+            {
+                initSystem.Init(this);
+            }
+
+            if (this.state == ContextState.ENABLED && system is IEnableSystem enableSystem)
+            {
+                enableSystem.Enable(this);
+            }
+
+            if (system is IUpdateSystem update)
+            {
+                this.updateSystems.Add(update);
+            }
+
+            if (system is IFixedUpdateSystem fixedUpdate)
+            {
+                this.fixedUpdateSystems.Add(fixedUpdate);
+            }
+
+            if (system is ILateUpdateSystem lateUpdate)
+            {
+                this.lateUpdateSystems.Add(lateUpdate);
+            }
             
-            this.allSystems.Add(system);
+            this.OnSystemAdded?.Invoke(system);
             return true;
-            // throw new System.NotImplementedException();
         }
 
         //
@@ -245,10 +234,7 @@ namespace Atomic.Contexts
         //     }
         // }
 
-        public bool AddSystem<T>() where T : ISystem
-        {
-            throw new System.NotImplementedException();
-        }
+        
 
         public bool DelSystem(ISystem system)
         {
@@ -270,6 +256,11 @@ namespace Atomic.Contexts
             throw new NotImplementedException();
         }
 
+        public void Inject(object target)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool AddSystem(int key, ISystem logic)
         {
             throw new System.NotImplementedException();
@@ -281,7 +272,7 @@ namespace Atomic.Contexts
         }
 
 
-        #region Updates
+        #region Lifecycle
 
         private readonly List<IUpdateSystem> updateSystems = new();
         private readonly List<IFixedUpdateSystem> fixedUpdateSystems = new();
@@ -356,6 +347,86 @@ namespace Atomic.Contexts
                 updateSystem.LateUpdate(this, deltaTime);
             }
         }
+        
+        public void Initialize()
+        {
+            if (this.state != ContextState.OFF)
+            {
+                Debug.LogWarning($"You can initialize context only from {ContextState.OFF} state! (Actual state: {this.state})");
+                return;
+            }
+
+            foreach (ISystem system in this.allSystems)
+            {
+                if (system is IInitSystem initSystem)
+                {
+                    initSystem.Init(this);
+                }
+            }
+
+            this.state = ContextState.INITIALIZED;
+            this.OnStateChanged?.Invoke(this.state);
+        }
+        
+        public void Disable()
+        {
+            if (this.state != ContextState.ENABLED)
+            {
+                Debug.LogWarning($"You can disable context only from {ContextState.ENABLED} state! (Actual state: {this.state})");
+                return;
+            }
+
+            foreach (ISystem system in this.allSystems)
+            {
+                if (system is IDisableSystem disableSystem)
+                {
+                    disableSystem.Disable(this);
+                }
+            }
+
+            this.state = ContextState.DISABLED;
+            this.OnStateChanged?.Invoke(this.state);
+        }
+
+        public void Enable()
+        {
+            if (this.state != ContextState.INITIALIZED)
+            {
+                Debug.LogWarning($"You can enable context only from {ContextState.INITIALIZED} state! (Actual state: {this.state})");
+                return;
+            }
+
+            foreach (ISystem system in this.allSystems)
+            {
+                if (system is IEnableSystem enableSystem)
+                {
+                    enableSystem.Enable(this);
+                }
+            }
+
+            this.state = ContextState.ENABLED;
+            this.OnStateChanged?.Invoke(this.state);
+        }
+
+        public void Destroy()
+        {
+            if (this.state != ContextState.DISABLED)
+            {
+                Debug.LogWarning($"You can destroy context only from {ContextState.DISABLED} state! (Actual state: {this.state})");
+                return;
+            }
+
+            foreach (ISystem system in this.allSystems)
+            {
+                if (system is IDestroySystem destroySystem)
+                {
+                    destroySystem.Destroy(this);
+                }
+            }
+
+            this.state = ContextState.DESTROYED;
+            this.OnStateChanged?.Invoke(this.state);
+        }
 
         #endregion
 
@@ -367,5 +438,7 @@ namespace Atomic.Contexts
         }
 
         #endregion
+
+        
     }
 }
