@@ -1,6 +1,6 @@
 namespace Atomic.UI
 {
-    public interface IDestroyHandler
+    public interface IDestroyHandler : IHandler
     {
         void Destroy(IView view);
     }

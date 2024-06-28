@@ -1,6 +1,6 @@
 namespace Atomic.UI
 {
-    public interface IAwakeHandler
+    public interface IAwakeHandler : IHandler
     {
         void Awake(IView view);
     }

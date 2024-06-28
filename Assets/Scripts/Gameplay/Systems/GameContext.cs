@@ -1,6 +1,6 @@
 using Atomic.Contexts;
 
-namespace Gameplay.Systems
+namespace SampleGame
 {
     public sealed class GameContext
     {

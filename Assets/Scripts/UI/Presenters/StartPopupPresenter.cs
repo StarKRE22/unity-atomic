@@ -1,10 +1,9 @@
 using Atomic.UI;
-using Gameplay.Systems;
 using Modules.GameCycles;
 
 namespace SampleGame.UI
 {
-    public sealed class StartScreenPresenter : IEnableHandler, IDisableHandler
+    public sealed class StartPopupPresenter : IEnableHandler, IDisableHandler
     {
         private GameCycle gameCycle;
         

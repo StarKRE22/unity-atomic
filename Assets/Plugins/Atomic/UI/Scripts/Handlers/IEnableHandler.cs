@@ -1,6 +1,6 @@
 namespace Atomic.UI
 {
-    public interface IEnableHandler
+    public interface IEnableHandler : IHandler
     {
         void Enable(IView view);
     }
