@@ -1,37 +1,22 @@
-using System;
-using Modules.Contexts;
+using Atomic.UI;
+using Gameplay.Systems;
 using Modules.GameCycles;
-using UnityEngine;
 
 namespace SampleGame.UI
 {
-    [Serializable]
-    public sealed class StartScreenPresenter : IInitSystem, IDisposeSystem
+    public sealed class StartScreenPresenter : IEnableHandler, IDisableHandler
     {
-        [SerializeField]
-        private StartScreenView startScreen;
-        
         private GameCycle gameCycle;
-
-        public void Init(IContext context)
+        
+        public void Enable(IView view)
         {
-            this.gameCycle = context.GetGameCycle();
-            this.gameCycle.OnGameStarted += this.OnGameStarted;
-            
-            this.startScreen.startButton.onClick.AddListener(this.gameCycle.StartGame);
-
-            this.startScreen.Show();
+            this.gameCycle = GameContext.Instance.GetGameCycle();
+            view.GetStartButton().onClick.AddListener(this.gameCycle.StartGame);
         }
 
-        public void Dispose()
+        public void Disable(IView view)
         {
-            this.gameCycle.OnGameStarted -= this.OnGameStarted;
-            this.startScreen.startButton.onClick.RemoveListener(this.gameCycle.StartGame);
-        }
-
-        private void OnGameStarted()
-        {
-            this.startScreen.Hide();
+            view.GetStartButton().onClick.RemoveListener(this.gameCycle.StartGame);
         }
     }
 }

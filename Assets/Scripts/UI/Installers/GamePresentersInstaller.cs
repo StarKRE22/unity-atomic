@@ -1,5 +1,5 @@
 using System;
-using Modules.Contexts;
+using Atomic.Contexts;
 using UnityEngine;
 
 namespace SampleGame.UI
@@ -11,7 +11,7 @@ namespace SampleGame.UI
         private StartScreenPresenter startScreenPresenter;
         
         [SerializeField]
-        private FinishScreenPresenter finishScreenPresenter;
+        private GameScreenPresenter gameScreenPresenter;
         
         public void Install(IContext context)
         {

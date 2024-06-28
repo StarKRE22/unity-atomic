@@ -1,26 +1,22 @@
 using System;
-using Modules.Contexts;
+using Atomic.UI;
 using SampleGame.App;
-using UnityEngine;
 
 namespace SampleGame.UI
 {
     [Serializable]
-    public sealed class MenuScreenPresenter : IInitSystem, IDisposable
+    public sealed class MenuScreenPresenter : IEnableHandler, IDisableHandler
     {
-        [SerializeField]
-        private MenuScreenView menuScreen;
-
-        public void Init(IContext context)
+        public void Enable(IView view)
         {
-            this.menuScreen.startButton.onClick.AddListener(GameLaunchCase.LaunchGame);
-            this.menuScreen.exitButton.onClick.AddListener(ApplicationCase.Exit);
+            view.GetStartButton().onClick.AddListener(GameLaunchCase.LaunchGame);
+            view.GetExitButton().onClick.AddListener(ApplicationCase.Exit);
         }
 
-        public void Dispose()
+        public void Disable(IView view)
         {
-            this.menuScreen.startButton.onClick.RemoveListener(GameLaunchCase.LaunchGame);
-            this.menuScreen.exitButton.onClick.RemoveListener(ApplicationCase.Exit);
+            view.GetStartButton().onClick.RemoveListener(GameLaunchCase.LaunchGame);
+            view.GetExitButton().onClick.RemoveListener(ApplicationCase.Exit);
         }
     }
 }
