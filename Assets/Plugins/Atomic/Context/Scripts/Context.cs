@@ -267,36 +267,44 @@ namespace Atomic.Contexts
 
         #region Parent
         
-        public IContext Parent
-        {
-            get { return this.parent; }
-            set { this.SetParent(value); }
-        }
-
+        public IContext Parent => this.parent;
         public IReadOnlyCollection<IContext> Children => this.children;
         public ICollection<IContext> ChildrenUnsafe => this.children;
 
         private readonly HashSet<IContext> children = new();
         private IContext parent;
 
-        public bool IsChild(Context context)
+        public bool IsChild(IContext context)
         {
             return this.children.Contains(context);
         }
 
-        public bool IsParent(Context context)
+        public bool IsParent(IContext context)
         {
             return this.parent == context;
         }
 
-        private void SetParent(IContext parent)
+        public bool AddChild(IContext child)
         {
-            if (this.parent != parent)
+            return child != null && child.SetParent(this);
+        }
+
+        public bool DelChild(IContext child)
+        {
+            return child != null && child.SetParent(null);
+        }
+
+        public bool SetParent(IContext parent)
+        {
+            if (this.parent == parent)
             {
-                this.parent?.ChildrenUnsafe.Remove(this);
-                this.parent = parent;
-                this.parent?.ChildrenUnsafe.Add(this);
+                return false;
             }
+
+            this.parent?.ChildrenUnsafe.Remove(this);
+            this.parent = parent;
+            this.parent?.ChildrenUnsafe.Add(this);
+            return true;
         }
 
         #endregion
@@ -471,6 +479,5 @@ namespace Atomic.Contexts
         }
 
         #endregion
-
     }
 }

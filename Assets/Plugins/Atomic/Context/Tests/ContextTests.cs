@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using UnityEngine;
 
 namespace Atomic.Contexts
 {
@@ -323,7 +324,7 @@ namespace Atomic.Contexts
             var child = new Context();
 
             //Act:
-            child.Parent = parent;
+            child.SetParent(parent);
 
             //Assert:
             Assert.IsTrue(child.IsParent(parent));
@@ -345,7 +346,7 @@ namespace Atomic.Contexts
             Assert.IsFalse(parent2.IsChild(child));
 
             //Act:
-            child.Parent = parent2;
+            child.SetParent(parent2);
 
             //Assert:
             Assert.IsTrue(child.IsParent(parent2));
@@ -354,6 +355,65 @@ namespace Atomic.Contexts
             Assert.IsFalse(parent1.IsChild(child));
         }
 
+        [Test]
+        public void AddChild()
+        {
+            //Arrange:
+            var parent = new Context();
+            var child = new Context();
+
+            //Act:
+            bool success = parent.AddChild(child);
+            
+            //Assert:
+            Assert.IsTrue(success);
+            Assert.IsTrue(child.IsParent(parent));
+            Assert.IsTrue(parent.IsChild(child));
+        }
+        
+        [Test]
+        public void DelChild()
+        {
+            //Arrange:
+            var parent = new Context();
+            var child = new Context("Child", parent);
+
+            //Act:
+            bool success = parent.DelChild(child);
+            
+            //Assert:
+            Assert.IsTrue(success);
+            Assert.IsFalse(child.IsParent(parent));
+            Assert.IsFalse(parent.IsChild(child));
+        }
+
+        [Test]
+        public void WhenAddChildThatAlreadyAddedThenFalse()
+        {
+            //Arrange:
+            var parent = new Context();
+            var child = new Context(null, parent);
+
+            //Act:
+            bool success = parent.AddChild(child);
+            
+            //Assert:
+            Assert.IsFalse(success);
+        }
+        
+        [Test]
+        public void WhenRemoveChildThatNotChildThenFalse()
+        {
+            //Arrange:
+            var parent = new Context();
+            var child = new Context();
+
+            //Act:
+            bool success = parent.DelChild(child);
+            
+            //Assert:
+            Assert.IsFalse(success);
+        }
 
         //
         // [Test]
@@ -447,10 +507,8 @@ namespace Atomic.Contexts
         {
             //Arrange:
             var parent = new Context();
-            var child = new Context();
-            child.Parent = parent;
-            
-            
+            parent.AddChild(new Context());
+
             //Act:
             string data = parent.GetValueInChildren<string>(1);
 
