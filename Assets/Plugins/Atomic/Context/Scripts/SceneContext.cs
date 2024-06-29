@@ -62,7 +62,9 @@ namespace Atomic.Contexts
             set => context.Parent = value;
         }
 
-        public IReadOnlyList<IContext> Children => context.Children;
+
+        public IReadOnlyCollection<IContext> Children => context.Children;
+        public ICollection<IContext> ChildrenUnsafe => context.ChildrenUnsafe;
 
         public bool AddData(int key, object value)
         {
@@ -147,6 +149,16 @@ namespace Atomic.Contexts
         public bool HasSystem<T>() where T : ISystem
         {
             return context.HasSystem<T>();
+        }
+
+        public bool IsChild(Context context)
+        {
+            return this.context.IsChild(context);
+        }
+
+        public bool IsParent(Context context)
+        {
+            return this.context.IsParent(context);
         }
     }
 }

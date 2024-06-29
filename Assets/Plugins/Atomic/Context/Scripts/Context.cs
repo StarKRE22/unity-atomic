@@ -13,12 +13,13 @@ namespace Atomic.Contexts
             get { return this.name; }
             set { this.name = value; }
         }
-        
+
         private string name;
 
-        public Context(string name = null)
+        public Context(string name = null, IContext parent = null)
         {
             this.name = name;
+            this.SetParent(parent);
         }
 
         #endregion
@@ -57,6 +58,7 @@ namespace Atomic.Contexts
 
             return null;
         }
+
 
         public bool AddData(int key, object value)
         {
@@ -152,7 +154,7 @@ namespace Atomic.Contexts
             result = default;
             return false;
         }
-        
+
         public bool HasSystem(ISystem system)
         {
             return this.allSystems.Contains(system);
@@ -183,7 +185,7 @@ namespace Atomic.Contexts
                 return false;
             }
 
-            if (this.state is > ContextState.OFF and < ContextState.DESTROYED && 
+            if (this.state is > ContextState.OFF and < ContextState.DESTROYED &&
                 system is IInitSystem initSystem)
             {
                 initSystem.Init(this);
@@ -245,13 +247,13 @@ namespace Atomic.Contexts
             {
                 this.lateUpdateSystems.Remove(lateUpdate);
             }
-            
+
             if (this.state == ContextState.ENABLED && system is IDisableSystem disableSystem)
             {
                 disableSystem.Disable(this);
             }
 
-            if (this.state is > ContextState.OFF and < ContextState.DESTROYED && 
+            if (this.state is > ContextState.OFF and < ContextState.DESTROYED &&
                 system is IDestroySystem destroySystem)
             {
                 destroySystem.Destroy(this);
@@ -260,17 +262,45 @@ namespace Atomic.Contexts
             this.OnSystemRemoved?.Invoke(system);
             return true;
         }
-        
+
         #endregion
 
         #region Parent
+        
+        public IContext Parent
+        {
+            get { return this.parent; }
+            set { this.SetParent(value); }
+        }
 
-        public IContext Parent { get; set; }
+        public IReadOnlyCollection<IContext> Children => this.children;
+        public ICollection<IContext> ChildrenUnsafe => this.children;
 
-        public IReadOnlyList<IContext> Children { get; }
+        private readonly HashSet<IContext> children = new();
+        private IContext parent;
+
+        public bool IsChild(Context context)
+        {
+            return this.children.Contains(context);
+        }
+
+        public bool IsParent(Context context)
+        {
+            return this.parent == context;
+        }
+
+        private void SetParent(IContext parent)
+        {
+            if (this.parent != parent)
+            {
+                this.parent?.ChildrenUnsafe.Remove(this);
+                this.parent = parent;
+                this.parent?.ChildrenUnsafe.Add(this);
+            }
+        }
 
         #endregion
-        
+
         #region Lifecycle
 
         public ContextState State
@@ -441,5 +471,6 @@ namespace Atomic.Contexts
         }
 
         #endregion
+
     }
 }

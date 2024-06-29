@@ -121,7 +121,7 @@ namespace Atomic.Contexts
             //Act
             this.context.Initialize();
             this.context.Enable();
-            
+
             this.context.Update(deltaTime: 0);
             this.context.FixedUpdate(deltaTime: 0);
             this.context.LateUpdate(deltaTime: 0);
@@ -154,7 +154,7 @@ namespace Atomic.Contexts
             Assert.IsFalse(wasEvent.value);
             Assert.IsFalse(enableSystem.enabled);
         }
-        
+
         [Test]
         public void WhenUpdateContextFromOffStateThenFailed()
         {
@@ -183,7 +183,7 @@ namespace Atomic.Contexts
             //Arrange:
             var wasEvent = new Reference<(int, object)>();
             this.context.OnDataAdded += (key, value) => wasEvent.value = (key, value);
-            
+
             //Act:
             bool success = this.context.AddData(1, "Apple");
 
@@ -199,7 +199,7 @@ namespace Atomic.Contexts
         {
             //Arrange:
             this.context.AddData(1, "Apple");
-            
+
             //Act:
             string data = this.context.GetData<string>(1);
 
@@ -212,7 +212,7 @@ namespace Atomic.Contexts
         {
             //Act
             string data = this.context.GetData<string>(1);
-            
+
             //Assert
             Assert.IsNull(data);
         }
@@ -222,10 +222,10 @@ namespace Atomic.Contexts
         {
             //Arrange:
             this.context.AddData(1, "Apple");
-            
+
             var wasEvent = new Reference<bool>();
             this.context.OnDataAdded += (_, _) => wasEvent.value = true;
-            
+
             //Act:
             bool success = this.context.AddData(1, "Apple");
 
@@ -245,7 +245,7 @@ namespace Atomic.Contexts
             var wasEvent = new Reference<ISystem>();
             var systemStub = new SystemStub();
             this.context.OnSystemAdded += system => wasEvent.value = system;
-            
+
             //Act:
             bool success = this.context.AddSystem(systemStub);
 
@@ -266,16 +266,16 @@ namespace Atomic.Contexts
             var systemStub = new SystemStub();
             this.context.AddSystem(systemStub);
             this.context.OnSystemRemoved += system => wasEvent.value = system;
-            
+
             //Act:
             bool removed = this.context.DelSystem<SystemStub>();
-            
+
             //Assert:
             Assert.IsTrue(removed);
             Assert.IsFalse(this.context.HasSystem<SystemStub>());
             Assert.AreEqual(systemStub, wasEvent.value);
         }
-        
+
         [Test]
         public void WhenAddAndRemoveSystemOnEnableContextThenSystemWillListenCallbacks()
         {
@@ -286,13 +286,13 @@ namespace Atomic.Contexts
             //Act:
             var systemStub = new CommonSystemStub();
             this.context.AddSystem(systemStub);
-            
+
             this.context.Update(deltaTime: 0);
             this.context.FixedUpdate(deltaTime: 0);
             this.context.LateUpdate(deltaTime: 0);
 
             this.context.DelSystem<CommonSystemStub>();
-            
+
             //Assert:
             Assert.IsTrue(systemStub.initialized);
             Assert.IsTrue(systemStub.enabled);
@@ -302,6 +302,107 @@ namespace Atomic.Contexts
             Assert.IsTrue(systemStub.disabled);
             Assert.IsTrue(systemStub.destroyed);
         }
+
+        #endregion
+
+        #region Parent
+
+        [Test]
+        public void SetParent()
+        {
+            //Arrange:
+            var parent = new Context();
+            var child = new Context();
+
+            //Act:
+            child.Parent = parent;
+
+            //Assert:
+            Assert.IsTrue(child.IsParent(parent));
+            Assert.IsTrue(parent.IsChild(child));
+        }
+
+        [Test]
+        public void ChangeParent()
+        {
+            //Arrange:
+            var parent1 = new Context();
+            var parent2 = new Context();
+            var child = new Context(null, parent1);
+
+            //Verify:
+            Assert.IsTrue(child.IsParent(parent1));
+            Assert.IsFalse(child.IsParent(parent2));
+            Assert.IsTrue(parent1.IsChild(child));
+            Assert.IsFalse(parent2.IsChild(child));
+
+            //Act:
+            child.Parent = parent2;
+
+            //Assert:
+            Assert.IsTrue(child.IsParent(parent2));
+            Assert.IsTrue(parent2.IsChild(child));
+            Assert.IsFalse(child.IsParent(parent1));
+            Assert.IsFalse(parent1.IsChild(child));
+        }
+
+
+        //
+        // [Test]
+        // public void InitializeChildren()
+        // {
+        //     
+        //     
+        //     
+        //     // //Arrange:
+        //     // var parent1 = new Context();
+        //     // var parent2 = new Context();
+        //     // var child = new Context();
+        //     //
+        //     // //Act:
+        //     // child.Parent = parent;
+        //     //
+        //     // //Assert:
+        //     // Assert.IsTrue(child.IsParent(parent));
+        //     // Assert.IsTrue(parent.IsChild(child));
+        // }
+
+        #endregion
+
+        #region Extensions
+
+        [Test]
+        public void GetDataInParent()
+        {
+            //Arrange:
+            var parent = new Context();
+            parent.AddData(1, "Apple");
+            
+            var child = new Context(null, parent);
+            
+            //Act:
+            string data = child.GetDataInParent<string>(1);
+            
+            //Assert:
+            Assert.IsFalse(child.HasData(1));
+            Assert.AreEqual("Apple", data);
+        }
+        
+        // [Test]
+        // public void GetDataInSelfAndParent()
+        // {
+        //     //Arrange:
+        //     var parent = new Context();
+        //     
+        //     var child = new Context(null, parent);
+        //     parent.AddData(1, "Apple");
+        //
+        //     //Verify:
+        //     Assert.IsFalse(child.HasData(1));
+        //
+        //     //Act:
+        //     child.GetDataInParent<>()
+        // }
 
         #endregion
     }

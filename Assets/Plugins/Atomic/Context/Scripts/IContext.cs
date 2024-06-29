@@ -21,7 +21,8 @@ namespace Atomic.Contexts
         IReadOnlyCollection<ISystem> AllSystems { get; }
         
         IContext Parent { get; set; }
-        IReadOnlyList<IContext> Children { get; }
+        IReadOnlyCollection<IContext> Children { get; }
+        ICollection<IContext> ChildrenUnsafe { get; }
 
         bool AddData(int key, object value);
         void SetData(int key, object value);
@@ -43,5 +44,8 @@ namespace Atomic.Contexts
         bool DelSystem<T>() where T : ISystem;
         bool HasSystem(ISystem system);
         bool HasSystem<T>() where T : ISystem;
+
+        bool IsChild(Context context);
+        bool IsParent(Context context);
     }
 }
