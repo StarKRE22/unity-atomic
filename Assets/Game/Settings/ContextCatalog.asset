@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e76fb309170c43a099373e6806c27f2b, type: 3}
-  m_Name: ValueCatalog
+  m_Name: ContextCatalog
   m_EditorClassIdentifier: 
   <Inactive>k__BackingField: 0
   categories:
@@ -19,7 +19,7 @@ MonoBehaviour:
     DirectoryPath: Assets/Game/Scripts/Gameplay/API
     ClassSuffix: API
     Imports:
-    - 
+    - Modules.Gameplay
     items:
     - id: 1
       name: MoveInput
@@ -27,3 +27,9 @@ MonoBehaviour:
     - id: 2
       name: Character
       type: ICharacter
+    - id: 3
+      name: PlayerCamera
+      type: Camera
+    - id: 4
+      name: GameCycle
+      type: GameCycle

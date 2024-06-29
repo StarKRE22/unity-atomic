@@ -38,7 +38,7 @@ namespace Atomic.Contexts
             Color prevColor = GUI.color;
             EditorGUILayout.BeginHorizontal();
 
-            EditorGUILayout.LabelField("Id", GUILayout.Width(50));
+            EditorGUILayout.LabelField($"{label.text}", GUILayout.Width(150));
 
             int newCategoryIndex = EditorGUILayout.Popup(categoryIndex, catalog.GetNotEmptyCategoryNames());
             if (newCategoryIndex != categoryIndex)
@@ -56,7 +56,7 @@ namespace Atomic.Contexts
             }
             else
             {
-                itemIndex = EditorGUILayout.Popup(GUIContent.none, itemIndex, category.GetItemNamesWithIds());
+                itemIndex = EditorGUILayout.Popup(itemIndex, category.GetItemNamesWithIds());
                 this.ValueEntry.SmartValue = category.GetItem(itemIndex).id;
             }
 

@@ -21,7 +21,8 @@ namespace SampleGame
         {
             this.character = context.GetCharacter();
             this.camera = context.GetPlayerCamera();
-            this.gameCycle = context.GetGameCycle();
+            
+            this.gameCycle = context.ResolveGameCycle();
             this.gameCycle.AddListener(this);
         }
         

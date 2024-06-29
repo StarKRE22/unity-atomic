@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using UnityEngine;
 
 namespace Atomic.Contexts
 {
@@ -48,8 +49,11 @@ namespace Atomic.Contexts
                 
                 if (context == null)
                 {
+                    Debug.Log($"CONTEXT NULL");
                     return null;
                 }
+
+                Debug.Log($"CONTEXT {context.Name} CHECK");
 
                 value = context.GetValue<T>(key);
 

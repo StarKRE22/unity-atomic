@@ -14,7 +14,7 @@ namespace SampleGame
         {
             this.moveInput = context.GetMoveInput();
 
-            this.gameCycle = context.GetGameCycle();
+            this.gameCycle = context.ResolveGameCycle();
             this.gameCycle.AddListener(this);
         }
 

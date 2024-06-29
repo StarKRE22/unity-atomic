@@ -13,8 +13,8 @@ namespace SampleGame
         public void Install(IContext context)
         {
             context.AddCharacter(this.character);
-            context.AddSystem<CharacterMoveController>();
             context.AddSystem<CharacterDeathObserver>();
+            // context.AddSystem<CharacterMoveController>();
         }
     }
 }

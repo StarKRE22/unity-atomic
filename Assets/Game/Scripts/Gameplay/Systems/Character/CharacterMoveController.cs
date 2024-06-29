@@ -10,21 +10,25 @@ namespace SampleGame
     {
         [ContextKey]
         [SerializeField]
-        private int characterKey = GameContextAPI.Character;
+        private int characterKey;
+
+        [ContextKey]
+        [SerializeField]
+        private int moveInputKey;
         
-        private ICharacter character;
-        private MoveInput moveInput;
+        private ICharacter _character;
+        private MoveInput _moveInput;
 
         public void Init(IContext context)
         {
-            this.character = context.GetValue<ICharacter>(this.characterKey);
-            this.moveInput = context.GetMoveInput();
-            this.moveInput.OnMove += this.character.Move;
+            _character = context.GetValue<ICharacter>(this.characterKey);
+            _moveInput = context.GetValue<MoveInput>(this.moveInputKey);
+            _moveInput.OnMove += _character.Move;
         }
 
         public void Dispose(IContext context)
         {
-            this.moveInput.OnMove -= this.character.Move;
+            _moveInput.OnMove -= _character.Move;
         }
     }
 }
