@@ -28,15 +28,15 @@ namespace Atomic.Contexts
             get => context.Name;
             set => context.Name = value;
         }
-        
+
         public IContext Parent
         {
             get => context.Parent;
             set => context.Parent = value;
         }
-        
+
         private Context context;
-        
+
         public void Install()
         {
             context = new Context(this.name, this.initialParent);
@@ -50,7 +50,7 @@ namespace Atomic.Contexts
                 }
             }
         }
-        
+
         public bool IsParent(IContext context)
         {
             return context.IsParent(context);
@@ -223,7 +223,6 @@ namespace Atomic.Contexts
             remove => context.OnSystemRemoved -= value;
         }
 
-      
 
         public IReadOnlyCollection<ISystem> Systems => context.Systems;
 
@@ -276,7 +275,7 @@ namespace Atomic.Contexts
             add => context.OnStateChanged += value;
             remove => context.OnStateChanged -= value;
         }
-        
+
         public event Action<float> OnUpdate
         {
             add => context.OnUpdate += value;
@@ -288,7 +287,7 @@ namespace Atomic.Contexts
             add => context.OnFixedUpdate += value;
             remove => context.OnFixedUpdate -= value;
         }
-        
+
         public event Action<float> OnLateUpdate
         {
             add => context.OnLateUpdate += value;
@@ -346,7 +345,7 @@ namespace Atomic.Contexts
 #if UNITY_EDITOR && ODIN_INSPECTOR
 
         ///Main
-        
+
         [FoldoutGroup("Debug")]
         [ShowInInspector, ReadOnly]
         [HideInEditorMode, LabelText("Name")]
@@ -432,7 +431,7 @@ namespace Atomic.Contexts
         {
             if (this.context != null) this.DelValue(ValuesDebug[index].id);
         }
-        
+
         ///Logics
         private static readonly List<SystemElement> _systemElementsCache = new();
 
@@ -441,12 +440,12 @@ namespace Atomic.Contexts
         {
             [ShowInInspector, ReadOnly, HideLabel]
             public string name;
-            
+
             internal readonly ISystem value;
 
-            public SystemElement(string name, ISystem value)
+            public SystemElement(ISystem value)
             {
-                this.name = name;
+                this.name = value.GetType().Name;
                 this.value = value;
             }
         }
@@ -456,8 +455,7 @@ namespace Atomic.Contexts
         [ShowInInspector, PropertyOrder(100)]
         [ListDrawerSettings(
             CustomRemoveElementFunction = nameof(RemoveSystemElement),
-            CustomRemoveIndexFunction = nameof(RemoveSystemElementAt),
-            HideAddButton = true
+            CustomRemoveIndexFunction = nameof(RemoveSystemElementAt)
         )]
         private List<SystemElement> SystemsDebug
         {
@@ -473,8 +471,7 @@ namespace Atomic.Contexts
 
                 foreach (var system in logics)
                 {
-                    string name = system.GetType().Name;
-                    _systemElementsCache.Add(new SystemElement(name, system));
+                    _systemElementsCache.Add(new SystemElement(system));
                 }
 
                 return _systemElementsCache;
@@ -483,6 +480,22 @@ namespace Atomic.Contexts
             {
                 /** noting... **/
             }
+        }
+
+        [FoldoutGroup("Debug")]
+        [ShowInInspector, PropertyOrder(100)]
+        [Button("Add System"), HideInEditorMode]
+        private void AddSystemDebug(ISystem system)
+        {
+            this.context.AddSystem(system);
+        }
+        
+        [FoldoutGroup("Debug")]
+        [ShowInInspector, PropertyOrder(100)]
+        [Button("Add Value"), HideInEditorMode]
+        private void AddValueDebug(int key, object value)
+        {
+            this.context.AddValue(key, value);
         }
 
         private void RemoveSystemElement(SystemElement systemElement)

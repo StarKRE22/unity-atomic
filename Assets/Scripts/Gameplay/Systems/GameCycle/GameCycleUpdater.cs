@@ -1,6 +1,5 @@
 using Atomic.Contexts;
 using Modules.GameCycles;
-using UnityEngine;
 
 namespace SampleGame
 {

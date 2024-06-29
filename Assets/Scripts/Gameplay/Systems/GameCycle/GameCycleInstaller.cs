@@ -10,8 +10,8 @@ namespace SampleGame
         public void Install(IContext context)
         {
             context.AddGameCycle(new GameCycle());
-            context.AddSystem<GameCycleInputController>();
             context.AddSystem<GameCycleUpdater>();
+            // context.AddSystem<GameCycleInputController>();
             // context.AddSystem<GameTimeDebug>();
         }
     }
