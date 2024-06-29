@@ -13,6 +13,7 @@ namespace SampleGame
         public void Init(IContext context)
         {
             this.gameCycle = context.ResolveGameCycle();
+            
             this.character = context.GetCharacter();
             this.character.OnDeath += this.gameCycle.Finish;
         }
