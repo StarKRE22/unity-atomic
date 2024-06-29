@@ -1,0 +1,18 @@
+using System;
+using Atomic.Contexts;
+using Modules.Gameplay;
+
+namespace SampleGame
+{
+    [Serializable]
+    public sealed class GameCycleInstaller : IContextInstaller
+    {
+        public void Install(IContext context)
+        {
+            context.AddGameCycle(new GameCycle());
+            context.AddSystem<GameCycleUpdater>();
+            // context.AddSystem<GameCycleInputController>();
+            // context.AddSystem<GameTimeDebug>();
+        }
+    }
+}

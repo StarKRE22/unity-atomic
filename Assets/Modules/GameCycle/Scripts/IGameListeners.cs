@@ -1,4 +1,4 @@
-namespace Modules.GameCycles
+namespace Modules.Gameplay
 {
     public interface IGameListener //Marker
     {

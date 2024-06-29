@@ -335,12 +335,7 @@ namespace Atomic.Contexts
 
         #region Debug
 
-        public static IValueNameFormatter ValueNameFormatter;
-
-        public interface IValueNameFormatter
-        {
-            string GetName(int id);
-        }
+        public static Func<int, string> ValueNameFormatter;
 
 #if UNITY_EDITOR && ODIN_INSPECTOR
 
@@ -409,7 +404,7 @@ namespace Atomic.Contexts
 
                 foreach ((int id, object value) in values)
                 {
-                    string name = ValueNameFormatter?.GetName(id) ?? id.ToString();
+                    string name = ValueNameFormatter?.Invoke(id) ?? id.ToString();
                     _valueElementsCache.Add(new ValueElement(name, value, id));
                 }
 

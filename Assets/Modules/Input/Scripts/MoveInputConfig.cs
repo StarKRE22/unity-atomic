@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Modules.Inputs
+namespace Modules.Gameplay
 {
     [CreateAssetMenu(
         fileName = "MoveInputConfig",

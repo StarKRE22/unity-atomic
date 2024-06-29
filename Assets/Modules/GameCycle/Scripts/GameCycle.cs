@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Sirenix.OdinInspector;
 
-namespace Modules.GameCycles
+namespace Modules.Gameplay
 {
     public sealed class GameCycle
     {

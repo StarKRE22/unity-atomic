@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Modules.Inputs
+namespace Modules.Gameplay
 {
     public delegate void MoveDelegate(Vector3 direction, float deltaTime);
 }
