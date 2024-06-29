@@ -6,6 +6,7 @@ using UnityEngine;
 namespace Atomic.Contexts
 {
     [AddComponentMenu("Atomic/Context/Scene Context")]
+    [DefaultExecutionOrder(-1000)]
     public sealed class SceneContext : MonoBehaviour, IContext
     {
         #region Main
@@ -13,27 +14,29 @@ namespace Atomic.Contexts
         private Context context;
         
         [SerializeField]
-        private SceneContext initialParent;
+        private bool controlState;
+        
+        [Space]
+        [SerializeField]
+        public SceneContext initialParent;
 
         [SerializeField]
-        private SceneContext[] initialChildren;
+        public List<SceneContext> initialChildren = new();
 
+        [Space]
         [SerializeField]
         private SceneContextInstallerBase[] installers;
 
         public void Install()
         {
-            this.context = new Context(this.name, this.initialParent, this.initialChildren);
+            context = new Context(this.name, this.initialParent, this.initialChildren);
 
-            if (this.installers != null)
+            for (int i = 0, count = installers.Length; i < count; i++)
             {
-                for (int i = 0, count = this.installers.Length; i < count; i++)
+                SceneContextInstallerBase installer = installers[i];
+                if (installer != null)
                 {
-                    SceneContextInstallerBase installer = this.installers[i];
-                    if (installer != null)
-                    {
-                        installer.Install(this);
-                    }
+                    installer.Install(this);
                 }
             }
         }
@@ -41,16 +44,13 @@ namespace Atomic.Contexts
         #endregion
 
         #region Unity
-        
-        [SerializeField]
-        private bool controlState;
-        
 
         private void Awake()
         {
             if (this.controlState)
             {
                 this.Install();
+                context.Initialize();
             }
             else
             {
@@ -58,19 +58,59 @@ namespace Atomic.Contexts
             }
         }
 
-        // private void Start()
-        // {
-        //     if (this.controlState.)
-        //     {
-        //         
-        //     }
-        // }
+        private void OnEnable()
+        {
+            if (this.controlState)
+            {
+                context.Enable();
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (this.controlState)
+            {
+                context.Disable();
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (this.controlState)
+            {
+                context.Destroy();
+            }
+        }
+
+        private void Update()
+        {
+            if (this.controlState)
+            {
+                context.Update(Time.deltaTime);
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (this.controlState)
+            {
+                context.Update(Time.fixedDeltaTime);
+            }
+        }
+
+        private void LateUpdate()
+        {
+            if (this.controlState)
+            {
+                context.Update(Time.deltaTime);
+            }
+        }
 
         private void OnValidate()
         {
             if (!EditorApplication.isPlaying)
             {
-                this.context = new Context(this.name, this.initialParent);
+                this.Install();
             }
         }
 
@@ -225,37 +265,37 @@ namespace Atomic.Contexts
 
         public void ManualInitialize()
         {
-            this.context.Initialize();
+            context.Initialize();
         }
 
         public void ManualEnable()
         {
-            this.context.Enable();
+            context.Enable();
         }
 
         public void ManualDisable()
         {
-            this.context.Disable();
+            context.Disable();
         }
 
         public void ManualDestroy()
         {
-            this.context.Destroy();
+            context.Destroy();
         }
 
         public void ManualUpdate(float deltaTime)
         {
-            this.context.Update(deltaTime);
+            context.Update(deltaTime);
         }
 
         public void ManualFixedUpdate(float deltaTime)
         {
-            this.context.FixedUpdate(deltaTime);
+            context.FixedUpdate(deltaTime);
         }
 
         public void ManualLateUpdate(float deltaTime)
         {
-            this.context.LateUpdate(deltaTime);
+            context.LateUpdate(deltaTime);
         }
 
         #endregion
@@ -272,23 +312,22 @@ namespace Atomic.Contexts
 
         public bool IsChild(IContext context)
         {
-            return this.context.IsChild(context);
+            return context.IsChild(context);
         }
 
         public bool IsParent(IContext context)
         {
-            return this.context.IsParent(context);
+            return context.IsParent(context);
         }
-        
 
         public bool AddChild(IContext child)
         {
-            return this.context.AddChild(child);
+            return context.AddChild(child);
         }
 
         public bool DelChild(IContext child)
         {
-            return this.context.DelChild(child);
+            return context.DelChild(child);
         }
 
         #endregion
