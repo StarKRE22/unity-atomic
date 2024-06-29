@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using UnityEngine;
 
 namespace Atomic.Contexts
 {
@@ -414,26 +413,6 @@ namespace Atomic.Contexts
             //Assert:
             Assert.IsFalse(success);
         }
-
-        //
-        // [Test]
-        // public void InitializeChildren()
-        // {
-        //     
-        //     
-        //     
-        //     // //Arrange:
-        //     // var parent1 = new Context();
-        //     // var parent2 = new Context();
-        //     // var child = new Context();
-        //     //
-        //     // //Act:
-        //     // child.Parent = parent;
-        //     //
-        //     // //Assert:
-        //     // Assert.IsTrue(child.IsParent(parent));
-        //     // Assert.IsTrue(parent.IsChild(child));
-        // }
 
         #endregion
 
