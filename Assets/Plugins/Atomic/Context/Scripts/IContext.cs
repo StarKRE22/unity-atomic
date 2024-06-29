@@ -7,9 +7,9 @@ namespace Atomic.Contexts
     {
         event Action<ContextState> OnStateChanged; 
         
-        event Action<int, object> OnDataAdded;
-        event Action<int, object> OnDataDeleted;
-        event Action<int, object> OnDataChanged;
+        event Action<int, object> OnValueAdded;
+        event Action<int, object> OnValueDeleted;
+        event Action<int, object> OnValueChanged;
 
         event Action<ISystem> OnSystemAdded;
         event Action<ISystem> OnSystemRemoved; 
@@ -17,23 +17,23 @@ namespace Atomic.Contexts
         string Name { get; set; }
         ContextState State { get; }
         
-        IReadOnlyDictionary<int, object> AllData { get; }
-        IReadOnlyCollection<ISystem> AllSystems { get; }
+        IReadOnlyDictionary<int, object> Values { get; }
+        IReadOnlyCollection<ISystem> Systems { get; }
         
         IContext Parent { get; set; }
         IReadOnlyCollection<IContext> Children { get; }
         ICollection<IContext> ChildrenUnsafe { get; }
 
-        bool AddData(int key, object value);
-        void SetData(int key, object value);
-        bool DelData(int key);
-        bool DelData(int key, out object removed);
-        bool HasData(int key);
+        bool AddValue(int key, object value);
+        void SetValue(int key, object value);
+        bool DelValue(int key);
+        bool DelValue(int key, out object removed);
+        bool HasValue(int key);
         
-        T GetData<T>(int key) where T : class;
-        object GetData(int key);
-        bool TryGetData<T>(int id, out T value) where T : class;
-        bool TryGetData(int id, out object value);
+        T GetValue<T>(int key) where T : class;
+        object GetValue(int key);
+        bool TryGetValue<T>(int id, out T value) where T : class;
+        bool TryGetValue(int id, out object value);
         
         T GetSystem<T>() where T : ISystem;
         bool TryGetSystem<T>(out T result) where T : ISystem;

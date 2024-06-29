@@ -5,7 +5,6 @@ namespace Atomic.Contexts
     [TestFixture]
     public sealed class ContextTests
     {
-
         #region Lifecycle
 
         [Test]
@@ -175,65 +174,65 @@ namespace Atomic.Contexts
 
         #endregion
 
-        #region Data
+        #region Values
 
         [Test]
-        public void AddData()
+        public void AddValue()
         {
             //Arrange:
             var context = new Context();
             var wasEvent = new Reference<(int, object)>();
-            context.OnDataAdded += (key, value) => wasEvent.value = (key, value);
+            context.OnValueAdded += (key, value) => wasEvent.value = (key, value);
 
             //Act:
-            bool success = context.AddData(1, "Apple");
+            bool success = context.AddValue(1, "Apple");
 
             //Assert: 
             Assert.IsTrue(success);
-            Assert.IsTrue(context.HasData(1));
+            Assert.IsTrue(context.HasValue(1));
             Assert.AreEqual(1, wasEvent.value.Item1);
             Assert.AreEqual("Apple", wasEvent.value.Item2);
         }
 
         [Test]
-        public void GetData()
+        public void GetValue()
         {
             //Arrange:
             var context = new Context();
-            context.AddData(1, "Apple");
+            context.AddValue(1, "Apple");
 
             //Act:
-            string data = context.GetData<string>(1);
+            string data = context.GetValue<string>(1);
 
             //Assert: 
             Assert.AreEqual("Apple", data);
         }
 
         [Test]
-        public void GetNullData()
+        public void GetNullValue()
         {
             //Arrange:
             var context = new Context();
-            
+
             //Act
-            string data = context.GetData<string>(1);
+            string data = context.GetValue<string>(1);
 
             //Assert
             Assert.IsNull(data);
         }
 
         [Test]
-        public void WhenAddDataThatAlreadyExistsThenFailed()
+        public void WhenAddValueThatAlreadyExistsThenFailed()
         {
             //Arrange:
             var context = new Context();
-            context.AddData(1, "Apple");
+            context.AddValue(1, "Apple");
 
             var wasEvent = new Reference<bool>();
-            context.OnDataAdded += (_, _) => wasEvent.value = true;
+            context.OnValueAdded += (_, _) => wasEvent.value = true;
 
             //Act:
-            bool success = context.AddData(1, "Apple");
+            bool success = context.AddValue(1, "Apple");
 
             //Assert: 
             Assert.IsFalse(success);
@@ -381,51 +380,82 @@ namespace Atomic.Contexts
         #region Extensions
 
         [Test]
-        public void GetDataInParent()
+        public void GetValueInParentOnly()
         {
             //Arrange:
             var parent = new Context();
-            parent.AddData(1, "Apple");
-            
+            parent.AddValue(1, "Apple");
+
             var child = new Context(null, parent);
-            
+
             //Act:
-            string data = child.GetDataInParent<string>(1);
-            
+            string data = child.GetValueInParent<string>(1, includeSelf: false);
+
             //Assert:
-            Assert.IsFalse(child.HasData(1));
+            Assert.IsFalse(child.HasValue(1));
             Assert.AreEqual("Apple", data);
         }
-        
+
         [Test]
-        public void GetDataInParentSelf()
+        public void GetValueInParentAndSelf()
         {
             //Arrange:
             var context = new Context();
-            context.AddData(1, "Apple");
+            context.AddValue(1, "Apple");
 
             //Act:
-            string data = context.GetDataInParent<string>(1);
-            
+            string data = context.GetValueInParent<string>(1, includeSelf: true);
+
             //Assert:
             Assert.AreEqual("Apple", data);
         }
 
         [Test]
-        public void GetDataInChildren()
+        public void GetValueInParentFailed()
+        {
+            //Arrange:
+            var parent = new Context();
+            var child = new Context(null, parent);
+            
+            //Act:
+            string data = child.GetValueInParent<string>(1);
+
+            //Assert:
+            Assert.IsNull(data);
+        }
+
+        [Test]
+        public void GetValueInChildrenOnly()
         {
             //Arrange:
             var parent = new Context();
             
             var child = new Context(null, parent);
-            child.AddData(1, "Apple");
-
+            child.AddValue(1, "Apple");
+            
             //Act:
-            string data = parent.GetDataInChildren<string>(1);
+            string data = parent.GetValueInChildren<string>(1, false);
             
             //Assert:
-            Assert.IsFalse(child.HasData(1));
+            Assert.IsFalse(parent.HasValue(1));
             Assert.AreEqual("Apple", data);
+        }
+        
+        
+        [Test]
+        public void GetValueInChildrenFailed()
+        {
+            //Arrange:
+            var parent = new Context();
+            var child = new Context();
+            child.Parent = parent;
+            
+            
+            //Act:
+            string data = parent.GetValueInChildren<string>(1);
+
+            //Assert:
+            Assert.IsNull(data);
         }
 
         #endregion

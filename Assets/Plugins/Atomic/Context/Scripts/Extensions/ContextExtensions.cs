@@ -1,5 +1,3 @@
-using System;
-
 namespace Atomic.Contexts
 {
     public static class ContextExtensions
@@ -23,35 +21,103 @@ namespace Atomic.Contexts
         {
             return context.State == ContextState.DISABLED;
         }
-        
+
         public static bool IsDestroyed(this IContext context)
         {
             return context.State == ContextState.DESTROYED;
         }
-        
-        public static T GetDataInParent<T>(this IContext context, int key) where T : class
+
+        public static T GetValueInParent<T>(
+            this IContext context,
+            int key,
+            bool includeSelf = true
+        )
+            where T : class
         {
-            while (true)
+            if (includeSelf)
             {
-                if (context == null)
-                {
-                    return null;
-                }
-                
-                T data = context.GetData<T>(key);
-                
+                T data = context.GetValue<T>(key);
                 if (data != null)
                 {
                     return data;
                 }
+            }
 
+            while (true)
+            {
                 context = context.Parent;
+                if (context == null)
+                {
+                    return null;
+                }
+
+                T data = context.GetValue<T>(key);
+
+                if (data != null)
+                {
+                    return data;
+                }
             }
         }
-        
-        public static T GetDataInChildren<T>(this IContext context, int key) where T : class
+
+        public static T GetValueInChildren<T>(
+            this IContext context,
+            int key,
+            bool includeSelf = true
+        ) where T : class
         {
-            throw new NotImplementedException();
+            if (includeSelf)
+            {
+                T data = context.GetValue<T>(key);
+                if (data != null)
+                {
+                    return data;
+                }
+            }
+            
+            foreach (IContext child in context.Children)
+            {
+                T value = child.GetValueInChildren<T>(key, includeSelf: true);
+                if (value != null)
+                {
+                    return value;
+                }
+            }
+
+            return null;
         }
     }
 }
+
+// public static T GetValueInParentAndSelf<T>(this IContext context, int key) where T : class
+// {
+//     T data = context.GetValue<T>(key);
+//     if (data != null)
+//     {
+//         return data;
+//     }
+//
+//     return context.GetValueInParent<T>(key);
+// }
+
+// private static T GetValueInChildren<T>(IEnumerable<IContext> children, int key) where T : class
+// {
+//     foreach (IContext child in children)
+//     {
+//         if (child.TryGetValue(key, out T value))
+//         {
+//             return value;
+//         }
+//     }
+//
+//     foreach (IContext child in children)
+//     {
+//         T value = GetValueInChildren<T>(child.Children, key);
+//         if (value != null)
+//         {
+//             return value;
+//         }
+//     }
+//
+//     return null;
+// }

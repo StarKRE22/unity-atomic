@@ -24,24 +24,24 @@ namespace Atomic.Contexts
 
         #endregion
 
-        #region Data
+        #region Values
 
-        public event Action<int, object> OnDataAdded;
-        public event Action<int, object> OnDataDeleted;
-        public event Action<int, object> OnDataChanged;
+        public event Action<int, object> OnValueAdded;
+        public event Action<int, object> OnValueDeleted;
+        public event Action<int, object> OnValueChanged;
 
-        public IReadOnlyDictionary<int, object> AllData => this.allData;
+        public IReadOnlyDictionary<int, object> Values => this.values;
 
-        private readonly Dictionary<int, object> allData = new();
+        private readonly Dictionary<int, object> values = new();
 
-        public bool HasData(int key)
+        public bool HasValue(int key)
         {
-            return this.allData.ContainsKey(key);
+            return this.values.ContainsKey(key);
         }
 
-        public T GetData<T>(int key) where T : class
+        public T GetValue<T>(int key) where T : class
         {
-            if (this.allData.TryGetValue(key, out object value))
+            if (this.values.TryGetValue(key, out object value))
             {
                 return value as T;
             }
@@ -49,9 +49,9 @@ namespace Atomic.Contexts
             return null;
         }
 
-        public object GetData(int key)
+        public object GetValue(int key)
         {
-            if (this.allData.TryGetValue(key, out var value))
+            if (this.values.TryGetValue(key, out var value))
             {
                 return value;
             }
@@ -60,20 +60,20 @@ namespace Atomic.Contexts
         }
 
 
-        public bool AddData(int key, object value)
+        public bool AddValue(int key, object value)
         {
-            if (this.allData.TryAdd(key, value))
+            if (this.values.TryAdd(key, value))
             {
-                this.OnDataAdded?.Invoke(key, value);
+                this.OnValueAdded?.Invoke(key, value);
                 return true;
             }
 
             return false;
         }
 
-        public bool TryGetData<T>(int id, out T value) where T : class
+        public bool TryGetValue<T>(int id, out T value) where T : class
         {
-            if (this.allData.TryGetValue(id, out object field))
+            if (this.values.TryGetValue(id, out object field))
             {
                 value = field as T;
                 return true;
@@ -83,33 +83,33 @@ namespace Atomic.Contexts
             return false;
         }
 
-        public bool TryGetData(int id, out object value)
+        public bool TryGetValue(int id, out object value)
         {
-            return this.allData.TryGetValue(id, out value);
+            return this.values.TryGetValue(id, out value);
         }
 
-        public void SetData(int key, object value)
+        public void SetValue(int key, object value)
         {
-            this.allData[key] = value;
-            this.OnDataChanged?.Invoke(key, value);
+            this.values[key] = value;
+            this.OnValueChanged?.Invoke(key, value);
         }
 
-        public bool DelData(int key)
+        public bool DelValue(int key)
         {
-            if (this.allData.Remove(key, out object removed))
+            if (this.values.Remove(key, out object removed))
             {
-                this.OnDataDeleted?.Invoke(key, removed);
+                this.OnValueDeleted?.Invoke(key, removed);
                 return true;
             }
 
             return false;
         }
 
-        public bool DelData(int key, out object removed)
+        public bool DelValue(int key, out object removed)
         {
-            if (this.allData.Remove(key, out removed))
+            if (this.values.Remove(key, out removed))
             {
-                this.OnDataDeleted?.Invoke(key, removed);
+                this.OnValueDeleted?.Invoke(key, removed);
                 return true;
             }
 
@@ -123,13 +123,13 @@ namespace Atomic.Contexts
         public event Action<ISystem> OnSystemAdded;
         public event Action<ISystem> OnSystemRemoved;
 
-        public IReadOnlyCollection<ISystem> AllSystems => this.allSystems;
+        public IReadOnlyCollection<ISystem> Systems => this.systems;
 
-        private readonly HashSet<ISystem> allSystems = new();
+        private readonly HashSet<ISystem> systems = new();
 
         public T GetSystem<T>() where T : ISystem
         {
-            foreach (ISystem system in this.allSystems)
+            foreach (ISystem system in this.systems)
             {
                 if (system is T tSystem)
                 {
@@ -142,7 +142,7 @@ namespace Atomic.Contexts
 
         public bool TryGetSystem<T>(out T result) where T : ISystem
         {
-            foreach (ISystem system in this.allSystems)
+            foreach (ISystem system in this.systems)
             {
                 if (system is T tSystem)
                 {
@@ -157,12 +157,12 @@ namespace Atomic.Contexts
 
         public bool HasSystem(ISystem system)
         {
-            return this.allSystems.Contains(system);
+            return this.systems.Contains(system);
         }
 
         public bool HasSystem<T>() where T : ISystem
         {
-            foreach (ISystem system in this.allSystems)
+            foreach (ISystem system in this.systems)
             {
                 if (system is T)
                 {
@@ -180,7 +180,7 @@ namespace Atomic.Contexts
 
         public bool AddSystem(ISystem system)
         {
-            if (!this.allSystems.Add(system))
+            if (!this.systems.Add(system))
             {
                 return false;
             }
@@ -198,17 +198,17 @@ namespace Atomic.Contexts
 
             if (system is IUpdateSystem update)
             {
-                this.updateSystems.Add(update);
+                this.updates.Add(update);
             }
 
             if (system is IFixedUpdateSystem fixedUpdate)
             {
-                this.fixedUpdateSystems.Add(fixedUpdate);
+                this.fixedUpdates.Add(fixedUpdate);
             }
 
             if (system is ILateUpdateSystem lateUpdate)
             {
-                this.lateUpdateSystems.Add(lateUpdate);
+                this.lateUpdates.Add(lateUpdate);
             }
 
             this.OnSystemAdded?.Invoke(system);
@@ -228,24 +228,24 @@ namespace Atomic.Contexts
 
         public bool DelSystem(ISystem system)
         {
-            if (!this.allSystems.Remove(system))
+            if (!this.systems.Remove(system))
             {
                 return false;
             }
 
             if (system is IUpdateSystem update)
             {
-                this.updateSystems.Remove(update);
+                this.updates.Remove(update);
             }
 
             if (system is IFixedUpdateSystem fixedUpdate)
             {
-                this.fixedUpdateSystems.Remove(fixedUpdate);
+                this.fixedUpdates.Remove(fixedUpdate);
             }
 
             if (system is ILateUpdateSystem lateUpdate)
             {
-                this.lateUpdateSystems.Remove(lateUpdate);
+                this.lateUpdates.Remove(lateUpdate);
             }
 
             if (this.state == ContextState.ENABLED && system is IDisableSystem disableSystem)
@@ -312,9 +312,9 @@ namespace Atomic.Contexts
 
         public event Action<ContextState> OnStateChanged;
 
-        private readonly List<IUpdateSystem> updateSystems = new();
-        private readonly List<IFixedUpdateSystem> fixedUpdateSystems = new();
-        private readonly List<ILateUpdateSystem> lateUpdateSystems = new();
+        private readonly List<IUpdateSystem> updates = new();
+        private readonly List<IFixedUpdateSystem> fixedUpdates = new();
+        private readonly List<ILateUpdateSystem> lateUpdates = new();
 
         private readonly List<IUpdateSystem> _updateCache = new();
         private readonly List<IFixedUpdateSystem> _fixedUpdateCache = new();
@@ -329,7 +329,7 @@ namespace Atomic.Contexts
                 return;
             }
 
-            foreach (ISystem system in this.allSystems)
+            foreach (ISystem system in this.systems)
             {
                 if (system is IInitSystem initSystem)
                 {
@@ -350,7 +350,7 @@ namespace Atomic.Contexts
                 return;
             }
 
-            foreach (ISystem system in this.allSystems)
+            foreach (ISystem system in this.systems)
             {
                 if (system is IEnableSystem enableSystem)
                 {
@@ -369,13 +369,13 @@ namespace Atomic.Contexts
                 return;
             }
 
-            if (this.updateSystems.Count == 0)
+            if (this.updates.Count == 0)
             {
                 return;
             }
 
             _updateCache.Clear();
-            _updateCache.AddRange(this.updateSystems);
+            _updateCache.AddRange(this.updates);
 
             for (int i = 0, count = _updateCache.Count; i < count; i++)
             {
@@ -391,13 +391,13 @@ namespace Atomic.Contexts
                 return;
             }
 
-            if (this.fixedUpdateSystems.Count == 0)
+            if (this.fixedUpdates.Count == 0)
             {
                 return;
             }
 
             _fixedUpdateCache.Clear();
-            _fixedUpdateCache.AddRange(this.fixedUpdateSystems);
+            _fixedUpdateCache.AddRange(this.fixedUpdates);
 
             for (int i = 0, count = _fixedUpdateCache.Count; i < count; i++)
             {
@@ -413,13 +413,13 @@ namespace Atomic.Contexts
                 return;
             }
 
-            if (this.lateUpdateSystems.Count == 0)
+            if (this.lateUpdates.Count == 0)
             {
                 return;
             }
 
             _lateUpdateCache.Clear();
-            _lateUpdateCache.AddRange(this.lateUpdateSystems);
+            _lateUpdateCache.AddRange(this.lateUpdates);
 
             for (int i = 0, count = _lateUpdateCache.Count; i < count; i++)
             {
@@ -437,7 +437,7 @@ namespace Atomic.Contexts
                 return;
             }
 
-            foreach (ISystem system in this.allSystems)
+            foreach (ISystem system in this.systems)
             {
                 if (system is IDisableSystem disableSystem)
                 {
@@ -458,7 +458,7 @@ namespace Atomic.Contexts
                 return;
             }
 
-            foreach (ISystem system in this.allSystems)
+            foreach (ISystem system in this.systems)
             {
                 if (system is IDestroySystem destroySystem)
                 {

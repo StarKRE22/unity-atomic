@@ -14,22 +14,22 @@ namespace Atomic.Contexts
             remove => context.OnStateChanged -= value;
         }
 
-        public event Action<int, object> OnDataAdded
+        public event Action<int, object> OnValueAdded
         {
-            add => context.OnDataAdded += value;
-            remove => context.OnDataAdded -= value;
+            add => context.OnValueAdded += value;
+            remove => context.OnValueAdded -= value;
         }
 
-        public event Action<int, object> OnDataDeleted
+        public event Action<int, object> OnValueDeleted
         {
-            add => context.OnDataDeleted += value;
-            remove => context.OnDataDeleted -= value;
+            add => context.OnValueDeleted += value;
+            remove => context.OnValueDeleted -= value;
         }
 
-        public event Action<int, object> OnDataChanged
+        public event Action<int, object> OnValueChanged
         {
-            add => context.OnDataChanged += value;
-            remove => context.OnDataChanged -= value;
+            add => context.OnValueChanged += value;
+            remove => context.OnValueChanged -= value;
         }
 
         public event Action<ISystem> OnSystemAdded
@@ -52,9 +52,9 @@ namespace Atomic.Contexts
 
         public ContextState State => context.State;
 
-        public IReadOnlyDictionary<int, object> AllData => context.AllData;
+        public IReadOnlyDictionary<int, object> Values => context.Values;
 
-        public IReadOnlyCollection<ISystem> AllSystems => context.AllSystems;
+        public IReadOnlyCollection<ISystem> Systems => context.Systems;
 
         public IContext Parent
         {
@@ -66,49 +66,49 @@ namespace Atomic.Contexts
         public IReadOnlyCollection<IContext> Children => context.Children;
         public ICollection<IContext> ChildrenUnsafe => context.ChildrenUnsafe;
 
-        public bool AddData(int key, object value)
+        public bool AddValue(int key, object value)
         {
-            return context.AddData(key, value);
+            return context.AddValue(key, value);
         }
 
-        public void SetData(int key, object value)
+        public void SetValue(int key, object value)
         {
-            context.SetData(key, value);
+            context.SetValue(key, value);
         }
 
-        public bool DelData(int key)
+        public bool DelValue(int key)
         {
-            return context.DelData(key);
+            return context.DelValue(key);
         }
 
-        public bool DelData(int key, out object removed)
+        public bool DelValue(int key, out object removed)
         {
-            return context.DelData(key, out removed);
+            return context.DelValue(key, out removed);
         }
 
-        public bool HasData(int key)
+        public bool HasValue(int key)
         {
-            return context.HasData(key);
+            return context.HasValue(key);
         }
 
-        public T GetData<T>(int key) where T : class
+        public T GetValue<T>(int key) where T : class
         {
-            return context.GetData<T>(key);
+            return context.GetValue<T>(key);
         }
 
-        public object GetData(int key)
+        public object GetValue(int key)
         {
-            return context.GetData(key);
+            return context.GetValue(key);
         }
 
-        public bool TryGetData<T>(int id, out T value) where T : class
+        public bool TryGetValue<T>(int id, out T value) where T : class
         {
-            return context.TryGetData(id, out value);
+            return context.TryGetValue(id, out value);
         }
 
-        public bool TryGetData(int id, out object value)
+        public bool TryGetValue(int id, out object value)
         {
-            return context.TryGetData(id, out value);
+            return context.TryGetValue(id, out value);
         }
 
         public T GetSystem<T>() where T : ISystem
