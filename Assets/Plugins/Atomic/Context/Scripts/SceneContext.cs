@@ -107,6 +107,7 @@ namespace Atomic.Contexts
             }
         }
 
+        [ContextMenu("Refresh")]
         private void OnValidate()
         {
             try
@@ -356,6 +357,11 @@ namespace Atomic.Contexts
         public bool DelChild(IContext child)
         {
             return context.DelChild(child);
+        }
+
+        public IContext GetChild(string name)
+        {
+            return context.GetChild(name);
         }
 
         #endregion

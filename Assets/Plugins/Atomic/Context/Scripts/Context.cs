@@ -300,6 +300,19 @@ namespace Atomic.Contexts
             return child != null && this.children.Remove(child);
         }
 
+        public IContext GetChild(string name)
+        {
+            foreach (var child in this.children)
+            {
+                if (child.Name == name)
+                {
+                    return child;
+                }
+            }
+
+            return null;
+        }
+
         #endregion
 
         #region Lifecycle

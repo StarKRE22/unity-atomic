@@ -52,5 +52,6 @@ namespace Atomic.Contexts
         bool IsParent(IContext context);
         bool AddChild(IContext child);
         bool DelChild(IContext child);
+        IContext GetChild(string name);
     }
 }
