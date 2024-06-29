@@ -35,7 +35,7 @@ namespace Atomic.Contexts
         bool TryGetData(int id, out object value);
         
         T GetSystem<T>() where T : ISystem;
-        bool TryGetLogic<T>(out T logic) where T : ISystem;
+        bool TryGetSystem<T>(out T result) where T : ISystem;
         
         bool AddSystem(ISystem system);
         bool AddSystem<T>() where T : ISystem, new();
@@ -43,7 +43,5 @@ namespace Atomic.Contexts
         bool DelSystem<T>() where T : ISystem;
         bool HasSystem(ISystem system);
         bool HasSystem<T>() where T : ISystem;
-
-        void Inject(object target);
     }
 }

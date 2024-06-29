@@ -6,30 +6,20 @@ namespace Atomic.Contexts
 {
     public sealed class Context : IContext
     {
-        #region Main
-
-        public event Action<ContextState> OnStateChanged;
+        #region Base
 
         public string Name
         {
             get { return this.name; }
             set { this.name = value; }
         }
-
-        public ContextState State
-        {
-            get { return this.state; }
-        }
-
+        
         private string name;
-        private ContextState state = ContextState.OFF;
 
         public Context(string name = null)
         {
             this.name = name;
         }
-
-       
 
         #endregion
 
@@ -39,92 +29,153 @@ namespace Atomic.Contexts
         public event Action<int, object> OnDataDeleted;
         public event Action<int, object> OnDataChanged;
 
-        public IReadOnlyDictionary<int, object> AllData { get; }
+        public IReadOnlyDictionary<int, object> AllData => this.allData;
 
-        #endregion
-
-        #region System
-
-        public event Action<ISystem> OnSystemAdded;
-        public event Action<ISystem> OnSystemRemoved;
-
-        public IReadOnlyCollection<ISystem> AllSystems
-        {
-            get { return this.allSystems; }
-        }
-
-        private readonly HashSet<ISystem> allSystems = new();
-
-        #endregion
-
-        #region Parent
-
-        public IContext Parent { get; set; }
-
-        public IReadOnlyList<IContext> Children { get; }
-
-        #endregion
-
-        public bool AddData(int key, object value)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void SetData(int key, object value)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool DelData(int key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool DelData(int key, out object removed)
-        {
-            throw new NotImplementedException();
-        }
+        private readonly Dictionary<int, object> allData = new();
 
         public bool HasData(int key)
         {
-            throw new NotImplementedException();
+            return this.allData.ContainsKey(key);
         }
 
         public T GetData<T>(int key) where T : class
         {
-            throw new System.NotImplementedException();
+            if (this.allData.TryGetValue(key, out object value))
+            {
+                return value as T;
+            }
+
+            return null;
         }
 
         public object GetData(int key)
         {
-            throw new NotImplementedException();
+            if (this.allData.TryGetValue(key, out var value))
+            {
+                return value;
+            }
+
+            return null;
+        }
+
+        public bool AddData(int key, object value)
+        {
+            if (this.allData.TryAdd(key, value))
+            {
+                this.OnDataAdded?.Invoke(key, value);
+                return true;
+            }
+
+            return false;
         }
 
         public bool TryGetData<T>(int id, out T value) where T : class
         {
-            throw new NotImplementedException();
+            if (this.allData.TryGetValue(id, out object field))
+            {
+                value = field as T;
+                return true;
+            }
+
+            value = default;
+            return false;
         }
 
         public bool TryGetData(int id, out object value)
         {
-            throw new NotImplementedException();
+            return this.allData.TryGetValue(id, out value);
         }
+
+        public void SetData(int key, object value)
+        {
+            this.allData[key] = value;
+            this.OnDataChanged?.Invoke(key, value);
+        }
+
+        public bool DelData(int key)
+        {
+            if (this.allData.Remove(key, out object removed))
+            {
+                this.OnDataDeleted?.Invoke(key, removed);
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool DelData(int key, out object removed)
+        {
+            if (this.allData.Remove(key, out removed))
+            {
+                this.OnDataDeleted?.Invoke(key, removed);
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion
+
+        #region Systems
+
+        public event Action<ISystem> OnSystemAdded;
+        public event Action<ISystem> OnSystemRemoved;
+
+        public IReadOnlyCollection<ISystem> AllSystems => this.allSystems;
+
+        private readonly HashSet<ISystem> allSystems = new();
 
         public T GetSystem<T>() where T : ISystem
         {
-            throw new NotImplementedException();
+            foreach (ISystem system in this.allSystems)
+            {
+                if (system is T tSystem)
+                {
+                    return tSystem;
+                }
+            }
+
+            return default;
         }
 
-        public bool TryGetLogic<T>(out T logic) where T : ISystem
+        public bool TryGetSystem<T>(out T result) where T : ISystem
         {
-            throw new NotImplementedException();
+            foreach (ISystem system in this.allSystems)
+            {
+                if (system is T tSystem)
+                {
+                    result = tSystem;
+                    return true;
+                }
+            }
+
+            result = default;
+            return false;
+        }
+        
+        public bool HasSystem(ISystem system)
+        {
+            return this.allSystems.Contains(system);
+        }
+
+        public bool HasSystem<T>() where T : ISystem
+        {
+            foreach (ISystem system in this.allSystems)
+            {
+                if (system is T)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public bool AddSystem<T>() where T : ISystem, new()
         {
             return this.AddSystem(new T());
         }
-        
+
         public bool AddSystem(ISystem system)
         {
             if (!this.allSystems.Add(system))
@@ -132,7 +183,8 @@ namespace Atomic.Contexts
                 return false;
             }
 
-            if (this.state == ContextState.INITIALIZED && system is IInitSystem initSystem)
+            if (this.state is > ContextState.OFF and < ContextState.DESTROYED && 
+                system is IInitSystem initSystem)
             {
                 initSystem.Init(this);
             }
@@ -156,123 +208,79 @@ namespace Atomic.Contexts
             {
                 this.lateUpdateSystems.Add(lateUpdate);
             }
-            
+
             this.OnSystemAdded?.Invoke(system);
             return true;
         }
 
-        //
-        // private void OnLogicAdded(IObject obj, ILogic logic)
-        // {
-        //     if (!obj.Constructed)
-        //     {
-        //         return;
-        //     }
-        //
-        //     if (logic is IConstructable composable)
-        //     {
-        //         composable.Init(obj);
-        //     }
-        //
-        //     if (!obj.Enabled)
-        //     {
-        //         return;
-        //     }
-        //
-        //     if (logic is IEnable enable)
-        //     {
-        //         enable.Enable();
-        //     }
-        //
-        //     if (logic is IUpdate update)
-        //     {
-        //         this.updateSystems.Add(update);
-        //     }
-        //
-        //     if (logic is IFixedUpdate fixedUpdate)
-        //     {
-        //         this.fixedUpdateSystems.Add(fixedUpdate);
-        //     }
-        //
-        //     if (logic is ILateUpdate lateUpdate)
-        //     {
-        //         this.lateUpdateSystems.Add(lateUpdate);
-        //     }
-        // }
-        //
-        // private void OnLogicDeleted(IObject obj, ILogic logic)
-        // {
-        //     if (obj.Enabled)
-        //     {
-        //         if (logic is IUpdate tickable)
-        //         {
-        //             this.updateSystems.Remove(tickable);
-        //         }
-        //
-        //         if (logic is IFixedUpdate fixedTickable)
-        //         {
-        //             this.fixedUpdateSystems.Remove(fixedTickable);
-        //         }
-        //
-        //         if (logic is ILateUpdate lateTickable)
-        //         {
-        //             this.lateUpdateSystems.Remove(lateTickable);
-        //         }
-        //
-        //         if (logic is IDisable disable)
-        //         {
-        //             disable.Disable();
-        //         }
-        //     }
-        //
-        //     if (obj.Constructed)
-        //     {
-        //         if (logic is IDisposable disposable)
-        //         {
-        //             disposable.Dispose();
-        //         }
-        //     }
-        // }
+        public bool DelSystem<T>() where T : ISystem
+        {
+            T system = this.GetSystem<T>();
+            if (system == null)
+            {
+                return false;
+            }
 
-        
+            return this.DelSystem(system);
+        }
 
         public bool DelSystem(ISystem system)
         {
-            throw new NotImplementedException();
+            if (!this.allSystems.Remove(system))
+            {
+                return false;
+            }
+
+            if (system is IUpdateSystem update)
+            {
+                this.updateSystems.Remove(update);
+            }
+
+            if (system is IFixedUpdateSystem fixedUpdate)
+            {
+                this.fixedUpdateSystems.Remove(fixedUpdate);
+            }
+
+            if (system is ILateUpdateSystem lateUpdate)
+            {
+                this.lateUpdateSystems.Remove(lateUpdate);
+            }
+            
+            if (this.state == ContextState.ENABLED && system is IDisableSystem disableSystem)
+            {
+                disableSystem.Disable(this);
+            }
+
+            if (this.state is > ContextState.OFF and < ContextState.DESTROYED && 
+                system is IDestroySystem destroySystem)
+            {
+                destroySystem.Destroy(this);
+            }
+
+            this.OnSystemRemoved?.Invoke(system);
+            return true;
         }
+        
+        #endregion
 
-        public bool DelSystem<T>() where T : ISystem
-        {
-            throw new NotImplementedException();
-        }
+        #region Parent
 
-        public bool HasSystem(ISystem system)
-        {
-            throw new NotImplementedException();
-        }
+        public IContext Parent { get; set; }
 
-        public bool HasSystem<T>() where T : ISystem
-        {
-            throw new NotImplementedException();
-        }
+        public IReadOnlyList<IContext> Children { get; }
 
-        public void Inject(object target)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool AddSystem(int key, ISystem logic)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void AddComponent(int key, ISystem obj)
-        {
-            throw new System.NotImplementedException();
-        }
-
-
+        #endregion
+        
         #region Lifecycle
+
+        public ContextState State
+        {
+            get { return this.state; }
+        }
+
+        private ContextState state = ContextState.OFF;
+
+        public event Action<ContextState> OnStateChanged;
 
         private readonly List<IUpdateSystem> updateSystems = new();
         private readonly List<IFixedUpdateSystem> fixedUpdateSystems = new();
@@ -281,6 +289,48 @@ namespace Atomic.Contexts
         private readonly List<IUpdateSystem> _updateCache = new();
         private readonly List<IFixedUpdateSystem> _fixedUpdateCache = new();
         private readonly List<ILateUpdateSystem> _lateUpdateCache = new();
+
+        public void Initialize()
+        {
+            if (this.state != ContextState.OFF)
+            {
+                Debug.LogWarning(
+                    $"You can initialize context only from {ContextState.OFF} state! (Actual state: {this.state})");
+                return;
+            }
+
+            foreach (ISystem system in this.allSystems)
+            {
+                if (system is IInitSystem initSystem)
+                {
+                    initSystem.Init(this);
+                }
+            }
+
+            this.state = ContextState.INITIALIZED;
+            this.OnStateChanged?.Invoke(this.state);
+        }
+
+        public void Enable()
+        {
+            if (this.state != ContextState.INITIALIZED)
+            {
+                Debug.LogWarning(
+                    $"You can enable context only from {ContextState.INITIALIZED} state! (Actual state: {this.state})");
+                return;
+            }
+
+            foreach (ISystem system in this.allSystems)
+            {
+                if (system is IEnableSystem enableSystem)
+                {
+                    enableSystem.Enable(this);
+                }
+            }
+
+            this.state = ContextState.ENABLED;
+            this.OnStateChanged?.Invoke(this.state);
+        }
 
         public void Update(float deltaTime)
         {
@@ -347,32 +397,13 @@ namespace Atomic.Contexts
                 updateSystem.LateUpdate(this, deltaTime);
             }
         }
-        
-        public void Initialize()
-        {
-            if (this.state != ContextState.OFF)
-            {
-                Debug.LogWarning($"You can initialize context only from {ContextState.OFF} state! (Actual state: {this.state})");
-                return;
-            }
 
-            foreach (ISystem system in this.allSystems)
-            {
-                if (system is IInitSystem initSystem)
-                {
-                    initSystem.Init(this);
-                }
-            }
-
-            this.state = ContextState.INITIALIZED;
-            this.OnStateChanged?.Invoke(this.state);
-        }
-        
         public void Disable()
         {
             if (this.state != ContextState.ENABLED)
             {
-                Debug.LogWarning($"You can disable context only from {ContextState.ENABLED} state! (Actual state: {this.state})");
+                Debug.LogWarning(
+                    $"You can disable context only from {ContextState.ENABLED} state! (Actual state: {this.state})");
                 return;
             }
 
@@ -388,31 +419,12 @@ namespace Atomic.Contexts
             this.OnStateChanged?.Invoke(this.state);
         }
 
-        public void Enable()
-        {
-            if (this.state != ContextState.INITIALIZED)
-            {
-                Debug.LogWarning($"You can enable context only from {ContextState.INITIALIZED} state! (Actual state: {this.state})");
-                return;
-            }
-
-            foreach (ISystem system in this.allSystems)
-            {
-                if (system is IEnableSystem enableSystem)
-                {
-                    enableSystem.Enable(this);
-                }
-            }
-
-            this.state = ContextState.ENABLED;
-            this.OnStateChanged?.Invoke(this.state);
-        }
-
         public void Destroy()
         {
             if (this.state != ContextState.DISABLED)
             {
-                Debug.LogWarning($"You can destroy context only from {ContextState.DISABLED} state! (Actual state: {this.state})");
+                Debug.LogWarning(
+                    $"You can destroy context only from {ContextState.DISABLED} state! (Actual state: {this.state})");
                 return;
             }
 
@@ -429,16 +441,5 @@ namespace Atomic.Contexts
         }
 
         #endregion
-
-        #region Construct
-
-        public void Construct()
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-
-        
     }
 }

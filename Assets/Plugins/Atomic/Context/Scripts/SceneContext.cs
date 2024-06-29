@@ -114,9 +114,9 @@ namespace Atomic.Contexts
             return context.GetSystem<T>();
         }
 
-        public bool TryGetLogic<T>(out T logic) where T : ISystem
+        public bool TryGetSystem<T>(out T result) where T : ISystem
         {
-            return context.TryGetLogic(out logic);
+            return context.TryGetSystem(out result);
         }
 
         public bool AddSystem(ISystem system)
@@ -147,21 +147,6 @@ namespace Atomic.Contexts
         public bool HasSystem<T>() where T : ISystem
         {
             return context.HasSystem<T>();
-        }
-
-        public void Inject(object target)
-        {
-            context.Inject(target);
-        }
-
-        public bool AddSystem(int key, ISystem logic)
-        {
-            return context.AddSystem(key, logic);
-        }
-
-        public void AddComponent(int key, ISystem component)
-        {
-            context.AddComponent(key, component);
         }
     }
 }
