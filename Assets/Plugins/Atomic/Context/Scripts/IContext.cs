@@ -20,9 +20,8 @@ namespace Atomic.Contexts
         IReadOnlyDictionary<int, object> Values { get; }
         IReadOnlyCollection<ISystem> Systems { get; }
         
-        IContext Parent { get; }
-        IReadOnlyCollection<IContext> Children { get; }
-        ICollection<IContext> ChildrenUnsafe { get; }
+        IContext Parent { get; set;  }
+        ICollection<IContext> Children { get; }
 
         bool AddValue(int key, object value);
         void SetValue(int key, object value);
@@ -47,7 +46,6 @@ namespace Atomic.Contexts
 
         bool IsChild(IContext context);
         bool IsParent(IContext context);
-        bool SetParent(IContext parent);
         bool AddChild(IContext child);
         bool DelChild(IContext child);
     }

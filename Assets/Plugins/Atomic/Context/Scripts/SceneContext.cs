@@ -16,11 +16,14 @@ namespace Atomic.Contexts
         private SceneContext initialParent;
 
         [SerializeField]
+        private SceneContext[] initialChildren;
+
+        [SerializeField]
         private SceneContextInstallerBase[] installers;
 
         public void Install()
         {
-            this.context = new Context(this.name);
+            this.context = new Context(this.name, this.initialParent, this.initialChildren);
 
             if (this.installers != null)
             {
@@ -34,11 +37,6 @@ namespace Atomic.Contexts
                 }
             }
         }
-        
-        public void InstallParent()
-        {
-            this.context.SetParent(this.initialParent);
-        }
 
         #endregion
 
@@ -50,12 +48,14 @@ namespace Atomic.Contexts
 
         private void Awake()
         {
-            if (!this.controlState)
+            if (this.controlState)
+            {
+                this.Install();
+            }
+            else
             {
                 this.enabled = false;
             }
-            
-            this.Install();
         }
 
         // private void Start()
@@ -262,9 +262,13 @@ namespace Atomic.Contexts
 
         #region Parent
 
-        public IContext Parent => context.Parent;
-        public IReadOnlyCollection<IContext> Children => context.Children;
-        public ICollection<IContext> ChildrenUnsafe => context.ChildrenUnsafe;
+        public IContext Parent
+        {
+            get => context.Parent;
+            set => context.Parent = value;
+        }
+
+        public ICollection<IContext> Children => context.Children;
 
         public bool IsChild(IContext context)
         {
@@ -275,11 +279,7 @@ namespace Atomic.Contexts
         {
             return this.context.IsParent(context);
         }
-
-        public bool SetParent(IContext parent)
-        {
-            return this.context.SetParent(parent);
-        }
+        
 
         public bool AddChild(IContext child)
         {

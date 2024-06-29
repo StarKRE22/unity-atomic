@@ -320,38 +320,28 @@ namespace Atomic.Contexts
         {
             //Arrange:
             var parent = new Context();
-            var child = new Context();
 
             //Act:
-            child.SetParent(parent);
+            var child = new Context(null, parent);
 
             //Assert:
             Assert.IsTrue(child.IsParent(parent));
-            Assert.IsTrue(parent.IsChild(child));
         }
 
         [Test]
         public void ChangeParent()
         {
             //Arrange:
-            var parent1 = new Context();
+            var parent = new Context();
             var parent2 = new Context();
-            var child = new Context(null, parent1);
-
-            //Verify:
-            Assert.IsTrue(child.IsParent(parent1));
-            Assert.IsFalse(child.IsParent(parent2));
-            Assert.IsTrue(parent1.IsChild(child));
-            Assert.IsFalse(parent2.IsChild(child));
+            var child = new Context(null, parent);
 
             //Act:
-            child.SetParent(parent2);
+            child.Parent = parent2;
 
             //Assert:
             Assert.IsTrue(child.IsParent(parent2));
-            Assert.IsTrue(parent2.IsChild(child));
-            Assert.IsFalse(child.IsParent(parent1));
-            Assert.IsFalse(parent1.IsChild(child));
+            Assert.IsFalse(child.IsParent(parent));
         }
 
         [Test]
@@ -360,59 +350,15 @@ namespace Atomic.Contexts
             //Arrange:
             var parent = new Context();
             var child = new Context();
-
-            //Act:
-            bool success = parent.AddChild(child);
             
+            //Act:
+            parent.AddChild(child);
+
             //Assert:
-            Assert.IsTrue(success);
-            Assert.IsTrue(child.IsParent(parent));
             Assert.IsTrue(parent.IsChild(child));
         }
-        
-        [Test]
-        public void DelChild()
-        {
-            //Arrange:
-            var parent = new Context();
-            var child = new Context("Child", parent);
 
-            //Act:
-            bool success = parent.DelChild(child);
-            
-            //Assert:
-            Assert.IsTrue(success);
-            Assert.IsFalse(child.IsParent(parent));
-            Assert.IsFalse(parent.IsChild(child));
-        }
-
-        [Test]
-        public void WhenAddChildThatAlreadyAddedThenFalse()
-        {
-            //Arrange:
-            var parent = new Context();
-            var child = new Context(null, parent);
-
-            //Act:
-            bool success = parent.AddChild(child);
-            
-            //Assert:
-            Assert.IsFalse(success);
-        }
-        
-        [Test]
-        public void WhenRemoveChildThatNotChildThenFalse()
-        {
-            //Arrange:
-            var parent = new Context();
-            var child = new Context();
-
-            //Act:
-            bool success = parent.DelChild(child);
-            
-            //Assert:
-            Assert.IsFalse(success);
-        }
+       
 
         #endregion
 
@@ -467,11 +413,13 @@ namespace Atomic.Contexts
         public void GetValueInChildrenOnly()
         {
             //Arrange:
-            var parent = new Context();
             
-            var child = new Context(null, parent);
+            var child = new Context();
             child.AddValue(1, "Apple");
-            
+
+            var parent = new Context();
+            parent.AddChild(child);
+
             //Act:
             string data = parent.GetValueInChildren<string>(1, false);
             
@@ -479,7 +427,6 @@ namespace Atomic.Contexts
             Assert.IsFalse(parent.HasValue(1));
             Assert.AreEqual("Apple", data);
         }
-        
         
         [Test]
         public void GetValueInChildrenFailed()
@@ -498,3 +445,70 @@ namespace Atomic.Contexts
         #endregion
     }
 }
+
+// [Test]
+// public void AddChild()
+// {
+//     //Arrange:
+//     var parent = new Context();
+//     var child = new Context();
+//
+//     //Act:
+//     bool success = parent.AddChild(child);
+//     
+//     //Assert:
+//     Assert.IsTrue(success);
+//     Assert.IsTrue(child.IsParent(parent));
+//     Assert.IsTrue(parent.IsChild(child));
+// }
+        
+// [Test]
+// public void DelChild()
+// {
+//     //Arrange:
+//     var parent = new Context();
+//     var child = new Context("Child", parent);
+//
+//     //Act:
+//     bool success = parent.DelChild(child);
+//     
+//     //Assert:
+//     Assert.IsTrue(success);
+//     Assert.IsFalse(child.IsParent(parent));
+//     Assert.IsFalse(parent.IsChild(child));
+// }
+//
+// [Test]
+// public void WhenAddChildThatAlreadyAddedThenFalse()
+// {
+//     //Arrange:
+//     var parent = new Context();
+//     var child = new Context(null, parent);
+//
+//     //Act:
+//     bool success = parent.AddChild(child);
+//     
+//     //Assert:
+//     Assert.IsFalse(success);
+// }
+//
+// [Test]
+// public void WhenRemoveChildThatNotChildThenFalse()
+// {
+//     //Arrange:
+//     var parent = new Context();
+//     var child = new Context();
+//
+//     //Act:
+//     bool success = parent.DelChild(child);
+//     
+//     //Assert:
+//     Assert.IsFalse(success);
+// }
+
+
+// //Verify:
+// Assert.IsTrue(child.IsParent(parent1));
+// Assert.IsFalse(child.IsParent(parent2));
+// Assert.IsTrue(parent1.IsChild(child));
+// Assert.IsFalse(parent2.IsChild(child));

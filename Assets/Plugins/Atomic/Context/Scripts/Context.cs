@@ -6,7 +6,14 @@ namespace Atomic.Contexts
 {
     public sealed class Context : IContext
     {
-        #region Base
+        public Context(string name = null, IContext parent = null, IEnumerable<IContext> chilren = null)
+        {
+            this.name = name;
+            this.parent = parent;
+            this.children = chilren != null ? new HashSet<IContext>(chilren) : new HashSet<IContext>();
+        }
+        
+        #region Common
 
         public string Name
         {
@@ -15,12 +22,6 @@ namespace Atomic.Contexts
         }
 
         private string name;
-
-        public Context(string name = null, IContext parent = null)
-        {
-            this.name = name;
-            this.SetParent(parent);
-        }
 
         #endregion
 
@@ -266,12 +267,16 @@ namespace Atomic.Contexts
         #endregion
 
         #region Parent
-        
-        public IContext Parent => this.parent;
-        public IReadOnlyCollection<IContext> Children => this.children;
-        public ICollection<IContext> ChildrenUnsafe => this.children;
 
-        private readonly HashSet<IContext> children = new();
+        public IContext Parent
+        {
+            get => this.parent;
+            set => this.parent = value;
+        }
+
+        public ICollection<IContext> Children => this.children;
+
+        private readonly HashSet<IContext> children;
         private IContext parent;
 
         public bool IsChild(IContext context)
@@ -286,25 +291,12 @@ namespace Atomic.Contexts
 
         public bool AddChild(IContext child)
         {
-            return child != null && child.SetParent(this);
+            return child != null && this.children.Add(child);
         }
 
         public bool DelChild(IContext child)
         {
-            return child != null && child.SetParent(null);
-        }
-
-        public bool SetParent(IContext parent)
-        {
-            if (this.parent == parent)
-            {
-                return false;
-            }
-
-            this.parent?.ChildrenUnsafe.Remove(this);
-            this.parent = parent;
-            this.parent?.ChildrenUnsafe.Add(this);
-            return true;
+            return child != null && this.children.Remove(child);
         }
 
         #endregion

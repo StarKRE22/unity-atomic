@@ -89,6 +89,63 @@ namespace Atomic.Contexts
     }
 }
 
+
+// public static bool BindParent(this IContext child, IContext parent)
+// {
+//     IContext prevParent = child.Parent;
+//     if (prevParent == parent)
+//     {
+//         return false;
+//     }
+//
+//     prevParent?.Children.Remove(child);
+//     child.Parent = parent;
+//     parent?.Children.Add(child);
+//     return true;
+// }
+//
+// public static bool BindChild(this IContext parent, IContext child)
+// {
+//     if (parent.AddChild(child))
+//     {
+//         child.Parent = parent;
+//     }
+//     
+//     ;
+//     
+//     if (!)
+//     {
+//         return false;
+//     }
+//     
+//     
+//     
+//     IContext prevParent = child.Parent;
+//     if (prevParent == parent)
+//     {
+//         return false;
+//     }
+//
+//     prevParent?.Children.Remove(child);
+//     child.Parent = parent;
+//     parent?.Children.Add(child);
+//     return true;
+// }
+//
+// public static bool UnbindChild(this IContext parent, IContext child)
+// {
+//     IContext prevParent = child.Parent;
+//     if (prevParent == parent)
+//     {
+//         return false;
+//     }
+//
+//     prevParent?.Children.Remove(child);
+//     child.Parent = parent;
+//     parent?.Children.Add(child);
+//     return true;
+// }
+
 // public static T GetValueInParentAndSelf<T>(this IContext context, int key) where T : class
 // {
 //     T data = context.GetValue<T>(key);
