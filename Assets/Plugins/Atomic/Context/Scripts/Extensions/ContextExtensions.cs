@@ -1,94 +1,123 @@
+using System.Runtime.CompilerServices;
+
 namespace Atomic.Contexts
 {
     public static class ContextExtensions
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsOff(this IContext context)
         {
             return context.State == ContextState.OFF;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsIntialized(this IContext context)
         {
             return context.State == ContextState.INITIALIZED;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEnabled(this IContext context)
         {
             return context.State == ContextState.ENABLED;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsDisabled(this IContext context)
         {
             return context.State == ContextState.DISABLED;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsDestroyed(this IContext context)
         {
             return context.State == ContextState.DISPOSED;
         }
 
-        public static T GetValueInParent<T>(
-            this IContext context,
-            int key,
-            bool includeSelf = true
-        )
-            where T : class
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T ResolveValue<T>(this IContext context, int key) where T : class
         {
-            if (includeSelf)
+            if (context.TryGetValue(key, out T value))
             {
-                T data = context.GetValue<T>(key);
-                if (data != null)
-                {
-                    return data;
-                }
+                return value;
             }
 
             while (true)
             {
                 context = context.Parent;
+                
                 if (context == null)
                 {
                     return null;
                 }
 
-                T data = context.GetValue<T>(key);
+                value = context.GetValue<T>(key);
 
-                if (data != null)
-                {
-                    return data;
-                }
-            }
-        }
-
-        public static T GetValueInChildren<T>(
-            this IContext context,
-            int key,
-            bool includeSelf = true
-        ) where T : class
-        {
-            if (includeSelf)
-            {
-                T data = context.GetValue<T>(key);
-                if (data != null)
-                {
-                    return data;
-                }
-            }
-            
-            foreach (IContext child in context.Children)
-            {
-                T value = child.GetValueInChildren<T>(key, includeSelf: true);
                 if (value != null)
                 {
                     return value;
                 }
             }
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryResolveValue<T>(this IContext context, int key, out T value) where T : class
+        {
+            if (context.TryGetValue(key, out value))
+            {
+                return true;
+            }
 
-            return null;
+            while (true)
+            {
+                context = context.Parent;
+                
+                if (context == null)
+                {
+                    return false;
+                }
+
+                value = context.GetValue<T>(key);
+
+                if (value != null)
+                {
+                    return true;
+                }
+            }
         }
     }
 }
 
+
+
+
+
+// public static T GetValueInChildren<T>(
+//     this IContext context,
+//     int key,
+//     bool includeSelf = true
+// ) where T : class
+// {
+//     if (includeSelf)
+//     {
+//         T data = context.GetValue<T>(key);
+//         if (data != null)
+//         {
+//             return data;
+//         }
+//     }
+//     
+//     foreach (IContext child in context.Children)
+//     {
+//         T value = child.GetValueInChildren<T>(key, includeSelf: true);
+//         if (value != null)
+//         {
+//             return value;
+//         }
+//     }
+//
+//     return null;
+// }
 
 // public static bool BindParent(this IContext child, IContext parent)
 // {

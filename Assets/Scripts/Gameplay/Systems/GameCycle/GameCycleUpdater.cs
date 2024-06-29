@@ -34,10 +34,8 @@ namespace SampleGame
 
         public void LateUpdate(IContext context, float deltaTime)
         {
-            Debug.Log("LATE TICK GAME CLYCLE");
             if (this.gameCycle.IsPlaying())
             {
-                Debug.Log("TICK!!!");
                 this.gameCycle.LateTick(deltaTime);
             }
         }

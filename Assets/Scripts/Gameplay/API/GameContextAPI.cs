@@ -20,7 +20,7 @@ namespace SampleGame
 
         public static MoveInput GetMoveInput(this IContext context)
         {
-            return context.GetValue<MoveInput>(MoveInput);
+            return context.ResolveValue<MoveInput>(MoveInput);
         }
 
         public static void AddCharacter(this IContext context, ICharacter character)
@@ -30,7 +30,7 @@ namespace SampleGame
 
         public static ICharacter GetCharacter(this IContext context)
         {
-            return context.GetValue<ICharacter>(Character);
+            return context.ResolveValue<ICharacter>(Character);
         }
 
         public static void AddPlayerCamera(this IContext context, Camera camera)
@@ -40,12 +40,12 @@ namespace SampleGame
         
         public static Camera GetPlayerCamera(this IContext context)
         {
-            return context.GetValue<Camera>(PlayerCamera);
+            return context.ResolveValue<Camera>(PlayerCamera);
         }
         
         public static GameCycle GetGameCycle(this IContext context)
         {
-            return context.GetValue<GameCycle>(GameCycle);
+            return context.ResolveValue<GameCycle>(GameCycle);
         }
         
         public static void AddGameCycle(this IContext context, GameCycle gameCycle)

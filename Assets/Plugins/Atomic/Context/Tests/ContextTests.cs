@@ -344,28 +344,14 @@ namespace Atomic.Contexts
             Assert.IsFalse(child.IsParent(parent));
         }
 
-        [Test]
-        public void AddChild()
-        {
-            //Arrange:
-            var parent = new Context();
-            var child = new Context();
-            
-            //Act:
-            parent.AddChild(child);
-
-            //Assert:
-            Assert.IsTrue(parent.IsChild(child));
-        }
-
-       
+     //
 
         #endregion
 
         #region Extensions
 
         [Test]
-        public void GetValueInParentOnly()
+        public void ResolveValueInParent()
         {
             //Arrange:
             var parent = new Context();
@@ -374,10 +360,9 @@ namespace Atomic.Contexts
             var child = new Context(null, parent);
 
             //Act:
-            string data = child.GetValueInParent<string>(1, includeSelf: false);
+            string data = child.ResolveValue<string>(1);
 
             //Assert:
-            Assert.IsFalse(child.HasValue(1));
             Assert.AreEqual("Apple", data);
         }
 
@@ -389,54 +374,21 @@ namespace Atomic.Contexts
             context.AddValue(1, "Apple");
 
             //Act:
-            string data = context.GetValueInParent<string>(1, includeSelf: true);
+            string data = context.ResolveValue<string>(1);
 
             //Assert:
             Assert.AreEqual("Apple", data);
         }
 
         [Test]
-        public void GetValueInParentFailed()
+        public void ResolveValueInParentFailed()
         {
             //Arrange:
             var parent = new Context();
             var child = new Context(null, parent);
             
             //Act:
-            string data = child.GetValueInParent<string>(1);
-
-            //Assert:
-            Assert.IsNull(data);
-        }
-
-        [Test]
-        public void GetValueInChildrenOnly()
-        {
-            //Arrange:
-            
-            var child = new Context();
-            child.AddValue(1, "Apple");
-
-            var parent = new Context();
-            parent.AddChild(child);
-
-            //Act:
-            string data = parent.GetValueInChildren<string>(1, false);
-            
-            //Assert:
-            Assert.IsFalse(parent.HasValue(1));
-            Assert.AreEqual("Apple", data);
-        }
-        
-        [Test]
-        public void GetValueInChildrenFailed()
-        {
-            //Arrange:
-            var parent = new Context();
-            parent.AddChild(new Context());
-
-            //Act:
-            string data = parent.GetValueInChildren<string>(1);
+            string data = child.ResolveValue<string>(1);
 
             //Assert:
             Assert.IsNull(data);
@@ -445,6 +397,56 @@ namespace Atomic.Contexts
         #endregion
     }
 }
+
+
+// [Test]
+// public void GetValueInChildrenOnly()
+// {
+//     //Arrange:
+//     
+//     var child = new Context();
+//     child.AddValue(1, "Apple");
+//
+//     var parent = new Context();
+//     parent.AddChild(child);
+//
+//     //Act:
+//     string data = parent.GetValueInChildren<string>(1, false);
+//     
+//     //Assert:
+//     Assert.IsFalse(parent.HasValue(1));
+//     Assert.AreEqual("Apple", data);
+// }
+//
+// [Test]
+// public void GetValueInChildrenFailed()
+// {
+//     //Arrange:
+//     var parent = new Context();
+//     parent.AddChild(new Context());
+//
+//     //Act:
+//     string data = parent.GetValueInChildren<string>(1);
+//
+//     //Assert:
+//     Assert.IsNull(data);
+// }
+
+// [Test]
+// public void AddChild()
+// {
+//     //Arrange:
+//     var parent = new Context();
+//     var child = new Context();
+//     
+//     //Act:
+//     parent.AddChild(child);
+//
+//     //Assert:
+//     Assert.IsTrue(parent.IsChild(child));
+// }
+//
+
 
 // [Test]
 // public void AddChild()

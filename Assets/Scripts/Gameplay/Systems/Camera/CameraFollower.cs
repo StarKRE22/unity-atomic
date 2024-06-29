@@ -19,7 +19,6 @@ namespace SampleGame
 
         public void Init(IContext context)
         {
-            Debug.Log("INIT FOLLOWER");
             this.character = context.GetCharacter();
             this.camera = context.GetPlayerCamera();
             this.gameCycle = context.GetGameCycle();
@@ -33,7 +32,6 @@ namespace SampleGame
 
         public void LateTick(float deltaTime)
         {
-            Debug.Log("LATE TICK");
             Vector3 cameraPosition = this.character.GetPosition() + this.cameraConfig.cameraOffset;
             this.camera.transform.position = cameraPosition;
         }

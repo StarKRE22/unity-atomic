@@ -5,8 +5,8 @@ namespace Atomic.Contexts
 {
     public interface IContext
     {
-        event Action<ContextState> OnStateChanged; 
-        
+        event Action<ContextState> OnStateChanged;
+
         event Action<int, object> OnValueAdded;
         event Action<int, object> OnValueDeleted;
         event Action<int, object> OnValueChanged;
@@ -16,31 +16,30 @@ namespace Atomic.Contexts
 
         event Action<float> OnUpdate;
         event Action<float> OnFixedUpdate;
-        event Action<float> OnLateUpdate; 
+        event Action<float> OnLateUpdate;
 
         string Name { get; set; }
         ContextState State { get; }
-        
+
         IReadOnlyDictionary<int, object> Values { get; }
         IReadOnlyCollection<ISystem> Systems { get; }
-        
-        IContext Parent { get; set;  }
-        ICollection<IContext> Children { get; }
+
+        IContext Parent { get; set; }
 
         bool AddValue(int key, object value);
         void SetValue(int key, object value);
         bool DelValue(int key);
         bool DelValue(int key, out object removed);
         bool HasValue(int key);
-        
+
         T GetValue<T>(int key) where T : class;
         object GetValue(int key);
         bool TryGetValue<T>(int id, out T value) where T : class;
         bool TryGetValue(int id, out object value);
-        
+
         T GetSystem<T>() where T : ISystem;
         bool TryGetSystem<T>(out T result) where T : ISystem;
-        
+
         bool AddSystem(ISystem system);
         bool AddSystem<T>() where T : ISystem, new();
         bool DelSystem(ISystem system);
@@ -48,10 +47,6 @@ namespace Atomic.Contexts
         bool HasSystem(ISystem system);
         bool HasSystem<T>() where T : ISystem;
 
-        bool IsChild(IContext context);
         bool IsParent(IContext context);
-        bool AddChild(IContext child);
-        bool DelChild(IContext child);
-        IContext GetChild(string name);
     }
 }

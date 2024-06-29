@@ -6,14 +6,7 @@ namespace Atomic.Contexts
 {
     public sealed class Context : IContext
     {
-        public Context(string name = null, IContext parent = null, IEnumerable<IContext> chilren = null)
-        {
-            this.name = name;
-            this.parent = parent;
-            this.children = chilren != null ? new HashSet<IContext>(chilren) : new HashSet<IContext>();
-        }
-        
-        #region Common
+        #region Main
 
         public string Name
         {
@@ -21,7 +14,25 @@ namespace Atomic.Contexts
             set { this.name = value; }
         }
 
+        public IContext Parent
+        {
+            get => this.parent;
+            set => this.parent = value;
+        }
+
         private string name;
+        private IContext parent;
+
+        public Context(string name = null, IContext parent = null)
+        {
+            this.name = name;
+            this.parent = parent;
+        }
+
+        public bool IsParent(IContext context)
+        {
+            return this.parent == context;
+        }
 
         #endregion
 
@@ -60,18 +71,6 @@ namespace Atomic.Contexts
             return null;
         }
 
-
-        public bool AddValue(int key, object value)
-        {
-            if (this.values.TryAdd(key, value))
-            {
-                this.OnValueAdded?.Invoke(key, value);
-                return true;
-            }
-
-            return false;
-        }
-
         public bool TryGetValue<T>(int id, out T value) where T : class
         {
             if (this.values.TryGetValue(id, out object field))
@@ -87,6 +86,17 @@ namespace Atomic.Contexts
         public bool TryGetValue(int id, out object value)
         {
             return this.values.TryGetValue(id, out value);
+        }
+
+        public bool AddValue(int key, object value)
+        {
+            if (this.values.TryAdd(key, value))
+            {
+                this.OnValueAdded?.Invoke(key, value);
+                return true;
+            }
+
+            return false;
         }
 
         public void SetValue(int key, object value)
@@ -123,7 +133,7 @@ namespace Atomic.Contexts
 
         public event Action<ISystem> OnSystemAdded;
         public event Action<ISystem> OnSystemRemoved;
-   
+
 
         public IReadOnlyCollection<ISystem> Systems => this.systems;
 
@@ -269,54 +279,10 @@ namespace Atomic.Contexts
 
         #region Parent
 
-        public IContext Parent
-        {
-            get => this.parent;
-            set => this.parent = value;
-        }
-
-        public ICollection<IContext> Children => this.children;
-
-        private readonly HashSet<IContext> children;
-        private IContext parent;
-
-        public bool IsChild(IContext context)
-        {
-            return this.children.Contains(context);
-        }
-
-        public bool IsParent(IContext context)
-        {
-            return this.parent == context;
-        }
-
-        public bool AddChild(IContext child)
-        {
-            return child != null && this.children.Add(child);
-        }
-
-        public bool DelChild(IContext child)
-        {
-            return child != null && this.children.Remove(child);
-        }
-
-        public IContext GetChild(string name)
-        {
-            foreach (var child in this.children)
-            {
-                if (child.Name == name)
-                {
-                    return child;
-                }
-            }
-
-            return null;
-        }
-
         #endregion
 
         #region Lifecycle
-        
+
         public event Action<float> OnUpdate;
         public event Action<float> OnFixedUpdate;
         public event Action<float> OnLateUpdate;
@@ -399,7 +365,7 @@ namespace Atomic.Contexts
                     update.Update(this, deltaTime);
                 }
             }
-            
+
             this.OnUpdate?.Invoke(deltaTime);
         }
 
@@ -422,7 +388,7 @@ namespace Atomic.Contexts
                     updateSystem.FixedUpdate(this, deltaTime);
                 }
             }
-            
+
             this.OnFixedUpdate?.Invoke(deltaTime);
         }
 
@@ -445,7 +411,7 @@ namespace Atomic.Contexts
                     updateSystem.LateUpdate(this, deltaTime);
                 }
             }
-            
+
             this.OnLateUpdate?.Invoke(deltaTime);
         }
 
@@ -494,3 +460,37 @@ namespace Atomic.Contexts
         #endregion
     }
 }
+
+// public ICollection<IContext> Children => this.children;
+//
+// private readonly HashSet<IContext> children;
+//
+// public bool IsChild(IContext context)
+// {
+//     return this.children.Contains(context);
+// }
+
+
+//
+// public bool AddChild(IContext child)
+// {
+//     return child != null && this.children.Add(child);
+// }
+//
+// public bool DelChild(IContext child)
+// {
+//     return child != null && this.children.Remove(child);
+// }
+//
+// public IContext GetChild(string name)
+// {
+//     foreach (var child in this.children)
+//     {
+//         if (child.Name == name)
+//         {
+//             return child;
+//         }
+//     }
+//
+//     return null;
+// }

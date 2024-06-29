@@ -12,8 +12,6 @@ namespace Atomic.Contexts
     {
         #region Main
 
-        private Context context;
-
         [SerializeField]
         private bool controlState = true;
 
@@ -21,16 +19,27 @@ namespace Atomic.Contexts
         [SerializeField]
         public SceneContext initialParent;
 
-        [SerializeField]
-        public List<SceneContext> initialChildren = new();
-
         [Space]
         [SerializeField]
         public List<SceneContextInstallerBase> installers = new();
 
+        public string Name
+        {
+            get => context.Name;
+            set => context.Name = value;
+        }
+        
+        public IContext Parent
+        {
+            get => context.Parent;
+            set => context.Parent = value;
+        }
+        
+        private Context context;
+        
         public void Install()
         {
-            context = new Context(this.name, this.initialParent, this.initialChildren);
+            context = new Context(this.name, this.initialParent);
 
             for (int i = 0, count = this.installers.Count; i < count; i++)
             {
@@ -40,6 +49,11 @@ namespace Atomic.Contexts
                     installer.Install(context);
                 }
             }
+        }
+        
+        public bool IsParent(IContext context)
+        {
+            return context.IsParent(context);
         }
 
         #endregion
@@ -55,6 +69,7 @@ namespace Atomic.Contexts
             }
             else
             {
+                Debug.Log($"DISABLED CONTEXT {name}");
                 this.enabled = false;
             }
         }
@@ -121,16 +136,6 @@ namespace Atomic.Contexts
             {
                 // ignored
             }
-        }
-
-        #endregion
-
-        #region Common
-        
-        public string Name
-        {
-            get => context.Name;
-            set => context.Name = value;
         }
 
         #endregion
@@ -329,43 +334,6 @@ namespace Atomic.Contexts
 
         #endregion
 
-        #region Parent
-
-        public IContext Parent
-        {
-            get => context.Parent;
-            set => context.Parent = value;
-        }
-
-        public ICollection<IContext> Children => context.Children;
-
-        public bool IsChild(IContext context)
-        {
-            return context.IsChild(context);
-        }
-
-        public bool IsParent(IContext context)
-        {
-            return context.IsParent(context);
-        }
-
-        public bool AddChild(IContext child)
-        {
-            return context.AddChild(child);
-        }
-
-        public bool DelChild(IContext child)
-        {
-            return context.DelChild(child);
-        }
-
-        public IContext GetChild(string name)
-        {
-            return context.GetChild(name);
-        }
-
-        #endregion
-
         #region Debug
 
         public static IValueNameFormatter ValueNameFormatter;
@@ -393,7 +361,7 @@ namespace Atomic.Contexts
 
         [FoldoutGroup("Debug")]
         [ShowInInspector, ReadOnly]
-        [HideInEditorMode, LabelText("Alive")]
+        [HideInEditorMode, LabelText("State")]
         private ContextState StateDebug
         {
             get { return this.context?.State ?? default; }
@@ -484,7 +452,7 @@ namespace Atomic.Contexts
         }
 
         [FoldoutGroup("Debug")]
-        [LabelText("Logics")]
+        [LabelText("Systems")]
         [ShowInInspector, PropertyOrder(100)]
         [ListDrawerSettings(
             CustomRemoveElementFunction = nameof(RemoveSystemElement),
