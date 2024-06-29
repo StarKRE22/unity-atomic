@@ -5,7 +5,7 @@ using Modules.Inputs;
 namespace SampleGame
 {
     [Serializable]
-    public sealed class CharacterMoveController : IInitSystem, IEnableSystem, IDisableSystem
+    public sealed class CharacterMoveController : IInitSystem, IDisposeSystem
     {
         private ICharacter character;
         private MoveInput moveInput;
@@ -14,14 +14,10 @@ namespace SampleGame
         {
             this.character = context.GetCharacter();
             this.moveInput = context.GetMoveInput();
-        }
-        
-        public void Enable(IContext context)
-        {
             this.moveInput.OnMove += this.character.Move;
         }
 
-        public void Disable(IContext context)
+        public void Dispose(IContext context)
         {
             this.moveInput.OnMove -= this.character.Move;
         }

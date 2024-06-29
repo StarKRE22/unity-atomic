@@ -23,4 +23,19 @@ namespace Modules.GameCycles
     {
         void OnFinishGame();
     }
+
+    public interface IGameTickable : IGameListener
+    {
+        void Tick(float deltaTime);
+    }
+
+    public interface IGameFixedTickable : IGameListener
+    {
+        void FixedTick(float deltaTime);
+    }
+    
+    public interface IGameLateTickable : IGameListener
+    {
+        void LateTick(float deltaTime);
+    }
 }

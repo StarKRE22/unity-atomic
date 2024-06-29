@@ -6,6 +6,6 @@ namespace Atomic.Contexts
         INITIALIZED = 1,
         ENABLED = 2,
         DISABLED = 3,
-        DESTROYED = 4
+        DISPOSED = 4
     }
 }

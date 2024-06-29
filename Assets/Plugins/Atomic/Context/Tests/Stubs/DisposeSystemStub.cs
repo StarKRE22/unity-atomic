@@ -1,10 +1,10 @@
 namespace Atomic.Contexts
 {
-    public sealed class DestroySystemStub : IDestroySystem
+    public sealed class DisposeSystemStub : IDisposeSystem
     {
         public bool destroyed;
         
-        public void Destroy(IContext context)
+        public void Dispose(IContext context)
         {
             destroyed = true;
         }

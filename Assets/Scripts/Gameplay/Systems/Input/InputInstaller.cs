@@ -14,7 +14,7 @@ namespace Modules.Inputs
         public void Install(IContext context)
         {
             context.AddMoveInput(new MoveInput(this.inputConfig));
-            context.AddSystem<InputUpdater>();
+            context.AddSystem<MoveInputUpdater>();
         }
     }
 }

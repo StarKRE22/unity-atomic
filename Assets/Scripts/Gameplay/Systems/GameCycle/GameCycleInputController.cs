@@ -19,22 +19,22 @@ namespace SampleGame
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                this.gameCycle.StartGame();
+                this.gameCycle.Start();
             }
 
             if (Input.GetKeyDown(KeyCode.P))
             {
-                this.gameCycle.PauseGame();
+                this.gameCycle.Pause();
             }
 
             if (Input.GetKeyDown(KeyCode.R))
             {
-                this.gameCycle.ResumeGame();
+                this.gameCycle.Resume();
             }
 
             if (Input.GetKeyDown(KeyCode.F))
             {
-                this.gameCycle.FinishGame();
+                this.gameCycle.Finish();
             }
         }
     }

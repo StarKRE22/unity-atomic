@@ -12,7 +12,11 @@ namespace Atomic.Contexts
         event Action<int, object> OnValueChanged;
 
         event Action<ISystem> OnSystemAdded;
-        event Action<ISystem> OnSystemRemoved; 
+        event Action<ISystem> OnSystemRemoved;
+
+        event Action<float> OnUpdate;
+        event Action<float> OnFixedUpdate;
+        event Action<float> OnLateUpdate; 
 
         string Name { get; set; }
         ContextState State { get; }

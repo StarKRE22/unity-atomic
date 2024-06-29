@@ -12,12 +12,12 @@ namespace SampleGame.UI
         public void Enable(IView view)
         {
             this.gameCycle = GameContext.Instance.GetGameCycle();
-            view.GetStartButton().onClick.AddListener(this.gameCycle.StartGame);
+            view.GetStartButton().onClick.AddListener(this.gameCycle.Start);
         }
 
         public void Disable(IView view)
         {
-            view.GetStartButton().onClick.RemoveListener(this.gameCycle.StartGame);
+            view.GetStartButton().onClick.RemoveListener(this.gameCycle.Start);
         }
     }
 }

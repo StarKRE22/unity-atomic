@@ -10,7 +10,6 @@ namespace SampleGame
     {
         public const int MoveInput = 1; 
         public const int Character = 2; 
-        public const int CameraConfig = 3; 
         public const int PlayerCamera = 4; 
         public const int GameCycle = 5; 
         
@@ -33,17 +32,7 @@ namespace SampleGame
         {
             return context.GetValue<ICharacter>(Character);
         }
-        
-        public static void AddCameraConfig(this IContext context, CameraConfig cameraConfig)
-        {
-            context.AddValue(CameraConfig, cameraConfig);
-        }
 
-        public static CameraConfig GetCameraConfig(this IContext context)
-        {
-            return context.GetValue<CameraConfig>(CameraConfig);
-        }
-        
         public static void AddPlayerCamera(this IContext context, Camera camera)
         {
             context.AddValue(PlayerCamera, camera);

@@ -82,12 +82,12 @@ namespace Atomic.Contexts
 
 
         [Test]
-        public void Destroy()
+        public void Dispose()
         {
             //Arrange
             var context = new Context();
             var wasEvent = new Reference<bool>();
-            var systemStub = new DestroySystemStub();
+            var systemStub = new DisposeSystemStub();
 
             context.AddSystem(systemStub);
             context.OnStateChanged += state =>
@@ -99,7 +99,7 @@ namespace Atomic.Contexts
             context.Initialize();
             context.Enable();
             context.Disable();
-            context.Destroy();
+            context.Dispose();
 
             //Assert
             Assert.IsTrue(systemStub.destroyed);

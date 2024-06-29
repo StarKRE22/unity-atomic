@@ -6,23 +6,27 @@ using Modules.Inputs;
 namespace SampleGame
 {
     [Serializable]
-    public sealed class InputUpdater : IInitSystem, IUpdateSystem
+    public sealed class MoveInputUpdater : IInitSystem, IDisposeSystem, IGameTickable
     {
         private MoveInput moveInput;
         private GameCycle gameCycle;
-        
+
         public void Init(IContext context)
         {
             this.moveInput = context.GetMoveInput();
+
             this.gameCycle = context.GetGameCycle();
+            this.gameCycle.AddListener(this);
         }
 
-        public void Update(IContext context, float deltaTime)
+        public void Dispose(IContext context)
         {
-            if (this.gameCycle.State == GameState.PLAY)
-            {
-                this.moveInput.Update(deltaTime);
-            }
+            this.gameCycle.DelListener(this);
+        }
+        
+        public void Tick(float deltaTime)
+        {
+            this.moveInput.Update();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Modules.Inputs
             this.config = config;
         }
         
-        public void Update(float deltaTime)
+        public void Update()
         {
             Vector3 direction = this.ReadDirection();
             if (direction != Vector3.zero)

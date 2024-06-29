@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,10 +13,10 @@ namespace Atomic.Contexts
         #region Main
 
         private Context context;
-        
+
         [SerializeField]
-        private bool controlState;
-        
+        private bool controlState = true;
+
         [Space]
         [SerializeField]
         public SceneContext initialParent;
@@ -25,18 +26,18 @@ namespace Atomic.Contexts
 
         [Space]
         [SerializeField]
-        private SceneContextInstallerBase[] installers;
+        public List<SceneContextInstallerBase> installers = new();
 
         public void Install()
         {
             context = new Context(this.name, this.initialParent, this.initialChildren);
 
-            for (int i = 0, count = installers.Length; i < count; i++)
+            for (int i = 0, count = this.installers.Count; i < count; i++)
             {
                 SceneContextInstallerBase installer = installers[i];
                 if (installer != null)
                 {
-                    installer.Install(this);
+                    installer.Install(context);
                 }
             }
         }
@@ -78,7 +79,7 @@ namespace Atomic.Contexts
         {
             if (this.controlState)
             {
-                context.Destroy();
+                context.Dispose();
             }
         }
 
@@ -102,22 +103,29 @@ namespace Atomic.Contexts
         {
             if (this.controlState)
             {
-                context.Update(Time.deltaTime);
+                context.LateUpdate(Time.deltaTime);
             }
         }
 
         private void OnValidate()
         {
-            if (!EditorApplication.isPlaying)
+            try
             {
-                this.Install();
+                if (!EditorApplication.isPlaying)
+                {
+                    this.Install();
+                }
+            }
+            catch (Exception)
+            {
+                // ignored
             }
         }
 
         #endregion
 
         #region Common
-
+        
         public string Name
         {
             get => context.Name;
@@ -209,6 +217,8 @@ namespace Atomic.Contexts
             remove => context.OnSystemRemoved -= value;
         }
 
+      
+
         public IReadOnlyCollection<ISystem> Systems => context.Systems;
 
         public T GetSystem<T>() where T : ISystem
@@ -260,6 +270,24 @@ namespace Atomic.Contexts
             add => context.OnStateChanged += value;
             remove => context.OnStateChanged -= value;
         }
+        
+        public event Action<float> OnUpdate
+        {
+            add => context.OnUpdate += value;
+            remove => context.OnUpdate -= value;
+        }
+
+        public event Action<float> OnFixedUpdate
+        {
+            add => context.OnFixedUpdate += value;
+            remove => context.OnFixedUpdate -= value;
+        }
+        
+        public event Action<float> OnLateUpdate
+        {
+            add => context.OnLateUpdate += value;
+            remove => context.OnLateUpdate -= value;
+        }
 
         public ContextState State => context.State;
 
@@ -278,9 +306,9 @@ namespace Atomic.Contexts
             context.Disable();
         }
 
-        public void ManualDestroy()
+        public void ManualDispose()
         {
-            context.Destroy();
+            context.Dispose();
         }
 
         public void ManualUpdate(float deltaTime)
@@ -329,6 +357,170 @@ namespace Atomic.Contexts
         {
             return context.DelChild(child);
         }
+
+        #endregion
+
+        #region Debug
+
+        public static IValueNameFormatter ValueNameFormatter;
+
+        public interface IValueNameFormatter
+        {
+            string GetName(int id);
+        }
+
+#if UNITY_EDITOR && ODIN_INSPECTOR
+
+        ///Main
+        
+        [FoldoutGroup("Debug")]
+        [ShowInInspector, ReadOnly]
+        [HideInEditorMode, LabelText("Name")]
+        private string NameDebug
+        {
+            get { return this.context?.Name ?? "undefined"; }
+            set
+            {
+                if (this.context != null) this.context.Name = value;
+            }
+        }
+
+        [FoldoutGroup("Debug")]
+        [ShowInInspector, ReadOnly]
+        [HideInEditorMode, LabelText("Alive")]
+        private ContextState StateDebug
+        {
+            get { return this.context?.State ?? default; }
+        }
+
+        ///Values
+        private static readonly List<ValueElement> _valueElementsCache = new();
+
+        private struct ValueElement
+        {
+            [HorizontalGroup(200), ShowInInspector, ReadOnly, HideLabel]
+            public string name;
+
+            [HorizontalGroup, ShowInInspector, HideLabel]
+            public object value;
+
+            internal readonly int id;
+
+            public ValueElement(string name, object value, int id)
+            {
+                this.name = name;
+                this.value = value;
+                this.id = id;
+            }
+        }
+
+        [FoldoutGroup("Debug")]
+        [LabelText("Values")]
+        [ShowInInspector, PropertyOrder(100)]
+        [ListDrawerSettings(
+            CustomRemoveElementFunction = nameof(RemoveValueElement),
+            CustomRemoveIndexFunction = nameof(RemoveValueElementAt),
+            HideAddButton = true
+        )]
+        private List<ValueElement> ValuesDebug
+        {
+            get
+            {
+                _valueElementsCache.Clear();
+
+                IReadOnlyDictionary<int, object> values = this.context?.Values;
+                if (values == null)
+                {
+                    return _valueElementsCache;
+                }
+
+                foreach ((int id, object value) in values)
+                {
+                    string name = ValueNameFormatter?.GetName(id) ?? id.ToString();
+                    _valueElementsCache.Add(new ValueElement(name, value, id));
+                }
+
+                return _valueElementsCache;
+            }
+
+            set
+            {
+                /** noting... **/
+            }
+        }
+
+        private void RemoveValueElement(ValueElement valueElement)
+        {
+            if (this.context != null) this.DelValue(valueElement.id);
+        }
+
+        private void RemoveValueElementAt(int index)
+        {
+            if (this.context != null) this.DelValue(ValuesDebug[index].id);
+        }
+        
+        ///Logics
+        private static readonly List<SystemElement> _systemElementsCache = new();
+
+        [InlineProperty]
+        private struct SystemElement
+        {
+            [ShowInInspector, ReadOnly, HideLabel]
+            public string name;
+            
+            internal readonly ISystem value;
+
+            public SystemElement(string name, ISystem value)
+            {
+                this.name = name;
+                this.value = value;
+            }
+        }
+
+        [FoldoutGroup("Debug")]
+        [LabelText("Logics")]
+        [ShowInInspector, PropertyOrder(100)]
+        [ListDrawerSettings(
+            CustomRemoveElementFunction = nameof(RemoveSystemElement),
+            CustomRemoveIndexFunction = nameof(RemoveSystemElementAt),
+            HideAddButton = true
+        )]
+        private List<SystemElement> SystemsDebug
+        {
+            get
+            {
+                _systemElementsCache.Clear();
+
+                var logics = this.context?.Systems;
+                if (logics == null)
+                {
+                    return _systemElementsCache;
+                }
+
+                foreach (var system in logics)
+                {
+                    string name = system.GetType().Name;
+                    _systemElementsCache.Add(new SystemElement(name, system));
+                }
+
+                return _systemElementsCache;
+            }
+            set
+            {
+                /** noting... **/
+            }
+        }
+
+        private void RemoveSystemElement(SystemElement systemElement)
+        {
+            if (this.context != null) this.DelSystem(systemElement.value);
+        }
+
+        private void RemoveSystemElementAt(int index)
+        {
+            if (this.context != null) this.DelSystem(SystemsDebug[index].value);
+        }
+#endif
 
         #endregion
     }

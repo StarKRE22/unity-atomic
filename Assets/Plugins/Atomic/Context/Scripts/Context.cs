@@ -123,6 +123,7 @@ namespace Atomic.Contexts
 
         public event Action<ISystem> OnSystemAdded;
         public event Action<ISystem> OnSystemRemoved;
+   
 
         public IReadOnlyCollection<ISystem> Systems => this.systems;
 
@@ -186,7 +187,7 @@ namespace Atomic.Contexts
                 return false;
             }
 
-            if (this.state is > ContextState.OFF and < ContextState.DESTROYED &&
+            if (this.state is > ContextState.OFF and < ContextState.DISPOSED &&
                 system is IInitSystem initSystem)
             {
                 initSystem.Init(this);
@@ -254,10 +255,10 @@ namespace Atomic.Contexts
                 disableSystem.Disable(this);
             }
 
-            if (this.state is > ContextState.OFF and < ContextState.DESTROYED &&
-                system is IDestroySystem destroySystem)
+            if (this.state is > ContextState.OFF and < ContextState.DISPOSED &&
+                system is IDisposeSystem destroySystem)
             {
-                destroySystem.Destroy(this);
+                destroySystem.Dispose(this);
             }
 
             this.OnSystemRemoved?.Invoke(system);
@@ -302,6 +303,10 @@ namespace Atomic.Contexts
         #endregion
 
         #region Lifecycle
+        
+        public event Action<float> OnUpdate;
+        public event Action<float> OnFixedUpdate;
+        public event Action<float> OnLateUpdate;
 
         public ContextState State
         {
@@ -369,19 +374,20 @@ namespace Atomic.Contexts
                 return;
             }
 
-            if (this.updates.Count == 0)
+            int count = this.updates.Count;
+            if (count != 0)
             {
-                return;
-            }
+                _updateCache.Clear();
+                _updateCache.AddRange(this.updates);
 
-            _updateCache.Clear();
-            _updateCache.AddRange(this.updates);
-
-            for (int i = 0, count = _updateCache.Count; i < count; i++)
-            {
-                IUpdateSystem update = _updateCache[i];
-                update.Update(this, deltaTime);
+                for (int i = 0; i < count; i++)
+                {
+                    IUpdateSystem update = _updateCache[i];
+                    update.Update(this, deltaTime);
+                }
             }
+            
+            this.OnUpdate?.Invoke(deltaTime);
         }
 
         public void FixedUpdate(float deltaTime)
@@ -391,19 +397,20 @@ namespace Atomic.Contexts
                 return;
             }
 
-            if (this.fixedUpdates.Count == 0)
+            int count = this.fixedUpdates.Count;
+            if (count != 0)
             {
-                return;
-            }
+                _fixedUpdateCache.Clear();
+                _fixedUpdateCache.AddRange(this.fixedUpdates);
 
-            _fixedUpdateCache.Clear();
-            _fixedUpdateCache.AddRange(this.fixedUpdates);
-
-            for (int i = 0, count = _fixedUpdateCache.Count; i < count; i++)
-            {
-                IFixedUpdateSystem updateSystem = _fixedUpdateCache[i];
-                updateSystem.FixedUpdate(this, deltaTime);
+                for (int i = 0; i < count; i++)
+                {
+                    IFixedUpdateSystem updateSystem = _fixedUpdateCache[i];
+                    updateSystem.FixedUpdate(this, deltaTime);
+                }
             }
+            
+            this.OnFixedUpdate?.Invoke(deltaTime);
         }
 
         public void LateUpdate(float deltaTime)
@@ -413,19 +420,20 @@ namespace Atomic.Contexts
                 return;
             }
 
-            if (this.lateUpdates.Count == 0)
+            int count = this.lateUpdates.Count;
+            if (count != 0)
             {
-                return;
-            }
+                _lateUpdateCache.Clear();
+                _lateUpdateCache.AddRange(this.lateUpdates);
 
-            _lateUpdateCache.Clear();
-            _lateUpdateCache.AddRange(this.lateUpdates);
-
-            for (int i = 0, count = _lateUpdateCache.Count; i < count; i++)
-            {
-                ILateUpdateSystem updateSystem = _lateUpdateCache[i];
-                updateSystem.LateUpdate(this, deltaTime);
+                for (int i = 0; i < count; i++)
+                {
+                    ILateUpdateSystem updateSystem = _lateUpdateCache[i];
+                    updateSystem.LateUpdate(this, deltaTime);
+                }
             }
+            
+            this.OnLateUpdate?.Invoke(deltaTime);
         }
 
         public void Disable()
@@ -449,7 +457,7 @@ namespace Atomic.Contexts
             this.OnStateChanged?.Invoke(this.state);
         }
 
-        public void Destroy()
+        public void Dispose()
         {
             if (this.state != ContextState.DISABLED)
             {
@@ -460,13 +468,13 @@ namespace Atomic.Contexts
 
             foreach (ISystem system in this.systems)
             {
-                if (system is IDestroySystem destroySystem)
+                if (system is IDisposeSystem destroySystem)
                 {
-                    destroySystem.Destroy(this);
+                    destroySystem.Dispose(this);
                 }
             }
 
-            this.state = ContextState.DESTROYED;
+            this.state = ContextState.DISPOSED;
             this.OnStateChanged?.Invoke(this.state);
         }
 

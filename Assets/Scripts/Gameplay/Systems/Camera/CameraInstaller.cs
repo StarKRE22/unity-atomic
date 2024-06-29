@@ -15,9 +15,8 @@ namespace SampleGame
         
         public void Install(IContext context)
         {
-            context.AddCameraConfig(this.cameraConfig);
             context.AddPlayerCamera(this.camera);
-            context.AddSystem<CameraFollower>();
+            context.AddSystem(new CameraFollower(this.cameraConfig));
         }
     }
 }

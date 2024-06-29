@@ -24,7 +24,7 @@ namespace Atomic.Contexts
 
         public static bool IsDestroyed(this IContext context)
         {
-            return context.State == ContextState.DESTROYED;
+            return context.State == ContextState.DISPOSED;
         }
 
         public static T GetValueInParent<T>(

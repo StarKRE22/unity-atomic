@@ -7,7 +7,7 @@ namespace Atomic.Contexts
         IUpdateSystem,
         IFixedUpdateSystem,
         ILateUpdateSystem,
-        IDestroySystem
+        IDisposeSystem
     {
         public bool initialized;
         public bool enabled;
@@ -47,7 +47,7 @@ namespace Atomic.Contexts
             this.lateUpdated = true;
         }
 
-        public void Destroy(IContext context)
+        public void Dispose(IContext context)
         {
             this.destroyed = true;
         }

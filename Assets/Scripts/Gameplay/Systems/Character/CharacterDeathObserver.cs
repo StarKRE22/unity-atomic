@@ -5,25 +5,21 @@ using Modules.GameCycles;
 namespace SampleGame
 {
     [Serializable]
-    public sealed class CharacterDeathObserver : IInitSystem, IEnableSystem, IDisableSystem
+    public sealed class CharacterDeathObserver : IInitSystem, IDisposeSystem
     {
         private ICharacter character;
         private GameCycle gameCycle;
 
         public void Init(IContext context)
         {
-            this.character = context.GetCharacter();
             this.gameCycle = context.GetGameCycle();
+            this.character = context.GetCharacter();
+            this.character.OnDeath += this.gameCycle.Finish;
         }
 
-        public void Enable(IContext context)
+        public void Dispose(IContext context)
         {
-            this.character.OnDeath += this.gameCycle.FinishGame;
-        }
-
-        public void Disable(IContext context)
-        {
-            this.character.OnDeath -= this.gameCycle.FinishGame;
+            this.character.OnDeath -= this.gameCycle.Finish;
         }
     }
 }

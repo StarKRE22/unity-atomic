@@ -11,6 +11,7 @@ namespace SampleGame
         {
             context.AddGameCycle(new GameCycle());
             context.AddSystem<GameCycleInputController>();
+            context.AddSystem<GameCycleUpdater>();
             context.AddSystem<GameTimeDebug>();
         }
     }
