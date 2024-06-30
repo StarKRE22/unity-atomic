@@ -129,7 +129,6 @@ namespace Atomic.Contexts
             }
         }
 
-        [ContextMenu("Refresh")]
         private void OnValidate()
         {
             try
@@ -381,7 +380,7 @@ namespace Atomic.Contexts
         }
 
         [FoldoutGroup("Debug")]
-        [ShowInInspector, ReadOnly]
+        [ShowInInspector, ReadOnly, PropertySpace]
         [HideInEditorMode, LabelText("Initialized")]
         private bool InitializedDebug
         {
@@ -510,6 +509,14 @@ namespace Atomic.Contexts
             {
                 /** noting... **/
             }
+        }
+        
+        [FoldoutGroup("Debug")]
+        [ShowInInspector, PropertyOrder(100)]
+        [Button("Refresh"), HideInPlayMode]
+        private void Refresh()
+        {
+            this.Install();
         }
 
         [FoldoutGroup("Debug")]

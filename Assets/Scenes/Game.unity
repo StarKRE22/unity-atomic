@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c7ec72f0dfc41099626eca8f3353622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlState: 0
+  controlState: 1
   initialParent: {fileID: 0}
   installers:
   - {fileID: 634595648}
