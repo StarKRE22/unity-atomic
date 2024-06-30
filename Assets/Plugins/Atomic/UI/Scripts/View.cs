@@ -64,8 +64,8 @@ namespace Atomic.UI
 
         public void Hide()
         {
-            this.enabled = true;
-            this.gameObject.SetActive(true);
+            this.enabled = false;
+            this.gameObject.SetActive(false);
         }
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
@@ -79,6 +79,7 @@ namespace Atomic.UI
 
         private void Awake()
         {
+            Debug.Log($"AWAKE {name}");
             this.OnInitialize();
         }
 
@@ -95,6 +96,12 @@ namespace Atomic.UI
         private void OnDestroy()
         {
             this.OnDispose();
+        }
+
+        private void OnValidate()
+        {
+            this.gameObject.SetActive(this.enabled);
+            this.enabled = this.gameObject.activeSelf;
         }
 
         #endregion

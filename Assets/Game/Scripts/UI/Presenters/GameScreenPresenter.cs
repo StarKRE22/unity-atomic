@@ -1,29 +1,30 @@
 using System;
 using Atomic.UI;
 using Modules.Gameplay;
+using UnityEngine;
 
 namespace SampleGame.UI
 {
     [Serializable]
     public sealed class GameScreenPresenter : IInitBehaviour, IShowBehaviour, IHideBehaviour
     {
-        private GameCycle gameCycle;
+        [SerializeField]
+        private View startPopup;
         
-        private IView finishPopup;
-        private IView startPopup;
-        private IView pausePopup;
+        [SerializeField]
+        private View pausePopup;
+        
+        [SerializeField]
+        private View finishPopup;
+
+        private GameCycle gameCycle;
 
         public void Init(IView view)
         {
             this.gameCycle = GameContext.Instance.GetGameCycle();
 
-            this.startPopup = view.GetStartPopup();
             this.startPopup.Show();
-            
-            this.finishPopup = view.GetFinishPopup();
             this.finishPopup.Hide();
-
-            this.pausePopup = view.GetPausePopup();
             this.pausePopup.Hide();
         }
 

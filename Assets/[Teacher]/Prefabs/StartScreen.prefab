@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 5569532995560923399}
   - component: {fileID: 7668008725839316350}
   - component: {fileID: 4588573913115514941}
+  - component: {fileID: 8221950422780004131}
   m_Layer: 5
   m_Name: StartScreen
   m_TagString: Untagged
@@ -257,3 +258,32 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8221950422780004131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7525503865444068419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12192e11a99440eb81f7c81942c958da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  installers: []
+  initialBehaviours: []
+  initEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  showEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  hideEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  disposeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  references:
+    version: 2
+    RefIds: []
