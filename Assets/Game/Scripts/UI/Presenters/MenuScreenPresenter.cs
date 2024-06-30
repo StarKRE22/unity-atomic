@@ -5,9 +5,9 @@ using SampleGame.App;
 namespace SampleGame.UI
 {
     [Serializable]
-    public sealed class MenuScreenPresenter : IEnableHandler, IDisableHandler
+    public sealed class MenuScreenPresenter : IShowBehaviour, IHideBehaviour
     {
-        public void Enable(IView view)
+        public void Show(IView view)
         {
             // ApplicationContext.Instance.GetGameLauncher();
             
@@ -15,7 +15,7 @@ namespace SampleGame.UI
             view.GetExitButton().onClick.AddListener(ApplicationCase.Exit);
         }
 
-        public void Disable(IView view)
+        public void Hide(IView view)
         {
             view.GetStartButton().onClick.RemoveListener(GameLaunchCase.LaunchGame);
             view.GetExitButton().onClick.RemoveListener(ApplicationCase.Exit);

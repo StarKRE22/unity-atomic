@@ -6,11 +6,11 @@ using SampleGame.App;
 namespace SampleGame.UI
 {
     [Serializable]
-    public sealed class PausePopupPresenter : IEnableHandler, IDisableHandler
+    public sealed class PausePopupPresenter : IShowBehaviour, IHideBehaviour
     {
         private GameCycle gameCycle;
 
-        public void Enable(IView view)
+        public void Show(IView view)
         {
             this.gameCycle = GameContext.Instance.GetGameCycle();
 
@@ -19,7 +19,7 @@ namespace SampleGame.UI
             view.GetExitButton().onClick.AddListener(ApplicationCase.Exit);
         }
 
-        public void Disable(IView view)
+        public void Hide(IView view)
         {
             view.GetResumeButton().onClick.RemoveListener(this.gameCycle.Resume);
             view.GetFinishButton().onClick.RemoveListener(this.gameCycle.Finish);

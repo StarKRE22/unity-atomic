@@ -5,7 +5,7 @@ using Modules.Gameplay;
 namespace SampleGame.UI
 {
     [Serializable]
-    public sealed class GameScreenPresenter : IAwakeHandler, IEnableHandler, IDisableHandler
+    public sealed class GameScreenPresenter : IInitBehaviour, IShowBehaviour, IHideBehaviour
     {
         private GameCycle gameCycle;
         
@@ -13,7 +13,7 @@ namespace SampleGame.UI
         private IView startPopup;
         private IView pausePopup;
 
-        public void Awake(IView view)
+        public void Init(IView view)
         {
             this.gameCycle = GameContext.Instance.GetGameCycle();
 
@@ -27,7 +27,7 @@ namespace SampleGame.UI
             this.pausePopup.Hide();
         }
 
-        public void Enable(IView view)
+        public void Show(IView view)
         {
             this.gameCycle.OnStarted += this.startPopup.Hide;
             this.gameCycle.OnFinished += this.finishPopup.Show;
@@ -35,7 +35,7 @@ namespace SampleGame.UI
             this.gameCycle.OnResumed += this.pausePopup.Hide;
         }
 
-        public void Disable(IView view)
+        public void Hide(IView view)
         {
             this.gameCycle.OnStarted -= this.startPopup.Hide;
             this.gameCycle.OnFinished -= this.finishPopup.Show;

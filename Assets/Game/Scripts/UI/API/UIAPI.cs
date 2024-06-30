@@ -16,37 +16,37 @@ namespace SampleGame.UI
 
         public static Button GetStartButton(this IView view)
         {
-            return view.GetData<Button>(StartButton);
+            return view.GetValue<Button>(StartButton);
         }
         
         public static Button GetExitButton(this IView view)
         {
-            return view.GetData<Button>(ExitButton);
+            return view.GetValue<Button>(ExitButton);
         }
         
         public static Button GetResumeButton(this IView view)
         {
-            return view.GetData<Button>(ResumeButton);
+            return view.GetValue<Button>(ResumeButton);
         }
         
         public static Button GetFinishButton(this IView view)
         {
-            return view.GetData<Button>(FinishButton);
+            return view.GetValue<Button>(FinishButton);
         }
 
         public static IView GetFinishPopup(this IView view)
         {
-            return view.GetData<IView>(FinishScreen);
+            return view.GetValue<IView>(FinishScreen);
         }
         
         public static IView GetPausePopup(this IView view)
         {
-            return view.GetData<IView>(PauseScreen);
+            return view.GetValue<IView>(PauseScreen);
         }
         
         public static IView GetStartPopup(this IView view)
         {
-            return view.GetData<IView>(StartScreen);
+            return view.GetValue<IView>(StartScreen);
         }
     }
 }

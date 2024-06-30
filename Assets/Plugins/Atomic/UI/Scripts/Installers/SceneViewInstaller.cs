@@ -5,7 +5,7 @@ namespace Atomic.UI
     public sealed class SceneViewInstaller : MonoBehaviour, IViewInstaller
     {
         [SerializeReference]
-        private IHandler[] handlers;
+        private IBehaviour[] handlers;
 
         [SerializeReference]
         private IViewInstaller[] installers;

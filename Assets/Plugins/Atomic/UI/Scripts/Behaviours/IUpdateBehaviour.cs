@@ -1,6 +1,6 @@
 namespace Atomic.UI
 {
-    public interface IUpdateHandler : IHandler
+    public interface IUpdateBehaviour : IBehaviour
     {
         void Update(IView view, float deltaTime);
     }

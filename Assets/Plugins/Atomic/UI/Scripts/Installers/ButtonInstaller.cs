@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace Atomic.UI
 {
     [Serializable]
-    public sealed class ButtonInstaller : DataInstaller<Button>
+    public sealed class ButtonInstaller : ValueInstaller<Button>
     {
     }
 }

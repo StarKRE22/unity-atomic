@@ -2,7 +2,7 @@ using UnityEngine.UI;
 
 namespace Atomic.UI
 {
-    public sealed class ImageInstaller : DataInstaller<Image>
+    public sealed class ImageInstaller : ValueInstaller<Image>
     {
     }
 }

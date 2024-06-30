@@ -5,17 +5,17 @@ using Modules.Gameplay;
 namespace SampleGame.UI
 {
     [Serializable]
-    public sealed class StartPopupPresenter : IEnableHandler, IDisableHandler
+    public sealed class StartPopupPresenter : IShowBehaviour, IHideBehaviour
     {
         private GameCycle gameCycle;
         
-        public void Enable(IView view)
+        public void Show(IView view)
         {
             this.gameCycle = GameContext.Instance.GetGameCycle();
             view.GetStartButton().onClick.AddListener(this.gameCycle.Start);
         }
 
-        public void Disable(IView view)
+        public void Hide(IView view)
         {
             view.GetStartButton().onClick.RemoveListener(this.gameCycle.Start);
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Atomic.UI
 {
     [Serializable]
-    public class DataInstaller<T> : IViewInstaller 
+    public class ValueInstaller<T> : IViewInstaller 
     {
         [ViewKey, SerializeField]
         public int key;
@@ -14,7 +14,7 @@ namespace Atomic.UI
         
         public void Install(IView view)
         {
-            view.AddData(this.key, this.value);
+            view.AddValue(this.key, this.value);
         }
     }
 }

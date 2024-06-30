@@ -1,6 +1,6 @@
 namespace Atomic.UI
 {
-    public interface IHandler
+    public interface IBehaviour
     {
     }
 }

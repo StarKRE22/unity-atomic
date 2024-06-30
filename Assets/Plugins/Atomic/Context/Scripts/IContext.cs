@@ -6,9 +6,14 @@ namespace Atomic.Contexts
     public interface IContext
     {
         event Action OnInitiazized;
+        event Action OnDisposed;
+
         event Action OnEnabled;
         event Action OnDisabled;
-        event Action OnDisposed;
+        
+        event Action<float> OnUpdate;
+        event Action<float> OnFixedUpdate;
+        event Action<float> OnLateUpdate;
         
         event Action<int, object> OnValueAdded;
         event Action<int, object> OnValueDeleted;
@@ -16,11 +21,7 @@ namespace Atomic.Contexts
 
         event Action<ISystem> OnSystemAdded;
         event Action<ISystem> OnSystemRemoved;
-
-        event Action<float> OnUpdate;
-        event Action<float> OnFixedUpdate;
-        event Action<float> OnLateUpdate;
-
+        
         string Name { get; set; }
         bool Initialized { get; }
         bool Enabled { get; }

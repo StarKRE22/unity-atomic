@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Atomic.UI
 {
     [Serializable]
-    public sealed class GameObjectInstaller : DataInstaller<GameObject>
+    public sealed class GameObjectInstaller : ValueInstaller<GameObject>
     {
     }
 }
