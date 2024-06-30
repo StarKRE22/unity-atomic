@@ -1,4 +1,6 @@
 using NUnit.Framework;
+using UnityEngine;
+using UnityEngine.TestTools;
 
 namespace Atomic.Contexts
 {
@@ -16,16 +18,13 @@ namespace Atomic.Contexts
             var initSystem = new InitSystemStub();
 
             context.AddSystem(initSystem);
-            context.OnStateChanged += state =>
-            {
-                if (state == ContextState.INITIALIZED) wasEvent.value = true;
-            };
+            context.OnInitiazized += () => wasEvent.value = true;
 
             //Act
             context.Initialize();
 
             //Assert
-            Assert.IsTrue(context.IsIntialized());
+            Assert.IsTrue(context.Initialized);
             Assert.IsTrue(wasEvent.value);
             Assert.IsTrue(initSystem.initialized);
         }
@@ -35,24 +34,28 @@ namespace Atomic.Contexts
         {
             //Arrange
             var context = new Context();
-            var wasEvent = new Reference<bool>();
+            var initEvent = new Reference<bool>();
+            var enabledEvent = new Reference<bool>();
             var systemStub = new CommonSystemStub();
 
             context.AddSystem(systemStub);
-            context.OnStateChanged += state =>
-            {
-                if (state == ContextState.ENABLED) wasEvent.value = true;
-            };
+            context.OnInitiazized += () => initEvent.value = true;
+            context.OnEnabled += () => enabledEvent.value = true;
 
             //Act
             context.Initialize();
             context.Enable();
 
             //Assert
-            Assert.IsTrue(context.IsEnabled());
-            Assert.IsTrue(wasEvent.value);
+            Assert.IsTrue(initEvent.value);
+            Assert.IsTrue(enabledEvent.value);
+
+            Assert.IsTrue(context.Initialized);
+            Assert.IsTrue(context.Enabled);
+
             Assert.IsTrue(systemStub.initialized);
             Assert.IsTrue(systemStub.enabled);
+            Assert.AreEqual("IE", systemStub.flowQueue.ToString());
         }
 
         [Test]
@@ -64,10 +67,7 @@ namespace Atomic.Contexts
             var disableSystem = new DisableSystemStub();
 
             context.AddSystem(disableSystem);
-            context.OnStateChanged += state =>
-            {
-                if (state == ContextState.DISABLED) wasEvent.value = true;
-            };
+            context.OnDisabled += () => wasEvent.value = true;
 
             //Act
             context.Initialize();
@@ -77,7 +77,7 @@ namespace Atomic.Contexts
             //Assert
             Assert.IsTrue(disableSystem.disabled);
             Assert.IsTrue(wasEvent.value);
-            Assert.IsTrue(context.IsDisabled());
+            Assert.IsFalse(context.Enabled);
         }
 
 
@@ -90,21 +90,19 @@ namespace Atomic.Contexts
             var systemStub = new DisposeSystemStub();
 
             context.AddSystem(systemStub);
-            context.OnStateChanged += state =>
-            {
-                if (state == ContextState.DISABLED) wasEvent.value = true;
-            };
+            context.OnDisposed += () => wasEvent.value = true;
 
             //Act
             context.Initialize();
             context.Enable();
-            context.Disable();
             context.Dispose();
 
             //Assert
             Assert.IsTrue(systemStub.destroyed);
             Assert.IsTrue(wasEvent.value);
-            Assert.IsTrue(context.IsDestroyed());
+            
+            Assert.IsFalse(context.Enabled);
+            Assert.IsFalse(context.Initialized);
         }
 
         [Test]
@@ -130,34 +128,32 @@ namespace Atomic.Contexts
         }
 
         [Test]
-        public void WhenEnableContextFromOffStateThenFailed()
+        public void WhenEnableNotInitializedContextThenFailed()
         {
             //Arrange
-            var context = new Context();
+            var context = new Context("123");
             var wasEvent = new Reference<bool>();
             var enableSystem = new EnableSystemStub();
 
             context.AddSystem(enableSystem);
-            context.OnStateChanged += state =>
-            {
-                if (state == ContextState.ENABLED) wasEvent.value = true;
-            };
+            context.OnEnabled += () => wasEvent.value = true;
 
             //Act
             context.Enable();
 
             //Assert
-            Assert.IsTrue(context.IsOff());
-            Assert.IsFalse(context.IsEnabled());
+            Assert.IsFalse(context.Initialized);
+            Assert.IsFalse(context.Enabled);
             Assert.IsFalse(wasEvent.value);
             Assert.IsFalse(enableSystem.enabled);
+            LogAssert.Expect(LogType.Error, $"You can enable context only after initialize! Context: {context.Name}");
         }
 
         [Test]
-        public void WhenUpdateContextFromOffStateThenFailed()
+        public void WhenUpdateNotEnabledContextThenFailed()
         {
             //Arrange
-            var context = new Context();
+            var context = new Context("123");
             var updateSystem = new UpdateSystemStub();
             context.AddSystem(updateSystem);
 
@@ -170,6 +166,10 @@ namespace Atomic.Contexts
             Assert.IsFalse(updateSystem.updated);
             Assert.IsFalse(updateSystem.fixedUpdated);
             Assert.IsFalse(updateSystem.lateUpdated);
+            
+            LogAssert.Expect(LogType.Error, $"You can update context if it's enabled! Context {context.Name}");
+            LogAssert.Expect(LogType.Error, $"You can update context if it's enabled! Context {context.Name}");
+            LogAssert.Expect(LogType.Error, $"You can update context if it's enabled! Context {context.Name}");
         }
 
         #endregion
@@ -397,120 +397,3 @@ namespace Atomic.Contexts
         #endregion
     }
 }
-
-
-// [Test]
-// public void GetValueInChildrenOnly()
-// {
-//     //Arrange:
-//     
-//     var child = new Context();
-//     child.AddValue(1, "Apple");
-//
-//     var parent = new Context();
-//     parent.AddChild(child);
-//
-//     //Act:
-//     string data = parent.GetValueInChildren<string>(1, false);
-//     
-//     //Assert:
-//     Assert.IsFalse(parent.HasValue(1));
-//     Assert.AreEqual("Apple", data);
-// }
-//
-// [Test]
-// public void GetValueInChildrenFailed()
-// {
-//     //Arrange:
-//     var parent = new Context();
-//     parent.AddChild(new Context());
-//
-//     //Act:
-//     string data = parent.GetValueInChildren<string>(1);
-//
-//     //Assert:
-//     Assert.IsNull(data);
-// }
-
-// [Test]
-// public void AddChild()
-// {
-//     //Arrange:
-//     var parent = new Context();
-//     var child = new Context();
-//     
-//     //Act:
-//     parent.AddChild(child);
-//
-//     //Assert:
-//     Assert.IsTrue(parent.IsChild(child));
-// }
-//
-
-
-// [Test]
-// public void AddChild()
-// {
-//     //Arrange:
-//     var parent = new Context();
-//     var child = new Context();
-//
-//     //Act:
-//     bool success = parent.AddChild(child);
-//     
-//     //Assert:
-//     Assert.IsTrue(success);
-//     Assert.IsTrue(child.IsParent(parent));
-//     Assert.IsTrue(parent.IsChild(child));
-// }
-        
-// [Test]
-// public void DelChild()
-// {
-//     //Arrange:
-//     var parent = new Context();
-//     var child = new Context("Child", parent);
-//
-//     //Act:
-//     bool success = parent.DelChild(child);
-//     
-//     //Assert:
-//     Assert.IsTrue(success);
-//     Assert.IsFalse(child.IsParent(parent));
-//     Assert.IsFalse(parent.IsChild(child));
-// }
-//
-// [Test]
-// public void WhenAddChildThatAlreadyAddedThenFalse()
-// {
-//     //Arrange:
-//     var parent = new Context();
-//     var child = new Context(null, parent);
-//
-//     //Act:
-//     bool success = parent.AddChild(child);
-//     
-//     //Assert:
-//     Assert.IsFalse(success);
-// }
-//
-// [Test]
-// public void WhenRemoveChildThatNotChildThenFalse()
-// {
-//     //Arrange:
-//     var parent = new Context();
-//     var child = new Context();
-//
-//     //Act:
-//     bool success = parent.DelChild(child);
-//     
-//     //Assert:
-//     Assert.IsFalse(success);
-// }
-
-
-// //Verify:
-// Assert.IsTrue(child.IsParent(parent1));
-// Assert.IsFalse(child.IsParent(parent2));
-// Assert.IsTrue(parent1.IsChild(child));
-// Assert.IsFalse(parent2.IsChild(child));

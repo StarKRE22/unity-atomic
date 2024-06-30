@@ -5,8 +5,11 @@ namespace Atomic.Contexts
 {
     public interface IContext
     {
-        event Action<ContextState> OnStateChanged;
-
+        event Action OnInitiazized;
+        event Action OnEnabled;
+        event Action OnDisabled;
+        event Action OnDisposed;
+        
         event Action<int, object> OnValueAdded;
         event Action<int, object> OnValueDeleted;
         event Action<int, object> OnValueChanged;
@@ -19,7 +22,8 @@ namespace Atomic.Contexts
         event Action<float> OnLateUpdate;
 
         string Name { get; set; }
-        ContextState State { get; }
+        bool Initialized { get; }
+        bool Enabled { get; }
 
         IReadOnlyDictionary<int, object> Values { get; }
         IReadOnlyCollection<ISystem> Systems { get; }

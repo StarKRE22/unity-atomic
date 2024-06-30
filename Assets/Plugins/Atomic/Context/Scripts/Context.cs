@@ -133,8 +133,7 @@ namespace Atomic.Contexts
 
         public event Action<ISystem> OnSystemAdded;
         public event Action<ISystem> OnSystemRemoved;
-
-
+        
         public IReadOnlyCollection<ISystem> Systems => this.systems;
 
         private readonly HashSet<ISystem> systems = new();
@@ -197,13 +196,12 @@ namespace Atomic.Contexts
                 return false;
             }
 
-            if (this.state is > ContextState.OFF and < ContextState.DISPOSED &&
-                system is IInitSystem initSystem)
+            if (this.initialized && system is IInitSystem initSystem)
             {
                 initSystem.Init(this);
             }
 
-            if (this.state == ContextState.ENABLED && system is IEnableSystem enableSystem)
+            if (this.enabled && system is IEnableSystem enableSystem)
             {
                 enableSystem.Enable(this);
             }
@@ -260,15 +258,14 @@ namespace Atomic.Contexts
                 this.lateUpdates.Remove(lateUpdate);
             }
 
-            if (this.state == ContextState.ENABLED && system is IDisableSystem disableSystem)
+            if (this.enabled && system is IDisableSystem disableSystem)
             {
                 disableSystem.Disable(this);
             }
 
-            if (this.state is > ContextState.OFF and < ContextState.DISPOSED &&
-                system is IDisposeSystem destroySystem)
+            if (this.initialized && system is IDisposeSystem disposeSystem)
             {
-                destroySystem.Dispose(this);
+                disposeSystem.Dispose(this);
             }
 
             this.OnSystemRemoved?.Invoke(system);
@@ -283,18 +280,20 @@ namespace Atomic.Contexts
 
         #region Lifecycle
 
+        public event Action OnInitiazized;
+        public event Action OnEnabled;
+        public event Action OnDisabled;
+        public event Action OnDisposed;
+
         public event Action<float> OnUpdate;
         public event Action<float> OnFixedUpdate;
         public event Action<float> OnLateUpdate;
 
-        public ContextState State
-        {
-            get { return this.state; }
-        }
-
-        private ContextState state = ContextState.OFF;
-
-        public event Action<ContextState> OnStateChanged;
+        public bool Initialized => this.initialized;
+        public bool Enabled => this.enabled;
+        
+        private bool initialized;
+        private bool enabled;
 
         private readonly List<IUpdateSystem> updates = new();
         private readonly List<IFixedUpdateSystem> fixedUpdates = new();
@@ -306,10 +305,9 @@ namespace Atomic.Contexts
 
         public void Initialize()
         {
-            if (this.state != ContextState.OFF)
+            if (this.initialized)
             {
-                Debug.LogWarning(
-                    $"You can initialize context only from {ContextState.OFF} state! (Actual state: {this.state})");
+                Debug.LogWarning($"Context with name {name} is already initialized!");
                 return;
             }
 
@@ -321,16 +319,21 @@ namespace Atomic.Contexts
                 }
             }
 
-            this.state = ContextState.INITIALIZED;
-            this.OnStateChanged?.Invoke(this.state);
+            this.initialized = true;
+            this.OnInitiazized?.Invoke();
         }
 
         public void Enable()
         {
-            if (this.state != ContextState.INITIALIZED)
+            if (this.enabled)
             {
-                Debug.LogWarning(
-                    $"You can enable context only from {ContextState.INITIALIZED} state! (Actual state: {this.state})");
+                Debug.LogWarning($"Context with name {name} is already enabled!");
+                return;
+            }
+            
+            if (!this.initialized)
+            {
+                Debug.LogError($"You can enable context only after initialize! Context: {name}");
                 return;
             }
 
@@ -342,14 +345,15 @@ namespace Atomic.Contexts
                 }
             }
 
-            this.state = ContextState.ENABLED;
-            this.OnStateChanged?.Invoke(this.state);
+            this.enabled = true;
+            this.OnEnabled?.Invoke();
         }
 
         public void Update(float deltaTime)
         {
-            if (this.state != ContextState.ENABLED)
+            if (!this.enabled)
             {
+                Debug.LogError($"You can update context if it's enabled! Context {name}");
                 return;
             }
 
@@ -371,8 +375,9 @@ namespace Atomic.Contexts
 
         public void FixedUpdate(float deltaTime)
         {
-            if (this.state != ContextState.ENABLED)
+            if (!this.enabled)
             {
+                Debug.LogError($"You can update context if it's enabled! Context {name}");
                 return;
             }
 
@@ -394,8 +399,9 @@ namespace Atomic.Contexts
 
         public void LateUpdate(float deltaTime)
         {
-            if (this.state != ContextState.ENABLED)
+            if (!this.enabled)
             {
+                Debug.LogError($"You can update context if it's enabled! Context {name}");
                 return;
             }
 
@@ -417,10 +423,9 @@ namespace Atomic.Contexts
 
         public void Disable()
         {
-            if (this.state != ContextState.ENABLED)
+            if (!this.enabled)
             {
-                Debug.LogWarning(
-                    $"You can disable context only from {ContextState.ENABLED} state! (Actual state: {this.state})");
+                Debug.LogWarning($"Context with {name} is not enabled!");
                 return;
             }
 
@@ -432,17 +437,20 @@ namespace Atomic.Contexts
                 }
             }
 
-            this.state = ContextState.DISABLED;
-            this.OnStateChanged?.Invoke(this.state);
+            this.enabled = false;
+            this.OnDisabled?.Invoke();
         }
 
         public void Dispose()
         {
-            if (this.state != ContextState.DISABLED)
+            if (!this.initialized)
             {
-                Debug.LogWarning(
-                    $"You can destroy context only from {ContextState.DISABLED} state! (Actual state: {this.state})");
-                return;
+                Debug.LogWarning($"Context with name {name} is not initialized!");
+            }
+            
+            if (this.enabled)
+            {
+                this.Disable();
             }
 
             foreach (ISystem system in this.systems)
@@ -453,44 +461,10 @@ namespace Atomic.Contexts
                 }
             }
 
-            this.state = ContextState.DISPOSED;
-            this.OnStateChanged?.Invoke(this.state);
+            this.initialized = false;
+            this.OnDisposed?.Invoke();
         }
 
         #endregion
     }
 }
-
-// public ICollection<IContext> Children => this.children;
-//
-// private readonly HashSet<IContext> children;
-//
-// public bool IsChild(IContext context)
-// {
-//     return this.children.Contains(context);
-// }
-
-
-//
-// public bool AddChild(IContext child)
-// {
-//     return child != null && this.children.Add(child);
-// }
-//
-// public bool DelChild(IContext child)
-// {
-//     return child != null && this.children.Remove(child);
-// }
-//
-// public IContext GetChild(string name)
-// {
-//     foreach (var child in this.children)
-//     {
-//         if (child.Name == name)
-//         {
-//             return child;
-//         }
-//     }
-//
-//     return null;
-// }

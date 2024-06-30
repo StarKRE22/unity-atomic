@@ -25,28 +25,28 @@ namespace Atomic.Contexts
 
         public string Name
         {
-            get => context.Name;
-            set => context.Name = value;
+            get => this.context.Name;
+            set => this.context.Name = value;
         }
 
         public IContext Parent
         {
-            get => context.Parent;
-            set => context.Parent = value;
+            get => this.context.Parent;
+            set => this.context.Parent = value;
         }
 
         private Context context;
 
         public void Install()
         {
-            context = new Context(this.name, this.initialParent);
+            this.context = new Context(this.name, this.initialParent);
 
             for (int i = 0, count = this.installers.Count; i < count; i++)
             {
-                SceneContextInstallerBase installer = installers[i];
+                SceneContextInstallerBase installer = this.installers[i];
                 if (installer != null)
                 {
-                    installer.Install(context);
+                    installer.Install(this.context);
                 }
             }
         }
@@ -65,60 +65,67 @@ namespace Atomic.Contexts
             if (this.controlState)
             {
                 this.Install();
-                context.Initialize();
             }
             else
             {
-                Debug.Log($"DISABLED CONTEXT {name}");
                 this.enabled = false;
+            }
+        }
+
+        private void Start()
+        {
+            if (this.controlState)
+            {
+                this.context.Initialize();
+                this.context.Enable();
             }
         }
 
         private void OnEnable()
         {
-            if (this.controlState)
+            if (this.controlState && this.context.Initialized && !this.context.Enabled)
             {
-                context.Enable();
+                this.context.Enable();
             }
         }
 
         private void OnDisable()
         {
-            if (this.controlState)
+            if (this.controlState && this.context.Initialized && this.context.Enabled)
             {
-                context.Disable();
+                this.context.Disable();
             }
         }
 
         private void OnDestroy()
         {
-            if (this.controlState)
+            if (this.controlState && this.context.Initialized)
             {
-                context.Dispose();
+                this.context.Dispose();
             }
         }
 
         private void Update()
         {
-            if (this.controlState)
+            if (this.controlState && this.context.Enabled)
             {
-                context.Update(Time.deltaTime);
+                this.context.Update(Time.deltaTime);
             }
         }
 
         private void FixedUpdate()
         {
-            if (this.controlState)
+            if (this.controlState && this.context.Enabled)
             {
-                context.Update(Time.fixedDeltaTime);
+                this.context.Update(Time.fixedDeltaTime);
             }
         }
 
         private void LateUpdate()
         {
-            if (this.controlState)
+            if (this.controlState && this.context.Enabled)
             {
-                context.LateUpdate(Time.deltaTime);
+                this.context.LateUpdate(Time.deltaTime);
             }
         }
 
@@ -270,10 +277,28 @@ namespace Atomic.Contexts
 
         #region Lifecycle
 
-        public event Action<ContextState> OnStateChanged
+        public event Action OnInitiazized
         {
-            add => context.OnStateChanged += value;
-            remove => context.OnStateChanged -= value;
+            add => context.OnInitiazized += value;
+            remove => context.OnInitiazized -= value;
+        }
+
+        public event Action OnEnabled
+        {
+            add => context.OnEnabled += value;
+            remove => context.OnEnabled -= value;
+        }
+
+        public event Action OnDisabled
+        {
+            add => context.OnDisabled += value;
+            remove => context.OnDisabled -= value;
+        }
+
+        public event Action OnDisposed
+        {
+            add => context.OnDisposed += value;
+            remove => context.OnDisposed -= value;
         }
 
         public event Action<float> OnUpdate
@@ -294,7 +319,9 @@ namespace Atomic.Contexts
             remove => context.OnLateUpdate -= value;
         }
 
-        public ContextState State => context.State;
+        public bool Initialized => context.Initialized;
+
+        public bool Enabled => context.Enabled;
 
         public void ManualInitialize()
         {
@@ -355,10 +382,18 @@ namespace Atomic.Contexts
 
         [FoldoutGroup("Debug")]
         [ShowInInspector, ReadOnly]
-        [HideInEditorMode, LabelText("State")]
-        private ContextState StateDebug
+        [HideInEditorMode, LabelText("Initialized")]
+        private bool InitializedDebug
         {
-            get { return this.context?.State ?? default; }
+            get { return this.context?.Initialized ?? default; }
+        }
+        
+        [FoldoutGroup("Debug")]
+        [ShowInInspector, ReadOnly]
+        [HideInEditorMode, LabelText("Enabled")]
+        private bool EnabledDebug
+        {
+            get { return this.context?.Enabled ?? default; }
         }
 
         ///Values

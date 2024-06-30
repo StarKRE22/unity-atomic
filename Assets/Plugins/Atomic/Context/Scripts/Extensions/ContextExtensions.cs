@@ -6,36 +6,6 @@ namespace Atomic.Contexts
     public static class ContextExtensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsOff(this IContext context)
-        {
-            return context.State == ContextState.OFF;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsIntialized(this IContext context)
-        {
-            return context.State == ContextState.INITIALIZED;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEnabled(this IContext context)
-        {
-            return context.State == ContextState.ENABLED;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsDisabled(this IContext context)
-        {
-            return context.State == ContextState.DISABLED;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsDestroyed(this IContext context)
-        {
-            return context.State == ContextState.DISPOSED;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T ResolveValue<T>(this IContext context, int key) where T : class
         {
             if (context.TryGetValue(key, out T value))
@@ -49,11 +19,8 @@ namespace Atomic.Contexts
                 
                 if (context == null)
                 {
-                    Debug.Log($"CONTEXT NULL");
                     return null;
                 }
-
-                Debug.Log($"CONTEXT {context.Name} CHECK");
 
                 value = context.GetValue<T>(key);
 
