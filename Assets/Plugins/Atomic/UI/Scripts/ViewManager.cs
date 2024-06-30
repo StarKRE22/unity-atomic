@@ -1,49 +1,65 @@
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Atomic.UI
 {
-    internal sealed class ViewUpdateManager
+    internal sealed class ViewUpdateManager : MonoBehaviour
     {
         private static ViewUpdateManager _instance;
-        
-        
-        
-        public static void AddBehaviours(IEnumerable<IUpdateBehaviour> handlers)
+
+        private readonly List<(IView, IUpdateBehaviour)> updateBehaviours = new();
+        private readonly List<(IView, IUpdateBehaviour)> updateCache = new();
+
+        private static ViewUpdateManager instance
         {
-            foreach (IBehaviour behaviour in this.behaviours)
+            get
             {
-                if (behaviour is IShowBehaviour showBehaviour)
+                if (_instance == null)
                 {
-                    showBehaviour.Show(this);
+                    GameObject go = new GameObject("ViewManager");
+                    DontDestroyOnLoad(go);
+                    _instance = go.AddComponent<ViewUpdateManager>();
                 }
-            }
-        }
-        
-        public static void AddBehaviour(IUpdateBehaviour behaviour)
-        {
-            foreach (IBehaviour behaviour in this.behaviours)
-            {
-                if (behaviour is IShowBehaviour showBehaviour)
-                {
-                    showBehaviour.Show(this);
-                }
+
+                return _instance;
             }
         }
 
-        public static void RemoveBehaviours(IEnumerable<IBehaviour> handlers)
+        internal static void AddBehaviour(IView view, IUpdateBehaviour behaviour)
         {
-            foreach (IBehaviour behaviour in this.behaviours)
+            if (behaviour != null)
             {
-                if (behaviour is IHideBehaviour hideBehaviour)
-                {
-                    hideBehaviour.Hide(this);
-                }
+                instance.updateBehaviours.Add((view, behaviour));
             }
         }
 
-        public static void RemoveBehaviour(IUpdateBehaviour updateBehaviour)
+        internal static void RemoveBehaviour(IView view, IUpdateBehaviour behaviour)
         {
-            throw new System.NotImplementedException();
+            if (behaviour != null)
+            {
+                instance.updateBehaviours.Remove((view, behaviour));
+            }
+        }
+
+        private void Update()
+        {
+            int count = this.updateBehaviours.Count;
+            if (count == 0)
+            {
+                return;
+            }
+
+            this.updateCache.Clear();
+            this.updateCache.AddRange(this.updateBehaviours);
+
+            float deltaTime = Time.deltaTime;
+            
+            for (int i = 0; i < count; i++)
+            {
+                (IView view, IUpdateBehaviour behaviour) = this.updateCache[i];
+                behaviour.Update(view, deltaTime);
+            }
         }
     }
 }

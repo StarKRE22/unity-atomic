@@ -9,8 +9,6 @@ namespace SampleGame.UI
     {
         public void Show(IView view)
         {
-            // ApplicationContext.Instance.GetGameLauncher();
-            
             view.GetStartButton().onClick.AddListener(GameLaunchCase.LaunchGame);
             view.GetExitButton().onClick.AddListener(ApplicationCase.Exit);
         }

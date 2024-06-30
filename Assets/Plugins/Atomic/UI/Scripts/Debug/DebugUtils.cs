@@ -1,6 +1,6 @@
 using System;
 
-namespace Atomic.Contexts
+namespace Atomic.UI
 {
     public static class DebugUtils
     {

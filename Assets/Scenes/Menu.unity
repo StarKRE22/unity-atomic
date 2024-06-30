@@ -280,7 +280,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!114 &109863839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -676,7 +676,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1244175963}
-  - component: {fileID: 1244175964}
   m_Layer: 0
   m_Name: '[System]'
   m_TagString: Untagged
@@ -699,37 +698,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1244175964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1244175962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
-  _monoInstallers: []
-  _installerPrefabs: []
-  _autoRun: 1
-  OnPreInstall:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPostInstall:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPreResolve:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPostResolve:
-    m_PersistentCalls:
-      m_Calls: []
-  _parentNewObjectsUnderSceneContext: 0
-  _contractNames: []
-  _parentContractNames: []
 --- !u!1 &1535673779
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,11 +921,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 1811688422}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f073d91765f14d2ab0dab974e3862089, type: 3}
+  m_Script: {fileID: 11500000, guid: 12192e11a99440eb81f7c81942c958da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startButton: {fileID: 90987164}
-  exitButton: {fileID: 2066704869}
+  installers:
+  - rid: 5031450564982734848
+  - rid: 5031450564982734849
+  initialBehaviours:
+  - rid: 5031450564982734850
+  initEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  showEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  hideEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  disposeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 5031450564982734848
+      type: {class: ButtonInstaller, ns: Atomic.UI, asm: Atomic.UI}
+      data:
+        key: 1
+        value: {fileID: 90987164}
+    - rid: 5031450564982734849
+      type: {class: ButtonInstaller, ns: Atomic.UI, asm: Atomic.UI}
+      data:
+        key: 2
+        value: {fileID: 2066704869}
+    - rid: 5031450564982734850
+      type: {class: MenuScreenPresenter, ns: SampleGame.UI, asm: Assembly-CSharp}
 --- !u!1 &2066704867
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,16 +18,20 @@ namespace Atomic.UI
         [SerializeReference]
         private IBehaviour[] initialBehaviours;
 
-        [Header("Events")]
+        [Space]
+        [FoldoutGroup("Events")]
         [SerializeField]
         private UnityEvent initEvent;
 
+        [FoldoutGroup("Events")]
         [SerializeField]
         private UnityEvent showEvent;
 
+        [FoldoutGroup("Events")]
         [SerializeField]
         private UnityEvent hideEvent;
 
+        [FoldoutGroup("Events")]
         [SerializeField]
         private UnityEvent disposeEvent;
 
@@ -179,7 +183,7 @@ namespace Atomic.UI
 
                 if (behaviour is IUpdateBehaviour updateBehaviour)
                 {
-                    ViewUpdateManager.AddBehaviour(updateBehaviour);
+                    ViewUpdateManager.AddBehaviour(this, updateBehaviour);
                 }
             }
 
@@ -189,13 +193,11 @@ namespace Atomic.UI
 
         private void OnHide()
         {
-            ViewUpdateManager.RemoveBehaviours(this.behaviours);
-
             foreach (IBehaviour behaviour in this.behaviours)
             {
                 if (behaviour is IUpdateBehaviour updateBehaviour)
                 {
-                    ViewUpdateManager.RemoveBehaviour(updateBehaviour);
+                    ViewUpdateManager.RemoveBehaviour(this, updateBehaviour);
                 }
 
                 if (behaviour is IHideBehaviour hideBehaviour)
@@ -209,7 +211,7 @@ namespace Atomic.UI
         }
 
         #endregion
-        
+
         #region Values
 
         public event Action<int, object> OnValueAdded;
@@ -383,7 +385,7 @@ namespace Atomic.UI
 
                     if (behaviour is IUpdateBehaviour updateBehaviour)
                     {
-                        ViewUpdateManager.AddBehaviour(updateBehaviour);
+                        ViewUpdateManager.AddBehaviour(this, updateBehaviour);
                     }
                 }
             }
@@ -414,7 +416,7 @@ namespace Atomic.UI
             {
                 if (behaviour is IUpdateBehaviour updateBehaviour)
                 {
-                    ViewUpdateManager.RemoveBehaviour(updateBehaviour);
+                    ViewUpdateManager.RemoveBehaviour(this, updateBehaviour);
                 }
 
                 if (behaviour is IHideBehaviour showBehaviour)
@@ -436,7 +438,173 @@ namespace Atomic.UI
 
         #region Debug
 
-        //TODO:
+#if UNITY_EDITOR && ODIN_INSPECTOR
+
+        ///Main
+        [FoldoutGroup("Debug")]
+        [ShowInInspector, ReadOnly, PropertySpace]
+        [HideInEditorMode, LabelText("Initialized")]
+        private bool InitializedDebug
+        {
+            get { return this.initialized; }
+        }
+
+        [FoldoutGroup("Debug")]
+        [ShowInInspector, ReadOnly]
+        [HideInEditorMode, LabelText("Visible")]
+        private bool VisibleDebug
+        {
+            get { return this.IsVisible; }
+        }
+
+        ///Values
+        private static readonly List<ValueElement> _valueElementsCache = new();
+
+        private struct ValueElement
+        {
+            [HorizontalGroup(200), ShowInInspector, ReadOnly, HideLabel]
+            public string name;
+
+            [HorizontalGroup, ShowInInspector, HideLabel]
+            public object value;
+
+            internal readonly int id;
+
+            public ValueElement(string name, object value, int id)
+            {
+                this.name = name;
+                this.value = value;
+                this.id = id;
+            }
+        }
+
+        [FoldoutGroup("Debug")]
+        [LabelText("Values")]
+        [ShowInInspector, PropertyOrder(100)]
+        [ListDrawerSettings(
+            CustomRemoveElementFunction = nameof(RemoveValueElement),
+            CustomRemoveIndexFunction = nameof(RemoveValueElementAt),
+            HideAddButton = true
+        )]
+        private List<ValueElement> ValuesDebug
+        {
+            get
+            {
+                _valueElementsCache.Clear();
+
+                if (values == null)
+                {
+                    return _valueElementsCache;
+                }
+
+                foreach ((int id, object value) in values)
+                {
+                    string name = DebugUtils.ConvertToName(id);
+                    _valueElementsCache.Add(new ValueElement(name, value, id));
+                }
+
+                return _valueElementsCache;
+            }
+
+            set
+            {
+                /** noting... **/
+            }
+        }
+
+        private void RemoveValueElement(ValueElement valueElement)
+        {
+            this.DelValue(valueElement.id);
+        }
+
+        private void RemoveValueElementAt(int index)
+        {
+            this.DelValue(ValuesDebug[index].id);
+        }
+
+        ///Logics
+        private static readonly List<BehaviourElement> _behaviourElementsCache = new();
+
+        [InlineProperty]
+        private struct BehaviourElement
+        {
+            [ShowInInspector, ReadOnly, HideLabel]
+            public string name;
+
+            internal readonly IBehaviour value;
+
+            public BehaviourElement(IBehaviour value)
+            {
+                this.name = value.GetType().Name;
+                this.value = value;
+            }
+        }
+
+        [FoldoutGroup("Debug")]
+        [LabelText("Behaviours")]
+        [ShowInInspector, PropertyOrder(100)]
+        [ListDrawerSettings(
+            CustomRemoveElementFunction = nameof(RemoveBehaviourElement),
+            CustomRemoveIndexFunction = nameof(RemoveBehaviourElementAt)
+        )]
+        private List<BehaviourElement> BehavioursDebug
+        {
+            get
+            {
+                _behaviourElementsCache.Clear();
+
+                if (this.behaviours == null)
+                {
+                    return _behaviourElementsCache;
+                }
+
+                foreach (var behaviour in this.behaviours)
+                {
+                    _behaviourElementsCache.Add(new BehaviourElement(behaviour));
+                }
+
+                return _behaviourElementsCache;
+            }
+            set
+            {
+                /** noting... **/
+            }
+        }
+
+        [FoldoutGroup("Debug")]
+        [ShowInInspector, PropertyOrder(100)]
+        [Button("Refresh"), HideInPlayMode]
+        private void Refresh()
+        {
+            this.OnInstall();
+        }
+
+        [FoldoutGroup("Debug")]
+        [ShowInInspector, PropertyOrder(100)]
+        [Button("Add Behaviour"), HideInEditorMode]
+        private void AddBehaviourDebug(IBehaviour behaviour)
+        {
+            this.AddBehaviour(behaviour);
+        }
+
+        [FoldoutGroup("Debug")]
+        [ShowInInspector, PropertyOrder(100)]
+        [Button("Add Value"), HideInEditorMode]
+        private void AddValueDebug(int key, object value)
+        {
+            this.AddValue(key, value);
+        }
+
+        private void RemoveBehaviourElement(BehaviourElement behaviourElement)
+        {
+            this.DelBehaviour(behaviourElement.value);
+        }
+
+        private void RemoveBehaviourElementAt(int index)
+        {
+            this.DelBehaviour(BehavioursDebug[index].value);
+        }
+#endif
 
         #endregion
     }
