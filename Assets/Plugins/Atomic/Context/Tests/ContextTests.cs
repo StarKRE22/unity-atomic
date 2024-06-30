@@ -348,7 +348,7 @@ namespace Atomic.Contexts
 
         #endregion
 
-        #region Extensions
+        #region Resolve
 
         [Test]
         public void ResolveValueInParent()
@@ -392,6 +392,58 @@ namespace Atomic.Contexts
 
             //Assert:
             Assert.IsNull(data);
+        }
+
+        #endregion
+
+        #region Inject
+
+        [Test]
+        public void InjectByField()
+        {
+            //Arrange:
+            var ctx = new Context("123");
+            ctx.AddValue(1, "Vasya");
+
+            var stub = new InjectStub1();
+
+            //Act:
+            ctx.Inject(stub);
+            
+            //Assert:
+            Assert.AreEqual("Vasya", stub.name);
+        }
+
+        [Test]
+        public void InjectByMethod()
+        {
+            //Arrange:
+            var ctx = new Context("123");
+            ctx.AddValue(1, "Vasya");
+
+            var stub = new InjectStub2();
+
+            //Act:
+            ctx.Inject(stub);
+            
+            //Assert:
+            Assert.AreEqual("Vasya", stub.name);
+        }
+        
+        [Test]
+        public void InjectByProperty()
+        {
+            //Arrange:
+            var ctx = new Context("123");
+            ctx.AddValue(1, "Vasya");
+
+            var stub = new InjectStub3();
+
+            //Act:
+            ctx.Inject(stub);
+            
+            //Assert:
+            Assert.AreEqual("Vasya", stub.name);
         }
 
         #endregion

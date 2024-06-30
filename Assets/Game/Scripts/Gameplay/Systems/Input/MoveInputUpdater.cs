@@ -7,14 +7,14 @@ namespace SampleGame
     [Serializable]
     public sealed class MoveInputUpdater : IInitSystem, IDisposeSystem, IGameTickable
     {
+        [Inject(GameplayAPI.MoveInput)]
         private MoveInput moveInput;
+        
+        [Inject(GameplayAPI.GameCycle)]
         private GameCycle gameCycle;
 
         public void Init(IContext context)
         {
-            this.moveInput = context.GetMoveInput();
-
-            this.gameCycle = context.ResolveGameCycle();
             this.gameCycle.AddListener(this);
         }
 

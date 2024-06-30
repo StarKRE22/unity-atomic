@@ -3,16 +3,17 @@ using Modules.Gameplay;
 
 namespace SampleGame
 {
-    public sealed class GameCycleUpdater : IInitSystem,
+    public sealed class GameCycleUpdater : 
         IUpdateSystem,
         IFixedUpdateSystem,
         ILateUpdateSystem
     {
         private GameCycle gameCycle;
 
-        public void Init(IContext context)
+        [Construct]
+        public void Construct([Inject(GameplayAPI.GameCycle)] GameCycle gameCycle)
         {
-            this.gameCycle = context.GetGameCycle();
+            this.gameCycle = gameCycle;
         }
 
         public void Update(IContext context, float deltaTime)

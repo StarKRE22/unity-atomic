@@ -15,6 +15,10 @@ namespace Atomic.Contexts
         [SerializeField]
         private bool controlState = true;
 
+        [ShowIf(nameof(controlState))]
+        [SerializeField]
+        private bool dependencyInjection = true;
+
         [Space]
         [SerializeField]
         public SceneContext initialParent;
@@ -76,6 +80,11 @@ namespace Atomic.Contexts
         {
             if (this.controlState)
             {
+                if (this.dependencyInjection)
+                {
+                    this.context.Construct();
+                }
+                
                 this.context.Initialize();
                 this.context.Enable();
             }
@@ -361,8 +370,6 @@ namespace Atomic.Contexts
 
         #region Debug
 
-        public static Func<int, string> ValueNameFormatter;
-
 #if UNITY_EDITOR && ODIN_INSPECTOR
 
         ///Main
@@ -386,7 +393,7 @@ namespace Atomic.Contexts
         {
             get { return this.context?.Initialized ?? default; }
         }
-        
+
         [FoldoutGroup("Debug")]
         [ShowInInspector, ReadOnly]
         [HideInEditorMode, LabelText("Enabled")]
@@ -438,7 +445,7 @@ namespace Atomic.Contexts
 
                 foreach ((int id, object value) in values)
                 {
-                    string name = ValueNameFormatter?.Invoke(id) ?? id.ToString();
+                    string name = DebugUtils.ConvertToName(id);
                     _valueElementsCache.Add(new ValueElement(name, value, id));
                 }
 
@@ -510,7 +517,7 @@ namespace Atomic.Contexts
                 /** noting... **/
             }
         }
-        
+
         [FoldoutGroup("Debug")]
         [ShowInInspector, PropertyOrder(100)]
         [Button("Refresh"), HideInPlayMode]
@@ -526,7 +533,7 @@ namespace Atomic.Contexts
         {
             this.context.AddSystem(system);
         }
-        
+
         [FoldoutGroup("Debug")]
         [ShowInInspector, PropertyOrder(100)]
         [Button("Add Value"), HideInEditorMode]

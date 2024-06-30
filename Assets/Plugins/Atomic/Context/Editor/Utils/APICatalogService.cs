@@ -12,7 +12,7 @@ namespace Atomic.Contexts
         
         static APICatalogService()
         {
-            SceneContext.ValueNameFormatter = ConvertIdToName;
+            DebugUtils.ValueNameFormatter = ConvertIdToName;
         }
         
         internal static APICatalog CreateCatalog()
