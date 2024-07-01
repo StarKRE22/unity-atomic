@@ -5,7 +5,7 @@ using Modules.Gameplay;
 namespace SampleGame.UI
 {
     [Serializable]
-    public sealed class StartPopupPresenter : IShowBehaviour, IHideBehaviour
+    public sealed class StartPopupPresenter : IShowViewBehaviour, IHideViewBehaviour
     {
         private GameCycle gameCycle;
         

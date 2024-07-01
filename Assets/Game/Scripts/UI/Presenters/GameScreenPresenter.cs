@@ -6,7 +6,7 @@ using UnityEngine;
 namespace SampleGame.UI
 {
     [Serializable]
-    public sealed class GameScreenPresenter : IInitBehaviour, IShowBehaviour, IHideBehaviour
+    public sealed class GameScreenPresenter : IInitViewBehaviour, IShowViewBehaviour, IHideViewBehaviour
     {
         [SerializeField]
         private View startPopup;

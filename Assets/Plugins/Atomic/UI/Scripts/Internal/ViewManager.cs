@@ -8,8 +8,8 @@ namespace Atomic.UI
     {
         private static ViewUpdateManager _instance;
 
-        private readonly List<(IView, IUpdateBehaviour)> updateBehaviours = new();
-        private readonly List<(IView, IUpdateBehaviour)> updateCache = new();
+        private readonly List<(IView, IUpdateViewBehaviour)> updateBehaviours = new();
+        private readonly List<(IView, IUpdateViewBehaviour)> updateCache = new();
 
         private static ViewUpdateManager instance
         {
@@ -26,7 +26,7 @@ namespace Atomic.UI
             }
         }
 
-        internal static void AddBehaviour(IView view, IUpdateBehaviour behaviour)
+        internal static void AddBehaviour(IView view, IUpdateViewBehaviour behaviour)
         {
             if (behaviour != null)
             {
@@ -34,7 +34,7 @@ namespace Atomic.UI
             }
         }
 
-        internal static void RemoveBehaviour(IView view, IUpdateBehaviour behaviour)
+        internal static void RemoveBehaviour(IView view, IUpdateViewBehaviour behaviour)
         {
             if (behaviour != null)
             {
@@ -57,7 +57,7 @@ namespace Atomic.UI
             
             for (int i = 0; i < count; i++)
             {
-                (IView view, IUpdateBehaviour behaviour) = this.updateCache[i];
+                (IView view, IUpdateViewBehaviour behaviour) = this.updateCache[i];
                 behaviour.Update(view, deltaTime);
             }
         }

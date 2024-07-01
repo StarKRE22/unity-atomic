@@ -6,7 +6,7 @@ using SampleGame.App;
 namespace SampleGame.UI
 {
     [Serializable]
-    public sealed class PausePopupPresenter : IShowBehaviour, IHideBehaviour
+    public sealed class PausePopupPresenter : IShowViewBehaviour, IHideViewBehaviour
     {
         private GameCycle gameCycle;
 

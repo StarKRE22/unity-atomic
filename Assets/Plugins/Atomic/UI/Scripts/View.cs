@@ -16,7 +16,7 @@ namespace Atomic.UI
 
         [LabelText("Behaviours"), HideInPlayMode]
         [SerializeReference]
-        private IBehaviour[] initialBehaviours;
+        private IViewBehaviour[] initialBehaviours;
 
         [Space]
         [FoldoutGroup("Events")]
@@ -116,7 +116,7 @@ namespace Atomic.UI
         private void OnInstall()
         {
             this.values = new Dictionary<int, object>();
-            this.behaviours = new HashSet<IBehaviour>();
+            this.behaviours = new HashSet<IViewBehaviour>();
 
             if (this.installers != null)
             {
@@ -131,7 +131,7 @@ namespace Atomic.UI
             {
                 for (int i = 0, count = this.initialBehaviours.Length; i < count; i++)
                 {
-                    IBehaviour behaviour = this.initialBehaviours[i];
+                    IViewBehaviour behaviour = this.initialBehaviours[i];
                     if (behaviour != null)
                     {
                         this.AddBehaviour(behaviour);
@@ -144,9 +144,9 @@ namespace Atomic.UI
         {
             this.initialized = true;
 
-            foreach (IBehaviour behaviour in this.behaviours)
+            foreach (IViewBehaviour behaviour in this.behaviours)
             {
-                if (behaviour is IInitBehaviour initBehaviour)
+                if (behaviour is IInitViewBehaviour initBehaviour)
                 {
                     initBehaviour.Init(this);
                 }
@@ -160,9 +160,9 @@ namespace Atomic.UI
         {
             this.initialized = false;
 
-            foreach (IBehaviour behaviour in this.behaviours)
+            foreach (IViewBehaviour behaviour in this.behaviours)
             {
-                if (behaviour is IDisposeBehaviour disposeBehaviour)
+                if (behaviour is IDisposeViewBehaviour disposeBehaviour)
                 {
                     disposeBehaviour.Dispose(this);
                 }
@@ -174,14 +174,14 @@ namespace Atomic.UI
 
         private void OnShow()
         {
-            foreach (IBehaviour behaviour in this.behaviours)
+            foreach (IViewBehaviour behaviour in this.behaviours)
             {
-                if (behaviour is IShowBehaviour showBehaviour)
+                if (behaviour is IShowViewBehaviour showBehaviour)
                 {
                     showBehaviour.Show(this);
                 }
 
-                if (behaviour is IUpdateBehaviour updateBehaviour)
+                if (behaviour is IUpdateViewBehaviour updateBehaviour)
                 {
                     ViewUpdateManager.AddBehaviour(this, updateBehaviour);
                 }
@@ -193,14 +193,14 @@ namespace Atomic.UI
 
         private void OnHide()
         {
-            foreach (IBehaviour behaviour in this.behaviours)
+            foreach (IViewBehaviour behaviour in this.behaviours)
             {
-                if (behaviour is IUpdateBehaviour updateBehaviour)
+                if (behaviour is IUpdateViewBehaviour updateBehaviour)
                 {
                     ViewUpdateManager.RemoveBehaviour(this, updateBehaviour);
                 }
 
-                if (behaviour is IHideBehaviour hideBehaviour)
+                if (behaviour is IHideViewBehaviour hideBehaviour)
                 {
                     hideBehaviour.Hide(this);
                 }
@@ -307,16 +307,16 @@ namespace Atomic.UI
 
         #region Behaviours
 
-        public event Action<IBehaviour> OnBehaviourAdded;
-        public event Action<IBehaviour> OnBehaviourRemoved;
+        public event Action<IViewBehaviour> OnBehaviourAdded;
+        public event Action<IViewBehaviour> OnBehaviourRemoved;
 
-        public IReadOnlyCollection<IBehaviour> Behaviours => this.behaviours;
+        public IReadOnlyCollection<IViewBehaviour> Behaviours => this.behaviours;
 
-        private HashSet<IBehaviour> behaviours;
+        private HashSet<IViewBehaviour> behaviours;
 
-        public T GetBehaviour<T>() where T : IBehaviour
+        public T GetBehaviour<T>() where T : IViewBehaviour
         {
-            foreach (IBehaviour behaviour in this.behaviours)
+            foreach (IViewBehaviour behaviour in this.behaviours)
             {
                 if (behaviour is T tBehaviour)
                 {
@@ -327,9 +327,9 @@ namespace Atomic.UI
             return default;
         }
 
-        public bool TryGetBehaviour<T>(out T result) where T : IBehaviour
+        public bool TryGetBehaviour<T>(out T result) where T : IViewBehaviour
         {
-            foreach (IBehaviour behaviour in this.behaviours)
+            foreach (IViewBehaviour behaviour in this.behaviours)
             {
                 if (behaviour is T tBehaviour)
                 {
@@ -342,14 +342,14 @@ namespace Atomic.UI
             return false;
         }
 
-        public bool HasBehaviour(IBehaviour behaviour)
+        public bool HasBehaviour(IViewBehaviour behaviour)
         {
             return this.behaviours.Contains(behaviour);
         }
 
-        public bool HasBehaviour<T>() where T : IBehaviour
+        public bool HasBehaviour<T>() where T : IViewBehaviour
         {
-            foreach (IBehaviour behaviour in this.behaviours)
+            foreach (IViewBehaviour behaviour in this.behaviours)
             {
                 if (behaviour is T)
                 {
@@ -360,30 +360,30 @@ namespace Atomic.UI
             return false;
         }
 
-        public bool AddBehaviour<T>() where T : IBehaviour, new()
+        public bool AddBehaviour<T>() where T : IViewBehaviour, new()
         {
             return this.AddBehaviour(new T());
         }
 
-        public bool AddBehaviour(IBehaviour behaviour)
+        public bool AddBehaviour(IViewBehaviour behaviour)
         {
             if (!this.behaviours.Add(behaviour))
             {
                 return false;
             }
 
-            if (this.initialized && behaviour is IInitBehaviour initBehaviour)
+            if (this.initialized && behaviour is IInitViewBehaviour initBehaviour)
             {
                 initBehaviour.Init(this);
 
                 if (this.IsVisible)
                 {
-                    if (behaviour is IShowBehaviour showBehaviour)
+                    if (behaviour is IShowViewBehaviour showBehaviour)
                     {
                         showBehaviour.Show(this);
                     }
 
-                    if (behaviour is IUpdateBehaviour updateBehaviour)
+                    if (behaviour is IUpdateViewBehaviour updateBehaviour)
                     {
                         ViewUpdateManager.AddBehaviour(this, updateBehaviour);
                     }
@@ -394,7 +394,7 @@ namespace Atomic.UI
             return true;
         }
 
-        public bool DelBehaviour<T>() where T : IBehaviour
+        public bool DelBehaviour<T>() where T : IViewBehaviour
         {
             T behaviour = this.GetBehaviour<T>();
             if (behaviour == null)
@@ -405,7 +405,7 @@ namespace Atomic.UI
             return this.DelBehaviour(behaviour);
         }
 
-        public bool DelBehaviour(IBehaviour behaviour)
+        public bool DelBehaviour(IViewBehaviour behaviour)
         {
             if (!this.behaviours.Remove(behaviour))
             {
@@ -414,18 +414,18 @@ namespace Atomic.UI
 
             if (this.IsVisible)
             {
-                if (behaviour is IUpdateBehaviour updateBehaviour)
+                if (behaviour is IUpdateViewBehaviour updateBehaviour)
                 {
                     ViewUpdateManager.RemoveBehaviour(this, updateBehaviour);
                 }
 
-                if (behaviour is IHideBehaviour showBehaviour)
+                if (behaviour is IHideViewBehaviour showBehaviour)
                 {
                     showBehaviour.Hide(this);
                 }
             }
 
-            if (this.initialized && behaviour is IDisposeBehaviour disposeBehaviour)
+            if (this.initialized && behaviour is IDisposeViewBehaviour disposeBehaviour)
             {
                 disposeBehaviour.Dispose(this);
             }
@@ -531,9 +531,9 @@ namespace Atomic.UI
             [ShowInInspector, ReadOnly, HideLabel]
             public string name;
 
-            internal readonly IBehaviour value;
+            internal readonly IViewBehaviour value;
 
-            public BehaviourElement(IBehaviour value)
+            public BehaviourElement(IViewBehaviour value)
             {
                 this.name = value.GetType().Name;
                 this.value = value;
@@ -582,7 +582,7 @@ namespace Atomic.UI
         [FoldoutGroup("Debug")]
         [ShowInInspector, PropertyOrder(100)]
         [Button("Add Behaviour"), HideInEditorMode]
-        private void AddBehaviourDebug(IBehaviour behaviour)
+        private void AddBehaviourDebug(IViewBehaviour behaviour)
         {
             this.AddBehaviour(behaviour);
         }

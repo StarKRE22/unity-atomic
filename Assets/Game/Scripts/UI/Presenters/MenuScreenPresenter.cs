@@ -5,7 +5,7 @@ using SampleGame.App;
 namespace SampleGame.UI
 {
     [Serializable]
-    public sealed class MenuScreenPresenter : IShowBehaviour, IHideBehaviour
+    public sealed class MenuScreenPresenter : IShowViewBehaviour, IHideViewBehaviour
     {
         public void Show(IView view)
         {

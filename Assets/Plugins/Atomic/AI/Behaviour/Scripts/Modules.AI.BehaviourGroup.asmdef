@@ -1,0 +1,17 @@
+{
+    "name": "Modules.AI.BehaviourSet",
+    "rootNamespace": "",
+    "references": [
+        "GUID:0e2ae32f4fbf469fac3902ce24774b46",
+        "GUID:2518b66ed6d9a4644b5c6292bf3cae65"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
