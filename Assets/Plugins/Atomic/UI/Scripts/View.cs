@@ -79,7 +79,6 @@ namespace Atomic.UI
 
         private void Awake()
         {
-            Debug.Log($"AWAKE {name}");
             this.OnInitialize();
         }
 

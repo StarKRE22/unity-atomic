@@ -10,7 +10,7 @@ namespace Atomic.UI
         private const string DEFAULT_ITEM_TYPE = "Enter Type";
         private const string DEFAULT_CATEGORY_NAME = "Enter Category";
 
-        private APICatalog catalog;
+        private UIAPICatalog catalog;
 
         private SerializedObject catalogSerialized;
         private SerializedProperty itemsSerialized;

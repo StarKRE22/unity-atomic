@@ -17,7 +17,7 @@ namespace Atomic.UI
         private const string SET = "Set";
         private const string HAS = "Has";
 
-        internal static void Generate(APICatalog catalog)
+        internal static void Generate(UIAPICatalog catalog)
         {
             foreach (APICategory category in catalog)
             {
@@ -28,7 +28,7 @@ namespace Atomic.UI
             AssetDatabase.Refresh();
         }
 
-        internal static void GenerateCategory(APICatalog catalog, int categoryIndex, bool force = true)
+        internal static void GenerateCategory(UIAPICatalog catalog, int categoryIndex, bool force = true)
         {
             APICategory category = catalog.GetCategory(categoryIndex);
             GenerateCategory(category, force);

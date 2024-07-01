@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Atomic.UI
 {
-    internal sealed class APICatalog : ScriptableObject, IEnumerable<APICategory>
+    internal sealed class UIAPICatalog : ScriptableObject, IEnumerable<APICategory>
     {
         [field: SerializeField]
         internal bool Inactive { get; private set; }

@@ -11,7 +11,7 @@ namespace Atomic.UI
     {
         protected override void DrawPropertyLayout(GUIContent label)
         {
-            APICatalog catalog = APICatalogService.GetCatalog();
+            UIAPICatalog catalog = APICatalogService.GetCatalog();
 
             if (catalog == null)
             {

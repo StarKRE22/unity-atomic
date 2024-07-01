@@ -13,7 +13,7 @@ namespace Atomic.UI
         public string Name;
 
         [Title("Settings")]
-        public string Namespace = "Atomic.Contexts";
+        public string Namespace = "Atomic.UI";
         public string DirectoryPath = "Assets/Codegen";
         public string ClassSuffix = "API";
         public string[] Imports = Array.Empty<string>();

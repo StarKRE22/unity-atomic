@@ -2018,7 +2018,7 @@ MonoBehaviour:
     - rid: 5031450564982734856
       type: {class: ButtonInstaller, ns: Atomic.UI, asm: Atomic.UI}
       data:
-        key: 6
+        key: 4
         value: {fileID: 1224725877}
     - rid: 5031450564982734857
       type: {class: ButtonInstaller, ns: Atomic.UI, asm: Atomic.UI}

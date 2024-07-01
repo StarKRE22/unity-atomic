@@ -14,15 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Inactive>k__BackingField: 0
   categories:
-  - Name: Core
-    Namespace: Atomic.Contexts
-    DirectoryPath: Assets/Codegen
+  - Name: Buttons
+    Namespace: SampleGame.UI
+    DirectoryPath: Assets/Game/Scripts/UI/API
     ClassSuffix: API
-    Imports: []
+    Imports:
+    - UnityEngine.UI
     items:
     - id: 1
       name: StartButton
       type: Button
     - id: 2
       name: ExitButton
+      type: Button
+    - id: 3
+      name: ResumeButton
+      type: Button
+    - id: 4
+      name: FinishButton
       type: Button

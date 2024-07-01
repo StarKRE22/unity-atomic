@@ -8,19 +8,19 @@ namespace Atomic.UI
     [InitializeOnLoad]
     public static class APICatalogService
     {
-        private static APICatalog catalog;
+        private static UIAPICatalog catalog;
         
         static APICatalogService()
         {
             DebugUtils.ValueNameFormatter = ConvertIdToName;
         }
         
-        internal static APICatalog CreateCatalog()
+        internal static UIAPICatalog CreateCatalog()
         {
             string path = EditorUtility.SaveFilePanelInProject("Create View API Catalog", "ViewCatalog", "asset",
                 "Please enter a file name to save the asset to");
 
-            catalog = ScriptableObject.CreateInstance<APICatalog>();
+            catalog = ScriptableObject.CreateInstance<UIAPICatalog>();
 
             AssetDatabase.CreateAsset(catalog, path);
             AssetDatabase.SaveAssets();
@@ -37,14 +37,14 @@ namespace Atomic.UI
             return catalog;
         }
 
-        internal static APICatalog GetCatalog()
+        internal static UIAPICatalog GetCatalog()
         {
             if (catalog != null)
             {
                 return catalog;
             }
         
-            string[] guids = AssetDatabase.FindAssets("t:" + nameof(APICatalog));
+            string[] guids = AssetDatabase.FindAssets("t:" + nameof(UIAPICatalog));
             int count = guids.Length;
             if (count == 0)
             {
@@ -54,7 +54,7 @@ namespace Atomic.UI
             for (int i = 0; i < count; i++)
             {
                 string assetPath = AssetDatabase.GUIDToAssetPath(guids[0]);
-                APICatalog apiCatalog = AssetDatabase.LoadAssetAtPath<APICatalog>(assetPath);
+                UIAPICatalog apiCatalog = AssetDatabase.LoadAssetAtPath<UIAPICatalog>(assetPath);
                 if (apiCatalog.Inactive)
                 {
                     continue;
@@ -69,7 +69,7 @@ namespace Atomic.UI
 
         private static string ConvertIdToName(int id)
         {
-            APICatalog catalog = GetCatalog();
+            UIAPICatalog catalog = GetCatalog();
             
             if (catalog == null)
             {

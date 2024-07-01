@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Atomic.UI
 {
-    [CustomEditor(typeof(APICatalog))]
+    [CustomEditor(typeof(UIAPICatalog))]
     internal sealed class APICatalogEditor : OdinEditor
     {
         public override void OnInspectorGUI()
@@ -30,7 +30,7 @@ namespace Atomic.UI
 
         private void CompileKeys()
         {
-            APICatalog catalog = this.target as APICatalog;
+            UIAPICatalog catalog = this.target as UIAPICatalog;
             APIGenerator.Generate(catalog);
         }
     }
