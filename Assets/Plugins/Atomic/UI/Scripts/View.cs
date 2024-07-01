@@ -97,12 +97,6 @@ namespace Atomic.UI
             this.OnDispose();
         }
 
-        private void OnValidate()
-        {
-            this.gameObject.SetActive(this.enabled);
-            this.enabled = this.gameObject.activeSelf;
-        }
-
         #endregion
 
         #region Lifecycle
