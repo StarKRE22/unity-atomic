@@ -1,8 +1,9 @@
 ![Official](https://img.shields.io/badge/official-%20)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/starkre22/unity-atomic?color=orange)](https://github.com/starkre22/unity-atomic/releases)
 
+
 > [!IMPORTANT]
-> For a more better Unity development experience, I recommend using the [Odin Inspector](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) asset.
+> I have started distributing an evolved version of unity-atomic in [StarKRE22/Atomic](https://github.com/StarKRE22/Atomic), please use it instead of unity-atomic.
 
 Unity Atomic - Atomic Extensions for Unity
 ===
